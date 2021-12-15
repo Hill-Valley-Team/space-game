@@ -1,12 +1,15 @@
 import block from 'bem-cn';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '../../components/Button';
+import { Footer } from '../../components/Footer';
 import { Form } from '../../components/Form/Form';
 import { InputField } from '../../components/InputField';
 import { PageContainer } from '../../components/PageContainer';
 import { Title } from '../../components/Title';
 import { formScheme, InputNames } from '../../consts/formScheme';
 import { useFormInput, withEqualValue } from '../../hooks/useFormInput';
+import './registrationPage.css';
 
 const b = block('registration-page');
 
@@ -80,8 +83,18 @@ export const RegistrationPage = () => {
             view="labeled"
             onChange={withEqualValue(setRepeatPasswordValue, passwordValue)}
           />
-          <Button text="Зарегистрироваться" className={b('button')} />
         </Form>
+        <Footer>
+          <Button
+            width="stretch"
+            view="primary"
+            text="Зарегистрироваться"
+            className={b('button')}
+          />
+          <Link className="footer__link" to="/login">
+            Войти
+          </Link>
+        </Footer>
       </PageContainer>
     </div>
   );

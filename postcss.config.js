@@ -4,6 +4,9 @@ const colors = {
   'text-color': '#000000',
   'error-text-color': '#ff4d00',
   'text-color-light': '#999999',
+  'primary-bg-color': 'rgb(255 255 255 / 90%)',
+  'disabled-bg-color': '#999999',
+  'accent-color': '#ffc701',
 };
 
 module.exports = {

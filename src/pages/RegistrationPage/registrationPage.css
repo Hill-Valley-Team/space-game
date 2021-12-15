@@ -1,0 +1,5 @@
+.registration-page {
+  &__form {
+    max-width: 290px;
+  }
+}

@@ -5,8 +5,15 @@ import './button.css';
 
 const b = block('button');
 
-export const Button = ({ text = 'Button', className, type = 'submit', ...props }: ButtonProps) => (
-  <button type={type} className={b.mix(className)} {...props}>
+export const Button = ({
+  text = 'Button',
+  view = 'default',
+  width = 'auto',
+  className,
+  type = 'submit',
+  ...props
+}: ButtonProps) => (
+  <button type={type} className={b({ view, width }).mix(className)} {...props}>
     {text}
   </button>
 );

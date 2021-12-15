@@ -1,7 +1,8 @@
 .page-container {
-  background: rgb(255 255 255 / 90%);
+  background: $primary-bg-color;
   box-shadow: 0 0 6px rgb(0 0 0 / 14%);
   border-radius: 50px;
+  margin-top: 10px;
 
   &_small {
     max-width: 350px;
