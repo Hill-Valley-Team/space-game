@@ -18,7 +18,7 @@ export const InputField = ({
   onChange,
   ...props
 }: InputFieldProps) => {
-  const errorField = !isValid ? <div className={b.mix('error-text')}>{errorText}</div> : null;
+  const errorField = !isValid ? <div className={b('error-text')}>{errorText}</div> : null;
 
   const labelField = label ? <label htmlFor={id}>{label}</label> : null;
 
@@ -36,7 +36,7 @@ export const InputField = ({
         id={id}
         name={name ?? id}
         type={type}
-        className={b.mix('input')}
+        className={b('input')}
         value={value}
         disabled={disabled}
         onChange={handleChange}

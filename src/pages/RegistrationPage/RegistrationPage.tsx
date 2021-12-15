@@ -1,5 +1,6 @@
 import block from 'bem-cn';
 import React from 'react';
+import { Button } from '../../components/Button';
 import { InputField } from '../../components/InputField';
 import { formScheme, InputNames } from '../../consts/formScheme';
 import { useFormInput, withEqualValue } from '../../hooks/useFormInput';
@@ -36,7 +37,7 @@ export const RegistrationPage = () => {
       <form>
         <InputField
           id={InputNames.LOGIN}
-          name={formScheme[InputNames.LOGIN].type}
+          name={formScheme[InputNames.LOGIN].name}
           label="Логин"
           isValid={loginIsValid}
           errorText={loginErrorMessage}
@@ -70,6 +71,7 @@ export const RegistrationPage = () => {
           value={repeatPasswordValue}
           onChange={withEqualValue(setRepeatPasswordValue, passwordValue)}
         />
+        <Button text='Зарегистрироваться' className={b('button')}/>
       </form>
     </div>
   );
