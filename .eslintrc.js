@@ -22,6 +22,7 @@ module.exports = {
     'import/extensions': 'off',
     'import/no-cycle': 'warn',
     '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/default-param-last': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'react/function-component-definition': 'off',

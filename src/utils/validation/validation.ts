@@ -109,7 +109,8 @@ const checkEmailValidaty = (value: string = '') => {
   return checker(checkList);
 };
 
-const checkEqualValidaty = (equal: string, errorMessage: string, value: string = '') => {
+const checkEqualValidaty = (value: string = '', equal: string, errorMessage: string) => {
+  console.log('equal', equal);
   const pattern = new RegExp(`^${equal}$`);
   const checkList: (string | boolean)[] = [checkPattern(value, pattern, errorMessage)];
   return checker(checkList);
@@ -216,8 +217,10 @@ export const checkFormInput = (value: string, type: ValidationType, equal: strin
       case 'equal':
         result = checkEqualValidaty(value, equal, 'Поля не равны');
         break;
-      default:
+      case 'text':
         result = checkTextValidaty(value);
+        break;
+      default:
         break;
     }
   }
