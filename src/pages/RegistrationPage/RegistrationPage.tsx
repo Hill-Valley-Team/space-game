@@ -71,7 +71,7 @@ export const RegistrationPage = () => {
           value={repeatPasswordValue}
           onChange={withEqualValue(setRepeatPasswordValue, passwordValue)}
         />
-        <Button text='Зарегистрироваться' className={b('button')}/>
+        <Button text="Зарегистрироваться" className={b('button')} />
       </form>
     </div>
   );

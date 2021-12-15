@@ -11,12 +11,12 @@ export const useFormInput = ({ type = 'text', value = '' }: HookInputObject): Ho
   });
 
   const changeValue = useCallback(
-    ({ value, equal }: HookInputObject) => {
-      setValue(value!);
+    ({ value: newValue, equal }: HookInputObject) => {
+      setValue(newValue!);
       const result = checkFormInput(value!, validationType, equal!);
       setValidationResult(result);
     },
-    [checkFormInput],
+    [validationType, value],
   );
 
   const resultObject = useMemo<HookOutputObject>(

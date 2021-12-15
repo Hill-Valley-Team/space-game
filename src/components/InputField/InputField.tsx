@@ -27,6 +27,7 @@ export const InputField = ({
     if (onChange) {
       return onChange({ value: newValue, equal });
     }
+    return null;
   };
 
   return (

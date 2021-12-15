@@ -5,10 +5,8 @@ import './app.css';
 
 const b = block('app');
 
-export const App = () => {
-  return (
-    <div className={b()}>
-      <AppRoutes />
-    </div>
-  );
-};
+export const App = () => (
+  <div className={b()}>
+    <AppRoutes />
+  </div>
+);

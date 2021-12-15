@@ -1,49 +1,10 @@
 import { ValidationRules, ValidationType, ValidationResult } from './types';
 
-export const checkFormInput = (value: string, type: ValidationType, equal: string) => {
-  let result: ValidationResult = {
-    isValid: false,
-    errorMessage: null,
-  };
+const checkMaxLength = (length: number, maxLength: number) =>
+  length > maxLength ? `Поле может быть не более ${maxLength} символов` : false;
 
-  if (value && type) {
-    switch (type) {
-      case 'password':
-        result = checkPasswordValidaty(value);
-        break;
-      case 'login':
-        result = checkLoginValidaty(value);
-        break;
-      case 'email':
-        result = checkEmailValidaty(value);
-        break;
-      case 'name':
-        result = checkNameValidaty(value);
-        break;
-      case 'shortText':
-        result = checkShortTextValidaty(value);
-        break;
-      case 'phone':
-        result = checkPhoneValidaty(value);
-        break;
-      case 'equal':
-        result = checkEqualValidaty(value, equal, 'Поля не равны');
-        break;
-      case 'text':
-        result = checkTextValidaty(value);
-        break;
-    }
-  }
-  return result;
-};
-
-const checkMaxLength = (length: number, maxLength: number) => {
-  return length > maxLength ? `Поле может быть не более ${maxLength} символов` : false;
-};
-
-const checkMinLength = (length: number, minLength: number) => {
-  return length < minLength ? `Поле должно быть длинее ${minLength} символов` : false;
-};
+const checkMinLength = (length: number, minLength: number) =>
+  length < minLength ? `Поле должно быть длинее ${minLength} символов` : false;
 
 const checkHasNumber = (value: string) => {
   const pattern = /(?=.*[0-9])/g;
@@ -64,12 +25,10 @@ const checkPattern = (
   value: string,
   pattern: RegExp,
   errorMessage = 'Поле заполнено некорректно',
-) => {
-  return !pattern.test(value) ? errorMessage : false;
-};
+) => (!pattern.test(value) ? errorMessage : false);
 
 const checker = (checkResults: (string | boolean)[]): ValidationResult => {
-  const res = checkResults.find((res) => res);
+  const res = checkResults.find((result) => result);
 
   return res != null
     ? ({
@@ -150,8 +109,8 @@ const checkEmailValidaty = (value: string = '') => {
   return checker(checkList);
 };
 
-const checkEqualValidaty = (value: string = '', equal: string, errorMessage: string) => {
-  const pattern = new RegExp('^' + equal + '$');
+const checkEqualValidaty = (equal: string, errorMessage: string, value: string = '') => {
+  const pattern = new RegExp(`^${equal}$`);
   const checkList: (string | boolean)[] = [checkPattern(value, pattern, errorMessage)];
   return checker(checkList);
 };
@@ -226,4 +185,41 @@ const checkPhoneValidaty = (value: string = '') => {
   ];
 
   return checker(checkList);
+};
+
+export const checkFormInput = (value: string, type: ValidationType, equal: string) => {
+  let result: ValidationResult = {
+    isValid: false,
+    errorMessage: null,
+  };
+
+  if (value && type) {
+    switch (type) {
+      case 'password':
+        result = checkPasswordValidaty(value);
+        break;
+      case 'login':
+        result = checkLoginValidaty(value);
+        break;
+      case 'email':
+        result = checkEmailValidaty(value);
+        break;
+      case 'name':
+        result = checkNameValidaty(value);
+        break;
+      case 'shortText':
+        result = checkShortTextValidaty(value);
+        break;
+      case 'phone':
+        result = checkPhoneValidaty(value);
+        break;
+      case 'equal':
+        result = checkEqualValidaty(value, equal, 'Поля не равны');
+        break;
+      default:
+        result = checkTextValidaty(value);
+        break;
+    }
+  }
+  return result;
 };
