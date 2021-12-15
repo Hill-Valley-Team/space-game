@@ -13,5 +13,6 @@ export type InputFieldProps = {
   errorText?: string | null;
   isValid?: boolean;
   disabled?: boolean;
+  view?: 'default' | 'labeled';
   onChange?: HookOutputFunction;
 };

@@ -1,3 +1,49 @@
 .input-field {
-  color: $primary-color;
+  position: relative;
+  min-height: 50px;
+
+  &__label {
+    position: absolute;
+    z-index: 0;
+    bottom: 28px;
+    display: block;
+    font-size: 13px;
+    line-height: 13px;
+    color: $text-color-light;
+  }
+
+  &__input {
+    position: relative;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid $primary-color;
+    background-color: transparent;
+    height: 35px;
+    text-align: center;
+  }
+
+  &__error-text {
+    color: $error-text-color;
+    margin-top: 7px;
+    font-size: 8px;
+    line-height: 8px;
+    display: block;
+    text-align: center;
+  }
+
+  &_labeled {
+    min-height: 62px;
+
+    .input-field__input {
+      text-align: left;
+      height: 25px;
+    }
+
+    .input-field__label {
+      position: relative;
+      bottom: auto;
+      font-size: 12px;
+    }
+  }
 }

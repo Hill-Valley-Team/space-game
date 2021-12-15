@@ -1,7 +1,10 @@
 import block from 'bem-cn';
 import React from 'react';
 import { Button } from '../../components/Button';
+import { Form } from '../../components/Form/Form';
 import { InputField } from '../../components/InputField';
+import { PageContainer } from '../../components/PageContainer';
+import { Title } from '../../components/Title';
 import { formScheme, InputNames } from '../../consts/formScheme';
 import { useFormInput, withEqualValue } from '../../hooks/useFormInput';
 
@@ -34,45 +37,52 @@ export const RegistrationPage = () => {
 
   return (
     <div className={b()}>
-      <form>
-        <InputField
-          id={InputNames.LOGIN}
-          name={formScheme[InputNames.LOGIN].name}
-          label="Логин"
-          isValid={loginIsValid}
-          errorText={loginErrorMessage}
-          value={loginValue}
-          onChange={setLoginValue}
-        />
-        <InputField
-          id={InputNames.EMAIL}
-          name={formScheme[InputNames.EMAIL].name}
-          label="Email"
-          isValid={emailIsValid}
-          errorText={emailErrorMessage}
-          value={emailValue}
-          onChange={setEmailValue}
-        />
-        <InputField
-          id={InputNames.PASSWORD}
-          name={formScheme[InputNames.PASSWORD].name}
-          label="Пароль"
-          isValid={passwordIsValid}
-          errorText={passwordErrorMessage}
-          value={passwordValue}
-          onChange={setPasswordValue}
-        />
-        <InputField
-          id={InputNames.REPEAT_PASSWORD}
-          name={formScheme[InputNames.REPEAT_PASSWORD].name}
-          label="Повторите пароль"
-          isValid={repeatPasswordIsValid}
-          errorText={repeatPasswordErrorMessage}
-          value={repeatPasswordValue}
-          onChange={withEqualValue(setRepeatPasswordValue, passwordValue)}
-        />
-        <Button text="Зарегистрироваться" className={b('button')} />
-      </form>
+      <PageContainer size="small">
+        <Title text="Регистрация" className={b('title')} />
+        <Form className={b('form')}>
+          <InputField
+            id={InputNames.LOGIN}
+            name={formScheme[InputNames.LOGIN].name}
+            label="Логин"
+            isValid={loginIsValid}
+            errorText={loginErrorMessage}
+            value={loginValue}
+            view="labeled"
+            onChange={setLoginValue}
+          />
+          <InputField
+            id={InputNames.EMAIL}
+            name={formScheme[InputNames.EMAIL].name}
+            label="Email"
+            isValid={emailIsValid}
+            errorText={emailErrorMessage}
+            value={emailValue}
+            view="labeled"
+            onChange={setEmailValue}
+          />
+          <InputField
+            id={InputNames.PASSWORD}
+            name={formScheme[InputNames.PASSWORD].name}
+            label="Пароль"
+            isValid={passwordIsValid}
+            errorText={passwordErrorMessage}
+            value={passwordValue}
+            view="labeled"
+            onChange={setPasswordValue}
+          />
+          <InputField
+            id={InputNames.REPEAT_PASSWORD}
+            name={formScheme[InputNames.REPEAT_PASSWORD].name}
+            label="Повторите пароль"
+            isValid={repeatPasswordIsValid}
+            errorText={repeatPasswordErrorMessage}
+            value={repeatPasswordValue}
+            view="labeled"
+            onChange={withEqualValue(setRepeatPasswordValue, passwordValue)}
+          />
+          <Button text="Зарегистрироваться" className={b('button')} />
+        </Form>
+      </PageContainer>
     </div>
   );
 };

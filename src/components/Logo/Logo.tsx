@@ -1,6 +1,6 @@
 import block from 'bem-cn';
 import React from 'react';
-
+import './logo.css';
 import logoImg from './static/logo.png';
 
 const b = block('logo');

@@ -5,8 +5,8 @@ import './title.css';
 
 const b = block('title');
 
-export const Title = ({ Tag = 'h3', text = 'Header', className, ...props }: TitleProps) => (
-  <Tag className={(b.mix(className), b(Tag))} {...props}>
+export const Title = ({ Tag = 'h2', text = 'Header', className, ...props }: TitleProps) => (
+  <Tag className={b.mix(className)} {...props}>
     {text}
   </Tag>
 );

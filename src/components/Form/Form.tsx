@@ -1,11 +1,12 @@
 import block from 'bem-cn';
-import React, { Children } from 'react';
+import React from 'react';
 import { FormProps } from './types';
+import './form.css';
 
 const b = block('form');
 
-export const Form = ({ className, ...props }: FormProps) => (
+export const Form = ({ className, children, ...props }: FormProps) => (
   <form className={b.mix(className)} {...props}>
-    {Children}
+    {children}
   </form>
 );

@@ -13,6 +13,7 @@ export const InputField = ({
   className,
   isValid = false,
   disabled = false,
+  view = 'default',
   label,
   errorText = 'Error in this field',
   onChange,
@@ -20,7 +21,11 @@ export const InputField = ({
 }: InputFieldProps) => {
   const errorField = !isValid ? <div className={b('error-text')}>{errorText}</div> : null;
 
-  const labelField = label ? <label htmlFor={id}>{label}</label> : null;
+  const labelField = label ? (
+    <label htmlFor={id} className={b('label')}>
+      {label}
+    </label>
+  ) : null;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, equal?: string) => {
     const newValue = e.target.value;
@@ -31,7 +36,8 @@ export const InputField = ({
   };
 
   return (
-    <div className={b.mix(className)}>
+    <div className={b({ [view]: true }).mix(className)}>
+      {' '}
       {labelField}
       <input
         id={id}
