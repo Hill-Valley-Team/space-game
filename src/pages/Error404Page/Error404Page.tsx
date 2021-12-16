@@ -6,6 +6,6 @@ const b = block('error404-page');
 
 export const Error404Page = () => (
   <div className={b()}>
-    <Title Tag="h1" className={b('title')} text="404" />
+    <Title tag="h1" className={b('title')} text="404" />
   </div>
 );
