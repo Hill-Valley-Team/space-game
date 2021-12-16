@@ -15,35 +15,35 @@ export enum InputNames {
 
 export const formScheme: Record<InputNames, { name: string; type: ValidationType }> = {
   [InputNames.LOGIN]: {
-    name: 'user-login',
+    name: 'login',
     type: 'login',
   },
   [InputNames.EMAIL]: {
-    name: 'user-email',
+    name: 'email',
     type: 'email',
   },
   [InputNames.FIRST_NAME]: {
-    name: 'user-first-name',
+    name: 'first_name',
     type: 'shortText',
   },
   [InputNames.SECOND_NAME]: {
-    name: 'user-second-name',
+    name: 'second_name',
     type: 'shortText',
   },
   [InputNames.PHONE]: {
-    name: 'user-phone',
+    name: 'phone',
     type: 'phone',
   },
   [InputNames.PASSWORD]: {
-    name: 'user-password',
+    name: 'password',
     type: 'password',
   },
   [InputNames.REPEAT_PASSWORD]: {
-    name: 'repeat-user-password',
+    name: 'repeat_password',
     type: 'equal',
   },
   [InputNames.OLD_PASSWORD]: {
-    name: 'old-user-password',
+    name: 'old_password',
     type: 'password',
   },
 

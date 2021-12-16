@@ -8,4 +8,5 @@ export type ButtonProps = {
   type?: ButtonTypes;
   view?: ButtonView;
   width?: ButtonWidth;
+  disabled?: boolean;
 };
