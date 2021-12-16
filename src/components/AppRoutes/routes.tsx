@@ -13,7 +13,7 @@ export const routes: RouteObject[] = [
     children: [
       { index: true, element: <HomePage /> },
       {
-        path: '/registration',
+        path: 'registration',
         element: <RegistrationPage />,
       },
       {
