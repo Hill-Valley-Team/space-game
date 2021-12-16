@@ -3,7 +3,7 @@ import { ValidationType } from '../../utils/validation';
 export type HookInputObject = {
   value?: string;
   type?: ValidationType;
-  equal?: string | undefined;
+  equal?: string;
 };
 
 export type HookOutputObject = {
