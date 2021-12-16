@@ -65,6 +65,7 @@ export const RegistrationPage = () => {
           />
           <InputField
             id={InputNames.PASSWORD}
+            type="password"
             name={formScheme[InputNames.PASSWORD].name}
             label="Пароль"
             isValid={passwordIsValid}
@@ -75,6 +76,7 @@ export const RegistrationPage = () => {
           />
           <InputField
             id={InputNames.REPEAT_PASSWORD}
+            type="password"
             name={formScheme[InputNames.REPEAT_PASSWORD].name}
             label="Повторите пароль"
             isValid={repeatPasswordIsValid}

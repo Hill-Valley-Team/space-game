@@ -1,5 +1,5 @@
 import block from 'bem-cn';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { InputFieldProps } from './types';
 import './inputField.css';
 
@@ -19,6 +19,8 @@ export const InputField = ({
   onChange,
   ...props
 }: InputFieldProps) => {
+  const [passVisible, setPassVisible] = useState(false);
+
   const errorField = !isValid ? <div className={b('error-text')}>{errorText}</div> : null;
 
   const labelField = label ? (
@@ -26,6 +28,22 @@ export const InputField = ({
       {label}
     </label>
   ) : null;
+
+  const togglePasswordControl = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    setPassVisible(!passVisible);
+    console.log(passVisible);
+  };
+
+  const passwordControl =
+    type === 'password' ? (
+      <button
+        type="button"
+        onClick={togglePasswordControl}
+        aria-label="Показать пароль"
+        className={b('password-control', { [passVisible ? 'view' : 'hide']: true })}
+      />
+    ) : null;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, equal?: string) => {
     const newValue = e.target.value;
@@ -37,12 +55,12 @@ export const InputField = ({
 
   return (
     <div className={b({ [view]: true }).mix(className)}>
-      {' '}
       {labelField}
+      {passwordControl}
       <input
         id={id}
         name={name ?? id}
-        type={type}
+        type={type === 'password' && passVisible ? 'text' : type}
         className={b('input')}
         value={value}
         disabled={disabled}

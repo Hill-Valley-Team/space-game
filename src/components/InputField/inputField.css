@@ -46,4 +46,22 @@
       font-size: 12px;
     }
   }
+
+  &__password-control {
+    position: absolute;
+    z-index: 100;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    border: none;
+    cursor: pointer;
+
+    &_view {
+      background: url('./static/pass_view.svg') 50% 50% no-repeat;
+    }
+
+    &_hide {
+      background: url('./static/pass_hide.svg') 50% 50% no-repeat;
+    }
+  }
 }
