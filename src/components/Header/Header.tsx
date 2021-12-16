@@ -5,7 +5,7 @@ import './header.css';
 
 const b = block('title');
 
-export const Header = ({ Tag = 'h3', text = 'Header', className, ...props }: HeaderProps) => (
+export const Header = ({ tag: Tag = 'h3', text = 'Header', className, ...props }: HeaderProps) => (
   <Tag className={b.mix(className)} {...props}>
     {text}
   </Tag>
