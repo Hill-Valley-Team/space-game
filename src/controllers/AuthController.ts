@@ -1,6 +1,6 @@
-import { authApi } from '../Api/Auth';
-import { signInRequestFields, signUpRequestFields } from '../Api/consts';
-import { SignInRequest, SignUpRequest } from '../Api/types';
+import { authApi } from '../api/Auth';
+import { signInRequestFields, signUpRequestFields } from '../api/consts';
+import { SignInRequest, SignUpRequest } from '../api/types';
 import { prepareDataToRequest } from './utils/prepareDataToRequest';
 
 export class AuthController {

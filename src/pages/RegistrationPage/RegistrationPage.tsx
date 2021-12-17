@@ -18,7 +18,6 @@ const b = block('registration-page');
 export const RegistrationPage = () => {
   const [requestError, setRequestError] = useState('');
   const navigate = useNavigate();
-
   const [
     { value: loginValue, isValid: loginIsValid, errorMessage: loginErrorMessage },
     setLoginValue,
