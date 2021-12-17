@@ -5,7 +5,6 @@ import './form.css';
 
 const b = block('form');
 
-<<<<<<< HEAD
 export const Form = ({ className, children, onSubmitHandler, ...props }: FormProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,10 +22,3 @@ export const Form = ({ className, children, onSubmitHandler, ...props }: FormPro
     </form>
   );
 };
-=======
-export const Form = ({ className, children, ...props }: FormProps) => (
-  <form className={b.mix(className)} {...props}>
-    {children}
-  </form>
-);
->>>>>>> sprint_5
