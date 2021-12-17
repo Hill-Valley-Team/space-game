@@ -9,6 +9,7 @@ import { PageContainer } from '../../components/PageContainer';
 import { Title } from '../../components/Title';
 import { formScheme, InputNames } from '../../consts/formScheme';
 import { authController } from '../../controllers/AuthController';
+
 import { useFormInput, withEqualValue } from '../../hooks/useFormInput';
 import './registrationPage.css';
 
@@ -16,7 +17,6 @@ const b = block('registration-page');
 
 export const RegistrationPage = () => {
   const [requestError, setRequestError] = useState('');
-
   const [
     { value: loginValue, isValid: loginIsValid, errorMessage: loginErrorMessage },
     setLoginValue,
@@ -56,7 +56,7 @@ export const RegistrationPage = () => {
     setRepeatPasswordValue,
   ] = useFormInput({ type: formScheme[InputNames.REPEAT_PASSWORD].type });
 
-  const formSubmitHandler = (formData: FormData) => {
+  const formSubmitHandle = (formData: FormData) => {
     authController
       .signUp(formData)
       .then((response) => {
@@ -68,12 +68,12 @@ export const RegistrationPage = () => {
         }
       });
   };
-
   return (
     <div className={b()}>
       <PageContainer size="small">
         <Title text="Регистрация" className={b('title')} />
-        <Form className={b('form')} onSubmitHandler={formSubmitHandler}>
+        <Form className={b('form')} onSubmitHandler={formSubmitHandle}>
+
           <InputField
             id={InputNames.LOGIN}
             name={formScheme[InputNames.LOGIN].name}
@@ -128,7 +128,6 @@ export const RegistrationPage = () => {
           />
           <InputField
             id={InputNames.PASSWORD}
-            autoComplete="off"
             type="password"
             name={formScheme[InputNames.PASSWORD].name}
             label="Пароль"
@@ -140,8 +139,8 @@ export const RegistrationPage = () => {
           />
           <InputField
             id={InputNames.REPEAT_PASSWORD}
-            autoComplete="off"
             type="password"
+            name={formScheme[InputNames.REPEAT_PASSWORD].name}
             label="Повторите пароль"
             isValid={repeatPasswordIsValid}
             errorText={repeatPasswordErrorMessage}

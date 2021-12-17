@@ -29,7 +29,7 @@ export const InputField = ({
   const togglePasswordControl = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     setPassVisible(!passVisible);
-  };
+  }
 
   const passwordControl =
     type === 'password' ? (
@@ -63,4 +63,4 @@ export const InputField = ({
       {errorField}
     </div>
   );
-};
+}
