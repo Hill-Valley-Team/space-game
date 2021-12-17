@@ -82,7 +82,7 @@ export const RegistrationPage = () => {
             errorText={loginErrorMessage}
             value={loginValue}
             view="labeled"
-            onChange={setLoginValue}
+            onChangeHandle={setLoginValue}
           />
           <InputField
             id={InputNames.EMAIL}
@@ -93,7 +93,7 @@ export const RegistrationPage = () => {
             value={emailValue}
             type="email"
             view="labeled"
-            onChange={setEmailValue}
+            onChangeHandle={setEmailValue}
           />
           <InputField
             id={InputNames.FIRST_NAME}
@@ -103,7 +103,7 @@ export const RegistrationPage = () => {
             errorText={firstNameErrorMessage}
             value={firstNameValue}
             view="labeled"
-            onChange={setFirstNameValue}
+            onChangeHandle={setFirstNameValue}
           />
           <InputField
             id={InputNames.SECOND_NAME}
@@ -113,7 +113,7 @@ export const RegistrationPage = () => {
             errorText={secondNameErrorMessage}
             value={secondNameValue}
             view="labeled"
-            onChange={setSecondNameValue}
+            onChangeHandle={setSecondNameValue}
           />
           <InputField
             id={InputNames.PHONE}
@@ -124,10 +124,11 @@ export const RegistrationPage = () => {
             value={phoneValue}
             view="labeled"
             type="tel"
-            onChange={setPhoneValue}
+            onChangeHandle={setPhoneValue}
           />
           <InputField
             id={InputNames.PASSWORD}
+            autoComplete="off"
             type="password"
             name={formScheme[InputNames.PASSWORD].name}
             label="Пароль"
@@ -135,17 +136,18 @@ export const RegistrationPage = () => {
             errorText={passwordErrorMessage}
             value={passwordValue}
             view="labeled"
-            onChange={setPasswordValue}
+            onChangeHandle={setPasswordValue}
           />
           <InputField
             id={InputNames.REPEAT_PASSWORD}
+            autoComplete="off"
             type="password"
             label="Повторите пароль"
             isValid={repeatPasswordIsValid}
             errorText={repeatPasswordErrorMessage}
             value={repeatPasswordValue}
             view="labeled"
-            onChange={withEqualValue(setRepeatPasswordValue, passwordValue)}
+            onChangeHandle={withEqualValue(setRepeatPasswordValue, passwordValue)}
           />
           <Footer>
             <Button

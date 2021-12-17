@@ -11,10 +11,9 @@ export const Button = ({
   width = 'auto',
   className,
   type = 'submit',
-  disabled,
   ...props
 }: ButtonProps) => (
-  <button type={type} disabled={disabled} className={b({ view, width }).mix(className)} {...props}>
+  <button type={type} className={b({ view, width }).mix(className)} {...props}>
     {text}
   </button>
 );

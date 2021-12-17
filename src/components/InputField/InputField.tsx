@@ -7,16 +7,13 @@ const b = block('input-field');
 
 export const InputField = ({
   id,
-  name,
-  value,
   type = 'text',
   className,
   isValid = false,
-  disabled = false,
   view = 'default',
   label,
   errorText = 'Error in this field',
-  onChange,
+  onChangeHandle,
   ...props
 }: InputFieldProps) => {
   const [passVisible, setPassVisible] = useState(false);
@@ -32,7 +29,6 @@ export const InputField = ({
   const togglePasswordControl = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     setPassVisible(!passVisible);
-    console.log(passVisible);
   };
 
   const passwordControl =
@@ -47,8 +43,8 @@ export const InputField = ({
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, equal?: string) => {
     const newValue = e.target.value;
-    if (onChange) {
-      return onChange({ value: newValue, equal });
+    if (onChangeHandle) {
+      return onChangeHandle({ value: newValue, equal });
     }
     return null;
   };
@@ -59,11 +55,8 @@ export const InputField = ({
       {passwordControl}
       <input
         id={id}
-        name={name ?? id}
         type={type === 'password' && passVisible ? 'text' : type}
         className={b('input')}
-        value={value}
-        disabled={disabled}
         onChange={handleChange}
         {...props}
       />
