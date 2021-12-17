@@ -73,7 +73,6 @@ export const RegistrationPage = () => {
       <PageContainer size="small">
         <Title text="Регистрация" className={b('title')} />
         <Form className={b('form')} onSubmitHandler={formSubmitHandle}>
-
           <InputField
             id={InputNames.LOGIN}
             name={formScheme[InputNames.LOGIN].name}
