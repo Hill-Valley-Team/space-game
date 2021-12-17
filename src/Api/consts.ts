@@ -8,3 +8,5 @@ export const signUpRequestFields = [
   'email',
   'phone',
 ];
+
+export const signInRequestFields = ['login', 'password'];

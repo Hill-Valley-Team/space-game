@@ -1,6 +1,6 @@
 import block from 'bem-cn';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../../components/Button';
 import { Footer } from '../../components/Footer';
 import { Form } from '../../components/Form/Form';
@@ -17,6 +17,8 @@ const b = block('registration-page');
 
 export const RegistrationPage = () => {
   const [requestError, setRequestError] = useState('');
+  const navigate = useNavigate();
+
   const [
     { value: loginValue, isValid: loginIsValid, errorMessage: loginErrorMessage },
     setLoginValue,
@@ -59,8 +61,8 @@ export const RegistrationPage = () => {
   const formSubmitHandle = (formData: FormData) => {
     authController
       .signUp(formData)
-      .then((response) => {
-        console.log(response);
+      .then(() => {
+        navigate('/');
       })
       .catch((error) => {
         if (error.response && error.response.data) {
