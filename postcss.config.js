@@ -7,6 +7,7 @@ const colors = {
   'primary-bg-color': 'rgb(255 255 255 / 90%)',
   'disabled-bg-color': '#999999',
   'accent-color': '#ffc701',
+  'pure-white': '#ffffff',
 };
 
 module.exports = {

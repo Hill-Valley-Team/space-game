@@ -21,7 +21,7 @@ export const routes: RouteObject[] = [
         element: <Error500Page />,
       },
       {
-        path: '*',
+        path: '404',
         element: <Error404Page />,
       },
     ],
