@@ -157,9 +157,7 @@ export const RegistrationPage = () => {
               view="primary"
               text="Зарегистрироваться"
               className={b('button')}
-              disabled={
-                !loginIsValid || !emailIsValid || !passwordIsValid || !repeatPasswordIsValid
-              }
+              disabled={!(loginIsValid && emailIsValid && passwordIsValid && repeatPasswordIsValid)}
             />
             <Link className="footer__link" to="/login">
               Войти
