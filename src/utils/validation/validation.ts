@@ -110,7 +110,6 @@ const checkEmailValidaty = (value: string = '') => {
 };
 
 const checkEqualValidaty = (value: string = '', equal: string, errorMessage: string) => {
-  console.log('equal', equal);
   const pattern = new RegExp(`^${equal}$`);
   const checkList: (string | boolean)[] = [checkPattern(value, pattern, errorMessage)];
   return checker(checkList);
