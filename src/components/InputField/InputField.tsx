@@ -31,7 +31,7 @@ export const InputField = ({
       e.preventDefault();
       setPassVisible(!passVisible);
     },
-    [],
+    [passVisible],
   );
 
   const passwordControl =
