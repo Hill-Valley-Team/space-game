@@ -1,5 +1,5 @@
 import block from 'bem-cn';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useCallback, useState } from 'react';
 import { InputFieldProps } from './types';
 import './inputField.css';
 
@@ -26,10 +26,13 @@ export const InputField = ({
     </label>
   ) : null;
 
-  const togglePasswordControl = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault();
-    setPassVisible(!passVisible);
-  }
+  const togglePasswordControl = useCallback(
+    () => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      e.preventDefault();
+      setPassVisible(!passVisible);
+    },
+    [],
+  );
 
   const passwordControl =
     type === 'password' ? (
@@ -63,4 +66,4 @@ export const InputField = ({
       {errorField}
     </div>
   );
-}
+};

@@ -1,5 +1,5 @@
 import block from 'bem-cn';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../../components/Button';
 import { Footer } from '../../components/Footer';
@@ -57,18 +57,21 @@ export const RegistrationPage = () => {
     setRepeatPasswordValue,
   ] = useFormInput({ type: formScheme[InputNames.REPEAT_PASSWORD].type });
 
-  const formSubmitHandle = (formData: FormData) => {
-    authController
-      .signUp(formData)
-      .then(() => {
-        navigate('/');
-      })
-      .catch((error) => {
-        if (error.response && error.response.data) {
-          setRequestError(error.response.data.reason ?? '');
-        }
-      });
-  };
+  const formSubmitHandle = useCallback(
+    () => (formData: FormData) => {
+      authController
+        .signUp(formData)
+        .then(() => {
+          navigate('/');
+        })
+        .catch((error) => {
+          if (error.response && error.response.data) {
+            setRequestError(error.response.data.reason ?? '');
+          }
+        });
+    },
+    [navigate],
+  );
   return (
     <div className={b()}>
       <PageContainer size="small">
