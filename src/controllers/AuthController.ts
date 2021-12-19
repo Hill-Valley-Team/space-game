@@ -15,6 +15,8 @@ export class AuthController {
   };
 
   public logOut = () => authApi.logOut();
+
+  public getUserInfo = () => authApi.getUserInfo();
 }
 
 export const authController = new AuthController();
