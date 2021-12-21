@@ -1,4 +1,4 @@
-import { Scene } from './Scene';
+import { Scene } from './engine/Scene';
 
 export type GameState = Record<string, string>;
 export type GameConfig = {
