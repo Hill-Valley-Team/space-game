@@ -58,9 +58,8 @@ export class Loader {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async loadResources({ images, spritesheets, audio }: SceneResourcesConfig, path: string) {
     // TODO
-
     this._path = path;
-    return this._loadImages(images!).then(() => this._resourses);
+    await this._loadImages(images!);
 
     // if (spritesheets) this._loadSpriteSheets(spritesheets);
 
