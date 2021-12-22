@@ -6,6 +6,7 @@ import { RegistrationPage } from '../../pages/RegistrationPage/RegistrationPage'
 import { Error500Page } from '../../pages/Error500Page';
 import { Error404Page } from '../../pages/Error404Page';
 import { LoginPage } from '../../pages/LoginPage';
+import { GamePage } from '../../pages/GamePage';
 
 export const routes: RouteObject[] = [
   {
@@ -20,6 +21,10 @@ export const routes: RouteObject[] = [
       {
         path: 'login',
         element: <LoginPage />,
+      },
+      {
+        path: 'game',
+        element: <GamePage />,
       },
       {
         path: '500',

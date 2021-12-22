@@ -1,7 +1,7 @@
 import { Scene } from '../Scene';
 import { defaultGameConfig } from './defaultGameConfig';
 import { TimeStep } from './TimeStep';
-import { GameConfig, GameState } from './types';
+import { GameConfig } from './types';
 
 export class Game {
   private _width: number;
@@ -9,8 +9,6 @@ export class Game {
   private _height: number;
 
   private _parent: string | HTMLElement;
-
-  private _state: GameState;
 
   private _isRunning: boolean;
 
@@ -30,17 +28,12 @@ export class Game {
     return this._parent;
   }
 
-  public get state() {
-    return this._state;
-  }
-
   constructor(config: GameConfig) {
-    const { width, height, parent, state } = config;
+    const { width, height, parent } = config;
 
     this._width = width ?? defaultGameConfig.width;
     this._height = height ?? defaultGameConfig.height;
     this._parent = parent ?? defaultGameConfig.parent;
-    this._state = state ?? defaultGameConfig.state;
     this._isRunning = false;
     this._scene = null;
     this._loop = new TimeStep(this);
@@ -54,6 +47,8 @@ export class Game {
   protected preload() {}
 
   protected create() {}
+
+  protected exit() {}
 
   public update(delay: number) {
     if (this._isRunning) {

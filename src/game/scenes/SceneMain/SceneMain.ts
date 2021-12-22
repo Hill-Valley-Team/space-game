@@ -24,6 +24,8 @@ export class SceneMain extends Scene {
       y: gameConfig.height * 0.5,
       key: 'sprPlayer',
     });
+
+    console.log(this._player);
   }
 }
 
