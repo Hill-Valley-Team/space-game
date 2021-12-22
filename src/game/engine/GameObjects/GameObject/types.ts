@@ -7,5 +7,11 @@ export type GameObjectProps = {
   key: string;
 };
 
+export type SpriteProps = {
+  width: number;
+  height: number;
+  source: HTMLImageElement;
+} & GameObjectProps;
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type DataObject = Record<string, any>;

@@ -1,4 +1,4 @@
-import { SceneResourcesConfig } from '../../engine/Scene/types';
+import { SceneResourcesConfig } from '../../engine/Resources/types';
 
 export const sceneMainResources: SceneResourcesConfig = {
   images: [

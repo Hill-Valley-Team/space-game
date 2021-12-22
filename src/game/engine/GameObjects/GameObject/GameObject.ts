@@ -1,5 +1,5 @@
-import { PhysicBody } from '../PhysicBody';
-import { Scene } from '../Scene';
+import { PhysicBody } from '../../PhysicBody';
+import { Scene } from '../../Scene';
 import { DataObject, GameObjectProps } from './types';
 
 export class GameObject {

@@ -3,24 +3,24 @@ import {
   ImageResourceConfig,
   SceneResourcesConfig,
   SpriteSheetConfig,
-} from '../Scene/types';
+} from './types';
 
-export class Loader {
+export class Resources {
   private _path: string | null;
 
-  private _resourses: Record<string, HTMLImageElement>;
+  private _cache: Record<string, HTMLImageElement>;
 
   constructor() {
     this._path = null;
-    this._resourses = {};
+    this._cache = {};
   }
 
   public getResource(key: string) {
-    return this._resourses[key] ?? null;
+    return this._cache[key] ?? null;
   }
 
-  public get resources() {
-    return this._resourses;
+  public get cache() {
+    return this._cache;
   }
 
   public setImage(name: string, path: string): Promise<HTMLImageElement> {
@@ -28,7 +28,7 @@ export class Loader {
       const img = new Image();
       img.onload = () => {
         res(img);
-        this._resourses[name] = img;
+        this._cache[name] = img;
       };
       img.src = this._path + path;
     });
@@ -38,12 +38,11 @@ export class Loader {
     return Promise.all(images.map(({ name, path }) => this.setImage(name, path)));
   }
 
-  private _loadSpriteSheets = (spritesheets: SpriteSheetConfig[]) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    spritesheets.forEach(({ name, path, options }) => {
-      this.setImage(name, path); // TODO
-    });
-  };
+  private _loadSpriteSheets = (spritesheets: SpriteSheetConfig[]) =>
+    Promise.all(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      spritesheets.map(({ name, path, options }) => this.setImage(name, path)),
+    );
 
   private _loadAudio = (audios: AudioResourceConfig[]) => {
     audios.forEach(({ name, path }) => {
@@ -52,12 +51,10 @@ export class Loader {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public async loadResources({ images, spritesheets, audio }: SceneResourcesConfig, path: string) {
+  public async load({ images, spritesheets, audio }: SceneResourcesConfig, path: string) {
     // TODO
     this._path = path;
-    await this._loadImages(images!);
-
-    // if (spritesheets) this._loadSpriteSheets(spritesheets);
+    await Promise.all([this._loadImages(images!), this._loadSpriteSheets(spritesheets!)]);
 
     // if (audio) this._loadAudio(audio);
   }

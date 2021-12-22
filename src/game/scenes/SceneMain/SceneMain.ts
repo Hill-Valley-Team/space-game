@@ -14,35 +14,26 @@ export class SceneMain extends Scene {
   }
 
   async preload() {
-    await this.loadResources(sceneMainResources, ASSETS_PATH);
+    await this.res.load(sceneMainResources, ASSETS_PATH);
   }
 
   create() {
     this._player = new Player({
       scene: this,
-      x: this.game.width * 0.5, //TODO
+      x: this.game.width * 0.5,
       y: this.game.height * 0.5,
       key: 'sprPlayer',
     });
   }
 
   render() {
-    const image = this.res!.getResource('sprLaserEnemy0');
-    console.log(this.res.resources, image);
-    // const image = this.res.getResource(this._player!.key);
-
-    // if (image) {
-    //   this.game.add({
-    //     image,
-    //     x: this._player!.x,
-    //     y: this._player!.y,
-    //   });
-    // }
-  }
-
-  async start() {
-    await this.preload();
-    this.create();
-    this.render();
+    const image = this.res.getResource(this._player!.key);
+    if (image) {
+      this.game.add({
+        image,
+        x: this._player!.x,
+        y: this._player!.y,
+      });
+    }
   }
 }

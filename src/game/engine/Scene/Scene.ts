@@ -1,7 +1,7 @@
 import { Game } from '../Game';
 import { GameObject } from '../GameObject';
-import { Loader } from '../Resources';
-import { SceneProps, SceneResourcesConfig } from './types';
+import { Resources } from '../Resources';
+import { SceneProps } from './types';
 
 export abstract class Scene {
   private _key: string;
@@ -10,11 +10,11 @@ export abstract class Scene {
 
   private _game: Game;
 
-  private _res: Loader;
+  private _res: Resources;
+
+  private _isActive: boolean;
 
   // private _updateList: unknown[];
-
-  public abstract create(): void;
 
   public get key() {
     return this._key;
@@ -38,31 +38,48 @@ export abstract class Scene {
     this._key = key;
     this._displayList = [];
     this._game = game;
-    this.create();
-    this._res = new Loader();
+    this._res = new Resources();
+    this._isActive = false;
   }
 
   protected init() {}
 
+  private async _preload() {
+    await this.preload();
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  protected preload() {}
+  protected async preload() {}
+
+  private _create() {
+    this.create();
+  }
+
+  protected create() {}
+
+  private _render() {
+    this.render();
+    this._isActive = true;
+  }
+
+  protected render() {}
+
+  start() {
+    this._preload().then(() => {
+      this._create();
+      this._render();
+    });
+  }
 
   public update(delay: number) {
+    if (!this._isActive) return;
+
     this._displayList.forEach((element) => {
       element.update(delay);
     });
   }
 
-  protected render() {}
-
-  public start() {}
-
   public shutdown() {}
-
-  protected async loadResources(resourses: SceneResourcesConfig, path: string) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    await this._res.loadResources(resourses, path);
-  }
 
   add(item: GameObject) {
     this._displayList.push(item);
