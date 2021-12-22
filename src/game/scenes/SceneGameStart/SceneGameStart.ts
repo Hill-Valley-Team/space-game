@@ -1,4 +1,4 @@
-import { Scene } from '../engine/Scene';
+import { Scene } from '../../engine/Scene';
 
 class SceneGameStart extends Scene {
   constructor() {
@@ -8,4 +8,4 @@ class SceneGameStart extends Scene {
   create() {}
 }
 
-export const sceneGameStart = new SceneGameStart();
+export default new SceneGameStart();

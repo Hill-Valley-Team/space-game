@@ -1,4 +1,5 @@
 import { Scene } from '../Scene';
+import { State } from '../State/State';
 import { defaultGameConfig } from './defaultGameConfig';
 import { TimeStep } from './TimeStep';
 import { GameConfig } from './types';
@@ -8,13 +9,19 @@ export class Game {
 
   private _height: number;
 
+  private _bgColor: string;
+
   private _parent: Element | null;
 
   private _isRunning: boolean;
 
-  private _scene: Scene | null;
+  private _scenes: Scene[] | null;
+
+  private _scene!: Scene | null;
 
   private _loop: TimeStep;
+
+  private _state: State;
 
   private _canvas: HTMLCanvasElement | null;
 
@@ -40,30 +47,38 @@ export class Game {
     return this._canvas;
   }
 
+  public get state() {
+    return this._state;
+  }
+
   constructor(config: GameConfig) {
-    const { width, height, parent } = config;
+    const { width, height, parent, backgroundColor, scenes } = config;
 
     this._width = width ?? defaultGameConfig.width;
     this._height = height ?? defaultGameConfig.height;
+    this._bgColor = backgroundColor ?? defaultGameConfig.backgroundColor;
     this._parent = this._getParent(parent ?? defaultGameConfig.parent);
-    console.log(this._parent);
+    this._scenes = scenes ?? null;
     this._isRunning = false;
-    this._scene = null;
+    // this._scene = scenes ? scenes[0] : null;
     this._loop = new TimeStep(this);
     this._canvas = null;
     this._context = null;
-    this._createCanvas();
-    this._renderCanvas();
+    this._state = new State();
+    this._create();
   }
 
   public start() {
     this._isRunning = true;
-    this._loop.start();
+    // this._loop.start();
   }
 
-  protected preload() {}
+  // private _preload() {}
 
-  protected create() {}
+  private _create() {
+    this._createCanvas();
+    this._renderCanvas();
+  }
 
   private _getParent(parent: string | HTMLElement) {
     return parent instanceof HTMLElement ? parent : document.querySelector(parent);
@@ -73,7 +88,7 @@ export class Game {
     const canvas: HTMLCanvasElement = document.createElement('canvas');
     canvas.height = this.height;
     canvas.width = this.width;
-    canvas.style.background = 'black';
+    canvas.style.backgroundColor = this._bgColor;
     this._canvas = canvas;
     this._context = canvas.getContext('2d');
   }
@@ -84,7 +99,7 @@ export class Game {
     }
   }
 
-  protected exit() {}
+  public exit() {}
 
   public update(delay: number) {
     if (this._isRunning) {

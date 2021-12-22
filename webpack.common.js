@@ -17,6 +17,7 @@ module.exports = {
   plugins: [
     new CopyPlugin({
       patterns: [{ from: './src/assets/images/', to: './assets/images/' }],
+      patterns: [{ from: './src/game/assets/images/', to: './assets/images/' }],
     }),
     new HtmlWebpackPlugin({
       title: 'Space Racing Game',

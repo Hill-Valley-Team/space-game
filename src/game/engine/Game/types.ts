@@ -5,7 +5,7 @@ export type GameConfig = {
   width: number;
   height: number;
   backgroundColor: string;
-  scene: Scene[];
   parent?: HTMLElement | string;
+  scenes?: Scene[];
   state?: State;
 };

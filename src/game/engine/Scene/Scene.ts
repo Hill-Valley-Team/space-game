@@ -9,7 +9,7 @@ export abstract class Scene {
 
   // private _updateList: unknown[];
 
-  protected abstract create(): void;
+  public abstract create(): void;
 
   public get key() {
     return this._key;
@@ -27,15 +27,25 @@ export abstract class Scene {
     this.create();
   }
 
-  protected preload() {}
+  protected init() {} //TODO
 
-  public start() {}
+  protected preload() {}
 
   public update(delay: number) {
     this._displayList.forEach((element) => {
       element.update(delay);
     });
   }
+
+  protected render() {}
+
+  public start() {
+    this.preload();
+    this.create();
+    this.render();
+  }
+
+  public shutdown() {}
 
   protected loadResources(resourses: SceneResourcesConfig, path: string) {
     const loader = new Loader(path);
