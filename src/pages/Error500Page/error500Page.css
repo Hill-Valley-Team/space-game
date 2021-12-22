@@ -8,19 +8,19 @@
   padding-top: 129px;
 
   &__title.title {
-   margin-bottom: 4px;
-   font-size: 96px;
-   line-height: 120%;
-   color: $pure-white;
-   font-weight: 500;
+    margin-bottom: 4px;
+    font-size: 96px;
+    line-height: 120%;
+    color: $pure-white;
+    font-weight: 500;
   }
 
   &__subtitle.title {
-   margin-bottom: 40px;
-   font-size: 36px;
-   line-height: 120%;
-   color: $pure-white;
-   font-weight: 500;
+    margin-bottom: 40px;
+    font-size: 36px;
+    line-height: 120%;
+    color: $pure-white;
+    font-weight: 500;
   }
 
   &__text {
@@ -28,6 +28,6 @@
     font-size: 20px;
     line-height: 120%;
     font-weight: 500;
-    color: #FFF501;
+    color: $error-text-color;
   }
 }
