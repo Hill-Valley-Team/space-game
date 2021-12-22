@@ -1,0 +1,33 @@
+.error500-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 129px;
+
+  &__title.title {
+   margin-bottom: 4px;
+   font-size: 96px;
+   line-height: 120%;
+   color: $pure-white;
+   font-weight: 500;
+  }
+
+  &__subtitle.title {
+   margin-bottom: 40px;
+   font-size: 36px;
+   line-height: 120%;
+   color: $pure-white;
+   font-weight: 500;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 500;
+    color: #FFF501;
+  }
+}
