@@ -8,6 +8,7 @@ const colors = {
   'disabled-bg-color': '#999999',
   'accent-color': '#ffc701',
   'pure-white': '#ffffff',
+  'error-text-color': '#fff501'
 };
 
 module.exports = {
