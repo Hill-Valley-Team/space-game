@@ -16,7 +16,11 @@ export class Loader {
   }
 
   public getResource(key: string) {
-    return this._resourses[key];
+    return this._resourses[key] ?? null;
+  }
+
+  public get resources() {
+    return this._resourses;
   }
 
   public setImage(name: string, path: string): Promise<HTMLImageElement> {
@@ -30,13 +34,13 @@ export class Loader {
     });
   }
 
-  private _loadImages = (images: ImageResourceConfig[]) => {
-    Promise.all([
+  private _loadImages(images: ImageResourceConfig[]) {
+    return Promise.all([
       images.forEach(({ name, path }) => {
         this.setImage(name, path);
       }),
     ]);
-  };
+  }
 
   private _loadSpriteSheets = (spritesheets: SpriteSheetConfig[]) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -51,14 +55,15 @@ export class Loader {
     });
   };
 
-  public loadResources({ images, spritesheets, audio }: SceneResourcesConfig, path: string) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public async loadResources({ images, spritesheets, audio }: SceneResourcesConfig, path: string) {
+    // TODO
+
     this._path = path;
-    if (images) this._loadImages(images);
+    return this._loadImages(images!).then(() => this._resourses);
 
-    if (spritesheets) this._loadSpriteSheets(spritesheets);
+    // if (spritesheets) this._loadSpriteSheets(spritesheets);
 
-    if (audio) this._loadAudio(audio);
-
-    return this._resourses;
+    // if (audio) this._loadAudio(audio);
   }
 }

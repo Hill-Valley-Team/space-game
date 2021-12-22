@@ -13,27 +13,36 @@ export class SceneMain extends Scene {
     this._player = null;
   }
 
-  preload() {
-    this.loadResources(sceneMainResources, ASSETS_PATH);
+  async preload() {
+    await this.loadResources(sceneMainResources, ASSETS_PATH);
   }
 
-  async create() {
+  create() {
     this._player = new Player({
       scene: this,
       x: this.game.width * 0.5, //TODO
       y: this.game.height * 0.5,
       key: 'sprPlayer',
     });
+  }
 
-    const playerImg = this.res.getResource(this._player.key);
-    console.log(playerImg);
+  render() {
+    console.log(this.res.resources);
+    console.log(this.res.resources.sprEnemy1);
+    const image = this.res.getResource(this._player!.key);
 
-    if (playerImg) {
+    if (image) {
       this.game.add({
-        image: playerImg,
-        x: this._player.x,
-        y: this._player.y,
+        image,
+        x: this._player!.x,
+        y: this._player!.y,
       });
     }
+  }
+
+  async start() {
+    await this.preload();
+    this.create();
+    this.render();
   }
 }

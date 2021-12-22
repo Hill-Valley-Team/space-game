@@ -44,6 +44,7 @@ export abstract class Scene {
 
   protected init() {}
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   protected preload() {}
 
   public update(delay: number) {
@@ -54,16 +55,12 @@ export abstract class Scene {
 
   protected render() {}
 
-  public start() {
-    this.preload();
-    this.create();
-    this.render();
-  }
+  public start() {}
 
   public shutdown() {}
 
-  protected loadResources(resourses: SceneResourcesConfig, path: string) {
-    this._res.loadResources(resourses, path);
+  protected async loadResources(resourses: SceneResourcesConfig, path: string) {
+    await this._res.loadResources(resourses, path);
   }
 
   add(item: GameObject) {
