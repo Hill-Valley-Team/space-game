@@ -27,17 +27,17 @@ export class SceneMain extends Scene {
   }
 
   render() {
-    console.log(this.res.resources);
-    console.log(this.res.resources.sprEnemy1);
-    const image = this.res.getResource(this._player!.key);
+    const image = this.res!.getResource('sprLaserEnemy0');
+    console.log(this.res.resources, image);
+    // const image = this.res.getResource(this._player!.key);
 
-    if (image) {
-      this.game.add({
-        image,
-        x: this._player!.x,
-        y: this._player!.y,
-      });
-    }
+    // if (image) {
+    //   this.game.add({
+    //     image,
+    //     x: this._player!.x,
+    //     y: this._player!.y,
+    //   });
+    // }
   }
 
   async start() {

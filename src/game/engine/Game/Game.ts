@@ -77,11 +77,8 @@ export class Game {
   }
 
   public add(obj: ImgRes) {
-    const ctx = this._context;
     const { image, x, y } = obj;
-
-    console.log(image, x, y);
-    ctx!.drawImage(image, x, y);
+    this.context!.drawImage(image, x, y);
   }
 
   private _getParent(parent: string | HTMLElement) {

@@ -34,7 +34,7 @@ export class Loader {
     });
   }
 
-  private _loadImages(images: ImageResourceConfig[]) {
+  private async _loadImages(images: ImageResourceConfig[]) {
     return Promise.all([
       images.forEach(({ name, path }) => {
         this.setImage(name, path);
