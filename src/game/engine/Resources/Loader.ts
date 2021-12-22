@@ -6,13 +6,17 @@ import {
 } from '../Scene/types';
 
 export class Loader {
-  private _path: string;
+  private _path: string | null;
 
   private _resourses: Record<string, HTMLImageElement>;
 
-  constructor(path: string) {
-    this._path = path;
+  constructor() {
+    this._path = null;
     this._resourses = {};
+  }
+
+  public getResource(key: string) {
+    return this._resourses[key];
   }
 
   public setImage(name: string, path: string): Promise<HTMLImageElement> {
@@ -26,7 +30,7 @@ export class Loader {
     });
   }
 
-  private _loadImages = async (images: ImageResourceConfig[]) => {
+  private _loadImages = (images: ImageResourceConfig[]) => {
     Promise.all([
       images.forEach(({ name, path }) => {
         this.setImage(name, path);
@@ -47,11 +51,14 @@ export class Loader {
     });
   };
 
-  public async loadResources({ images, spritesheets, audio }: SceneResourcesConfig) {
+  public loadResources({ images, spritesheets, audio }: SceneResourcesConfig, path: string) {
+    this._path = path;
     if (images) this._loadImages(images);
 
     if (spritesheets) this._loadSpriteSheets(spritesheets);
 
     if (audio) this._loadAudio(audio);
+
+    return this._resourses;
   }
 }

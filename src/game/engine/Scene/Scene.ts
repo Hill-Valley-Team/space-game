@@ -10,6 +10,8 @@ export abstract class Scene {
 
   private _game: Game;
 
+  private _res: Loader;
+
   // private _updateList: unknown[];
 
   public abstract create(): void;
@@ -26,6 +28,10 @@ export abstract class Scene {
     return this._displayList;
   }
 
+  public get res() {
+    return this._res;
+  }
+
   constructor(props: SceneProps) {
     const { key, game } = props;
 
@@ -33,6 +39,7 @@ export abstract class Scene {
     this._displayList = [];
     this._game = game;
     this.create();
+    this._res = new Loader();
   }
 
   protected init() {}
@@ -56,8 +63,7 @@ export abstract class Scene {
   public shutdown() {}
 
   protected loadResources(resourses: SceneResourcesConfig, path: string) {
-    const loader = new Loader(path);
-    loader.loadResources(resourses);
+    this._res.loadResources(resourses, path);
   }
 
   add(item: GameObject) {

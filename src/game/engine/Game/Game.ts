@@ -2,7 +2,7 @@ import { Scene } from '../Scene';
 import { State } from '../State/State';
 import { defaultGameConfig } from './defaultGameConfig';
 import { TimeStep } from './TimeStep';
-import { GameConfig } from './types';
+import { GameConfig, ImgRes } from './types';
 
 export class Game {
   private _width: number;
@@ -74,6 +74,14 @@ export class Game {
   private _create() {
     this._createCanvas();
     this._renderCanvas();
+  }
+
+  public add(obj: ImgRes) {
+    const ctx = this._context;
+    const { image, x, y } = obj;
+
+    console.log(image, x, y);
+    ctx!.drawImage(image, x, y);
   }
 
   private _getParent(parent: string | HTMLElement) {

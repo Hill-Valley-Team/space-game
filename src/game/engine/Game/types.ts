@@ -10,3 +10,9 @@ export type GameConfig = {
   scenes?: Constructable<Scene>[];
   state?: State;
 };
+
+export type ImgRes = {
+  image: HTMLImageElement;
+  x: number;
+  y: number;
+};

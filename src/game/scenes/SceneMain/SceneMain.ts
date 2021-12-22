@@ -17,12 +17,23 @@ export class SceneMain extends Scene {
     this.loadResources(sceneMainResources, ASSETS_PATH);
   }
 
-  create() {
+  async create() {
     this._player = new Player({
       scene: this,
       x: this.game.width * 0.5, //TODO
       y: this.game.height * 0.5,
       key: 'sprPlayer',
     });
+
+    const playerImg = this.res.getResource(this._player.key);
+    console.log(playerImg);
+
+    if (playerImg) {
+      this.game.add({
+        image: playerImg,
+        x: this._player.x,
+        y: this._player.y,
+      });
+    }
   }
 }
