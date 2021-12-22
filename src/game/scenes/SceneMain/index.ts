@@ -1,3 +1,1 @@
-import SceneMain from './SceneMain';
-
-export { SceneMain };
+export { SceneMain } from './SceneMain';

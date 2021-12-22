@@ -1,3 +1,1 @@
-import SceneGameOver from './SceneGameOver';
-
-export { SceneGameOver };
+export { SceneGameOver } from './SceneGameOver';

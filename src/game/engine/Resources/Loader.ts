@@ -35,8 +35,9 @@ export class Loader {
   };
 
   private _loadSpriteSheets = (spritesheets: SpriteSheetConfig[]) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     spritesheets.forEach(({ name, path, options }) => {
-      console.log(name, path, options);
+      this.setImage(name, path); // TODO
     });
   };
 

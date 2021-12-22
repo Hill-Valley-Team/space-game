@@ -1,3 +1,4 @@
+import { Game } from '../Game';
 import { GameObject } from '../GameObject';
 import { Loader } from '../Resources';
 import { SceneProps, SceneResourcesConfig } from './types';
@@ -7,6 +8,8 @@ export abstract class Scene {
 
   private _displayList: GameObject[];
 
+  private _game: Game;
+
   // private _updateList: unknown[];
 
   public abstract create(): void;
@@ -15,19 +18,24 @@ export abstract class Scene {
     return this._key;
   }
 
+  public get game() {
+    return this._game;
+  }
+
   public get displayList() {
     return this._displayList;
   }
 
   constructor(props: SceneProps) {
-    const { key } = props;
+    const { key, game } = props;
 
     this._key = key;
     this._displayList = [];
+    this._game = game;
     this.create();
   }
 
-  protected init() {} //TODO
+  protected init() {}
 
   protected preload() {}
 

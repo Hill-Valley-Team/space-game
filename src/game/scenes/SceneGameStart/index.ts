@@ -1,3 +1,1 @@
-import SceneGameStart from './SceneGameStart';
-
-export { SceneGameStart };
+export { SceneGameStart } from './SceneGameStart';

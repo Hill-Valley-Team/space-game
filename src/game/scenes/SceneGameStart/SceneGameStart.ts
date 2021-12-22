@@ -1,11 +1,10 @@
+import { Game } from '../../engine/Game';
 import { Scene } from '../../engine/Scene';
 
-class SceneGameStart extends Scene {
-  constructor() {
-    super({ key: 'SceneGameStart' });
+export class SceneGameStart extends Scene {
+  constructor(game: Game) {
+    super({ key: 'SceneGameStart', game });
   }
 
   create() {}
 }
-
-export default new SceneGameStart();

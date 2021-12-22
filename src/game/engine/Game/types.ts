@@ -1,3 +1,4 @@
+import { Constructable } from '../interfaces';
 import { Scene } from '../Scene';
 import { State } from '../State/State';
 
@@ -6,6 +7,6 @@ export type GameConfig = {
   height: number;
   backgroundColor: string;
   parent?: HTMLElement | string;
-  scenes?: Scene[];
+  scenes?: Constructable<Scene>[];
   state?: State;
 };

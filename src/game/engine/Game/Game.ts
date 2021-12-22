@@ -15,8 +15,6 @@ export class Game {
 
   private _isRunning: boolean;
 
-  private _scenes: Scene[] | null;
-
   private _scene!: Scene | null;
 
   private _loop: TimeStep;
@@ -52,19 +50,17 @@ export class Game {
   }
 
   constructor(config: GameConfig) {
-    const { width, height, parent, backgroundColor, scenes } = config;
+    const { width, height, parent, backgroundColor } = config;
 
     this._width = width ?? defaultGameConfig.width;
     this._height = height ?? defaultGameConfig.height;
     this._bgColor = backgroundColor ?? defaultGameConfig.backgroundColor;
     this._parent = this._getParent(parent ?? defaultGameConfig.parent);
-    this._scenes = scenes ?? null;
     this._isRunning = false;
-    // this._scene = scenes ? scenes[0] : null;
     this._loop = new TimeStep(this);
     this._canvas = null;
     this._context = null;
-    this._state = new State();
+    this._state = new State(this);
     this._create();
   }
 
