@@ -60,6 +60,7 @@ export abstract class Scene {
   public shutdown() {}
 
   protected async loadResources(resourses: SceneResourcesConfig, path: string) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     await this._res.loadResources(resourses, path);
   }
 

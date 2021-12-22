@@ -35,11 +35,7 @@ export class Loader {
   }
 
   private async _loadImages(images: ImageResourceConfig[]) {
-    return Promise.all([
-      images.forEach(({ name, path }) => {
-        this.setImage(name, path);
-      }),
-    ]);
+    return Promise.all(images.map(({ name, path }) => this.setImage(name, path)));
   }
 
   private _loadSpriteSheets = (spritesheets: SpriteSheetConfig[]) => {
