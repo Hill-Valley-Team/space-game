@@ -125,10 +125,10 @@ export class Game {
     }
   }
 
-  public render(dt: number) {
+  public render() {
     this.context?.clearRect(0, 0, this.width, this.height);
     if (this._scene && this._scene.isActive) {
-      this._scene.render(dt);
+      this._scene.render();
     }
   }
 }

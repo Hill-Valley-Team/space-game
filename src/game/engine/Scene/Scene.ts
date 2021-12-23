@@ -1,5 +1,5 @@
 import { Game } from '../Game';
-import { GameObject } from '../GameObjects';
+import { GameObject, Sprite } from '../GameObjects';
 import { SceneProps } from './types';
 
 export abstract class Scene {
@@ -10,8 +10,6 @@ export abstract class Scene {
   private _game: Game;
 
   private _isActive: boolean;
-
-  // private _updateList: unknown[];
 
   public get key() {
     return this._key;
@@ -29,6 +27,10 @@ export abstract class Scene {
     return this._isActive;
   }
 
+  public set isActive(val: boolean) {
+    this._isActive = val;
+  }
+
   constructor(props: SceneProps) {
     const { key, game } = props;
 
@@ -40,46 +42,40 @@ export abstract class Scene {
 
   protected init() {}
 
-  private async _preload() {
-    await this.preload();
-  }
-
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   protected async preload() {}
 
-  private _create() {
-    this.create();
-  }
-
   protected create() {}
 
-  private _render() {
-    this.render();
-    this._isActive = true;
-    this._game.scene = this;
-  }
+  public render() {}
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public render(dt?: number) {}
 
   start() {
-    this._preload().then(() => {
-      this._create();
-      this._render();
+    this.preload().then(() => {
+      this.create();
+      this.render();
     });
   }
 
   public update(delay: number) {
     if (!this._isActive) return;
-
     this._displayList.forEach((element) => {
-      element.update(delay);
+      const elHeight = element instanceof Sprite ? element.height! : 50;
+      if (element.y <= 0 - elHeight) {
+        this.delete(element);
+      } else {
+        element.update(delay);
+      }
     });
   }
 
-  public shutdown() {}
-
   add(item: GameObject) {
     this._displayList.push(item);
+  }
+
+  delete(obj: GameObject) {
+    const index = this.displayList.findIndex((item) => item === obj);
+    this.displayList.splice(index, 1);
   }
 }

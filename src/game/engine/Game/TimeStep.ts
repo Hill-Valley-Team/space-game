@@ -26,7 +26,7 @@ export class TimeStep {
     }
 
     this._last = now;
-    this._game.render(this._dt);
+    this._game.render();
     requestAnimationFrame(this._frame);
   };
 

@@ -19,8 +19,8 @@ export class PhysicBody {
     return this._velocity;
   }
 
-  public setVelocity(x: number, y: number) {
+  public setVelocity(x: number, y?: number) {
     this._velocity.x = x;
-    this._velocity.y = y;
+    this._velocity.y = y!;
   }
 }

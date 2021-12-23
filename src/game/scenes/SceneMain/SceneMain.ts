@@ -64,5 +64,8 @@ export class SceneMain extends Scene {
       dy: 0,
       key: 'sprBg1',
     });
+
+    this.isActive = true;
+    this.game.scene = this;
   }
 }

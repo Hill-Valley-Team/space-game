@@ -17,6 +17,9 @@ export class Player extends Sprite {
 
     this.setData('speed', 200);
     this.setData('isDead', false);
+
+    this.body.velocity.x = 0;
+    this.body.velocity.y = 100;
     // this.play('sprPlayer'); // TODO
   }
 
@@ -36,9 +39,14 @@ export class Player extends Sprite {
     this.body.velocity.x = this.getData('speed');
   }
 
-  update() {
-    this._body.setVelocity(0, 0);
-
+  update(delay: number) {
+    // this._body.setVelocity(0, 0);
+    if (this.body && this.body.velocity) {
+      const dx = this.body.velocity.x! * delay;
+      const dy = this.body.velocity.y! * delay;
+      this.x += dx;
+      this.y -= dy;
+    }
     // this.x = Phaser.Math.Clamp(this.x, 0, this.scene.game.config.width);
     // this.y = Phaser.Math.Clamp(this.y, 0, this.scene.game.config.height);
   }

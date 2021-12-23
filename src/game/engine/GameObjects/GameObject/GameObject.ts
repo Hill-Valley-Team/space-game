@@ -19,8 +19,16 @@ export class GameObject {
     return this._x;
   }
 
+  public set x(val: number) {
+    this._x = val;
+  }
+
   public get y() {
     return this._y;
+  }
+
+  public set y(val: number) {
+    this._y = val;
   }
 
   public get scene() {
@@ -58,13 +66,5 @@ export class GameObject {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public update(delay: number) {
-    // const dx = this._speed * delay;
-    // if (this._x > GameField.gameFieldWidth) {
-    //   this._x = GameField.gameFieldWidth;
-    // } else {
-    //   this._x += dx;
-    // }
-    // return this;
-  }
+  public update(delay: number) {}
 }
