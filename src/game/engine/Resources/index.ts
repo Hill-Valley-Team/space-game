@@ -1,1 +1,1 @@
-export { Resources } from './Resources';
+export { gameResourses } from './Resources';

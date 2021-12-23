@@ -12,7 +12,7 @@ export type GameConfig = {
 };
 
 export type ImgRes = {
-  image: HTMLImageElement;
+  key: string;
   sx?: number;
   sy?: number;
   sWidth?: number;

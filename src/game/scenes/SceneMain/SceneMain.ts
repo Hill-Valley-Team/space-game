@@ -13,7 +13,7 @@ export class SceneMain extends Scene {
   }
 
   async preload() {
-    await this.res.load(sceneMainResources, ASSETS_PATH);
+    await this.game.res.load(sceneMainResources, ASSETS_PATH);
   }
 
   create() {
@@ -28,7 +28,7 @@ export class SceneMain extends Scene {
         x: this.game.width * 0.5,
         y: this.game.height * 0.5,
         key: playerImgData.name,
-        source: this.res.getResource(playerImgData.name),
+        source: this.game.res.getResource(playerImgData.name),
         height: frameHeight,
         width: frameWidth,
         type: 'Player',
@@ -37,19 +37,17 @@ export class SceneMain extends Scene {
   }
 
   render() {
-    const image = this.res.getResource(this._player!.key);
-    if (image) {
-      this.game.add.image({
-        image,
-        sx: this._player!.width! * this._player!.frame,
-        sy: 0,
-        sWidth: this._player!.width!,
-        sHeight: this._player!.height!,
-        dx: this._player!.x,
-        dy: this._player!.y,
-        dWidth: this._player!.width!,
-        dHeight: this._player!.height!,
-      });
-    }
+    const { sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight, key } = this._player!.getProps();
+    this.game.add.image({
+      key,
+      sx,
+      sy,
+      sWidth,
+      sHeight,
+      dx,
+      dy,
+      dWidth,
+      dHeight,
+    });
   }
 }

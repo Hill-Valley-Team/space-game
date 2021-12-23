@@ -1,3 +1,5 @@
+import { gameResourses } from '.';
+
 export type SpriteSheetConfig = {
   name: string;
   path: string;
@@ -22,3 +24,5 @@ export type SceneResourcesConfig = {
   spritesheets?: SpriteSheetConfig[];
   audio?: AudioResourceConfig[];
 };
+
+export type GameResourses = typeof gameResourses;

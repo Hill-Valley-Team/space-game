@@ -5,7 +5,7 @@ import {
   SpriteSheetConfig,
 } from './types';
 
-export class Resources {
+class Resources {
   private _path: string | null;
 
   private _cache: Record<string, HTMLImageElement>;
@@ -59,3 +59,5 @@ export class Resources {
     // if (audio) this._loadAudio(audio);
   }
 }
+
+export const gameResourses = new Resources();

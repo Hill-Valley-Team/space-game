@@ -35,4 +35,18 @@ export class Sprite extends GameObject {
     this._height = height ?? 0;
     this._frame = frame ?? 0;
   }
+
+  public getProps() {
+    return {
+      sx: this.width! * this.frame,
+      sy: 0,
+      sWidth: this.width!,
+      sHeight: this.height!,
+      dx: this.x,
+      dy: this.y,
+      dWidth: this.width!,
+      dHeight: this.height!,
+      key: this.key,
+    };
+  }
 }

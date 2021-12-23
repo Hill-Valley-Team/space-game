@@ -1,6 +1,5 @@
 import { Game } from '../Game';
 import { GameObject } from '../GameObjects';
-import { Resources } from '../Resources';
 import { SceneProps } from './types';
 
 export abstract class Scene {
@@ -9,8 +8,6 @@ export abstract class Scene {
   private _displayList: GameObject[];
 
   private _game: Game;
-
-  private _res: Resources;
 
   private _isActive: boolean;
 
@@ -28,17 +25,12 @@ export abstract class Scene {
     return this._displayList;
   }
 
-  public get res() {
-    return this._res;
-  }
-
   constructor(props: SceneProps) {
     const { key, game } = props;
 
     this._key = key;
     this._displayList = [];
     this._game = game;
-    this._res = new Resources();
     this._isActive = false;
   }
 

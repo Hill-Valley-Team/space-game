@@ -1,3 +1,5 @@
+import { gameResourses } from '../Resources';
+import { GameResourses } from '../Resources/types';
 import { Scene } from '../Scene';
 import { State } from '../State/State';
 import { Add } from './Add';
@@ -28,6 +30,8 @@ export class Game {
 
   private _add: Add;
 
+  private _res: GameResourses;
+
   public get width() {
     return this._width;
   }
@@ -56,6 +60,10 @@ export class Game {
     return this._add;
   }
 
+  public get res() {
+    return this._res;
+  }
+
   constructor(config: GameConfig) {
     const { width, height, parent, backgroundColor } = config;
 
@@ -69,6 +77,7 @@ export class Game {
     this._context = null;
     this._state = new State(this);
     this._add = new Add(this);
+    this._res = gameResourses;
     this._create();
   }
 
