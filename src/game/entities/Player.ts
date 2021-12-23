@@ -4,6 +4,8 @@ import { PlayerProps } from './types';
 export class Player extends Sprite {
   private _type: string;
 
+  private _speed: number;
+
   public get type() {
     return this._type;
   }
@@ -14,40 +16,30 @@ export class Player extends Sprite {
     super({ scene, x, y, key, source, width, height });
 
     this._type = 'Player';
+    this._speed = 100;
 
-    this.setData('speed', 200);
-    this.setData('isDead', false);
-
-    this.body.velocity.x = 0;
-    this.body.velocity.y = 100;
     // this.play('sprPlayer'); // TODO
   }
 
-  moveUp() {
-    this.body.velocity.y = -this.getData('speed');
-  }
-
-  moveDown() {
-    this.body.velocity.y = this.getData('speed');
-  }
-
   moveLeft() {
-    this.body.velocity.x = -this.getData('speed');
+    this.body.velocity.x = -this._speed;
   }
 
   moveRight() {
-    this.body.velocity.x = this.getData('speed');
+    this.body.velocity.x = this._speed;
+  }
+
+  moveTop() {
+    this.body.velocity.y = -this._speed;
+  }
+
+  moveDown() {
+    this.body.velocity.y = this._speed;
   }
 
   update(delay: number) {
-    // this._body.setVelocity(0, 0);
-    if (this.body && this.body.velocity) {
-      const dx = this.body.velocity.x! * delay;
-      const dy = this.body.velocity.y! * delay;
-      this.x += dx;
-      this.y -= dy;
-    }
-    // this.x = Phaser.Math.Clamp(this.x, 0, this.scene.game.config.width);
-    // this.y = Phaser.Math.Clamp(this.y, 0, this.scene.game.config.height);
+    this.x += this.body.velocity.x! * delay;
+    this.y += this.body.velocity.y! * delay;
+    this._body.setVelocity(0, 0);
   }
 }

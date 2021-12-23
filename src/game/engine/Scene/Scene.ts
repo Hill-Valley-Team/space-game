@@ -62,7 +62,14 @@ export abstract class Scene {
     if (!this._isActive) return;
     this._displayList.forEach((element) => {
       const elHeight = element instanceof Sprite ? element.height! : 50;
-      if (element.y <= 0 - elHeight) {
+      const elWidth = element instanceof Sprite ? element.height! : 50;
+
+      if (
+        element.y <= 0 - elHeight ||
+        element.y > this.game.height ||
+        element.x >= this.game.width ||
+        element.x <= 0 - elWidth
+      ) {
         this.delete(element);
       } else {
         element.update(delay);
@@ -77,5 +84,6 @@ export abstract class Scene {
   delete(obj: GameObject) {
     const index = this.displayList.findIndex((item) => item === obj);
     this.displayList.splice(index, 1);
+    console.log(this.displayList);
   }
 }
