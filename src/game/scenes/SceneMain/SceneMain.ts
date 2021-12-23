@@ -49,5 +49,17 @@ export class SceneMain extends Scene {
       dWidth,
       dHeight,
     });
+
+    this.game.add.image({
+      dx: 0,
+      dy: 0,
+      key: 'sprBg1',
+    });
+
+    this.game.add.image({
+      dx: this.game.width * 0.5,
+      dy: 0,
+      key: 'sprBg1',
+    });
   }
 }

@@ -4,6 +4,10 @@ import { PlayerProps } from './types';
 export class Player extends Sprite {
   private _type: string;
 
+  public get type() {
+    return this._type;
+  }
+
   constructor(props: PlayerProps) {
     const { scene, x, y, key, source, type, width, height } = props;
 

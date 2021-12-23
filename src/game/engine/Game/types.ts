@@ -11,7 +11,7 @@ export type GameConfig = {
   state?: State;
 };
 
-export type ImgRes = {
+export type ImageRes = {
   key: string;
   sx?: number;
   sy?: number;
