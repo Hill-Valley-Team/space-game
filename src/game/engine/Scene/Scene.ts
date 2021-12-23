@@ -25,6 +25,10 @@ export abstract class Scene {
     return this._displayList;
   }
 
+  public get isActive() {
+    return this._isActive;
+  }
+
   constructor(props: SceneProps) {
     const { key, game } = props;
 
@@ -52,9 +56,11 @@ export abstract class Scene {
   private _render() {
     this.render();
     this._isActive = true;
+    this._game.scene = this;
   }
 
-  protected render() {}
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public render(dt?: number) {}
 
   start() {
     this._preload().then(() => {

@@ -17,23 +17,26 @@ export class SceneMain extends Scene {
   }
 
   create() {
+    // TODO вынести логику в Player
     const playerImgData = sceneMainResources.spritesheets?.find(
       (item) => item.name === 'sprPlayer',
     );
 
     if (playerImgData) {
-      const { frameWidth, frameHeight } = playerImgData.options;
+      const { name, options } = playerImgData;
+      const { frameWidth, frameHeight } = options;
       this._player = new Player({
         scene: this,
         x: this.game.width * 0.5,
-        y: this.game.height * 0.5,
-        key: playerImgData.name,
-        source: this.game.res.getResource(playerImgData.name),
+        y: this.game.height - frameHeight - 50,
+        key: name,
+        source: this.game.res.getResource(name),
         height: frameHeight,
         width: frameWidth,
-        type: 'Player',
       });
     }
+
+    this.displayList.push(this._player!);
   }
 
   render() {
@@ -53,7 +56,7 @@ export class SceneMain extends Scene {
     this.game.add.image({
       dx: 0,
       dy: 0,
-      key: 'sprBg1',
+      key: 'sprBg0',
     });
 
     this.game.add.image({

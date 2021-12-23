@@ -9,11 +9,12 @@ export class Player extends Sprite {
   }
 
   constructor(props: PlayerProps) {
-    const { scene, x, y, key, source, type, width, height } = props;
+    const { scene, x, y, key, source, width, height } = props;
 
     super({ scene, x, y, key, source, width, height });
 
-    this._type = type;
+    this._type = 'Player';
+
     this.setData('speed', 200);
     this.setData('isDead', false);
     // this.play('sprPlayer'); // TODO

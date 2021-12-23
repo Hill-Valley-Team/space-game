@@ -64,6 +64,10 @@ export class Game {
     return this._res;
   }
 
+  public set scene(scene: Scene) {
+    this._scene = scene;
+  }
+
   constructor(config: GameConfig) {
     const { width, height, parent, backgroundColor } = config;
 
@@ -83,7 +87,7 @@ export class Game {
 
   public start() {
     this._isRunning = true;
-    // this._loop.start();
+    this._loop.start();
   }
 
   // private _preload() {}
@@ -91,6 +95,7 @@ export class Game {
   private _create() {
     this._createCanvas();
     this._renderCanvas();
+    this.start();
   }
 
   private _getParent(parent: string | HTMLElement) {
@@ -115,8 +120,15 @@ export class Game {
   public exit() {}
 
   public update(delay: number) {
-    if (this._isRunning) {
-      this._scene?.update(delay);
+    if (this._isRunning && this._scene) {
+      this._scene.update(delay);
+    }
+  }
+
+  public render(dt: number) {
+    this.context?.clearRect(0, 0, this.width, this.height);
+    if (this._scene && this._scene.isActive) {
+      this._scene.render(dt);
     }
   }
 }
