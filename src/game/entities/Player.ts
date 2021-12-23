@@ -1,12 +1,15 @@
-import { Entity } from './Entity';
+import { Sprite } from '../engine/GameObjects';
 import { PlayerProps } from './types';
 
-export class Player extends Entity {
+export class Player extends Sprite {
+  private _type: string;
+
   constructor(props: PlayerProps) {
-    const { scene, x, y, key } = props;
+    const { scene, x, y, key, source, type, width, height } = props;
 
-    super({ scene, x, y, key, type: 'Player' });
+    super({ scene, x, y, key, source, width, height });
 
+    this._type = type;
     this.setData('speed', 200);
     this.setData('isDead', false);
     // this.play('sprPlayer'); // TODO

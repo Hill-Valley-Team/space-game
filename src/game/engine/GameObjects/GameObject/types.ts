@@ -1,4 +1,4 @@
-import { Scene } from '../Scene';
+import { Scene } from '../../Scene';
 
 export type GameObjectProps = {
   scene: Scene;
@@ -8,9 +8,10 @@ export type GameObjectProps = {
 };
 
 export type SpriteProps = {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   source: HTMLImageElement;
+  frame?: number;
 } & GameObjectProps;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

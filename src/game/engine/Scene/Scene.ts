@@ -1,5 +1,5 @@
 import { Game } from '../Game';
-import { GameObject } from '../GameObject';
+import { GameObject } from '../GameObjects';
 import { Resources } from '../Resources';
 import { SceneProps } from './types';
 

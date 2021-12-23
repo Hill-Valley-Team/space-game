@@ -1,8 +1,9 @@
 import { Scene } from '../Scene';
 import { State } from '../State/State';
+import { Add } from './Add';
 import { defaultGameConfig } from './defaultGameConfig';
 import { TimeStep } from './TimeStep';
-import { GameConfig, ImgRes } from './types';
+import { GameConfig } from './types';
 
 export class Game {
   private _width: number;
@@ -24,6 +25,8 @@ export class Game {
   private _canvas: HTMLCanvasElement | null;
 
   private _context: CanvasRenderingContext2D | null;
+
+  private _add: Add;
 
   public get width() {
     return this._width;
@@ -49,6 +52,10 @@ export class Game {
     return this._state;
   }
 
+  public get add() {
+    return this._add;
+  }
+
   constructor(config: GameConfig) {
     const { width, height, parent, backgroundColor } = config;
 
@@ -61,6 +68,7 @@ export class Game {
     this._canvas = null;
     this._context = null;
     this._state = new State(this);
+    this._add = new Add(this);
     this._create();
   }
 
@@ -74,11 +82,6 @@ export class Game {
   private _create() {
     this._createCanvas();
     this._renderCanvas();
-  }
-
-  public add(obj: ImgRes) {
-    const { image, x, y } = obj;
-    this.context!.drawImage(image, x, y);
   }
 
   private _getParent(parent: string | HTMLElement) {

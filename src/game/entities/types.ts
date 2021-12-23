@@ -1,11 +1,5 @@
-import { Scene } from '../engine/Scene';
+import { SpriteProps } from '../engine/GameObjects/GameObject/types';
 
-export type EntityProps = {
-  scene: Scene;
-  x: number;
-  y: number;
-  key: string;
+export type PlayerProps = {
   type: string;
-};
-
-export type PlayerProps = Omit<EntityProps, 'type'>;
+} & SpriteProps;
