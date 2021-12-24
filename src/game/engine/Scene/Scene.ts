@@ -1,5 +1,5 @@
 import { Game } from '../Game';
-import { GameObject, Sprite } from '../GameObjects';
+import { GameObject } from '../GameObjects';
 import { EventObject, SceneProps } from './types';
 
 export abstract class Scene {
@@ -70,6 +70,8 @@ export abstract class Scene {
 
   public render() {}
 
+  public destroy() {}
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
   start() {
@@ -79,32 +81,15 @@ export abstract class Scene {
     });
   }
 
-  public update(delay: number) {
-    if (!this._isActive) return;
-    this._displayList.forEach((element) => {
-      const elHeight = element instanceof Sprite ? element.height! : 50;
-      const elWidth = element instanceof Sprite ? element.height! : 50;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public update(delay: number) {}
 
-      if (
-        element.y <= 0 - elHeight ||
-        element.y > this.game.height ||
-        element.x >= this.game.width ||
-        element.x <= 0 - elWidth
-      ) {
-        this.delete(element);
-      } else {
-        element.update(delay);
-      }
-    });
-  }
+  public checkCollisions() {}
 
   add(item: GameObject) {
     this._displayList.push(item);
   }
 
-  delete(obj: GameObject) {
-    const index = this.displayList.findIndex((item) => item === obj);
-    this.displayList.splice(index, 1);
-    console.log(this.displayList);
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public delete(obj: GameObject) {}
 }

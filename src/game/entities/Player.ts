@@ -1,3 +1,4 @@
+import { PLAYER_HEALTH, PLAYER_SPEED } from '../consts';
 import { Sprite } from '../engine/GameObjects';
 import { PlayerProps } from './types';
 
@@ -6,8 +7,14 @@ export class Player extends Sprite {
 
   private _speed: number;
 
+  private _health: number;
+
   public get type() {
     return this._type;
+  }
+
+  public get health() {
+    return this._health;
   }
 
   constructor(props: PlayerProps) {
@@ -16,9 +23,14 @@ export class Player extends Sprite {
     super({ scene, x, y, key, source, width, height });
 
     this._type = 'Player';
-    this._speed = 100;
+    this._speed = PLAYER_SPEED;
+    this._health = PLAYER_HEALTH;
 
     // this.play('sprPlayer'); // TODO
+  }
+
+  getDamage(damage: number) {
+    this._health -= damage;
   }
 
   moveLeft() {
