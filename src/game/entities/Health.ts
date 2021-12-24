@@ -31,8 +31,7 @@ export class Health extends GameObject {
     const ctx = this.scene.game.context;
     this._health = health;
 
-    const percent = (this._health * 100) / PLAYER_HEALTH / 100;
-    // console.log(healthWidth);
+    const percent = this._health / PLAYER_HEALTH;
 
     if (ctx) {
       ctx.fillStyle = 'black';

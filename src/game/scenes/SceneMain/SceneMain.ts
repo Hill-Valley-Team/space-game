@@ -1,5 +1,6 @@
 import { ASSETS_PATH } from '../../consts';
 import { Game } from '../../engine/Game';
+import { getRandomInt } from '../../engine/Game/helpers';
 import { GameObject, Sprite } from '../../engine/GameObjects';
 import { Scene } from '../../engine/Scene';
 import { Player } from '../../entities';
@@ -40,7 +41,7 @@ export class SceneMain extends Scene {
       this._player = new Player({
         scene: this,
         x: this.game.width * 0.5,
-        y: this.game.height - frameHeight - 50,
+        y: this.game.height * 0.6,
         key: name,
         source: this.game.res.getResource(name),
         height: frameHeight,
@@ -62,7 +63,7 @@ export class SceneMain extends Scene {
   }
 
   createAtack() {
-    this._atack = setInterval(() => this.createObstacle('sprEnemy0'), 3000);
+    this._atack = setInterval(() => this.createObstacle('sprEnemy0'), 1000);
   }
 
   // TODO вынести в class Events
@@ -119,7 +120,7 @@ export class SceneMain extends Scene {
       const { frameWidth, frameHeight } = options;
       obstacle = new Obstacle({
         scene: this,
-        x: x ?? this.game.width * 0.5,
+        x: x ?? getRandomInt(0, this.game.width),
         y: y ?? 0,
         key: name,
         source: this.game.res.getResource(name),
@@ -138,11 +139,6 @@ export class SceneMain extends Scene {
       dx: 0,
       dy: 0,
       key: 'sprBg0',
-    });
-    this.game.add.image({
-      dx: this.game.width * 0.5,
-      dy: 0,
-      key: 'sprBg1',
     });
     this._obstacles.forEach((item) => {
       this.game.add.image(item.getProps());
