@@ -17,7 +17,7 @@ export class SceneMain extends Scene {
   }
 
   create() {
-    // TODO вынести логику в Player
+    // TODO вынести в Player
     const playerImgData = sceneMainResources.spritesheets?.find(
       (item) => item.name === 'sprPlayer',
     );
@@ -37,6 +37,37 @@ export class SceneMain extends Scene {
     }
 
     this.displayList.push(this._player!);
+
+    this.addListeners();
+  }
+
+  // TODO вынести в class Events
+  addListeners() {
+    const listener = (event: Event) => {
+      if (event instanceof KeyboardEvent) {
+        if (event.code === 'ArrowRight') {
+          this._player?.moveRight();
+        }
+
+        if (event.code === 'ArrowLeft') {
+          this._player?.moveLeft();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', listener);
+
+    this.setEvent('keydown', listener);
+  }
+
+  deleteListeners() {
+    this.events.forEach((item) => {
+      document.removeEventListener(item.key, item.event);
+    });
+  }
+
+  destroy() {
+    this.deleteListeners();
   }
 
   render() {
