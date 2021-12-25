@@ -36,24 +36,32 @@ export const sceneMainResources: SceneResourcesConfig = {
       name: 'sprEnemy0',
       path: 'sprEnemy0.png',
       options: {
-        frameWidth: 16,
-        frameHeight: 16,
+        frameWidth: 99,
+        frameHeight: 109,
+      },
+    },
+    {
+      name: 'sprEnemy1',
+      path: 'sprEnemy1.png',
+      options: {
+        frameWidth: 79,
+        frameHeight: 67,
       },
     },
     {
       name: 'sprEnemy2',
       path: 'sprEnemy2.png',
       options: {
-        frameWidth: 16,
-        frameHeight: 16,
+        frameWidth: 108,
+        frameHeight: 110,
       },
     },
     {
-      name: 'sprPlayer',
-      path: 'sprPlayer.png',
+      name: 'sprSpaceShip',
+      path: 'sprSpaceShip.png',
       options: {
-        frameWidth: 16,
-        frameHeight: 16,
+        frameWidth: 54,
+        frameHeight: 120,
       },
     },
   ],

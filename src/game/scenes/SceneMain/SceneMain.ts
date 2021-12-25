@@ -32,7 +32,7 @@ export class SceneMain extends Scene {
   create() {
     // TODO вынести в Player
     const playerImgData = sceneMainResources.spritesheets?.find(
-      (item) => item.name === 'sprPlayer',
+      (item) => item.name === 'sprSpaceShip',
     );
 
     if (playerImgData) {
@@ -63,7 +63,8 @@ export class SceneMain extends Scene {
   }
 
   createAtack() {
-    this._atack = setInterval(() => this.createObstacle('sprEnemy0'), 1000);
+    const enemies = ['sprEnemy0', 'sprEnemy1', 'sprEnemy2'];
+    this._atack = setInterval(() => this.createObstacle(enemies[getRandomInt(0, 3)]), 3000);
   }
 
   // TODO вынести в class Events
@@ -101,7 +102,8 @@ export class SceneMain extends Scene {
     this._obstacles.forEach((obs) => {
       if (
         obs.y + obs.height! >= this._player!.y &&
-        obs.x >= this._player!.x &&
+        obs.y <= this._player!.y + this._player!.height! &&
+        obs.x + obs.width! >= this._player!.x &&
         obs.x <= this._player!.x + this._player!.width!
       ) {
         this._player?.getDamage(obs.damage);
@@ -120,7 +122,7 @@ export class SceneMain extends Scene {
       const { frameWidth, frameHeight } = options;
       obstacle = new Obstacle({
         scene: this,
-        x: x ?? getRandomInt(0, this.game.width),
+        x: x ?? getRandomInt(50, this.game.width - 150),
         y: y ?? 0,
         key: name,
         source: this.game.res.getResource(name),
