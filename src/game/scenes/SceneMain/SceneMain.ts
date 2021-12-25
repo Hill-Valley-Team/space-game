@@ -4,6 +4,7 @@ import { getRandomInt } from '../../engine/Game/helpers';
 import { GameObject, Sprite } from '../../engine/GameObjects';
 import { Scene } from '../../engine/Scene';
 import { Player } from '../../entities';
+import { Coins } from '../../entities/Coins';
 import { Health } from '../../entities/Health';
 import { Obstacle } from '../../entities/Obstacle';
 import { sceneMainResources } from './resources';
@@ -13,16 +14,25 @@ export class SceneMain extends Scene {
 
   private _obstacles: Obstacle[];
 
+  private _coins: Coins[];
+
+  private _score: number;
+
   private _healthPannel: Health | null;
 
-  private _atack: null | ReturnType<typeof setInterval>;
+  private _atackInterval: null | ReturnType<typeof setInterval>;
+
+  private _coinsInterval: null | ReturnType<typeof setInterval>;
 
   constructor(game: Game) {
     super({ key: 'SceneMain', game });
     this._player = null;
     this._obstacles = [];
+    this._coins = [];
     this._healthPannel = null;
-    this._atack = null;
+    this._atackInterval = null;
+    this._coinsInterval = null;
+    this._score = 0;
   }
 
   async preload() {
@@ -64,7 +74,12 @@ export class SceneMain extends Scene {
 
   createAtack() {
     const enemies = ['sprEnemy0', 'sprEnemy1', 'sprEnemy2'];
-    this._atack = setInterval(() => this.createObstacle(enemies[getRandomInt(0, 3)]), 3000);
+    this._atackInterval = setInterval(
+      () => this.createObstacle(enemies[getRandomInt(0, enemies.length - 1)]),
+      3000,
+    );
+
+    this._coinsInterval = setInterval(() => this.createCoin('sprCoins'), 4500);
   }
 
   // TODO вынести в class Events
@@ -93,7 +108,8 @@ export class SceneMain extends Scene {
 
   destroy() {
     this.deleteListeners();
-    clearInterval(this._atack!);
+    clearInterval(this._atackInterval!);
+    clearInterval(this._coinsInterval!);
     this.isActive = false;
   }
 
@@ -108,6 +124,19 @@ export class SceneMain extends Scene {
       ) {
         this._player?.getDamage(obs.damage);
         this.delete(obs);
+      }
+    });
+
+    this._coins.forEach((cn) => {
+      if (
+        cn.y + cn.height! >= this._player!.y &&
+        cn.y <= this._player!.y + this._player!.height! &&
+        cn.x + cn.width! >= this._player!.x &&
+        cn.x <= this._player!.x + this._player!.width!
+      ) {
+        this._score += cn.value;
+        this.delete(cn);
+        console.log(this._score);
       }
     });
   }
@@ -134,6 +163,27 @@ export class SceneMain extends Scene {
     this._obstacles.push(obstacle!);
   }
 
+  createCoin(key: string, x?: number, y?: number) {
+    const ImgData = sceneMainResources.spritesheets?.find((item) => item.name === key);
+    let coin: Coins | null = null;
+
+    if (ImgData) {
+      const { name, options } = ImgData;
+      const { frameWidth, frameHeight } = options;
+      coin = new Coins({
+        scene: this,
+        x: x ?? getRandomInt(50, this.game.width - 150),
+        y: y ?? 0,
+        key: name,
+        source: this.game.res.getResource(name),
+        height: frameHeight,
+        width: frameWidth,
+      });
+    }
+    this.displayList.push(coin!);
+    this._coins.push(coin!);
+  }
+
   render() {
     // TODO убрать render в объекты
     this.game.add.image(this._player!.getProps());
@@ -143,6 +193,9 @@ export class SceneMain extends Scene {
       key: 'sprBg0',
     });
     this._obstacles.forEach((item) => {
+      this.game.add.image(item.getProps());
+    });
+    this._coins.forEach((item) => {
       this.game.add.image(item.getProps());
     });
     this._healthPannel?.render(this._player!.health);
@@ -162,6 +215,11 @@ export class SceneMain extends Scene {
 
     if (obj instanceof Player) {
       this._player = null;
+    }
+
+    if (obj instanceof Coins) {
+      const j = this._coins.findIndex((item) => item === obj);
+      this._coins.splice(j, 1);
     }
   }
 

@@ -33,6 +33,14 @@ export const sceneMainResources: SceneResourcesConfig = {
       },
     },
     {
+      name: 'sprCoins',
+      path: 'sprCoins.png',
+      options: {
+        frameWidth: 47,
+        frameHeight: 47,
+      },
+    },
+    {
       name: 'sprEnemy0',
       path: 'sprEnemy0.png',
       options: {

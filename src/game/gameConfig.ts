@@ -4,8 +4,8 @@ import { SceneGameStart } from './scenes/SceneGameStart';
 import { SceneMain } from './scenes/SceneMain';
 
 export const gameConfig: GameConfig = {
-  width: 480,
+  width: 900,
   height: 600,
-  backgroundColor: 'white',
+  backgroundColor: 'black',
   scenes: [SceneGameStart, SceneMain, SceneGameOver],
 };
