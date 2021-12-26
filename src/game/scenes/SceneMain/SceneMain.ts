@@ -20,7 +20,7 @@ export class SceneMain extends Scene {
 
   private _healthPannel: Health | null;
 
-  private _atackInterval: null | ReturnType<typeof setInterval>;
+  private _attackInterval: null | ReturnType<typeof setInterval>;
 
   private _coinsInterval: null | ReturnType<typeof setInterval>;
 
@@ -30,7 +30,7 @@ export class SceneMain extends Scene {
     this._obstacles = [];
     this._coins = [];
     this._healthPannel = null;
-    this._atackInterval = null;
+    this._attackInterval = null;
     this._coinsInterval = null;
     this._score = 0;
   }
@@ -63,7 +63,7 @@ export class SceneMain extends Scene {
 
     this.createHealthPannel();
 
-    this.createAtack();
+    this.createAttack();
 
     this.addListeners();
   }
@@ -72,9 +72,9 @@ export class SceneMain extends Scene {
     this._healthPannel = new Health(this);
   }
 
-  createAtack() {
+  createAttack() {
     const enemies = ['sprEnemy0', 'sprEnemy1', 'sprEnemy2'];
-    this._atackInterval = setInterval(
+    this._attackInterval = setInterval(
       () => this.createObstacle(enemies[getRandomInt(0, enemies.length - 1)]),
       3000,
     );
@@ -122,7 +122,7 @@ export class SceneMain extends Scene {
 
   destroy() {
     this.deleteListeners();
-    clearInterval(this._atackInterval!);
+    clearInterval(this._attackInterval!);
     clearInterval(this._coinsInterval!);
     this.isActive = false;
   }

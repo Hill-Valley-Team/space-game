@@ -1,6 +1,6 @@
 import { Game } from '../Game';
 import { GameObject } from '../GameObjects';
-import { EventObject, SceneProps } from './types';
+import type { EventObject, SceneProps } from './types';
 
 export abstract class Scene {
   private _key: string;
