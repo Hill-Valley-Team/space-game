@@ -13,7 +13,8 @@ export type ValidationType =
   | 'name'
   | 'shortText'
   | 'phone'
-  | 'equal';
+  | 'equal'
+  | 'file';
 
 export type ValidationResult = {
   isValid: boolean;
