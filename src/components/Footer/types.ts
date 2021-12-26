@@ -1,4 +1,3 @@
-export type FooterProps = {
-  children?: React.ReactNode;
-  className?: string;
-};
+import { PropsWithChildren } from 'react';
+
+export type FooterProps = PropsWithChildren<{ className?: string }>;
