@@ -1,5 +1,5 @@
 import block from 'bem-cn';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Title } from '../../components/Title';
 import './profilePage.css';
 import { PageContainer } from '../../components/PageContainer';
@@ -12,10 +12,10 @@ import { InputFieldAvatar } from '../../components/InputFieldAvatar';
 const b = block('profile-page');
 
 export const ProfilePage = () => {
-  let isEditMode = true;
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const onBottomBtnClick = useCallback(() => {
-    isEditMode = !isEditMode;
+    setIsEditMode(!isEditMode);
   }, []);
 
   const getBottomButtons = () => {
@@ -57,7 +57,7 @@ export const ProfilePage = () => {
     isEditMode ? (
       <Title tag="h1" className={b('title').mix('hidden')} text="Профиль" />
     ) : (
-      <Title tag="h1" className={b('title')} text='sdfsdf' />
+      <Title tag="h1" className={b('title')} text="sdfsdf" />
     );
 
   const getLogoutBtn = () =>

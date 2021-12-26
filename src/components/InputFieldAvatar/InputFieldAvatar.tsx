@@ -17,7 +17,14 @@ export const InputFieldAvatar = ({
 
   return (
     <div className={b({ isEdit }).mix(className)}>
-      <input id={id} readOnly={!isEdit} type="file" className={b('input')} {...props} />
+      <input
+        id={id}
+        readOnly={!isEdit}
+        type="file"
+        accept="image/*"
+        className={b('input')}
+        {...props}
+      />
       <label htmlFor={id} className={b('label').mix('hidden')}>
         Аватар
       </label>

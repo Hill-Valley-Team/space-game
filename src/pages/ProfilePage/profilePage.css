@@ -1,59 +1,57 @@
 .profile-page {
+  &__title {
+    margin-bottom: 30px;
+  }
 
-    &__title {
-       margin-bottom: 30px;
-     }
-    &__bottom-wrapper {
-      margin-top: 53px;
-      display: flex;
-      justify-content: center;
+  &__bottom-wrapper {
+    margin-top: 53px;
+    display: flex;
+    justify-content: center;
 
-      &_dual {
-        padding: 0 85px;
-        justify-content: space-between;
-       }
+    &_dual {
+      padding: 0 85px;
+      justify-content: space-between;
     }
+  }
 
-    &__edit-btn {
-      max-width: 280px;
-    }
+  &__edit-btn {
+    max-width: 280px;
+  }
 
-    &__save-btn {
-      max-width: 162px;
-    }
+  &__save-btn {
+    max-width: 162px;
+  }
 
-    &__discard-btn {
-      max-width: 162px;
-    }
+  &__discard-btn {
+    max-width: 162px;
+  }
 
-    &__top-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 2fr 1fr;
-      align-items: center;
-      margin-bottom: 20px;
-     }
+  &__top-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    margin-bottom: 20px;
+  }
 
-     &__avatar {
-        justify-self: center;
-     }
+  &__avatar {
+    justify-self: center;
+  }
 
+  &__btn-back {
+    background: url('./static/btn-back.svg') no-repeat;
+    width: 28px;
+    height: 28px;
+    display: block;
+  }
 
-    &__btn-back {
-      background: url("./static/btn-back.svg") no-repeat;
-      width: 28px;
-      height: 28px;
-      display: block;
-    }
-
-    &__btn-logout {
-      justify-self: end;
-      background: url("./static/btn-logout.svg") no-repeat center right;
-      width: 78px;
-      height: 20px;
-      text-align: left;
-      display: block;
-      border: none;
-      padding: 0;
-    }
-
+  &__btn-logout {
+    justify-self: end;
+    background: url('./static/btn-logout.svg') no-repeat center right;
+    width: 78px;
+    height: 20px;
+    text-align: left;
+    display: block;
+    border: none;
+    padding: 0;
+  }
 }

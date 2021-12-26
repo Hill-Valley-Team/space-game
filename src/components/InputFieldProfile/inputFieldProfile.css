@@ -6,29 +6,29 @@
   padding: 10px 0;
 
 
-    &:last-child {
-        border-bottom: none;
-    }
+  &:last-child {
+    border-bottom: none;
+  }
 
-    & label {
-        display: block;
-        font-size: 13px;
-        line-height: 120%;
-        font-weight: 500;
-        color: $text-color;
-    }
+  & label {
+    display: block;
+    font-size: 13px;
+    line-height: 120%;
+    font-weight: 500;
+    color: $text-color;
+  }
 
-    & input {
-        width: 100%;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        text-align: right;
-        font-weight: 500;
-        font-size: 13px;
-        line-height: 120%;
-        color: $text-color-light;
-     }
+  & input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    text-align: right;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 120%;
+    color: $text-color-light;
+  }
 
   &_edit {
     & label {
