@@ -84,20 +84,34 @@ export class SceneMain extends Scene {
 
   // TODO вынести в class Events
   addListeners() {
-    const listener = (event: Event) => {
+    const keyDownListener = (event: Event) => {
       if (event instanceof KeyboardEvent) {
         if (event.code === 'ArrowRight') {
-          this._player?.moveRight();
+          this._player!.moveRight(true);
         }
 
         if (event.code === 'ArrowLeft') {
-          this._player?.moveLeft();
+          this._player!.moveLeft(true);
         }
       }
     };
 
-    document.addEventListener('keydown', listener);
-    this.setEvent('keydown', listener);
+    const keyUpListener = (event: Event) => {
+      if (event instanceof KeyboardEvent) {
+        if (event.code === 'ArrowRight') {
+          this._player!.moveRight(false);
+        }
+
+        if (event.code === 'ArrowLeft') {
+          this._player!.moveLeft(false);
+        }
+      }
+    };
+
+    document.addEventListener('keydown', keyDownListener);
+    document.addEventListener('keyup', keyUpListener);
+    this.setEvent('keydown', keyDownListener);
+    this.setEvent('keyup', keyUpListener);
   }
 
   deleteListeners() {
