@@ -48,7 +48,7 @@ export class Player extends Sprite {
     this._isMoveLeft = false;
     this._isMoveRight = false;
 
-    // this.play('sprPlayer'); // TODO
+    //this.play(this.key); // TODO sprite animation
   }
 
   getDamage(damage: number) {

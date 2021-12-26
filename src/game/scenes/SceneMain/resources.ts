@@ -3,8 +3,8 @@ import { SceneResourcesConfig } from '../../engine/Resources/types';
 export const sceneMainResources: SceneResourcesConfig = {
   images: [
     {
-      name: 'sprBg0',
-      path: 'sprBg0.png',
+      name: 'sprBg',
+      path: 'sprBg.png',
     },
     {
       name: 'sprBg1',

@@ -72,8 +72,6 @@ export abstract class Scene {
 
   public destroy() {}
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
   start() {
     this.preload().then(() => {
       this.create();

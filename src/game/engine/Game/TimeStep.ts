@@ -18,7 +18,7 @@ export class TimeStep {
 
   private _frame = () => {
     const now = performance.now();
-    this._dt += Math.min(1, (now - this._last) / 1000); // исправление проблемы неактивных вкладок
+    this._dt += Math.min(1, (now - this._last) / 1000);
 
     while (this._dt > this._step) {
       this._dt -= this._step;

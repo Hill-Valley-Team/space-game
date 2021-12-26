@@ -90,8 +90,6 @@ export class Game {
     this._loop.start();
   }
 
-  // private _preload() {}
-
   private _create() {
     this._createCanvas();
     this._renderCanvas();
