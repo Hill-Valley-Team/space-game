@@ -6,7 +6,7 @@ import './pageContainer.css';
 const b = block('page-container');
 
 export const PageContainer = ({
-  size = 'meduim',
+  size = 'medium',
   children,
   className,
   ...props
