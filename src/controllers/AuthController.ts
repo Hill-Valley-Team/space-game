@@ -5,12 +5,12 @@ import { prepareDataToRequest } from './utils/prepareDataToRequest';
 
 export class AuthController {
   public signIn = (formData: FormData) => {
-    const preparedData = prepareDataToRequest(signInRequestFields, formData) as SignInRequest;
+    const preparedData = prepareDataToRequest<SignInRequest>(signInRequestFields, formData);
     return authApi.signIn(preparedData);
   };
 
   public signUp = (formData: FormData) => {
-    const preparedData = prepareDataToRequest(signUpRequestFields, formData) as SignUpRequest;
+    const preparedData = prepareDataToRequest<SignUpRequest>(signUpRequestFields, formData);
     return authApi.signUp(preparedData);
   };
 
