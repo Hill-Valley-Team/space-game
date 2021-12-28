@@ -1,9 +1,9 @@
-import { Game } from '../../engine/Game';
 import { Scene } from '../../engine/Scene';
+import { SceneManager } from '../../engine/SceneManager';
 
 export class SceneGameOver extends Scene {
-  constructor(game: Game) {
-    super({ key: 'SceneGameOver', game });
+  constructor(scene: SceneManager) {
+    super({ key: 'end', scene });
   }
 
   create() {}

@@ -73,8 +73,8 @@ export class Player extends Sprite {
     const newX = this.x + this.body.velocity.x! * delay;
     const newY = this.y + this.body.velocity.y! * delay;
 
-    if (newX < this.scene.game.width && newX > 0) this.x = newX;
-    if (newY < this.scene.game.height && newY > 0) this.y = newY;
+    if (newX < this.scene.scene.game.width && newX > 0) this.x = newX;
+    if (newY < this.scene.scene.game.height && newY > 0) this.y = newY;
 
     if (!this._isMoveRight && !this._isMoveLeft) {
       this._body.setVelocity(0, 0);

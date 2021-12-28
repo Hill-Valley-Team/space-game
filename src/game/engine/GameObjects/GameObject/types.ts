@@ -14,5 +14,14 @@ export type SpriteProps = {
   frame?: number;
 } & GameObjectProps;
 
+export type ButtonProps = {
+  width?: number;
+  height?: number;
+  text?: string;
+  color?: string;
+  bgColor?: string;
+  onClick?: () => void;
+} & GameObjectProps;
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type DataObject = Record<string, any>;

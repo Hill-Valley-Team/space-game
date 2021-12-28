@@ -7,6 +7,7 @@ export class GameObject {
 
   private _y: number;
 
+  /** parent scene */
   private _scene: Scene;
 
   private _key: string;
@@ -64,6 +65,8 @@ export class GameObject {
   public play(animationName: string) {
     console.log(animationName);
   }
+
+  public render() {}
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public update(delay: number) {}

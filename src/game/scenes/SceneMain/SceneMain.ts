@@ -1,8 +1,8 @@
 import { ASSETS_PATH } from '../../consts';
-import { Game } from '../../engine/Game';
 import { getRandomInt } from '../../engine/Game/helpers';
 import { GameObject, Sprite } from '../../engine/GameObjects';
 import { Scene } from '../../engine/Scene';
+import { SceneManager } from '../../engine/SceneManager';
 import { Player } from '../../entities';
 import { Coins } from '../../entities/Coins';
 import { Health } from '../../entities/Health';
@@ -24,8 +24,8 @@ export class SceneMain extends Scene {
 
   private _coinsInterval: null | ReturnType<typeof setInterval>;
 
-  constructor(game: Game) {
-    super({ key: 'SceneMain', game });
+  constructor(scene: SceneManager) {
+    super({ key: 'SceneMain', scene });
     this._player = null;
     this._obstacles = [];
     this._coins = [];
@@ -36,7 +36,7 @@ export class SceneMain extends Scene {
   }
 
   async preload() {
-    await this.game.res.load(sceneMainResources, ASSETS_PATH);
+    await this.scene.game.res.load(sceneMainResources, ASSETS_PATH);
   }
 
   create() {
@@ -50,10 +50,10 @@ export class SceneMain extends Scene {
       const { frameWidth, frameHeight } = options;
       this._player = new Player({
         scene: this,
-        x: this.game.width * 0.5,
-        y: this.game.height * 0.6,
+        x: this.scene.game.width * 0.5,
+        y: this.scene.game.height * 0.6,
         key: name,
-        source: this.game.res.getResource(name),
+        source: this.scene.game.res.getResource(name),
         height: frameHeight,
         width: frameWidth,
       });
@@ -118,6 +118,7 @@ export class SceneMain extends Scene {
     this.events.forEach((item) => {
       document.removeEventListener(item.key, item.event);
     });
+    this.events = [];
   }
 
   destroy() {
@@ -165,10 +166,10 @@ export class SceneMain extends Scene {
       const { frameWidth, frameHeight } = options;
       obstacle = new Obstacle({
         scene: this,
-        x: x ?? getRandomInt(50, this.game.width - 150),
+        x: x ?? getRandomInt(50, this.scene.game.width - 150),
         y: y ?? 0,
         key: name,
-        source: this.game.res.getResource(name),
+        source: this.scene.game.res.getResource(name),
         height: frameHeight,
         width: frameWidth,
       });
@@ -186,10 +187,10 @@ export class SceneMain extends Scene {
       const { frameWidth, frameHeight } = options;
       coin = new Coins({
         scene: this,
-        x: x ?? getRandomInt(50, this.game.width - 150),
+        x: x ?? getRandomInt(50, this.scene.game.width - 150),
         y: y ?? 0,
         key: name,
-        source: this.game.res.getResource(name),
+        source: this.scene.game.res.getResource(name),
         height: frameHeight,
         width: frameWidth,
       });
@@ -200,22 +201,26 @@ export class SceneMain extends Scene {
 
   render() {
     // TODO убрать render в объекты
-    this.game.add.image(this._player!.getProps());
-    this.game.add.image({
+
+    if (!this.isActive) return;
+
+    this.scene.game.add.image(this._player!.getProps());
+    this.scene.game.add.image({
       dx: 0,
       dy: 0,
       key: 'sprBg0',
     });
     this._obstacles.forEach((item) => {
-      this.game.add.image(item.getProps());
+      this.scene.game.add.image(item.getProps());
     });
     this._coins.forEach((item) => {
-      this.game.add.image(item.getProps());
+      this.scene.game.add.image(item.getProps());
     });
-    this._healthPannel?.render(this._player!.health);
+    this._healthPannel!.health = this._player!.health;
+    this._healthPannel?.render(); // TODO
 
     this.isActive = true;
-    this.game.scene = this;
+    // this.game.scene = this;
   }
 
   delete(obj: GameObject) {
@@ -238,11 +243,11 @@ export class SceneMain extends Scene {
   }
 
   update(delay: number) {
+    if (!this.isActive) return;
     if (this._player!.health <= 0) {
       this.destroy();
       return; // TODO
     }
-    if (!this.isActive) return;
 
     this.checkCollisions();
 
@@ -252,8 +257,8 @@ export class SceneMain extends Scene {
 
       if (
         element.y < 0 - outY ||
-        element.y > this.game.height ||
-        element.x > this.game.width ||
+        element.y > this.scene.game.height ||
+        element.x > this.scene.game.width ||
         element.x < 0 - outX
       ) {
         this.delete(element);

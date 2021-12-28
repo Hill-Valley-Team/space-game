@@ -7,3 +7,9 @@ export const COINS_SPEED = 100;
 export const COINS_VALUE = 1;
 export const HEALTH_PANNEL_WIDTH = 200;
 export const HEALTH_PANNEL_HEIGHT = 30;
+
+export enum ScenesNames {
+  START = 'start',
+  MAIN = 'main',
+  END = 'end',
+}

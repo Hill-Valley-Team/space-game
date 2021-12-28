@@ -1,8 +1,8 @@
-import { Game } from '../Game';
+import { SceneManager } from '../SceneManager';
 
 export type SceneProps = {
   key: string;
-  game: Game;
+  scene: SceneManager;
 };
 
 export type EventObject = {

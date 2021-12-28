@@ -1,132 +1,96 @@
+import { ScenesNames } from '../../consts';
 import { gameResourses } from '../Resources';
 import { GameResourses } from '../Resources/types';
-import { Scene } from '../Scene';
-import { State } from '../State/State';
+// import { Scene } from '../Scene';
+import { SceneManager } from '../SceneManager';
 import { Add } from './Add';
 import { defaultGameConfig } from './defaultGameConfig';
 import { TimeStep } from './TimeStep';
 import { GameConfig } from './types';
 
 export class Game {
-  private _width: number;
+  private parent: Element | null;
 
-  private _height: number;
+  private isRunning: boolean;
 
-  private _bgColor: string;
+  private loop: TimeStep;
 
-  private _parent: Element | null;
+  public canvas: HTMLCanvasElement | null;
 
-  private _isRunning: boolean;
+  // public scene!: Scene | null;
 
-  private _scene!: Scene | null;
+  public scene: SceneManager;
 
-  private _loop: TimeStep;
+  public context: CanvasRenderingContext2D | null;
 
-  private _state: State;
+  public bgColor: string;
 
-  private _canvas: HTMLCanvasElement | null;
+  public width: number;
 
-  private _context: CanvasRenderingContext2D | null;
+  public height: number;
 
-  private _add: Add;
+  public add: Add = new Add(this);
 
-  private _res: GameResourses;
-
-  public get width() {
-    return this._width;
-  }
-
-  public get height() {
-    return this._height;
-  }
-
-  public get parent() {
-    return this._parent;
-  }
-
-  public get context() {
-    return this._context;
-  }
-
-  public get canvas() {
-    return this._canvas;
-  }
-
-  public get state() {
-    return this._state;
-  }
-
-  public get add() {
-    return this._add;
-  }
-
-  public get res() {
-    return this._res;
-  }
-
-  public set scene(scene: Scene) {
-    this._scene = scene;
-  }
+  public res: GameResourses;
 
   constructor(config: GameConfig) {
     const { width, height, parent, backgroundColor } = config;
 
-    this._width = width ?? defaultGameConfig.width;
-    this._height = height ?? defaultGameConfig.height;
-    this._bgColor = backgroundColor ?? defaultGameConfig.backgroundColor;
-    this._parent = this._getParent(parent ?? defaultGameConfig.parent);
-    this._isRunning = false;
-    this._loop = new TimeStep(this);
-    this._canvas = null;
-    this._context = null;
-    this._state = new State(this);
-    this._add = new Add(this);
-    this._res = gameResourses;
-    this._create();
+    this.width = width ?? defaultGameConfig.width;
+    this.height = height ?? defaultGameConfig.height;
+    this.bgColor = backgroundColor ?? defaultGameConfig.backgroundColor;
+    this.parent = this.getParent(parent ?? defaultGameConfig.parent);
+    this.isRunning = false;
+    this.loop = new TimeStep(this);
+    this.canvas = null;
+    this.context = null;
+    this.add = new Add(this);
+    this.res = gameResourses;
+    this.scene = new SceneManager(this, config.scenes);
+    this.create();
   }
 
   public start() {
-    this._isRunning = true;
-    this._loop.start();
+    this.scene.start(ScenesNames.START);
+    this.isRunning = true;
+    this.loop.start();
   }
 
-  private _create() {
-    this._createCanvas();
-    this._renderCanvas();
+  private create() {
+    this.createCanvas();
+    this.renderCanvas();
     this.start();
   }
 
-  private _getParent(parent: string | HTMLElement) {
+  private getParent(parent: string | HTMLElement) {
     return parent instanceof HTMLElement ? parent : document.querySelector(parent);
   }
 
-  private _createCanvas() {
+  private createCanvas() {
     const canvas: HTMLCanvasElement = document.createElement('canvas');
     canvas.height = this.height;
     canvas.width = this.width;
-    canvas.style.backgroundColor = this._bgColor;
-    this._canvas = canvas;
-    this._context = canvas.getContext('2d');
+    canvas.style.backgroundColor = this.bgColor;
+    this.canvas = canvas;
+    this.context = canvas.getContext('2d');
   }
 
-  private _renderCanvas() {
-    if (this._parent && this._canvas) {
-      this._parent.appendChild(this._canvas);
+  private renderCanvas() {
+    if (this.parent && this.canvas) {
+      this.parent.appendChild(this.canvas);
     }
   }
 
   public exit() {}
 
   public update(delay: number) {
-    if (this._isRunning && this._scene) {
-      this._scene.update(delay);
+    if (this.isRunning && this.scene.current) {
+      this.scene.current.update(delay);
     }
   }
 
   public render() {
     this.context?.clearRect(0, 0, this.width, this.height);
-    if (this._scene && this._scene.isActive) {
-      this._scene.render();
-    }
+    this.scene.current?.render();
   }
 }

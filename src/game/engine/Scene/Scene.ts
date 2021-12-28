@@ -1,64 +1,40 @@
-import { Game } from '../Game';
 import { GameObject } from '../GameObjects';
+import { SceneManager } from '../SceneManager';
 import type { EventObject, SceneProps } from './types';
 
 export abstract class Scene {
-  private _key: string;
+  private key: string;
 
-  private _displayList: GameObject[];
+  public displayList: GameObject[];
 
-  private _game: Game;
+  public scene: SceneManager;
 
-  private _isActive: boolean;
+  public isActive: boolean;
 
-  private _events: EventObject[];
-
-  public get key() {
-    return this._key;
-  }
-
-  public get game() {
-    return this._game;
-  }
-
-  public get displayList() {
-    return this._displayList;
-  }
-
-  public get isActive() {
-    return this._isActive;
-  }
-
-  public set isActive(val: boolean) {
-    this._isActive = val;
-  }
-
-  public get events() {
-    return this._events;
-  }
+  public events: EventObject[];
 
   public getEvent(key: string) {
-    return this._events.find((item) => item.key === key);
+    return this.events.find((item) => item.key === key);
   }
 
   public setEvent(key: string, event: (event: Event) => void) {
-    const index = this._events.findIndex((item) => item.key === key);
+    const index = this.events.findIndex((item) => item.key === key);
 
     if (index === -1) {
-      this._events.push({ key, event });
+      this.events.push({ key, event });
     } else {
-      this._events[index] = { key, event };
+      this.events[index] = { key, event };
     }
   }
 
   constructor(props: SceneProps) {
-    const { key, game } = props;
+    const { key, scene } = props;
 
-    this._key = key;
-    this._displayList = [];
-    this._game = game;
-    this._isActive = false;
-    this._events = [];
+    this.key = key;
+    this.displayList = [];
+    this.scene = scene;
+    this.isActive = false;
+    this.events = [];
   }
 
   protected init() {}
@@ -68,7 +44,11 @@ export abstract class Scene {
 
   protected create() {}
 
-  public render() {}
+  public render() {
+    this.displayList.forEach((item) => {
+      item.render();
+    });
+  }
 
   public destroy() {}
 
@@ -76,16 +56,18 @@ export abstract class Scene {
     this.preload().then(() => {
       this.create();
       this.render();
+      this.isActive = true;
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public update(delay: number) {}
-
-  public checkCollisions() {}
+  public update(delay: number) {
+    this.displayList.forEach((item) => {
+      item.update(delay);
+    });
+  }
 
   add(item: GameObject) {
-    this._displayList.push(item);
+    this.displayList.push(item);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -1,14 +1,11 @@
-import { Constructable } from '../interfaces';
-import { Scene } from '../Scene';
-import { State } from '../State/State';
+import { ScenesConfig } from '../SceneManager/types';
 
 export type GameConfig = {
   width: number;
   height: number;
   backgroundColor: string;
   parent?: HTMLElement | string;
-  scenes?: Constructable<Scene>[];
-  state?: State;
+  scenes: ScenesConfig;
 };
 
 export type ImageRes = {
