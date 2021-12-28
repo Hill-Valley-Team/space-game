@@ -16,8 +16,6 @@ export const InputField = ({
   onChangeHandle,
   ...props
 }: InputFieldProps) => {
-  // const [passVisible, setPassVisible] = useState(false);
-
   const errorField = !isValid ? <div className={b('error-text')}>{errorText}</div> : null;
 
   const labelField = label ? (
