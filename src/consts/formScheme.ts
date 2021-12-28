@@ -11,6 +11,7 @@ export enum InputNames {
   OLD_PASSWORD = 'oldPassword',
   NEW_PASSWORD = 'newPassword',
   REPEAT_PASSWORD = 'repeatPassword',
+  AVATAR = 'avatar',
 }
 
 export const formScheme: Record<InputNames, { name: string; type: ValidationType }> = {
@@ -54,5 +55,9 @@ export const formScheme: Record<InputNames, { name: string; type: ValidationType
   [InputNames.NEW_PASSWORD]: {
     name: 'new_password',
     type: 'password',
+  },
+  [InputNames.AVATAR]: {
+    name: 'avatar',
+    type: 'file',
   },
 };

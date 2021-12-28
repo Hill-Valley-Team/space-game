@@ -1,5 +1,5 @@
 import block from 'bem-cn';
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 import { InputFieldProps } from './types';
 import './inputField.css';
 
@@ -16,8 +16,6 @@ export const InputField = ({
   onChangeHandle,
   ...props
 }: InputFieldProps) => {
-  const [passVisible, setPassVisible] = useState(false);
-
   const errorField = !isValid ? <div className={b('error-text')}>{errorText}</div> : null;
 
   const labelField = label ? (
@@ -25,24 +23,6 @@ export const InputField = ({
       {label}
     </label>
   ) : null;
-
-  const togglePasswordControl = useCallback(
-    () => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      e.preventDefault();
-      setPassVisible(!passVisible);
-    },
-    [passVisible],
-  );
-
-  const passwordControl =
-    type === 'password' ? (
-      <button
-        type="button"
-        onClick={togglePasswordControl}
-        aria-label="Показать пароль"
-        className={b('password-control', { [passVisible ? 'view' : 'hide']: true })}
-      />
-    ) : null;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, equal?: string) => {
     const newValue = e.target.value;
@@ -55,14 +35,7 @@ export const InputField = ({
   return (
     <div className={b({ [view]: true }).mix(className)}>
       {labelField}
-      {passwordControl}
-      <input
-        id={id}
-        type={type === 'password' && passVisible ? 'text' : type}
-        className={b('input')}
-        onChange={handleChange}
-        {...props}
-      />
+      <input id={id} type={type} className={b('input')} onChange={handleChange} {...props} />
       {errorField}
     </div>
   );

@@ -8,6 +8,8 @@ const colors = {
   'disabled-bg-color': '#999999',
   'accent-color': '#ffc701',
   'pure-white': '#ffffff',
+  'error-text-color': '#FF4D00',
+  'error-text-color-light': '#fff501',
 };
 
 module.exports = {

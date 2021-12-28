@@ -1,13 +1,13 @@
 {
   "name": "space_racing",
   "engines": {
-    "node": "16.13.1"
+    "node": "16.13"
   },
   "version": "1.0.0",
-  "description": "Project developed during cource Middle Frontend Developer at Yandex Practicum",
+  "description": "Project developed during course Middle Frontend Developer at Yandex Practicum",
   "scripts": {
+    "start": "webpack serve  --mode development",
     "test": "test",
-    "dev": "webpack serve  --mode development",
     "build": "webpack --mode production",
     "lint:p": "prettier --write src/**/*.{js,jsx,ts,tsx,test.tsx,test.ts,json}",
     "lint:ts": "eslint src/**/*.{ts,tsx}",
@@ -26,9 +26,9 @@
   "author": "diglibum",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/diglibum/game/issues"
+    "url": "https://github.com/Hill-Valley-Team/space-game/issues"
   },
-  "homepage": "https://github.com/diglibum/game#readme",
+  "homepage": "https://github.com/Hill-Valley-Team/space-game#readme",
   "devDependencies": {
     "@types/qs": "^6.9.7",
     "@types/react": "17.0.37",
