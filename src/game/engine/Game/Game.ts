@@ -1,4 +1,3 @@
-import { ScenesNames } from '../../consts';
 import { gameResourses } from '../Resources';
 import { GameResourses } from '../Resources/types';
 // import { Scene } from '../Scene';
@@ -33,6 +32,8 @@ export class Game {
 
   public res: GameResourses;
 
+  public score: number;
+
   constructor(config: GameConfig) {
     const { width, height, parent, backgroundColor } = config;
 
@@ -47,11 +48,11 @@ export class Game {
     this.add = new Add(this);
     this.res = gameResourses;
     this.scene = new SceneManager(this, config.scenes);
+    this.score = 0;
     this.create();
   }
 
   public start() {
-    this.scene.start(ScenesNames.START);
     this.isRunning = true;
     this.loop.start();
   }

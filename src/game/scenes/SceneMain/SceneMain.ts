@@ -1,4 +1,4 @@
-import { ASSETS_PATH } from '../../consts';
+import { ASSETS_PATH, ScenesNames } from '../../consts';
 import { getRandomInt } from '../../engine/Game/helpers';
 import { GameObject, Sprite } from '../../engine/GameObjects';
 import { Scene } from '../../engine/Scene';
@@ -7,16 +7,17 @@ import { Player } from '../../entities';
 import { Coins } from '../../entities/Coins';
 import { Health } from '../../entities/Health';
 import { Obstacle } from '../../entities/Obstacle';
+import { LEVEL_TIME } from './consts';
 import { sceneMainResources } from './resources';
 
 export class SceneMain extends Scene {
+  private gameStartTime: number;
+
   private _player: Player | null;
 
   private _obstacles: Obstacle[];
 
   private _coins: Coins[];
-
-  private _score: number;
 
   private _healthPannel: Health | null;
 
@@ -32,7 +33,8 @@ export class SceneMain extends Scene {
     this._healthPannel = null;
     this._attackInterval = null;
     this._coinsInterval = null;
-    this._score = 0;
+    this.gameStartTime = 0;
+    this.scene.game.score = 0;
   }
 
   async preload() {
@@ -149,9 +151,9 @@ export class SceneMain extends Scene {
         cn.x + cn.width! >= this._player!.x &&
         cn.x <= this._player!.x + this._player!.width!
       ) {
-        this._score += cn.value;
+        this.scene.game.score += cn.value;
         this.delete(cn);
-        console.log(this._score);
+        console.log(this.scene.game.score);
       }
     });
   }
@@ -244,10 +246,14 @@ export class SceneMain extends Scene {
 
   update(delay: number) {
     if (!this.isActive) return;
-    if (this._player!.health <= 0) {
-      this.destroy();
-      return; // TODO
+    if (this.gameStartTime >= LEVEL_TIME) {
+      this.scene.start(ScenesNames.WIN);
     }
+    if (this._player!.health <= 0) {
+      this.scene.start(ScenesNames.END);
+    }
+
+    this.gameStartTime += delay;
 
     this.checkCollisions();
 

@@ -12,4 +12,5 @@ export enum ScenesNames {
   START = 'start',
   MAIN = 'main',
   END = 'end',
+  WIN = 'win',
 }

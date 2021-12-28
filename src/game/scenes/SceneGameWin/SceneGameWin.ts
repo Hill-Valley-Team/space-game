@@ -4,7 +4,7 @@ import { Text } from '../../engine/GameObjects/Text';
 import { Scene } from '../../engine/Scene';
 import { SceneManager } from '../../engine/SceneManager';
 
-export class SceneGameOver extends Scene {
+export class SceneGameWin extends Scene {
   private actionBtn: Button | null;
 
   constructor(scene: SceneManager) {
@@ -14,9 +14,9 @@ export class SceneGameOver extends Scene {
 
   create() {
     const text = new Text({
-      key: 'gameOverText',
+      key: 'gameWinText',
       scene: this,
-      text: 'Вы проиграли :( Начать заново?',
+      text: `Вы выиграли! Ваш счёт ${this.scene.game.score} очков`,
       x: this.scene.game.width / 2,
       y: this.scene.game.height / 2 - 50,
     });
@@ -63,7 +63,7 @@ export class SceneGameOver extends Scene {
       bgColor: 'white',
       width: btnWidth,
       height: btnHeight,
-      text: 'Restart Game',
+      text: 'Ещё разок!',
       onClick: this.onBtnClick,
     });
 

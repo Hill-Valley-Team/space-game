@@ -4,6 +4,7 @@ import { SceneGameStart } from './scenes/SceneGameStart';
 import { SceneMain } from './scenes/SceneMain';
 import { ScenesConfig } from './engine/SceneManager/types';
 import { ScenesNames } from './consts';
+import { SceneGameWin } from './scenes/SceneGameWin';
 
 const scenesConfig: ScenesConfig = {
   [ScenesNames.MAIN]: {
@@ -16,6 +17,11 @@ const scenesConfig: ScenesConfig = {
   },
   [ScenesNames.END]: {
     scene: SceneGameOver,
+    autoPlay: true,
+  },
+
+  [ScenesNames.WIN]: {
+    scene: SceneGameWin,
     autoPlay: true,
   },
 };

@@ -34,7 +34,7 @@ export class Button extends GameObject {
     const ctx = this.scene.scene.game.context;
 
     if (ctx) {
-      ctx.font = '20px Arial ';
+      ctx.font = '20px Inter';
       ctx.fillStyle = this.bgColor;
       ctx.fillRect(this.x, this.y, this.width, this.height);
 
