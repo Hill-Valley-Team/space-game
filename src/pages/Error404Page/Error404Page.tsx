@@ -12,7 +12,7 @@ export const Error404Page = () => {
 
   const onBtnClick = useCallback(() => {
     navigate('/');
-  }, []);
+  }, [navigate]);
 
   return (
     <div className={b()}>

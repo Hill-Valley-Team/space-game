@@ -28,6 +28,6 @@
     font-size: 20px;
     line-height: 120%;
     font-weight: 500;
-    color: $error-text-color;
+    color: $error-text-color-light;
   }
 }
