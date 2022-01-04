@@ -3,7 +3,7 @@ import { GameResourses } from '../Resources/types';
 import { SceneManager } from '../SceneManager';
 import { Add } from './Add';
 import { defaultGameConfig } from './defaultGameConfig';
-import { TimeStep } from './TimeStep.ts/TimeStep';
+import { TimeStep } from './TimeStep/TimeStep';
 import { GameConfig } from './types';
 
 export class Game {
