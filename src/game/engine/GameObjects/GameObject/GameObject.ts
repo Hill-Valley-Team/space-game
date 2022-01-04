@@ -3,63 +3,35 @@ import { Scene } from '../../Scene';
 import { DataObject, GameObjectProps } from './types';
 
 export class GameObject {
-  private _x: number;
+  public x: number;
 
-  private _y: number;
+  public y: number;
 
   /** parent scene */
-  private _scene: Scene;
+  public scene: Scene;
 
-  private _key: string;
+  public key: string;
 
-  private _data: DataObject;
+  public data: DataObject;
 
-  protected _body: PhysicBody;
-
-  public get x() {
-    return this._x;
-  }
-
-  public set x(val: number) {
-    this._x = val;
-  }
-
-  public get y() {
-    return this._y;
-  }
-
-  public set y(val: number) {
-    this._y = val;
-  }
-
-  public get scene() {
-    return this._scene;
-  }
-
-  public get key() {
-    return this._key;
-  }
-
-  public get body() {
-    return this._body;
-  }
+  protected body: PhysicBody;
 
   public getData(key: string) {
-    return this._data[key];
+    return this.data[key];
   }
 
   public setData(...{ key, value }: DataObject) {
-    this._data[key] = value;
+    this.data[key] = value;
   }
 
   constructor(props: GameObjectProps) {
     const { scene, x, y, key } = props;
-    this._scene = scene;
-    this._x = x;
-    this._y = y;
-    this._key = key;
-    this._data = {};
-    this._body = new PhysicBody(0, 0);
+    this.scene = scene;
+    this.x = x;
+    this.y = y;
+    this.key = key;
+    this.data = {};
+    this.body = new PhysicBody(0, 0);
   }
 
   public play(animationName: string) {

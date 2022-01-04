@@ -3,69 +3,45 @@ import { Sprite } from '../engine/GameObjects';
 import { PlayerProps } from './types';
 
 export class Player extends Sprite {
-  private _type: string;
+  public type: string;
 
-  private _speed: number;
+  public speed: number;
 
-  private _health: number;
+  public health: number;
 
-  private _isMoveRight: boolean;
+  public isMoveRight: boolean;
 
-  private _isMoveLeft: boolean;
-
-  public get type() {
-    return this._type;
-  }
-
-  public get health() {
-    return this._health;
-  }
-
-  public get isMoveLeft() {
-    return this._isMoveLeft;
-  }
-
-  public set isMoveLeft(value: boolean) {
-    this._isMoveLeft = value;
-  }
-
-  public get isMoveRight() {
-    return this._isMoveRight;
-  }
-
-  public set isMoveRight(value: boolean) {
-    this._isMoveRight = value;
-  }
+  public isMoveLeft: boolean;
 
   constructor(props: PlayerProps) {
     const { scene, x, y, key, source, width, height } = props;
 
     super({ scene, x, y, key, source, width, height });
 
-    this._type = 'Player';
-    this._speed = PLAYER_SPEED;
-    this._health = PLAYER_HEALTH;
-    this._isMoveLeft = false;
-    this._isMoveRight = false;
+    this.type = 'Player';
+    this.speed = PLAYER_SPEED;
+    this.health = PLAYER_HEALTH;
+    this.isMoveLeft = false;
+    this.isMoveRight = false;
 
     //this.play(this.key); // TODO sprite animation
   }
 
   getDamage(damage: number) {
-    this._health -= damage;
+    this.health -= damage;
   }
 
   moveLeft(flag: boolean) {
-    if (flag !== this._isMoveLeft) {
-      this.body.velocity.x = -this._speed;
-      this._isMoveLeft = !this._isMoveLeft;
+    if (flag !== this.isMoveLeft) {
+      this.body.velocity.x = -this.speed;
+      this.isMoveLeft = !this.isMoveLeft;
     }
   }
 
   moveRight(flag: boolean) {
-    if (flag !== this._isMoveRight) {
-      this.body.velocity.x = this._speed;
-      this._isMoveRight = !this._isMoveRight;
+    if (flag !== this.isMoveRight) {
+      this.body.velocity.x = this.speed;
+      this.isMoveRight = !this.isMoveRight;
     }
   }
 
@@ -76,8 +52,8 @@ export class Player extends Sprite {
     if (newX < this.scene.scene.game.width && newX > 0) this.x = newX;
     if (newY < this.scene.scene.game.height && newY > 0) this.y = newY;
 
-    if (!this._isMoveRight && !this._isMoveLeft) {
-      this._body.setVelocity(0, 0);
+    if (!this.isMoveRight && !this.isMoveLeft) {
+      this.body.setVelocity(0, 0);
     }
   }
 }

@@ -29,18 +29,6 @@ export class SceneGameStart extends Scene {
     this.setEvent('click', onClickListener);
   }
 
-  deleteListeners() {
-    this.events.forEach((item) => {
-      document.removeEventListener(item.key, item.event);
-    });
-    this.events = [];
-  }
-
-  destroy() {
-    this.deleteListeners();
-    this.isActive = false;
-  }
-
   createStartBtn = () => {
     const btnWidth = 150;
     const btnHeight = 50;

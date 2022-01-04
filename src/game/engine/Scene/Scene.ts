@@ -1,6 +1,6 @@
 import { GameObject } from '../GameObjects';
 import { SceneManager } from '../SceneManager';
-import type { EventObject, SceneProps } from './types';
+import type { EventsMap, SceneProps } from './types';
 
 export abstract class Scene {
   private key: string;
@@ -11,20 +11,14 @@ export abstract class Scene {
 
   public isActive: boolean;
 
-  public events: EventObject[];
+  public events: EventsMap;
 
   public getEvent(key: string) {
-    return this.events.find((item) => item.key === key);
+    return this.events.get(key);
   }
 
   public setEvent(key: string, event: (event: Event) => void) {
-    const index = this.events.findIndex((item) => item.key === key);
-
-    if (index === -1) {
-      this.events.push({ key, event });
-    } else {
-      this.events[index] = { key, event };
-    }
+    this.events.set(key, event);
   }
 
   constructor(props: SceneProps) {
@@ -34,7 +28,7 @@ export abstract class Scene {
     this.displayList = [];
     this.scene = scene;
     this.isActive = false;
-    this.events = [];
+    this.events = new Map();
   }
 
   protected init() {}
@@ -50,7 +44,10 @@ export abstract class Scene {
     });
   }
 
-  public destroy() {}
+  public destroy() {
+    this.deleteEventListeners();
+    this.isActive = false;
+  }
 
   start() {
     this.preload().then(() => {
@@ -66,10 +63,19 @@ export abstract class Scene {
     });
   }
 
-  add(item: GameObject) {
+  public add(item: GameObject) {
     this.displayList.push(item);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public delete(obj: GameObject) {}
+
+  public deleteEventListeners = () => {
+    if (this.events) {
+      this.events.forEach((value, key) => {
+        document.removeEventListener(key, value);
+      });
+      this.events.clear();
+    }
+  };
 }

@@ -8,12 +8,20 @@ export type GameConfig = {
   scenes: ScenesConfig;
 };
 
+export type SpriteRes = {
+  key: string;
+  sx: number;
+  sy: number;
+  sWidth: number;
+  sHeight: number;
+  dx: number;
+  dy: number;
+  dWidth: number;
+  dHeight: number;
+};
+
 export type ImageRes = {
   key: string;
-  sx?: number;
-  sy?: number;
-  sWidth?: number;
-  sHeight?: number;
   dx: number;
   dy: number;
   dWidth?: number;

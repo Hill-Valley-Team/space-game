@@ -5,8 +5,6 @@ import { DEFAULT_BTN_BG_COLOR, DEFAULT_BTN_COLOR } from './consts';
 export class Button extends GameObject {
   private width: number;
 
-  public isClicked: boolean;
-
   private height: number;
 
   private text: string;
@@ -16,6 +14,8 @@ export class Button extends GameObject {
   private bgColor: string;
 
   private onClick: (() => void) | null;
+
+  public isClicked: boolean;
 
   constructor(props: ButtonProps) {
     const { scene, x, y, key, width, height, text, color, bgColor, onClick } = props;

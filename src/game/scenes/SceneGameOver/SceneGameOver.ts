@@ -39,18 +39,6 @@ export class SceneGameOver extends Scene {
     this.setEvent('click', onClickListener);
   }
 
-  deleteListeners() {
-    this.events.forEach((item) => {
-      document.removeEventListener(item.key, item.event);
-    });
-    this.events = [];
-  }
-
-  destroy() {
-    this.deleteListeners();
-    this.isActive = false;
-  }
-
   createRestartBtn = () => {
     const btnWidth = 150;
     const btnHeight = 50;

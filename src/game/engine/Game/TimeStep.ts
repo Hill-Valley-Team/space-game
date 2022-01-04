@@ -1,36 +1,37 @@
 import { Game } from '.';
+import { FPS } from './consts';
 
 export class TimeStep {
-  private _last: number;
+  private last: number;
 
-  private _game: Game;
+  private game: Game;
 
-  private _step: number;
+  private step: number;
 
-  private _dt: number;
+  private dt: number;
 
   constructor(game: Game) {
-    this._last = performance.now();
-    this._game = game;
-    this._step = 1 / 60;
-    this._dt = 0;
+    this.last = performance.now();
+    this.game = game;
+    this.step = 1 / FPS;
+    this.dt = 0;
   }
 
-  private _frame = () => {
+  private frame = () => {
     const now = performance.now();
-    this._dt += Math.min(1, (now - this._last) / 1000);
+    this.dt += Math.min(1, (now - this.last) / 1000);
 
-    while (this._dt > this._step) {
-      this._dt -= this._step;
-      this._game.update(this._step);
+    while (this.dt > this.step) {
+      this.dt -= this.step;
+      this.game.update(this.step);
     }
 
-    this._last = now;
-    this._game.render();
-    requestAnimationFrame(this._frame);
+    this.last = now;
+    this.game.render();
+    requestAnimationFrame(this.frame);
   };
 
   public start = () => {
-    this._frame();
+    this.frame();
   };
 }

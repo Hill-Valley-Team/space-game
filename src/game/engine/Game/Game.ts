@@ -10,17 +10,22 @@ import { GameConfig } from './types';
 export class Game {
   private parent: Element | null;
 
-  private isRunning: boolean;
-
   private loop: TimeStep;
+
+  private contextValue: CanvasRenderingContext2D | null;
+
+  public get context() {
+    if (this.contextValue === null) {
+      throw new Error('Context is null');
+    }
+    return this.contextValue;
+  }
+
+  public isRunning: boolean;
 
   public canvas: HTMLCanvasElement | null;
 
-  // public scene!: Scene | null;
-
   public scene: SceneManager;
-
-  public context: CanvasRenderingContext2D | null;
 
   public bgColor: string;
 
@@ -44,7 +49,7 @@ export class Game {
     this.isRunning = false;
     this.loop = new TimeStep(this);
     this.canvas = null;
-    this.context = null;
+    this.contextValue = null;
     this.add = new Add(this);
     this.res = gameResourses;
     this.scene = new SceneManager(this, config.scenes);
@@ -73,7 +78,7 @@ export class Game {
     canvas.width = this.width;
     canvas.style.backgroundColor = this.bgColor;
     this.canvas = canvas;
-    this.context = canvas.getContext('2d');
+    this.contextValue = canvas.getContext('2d');
   }
 
   private renderCanvas() {
@@ -91,7 +96,7 @@ export class Game {
   }
 
   public render() {
-    this.context?.clearRect(0, 0, this.width, this.height);
+    this.context.clearRect(0, 0, this.width, this.height);
     this.scene.current?.render();
   }
 }

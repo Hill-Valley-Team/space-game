@@ -116,15 +116,8 @@ export class SceneMain extends Scene {
     this.setEvent('keyup', keyUpListener);
   }
 
-  deleteListeners() {
-    this.events.forEach((item) => {
-      document.removeEventListener(item.key, item.event);
-    });
-    this.events = [];
-  }
-
   destroy() {
-    this.deleteListeners();
+    this.deleteEventListeners();
     clearInterval(this._attackInterval!);
     clearInterval(this._coinsInterval!);
     this.isActive = false;
@@ -216,13 +209,12 @@ export class SceneMain extends Scene {
       this.scene.game.add.image(item.getProps());
     });
     this._coins.forEach((item) => {
-      this.scene.game.add.image(item.getProps());
+      this.scene.game.add.sprite(item.getProps());
     });
     this._healthPannel!.health = this._player!.health;
     this._healthPannel?.render(); // TODO
 
     this.isActive = true;
-    // this.game.scene = this;
   }
 
   delete(obj: GameObject) {

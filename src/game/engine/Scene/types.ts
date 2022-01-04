@@ -5,7 +5,4 @@ export type SceneProps = {
   scene: SceneManager;
 };
 
-export type EventObject = {
-  key: string;
-  event: (event: Event) => void;
-};
+export type EventsMap = Map<string, (event: Event) => void>;
