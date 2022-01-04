@@ -30,9 +30,8 @@ class Resources {
     });
   }
 
-  private async loadImages(images: ImageResourceConfig[]) {
-    return Promise.all(images.map(({ name, path }) => this.setImage(name, path)));
-  }
+  private loadImages = (images: ImageResourceConfig[]) =>
+    Promise.all(images.map(({ name, path }) => this.setImage(name, path)));
 
   private loadSpriteSheets = (spritesheets: SpriteSheetConfig[]) =>
     Promise.all(spritesheets.map(({ name, path }) => this.setImage(name, path)));
