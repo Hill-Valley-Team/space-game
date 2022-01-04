@@ -28,7 +28,7 @@ export class SceneGameWin extends Scene {
 
   addListeners() {
     const onClickListener = (event: Event) => {
-      if (event instanceof PointerEvent && event.type === 'click') {
+      if (event instanceof MouseEvent && event.type === 'click') {
         if (this.actionBtn?.checkClicked(event.x, event.y)) {
           this.actionBtn.isClicked = true;
         }

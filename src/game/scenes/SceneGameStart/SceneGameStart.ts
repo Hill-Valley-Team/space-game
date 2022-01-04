@@ -18,7 +18,7 @@ export class SceneGameStart extends Scene {
 
   addListeners() {
     const onClickListener = (event: Event) => {
-      if (event instanceof PointerEvent && event.type === 'click') {
+      if (event instanceof MouseEvent && event.type === 'click') {
         if (this.startBtn?.checkClicked(event.x, event.y)) {
           this.startBtn.isClicked = true;
         }
@@ -28,6 +28,10 @@ export class SceneGameStart extends Scene {
     document.addEventListener('click', onClickListener);
     this.setEvent('click', onClickListener);
   }
+
+  onBtnClick = () => {
+    this.scene.start(ScenesNames.MAIN);
+  };
 
   createStartBtn = () => {
     const btnWidth = 150;
@@ -46,9 +50,5 @@ export class SceneGameStart extends Scene {
     });
 
     this.displayList.push(this.startBtn);
-  };
-
-  onBtnClick = () => {
-    this.scene.start(ScenesNames.MAIN);
   };
 }
