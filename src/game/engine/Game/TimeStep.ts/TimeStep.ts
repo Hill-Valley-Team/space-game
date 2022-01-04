@@ -1,4 +1,4 @@
-import { Game } from '.';
+import type { Game } from '../Game';
 import { FPS } from './consts';
 
 export class TimeStep {

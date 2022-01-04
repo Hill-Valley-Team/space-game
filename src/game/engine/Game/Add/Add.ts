@@ -1,5 +1,5 @@
-import { Game } from '.';
-import { ImageRes, SpriteRes } from './types';
+import { Game } from '../Game';
+import { ImageRes, SpriteRes } from '../types';
 
 export class Add {
   private game: Game;

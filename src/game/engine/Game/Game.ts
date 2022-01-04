@@ -1,10 +1,9 @@
 import { gameResourses } from '../Resources';
 import { GameResourses } from '../Resources/types';
-// import { Scene } from '../Scene';
 import { SceneManager } from '../SceneManager';
 import { Add } from './Add';
 import { defaultGameConfig } from './defaultGameConfig';
-import { TimeStep } from './TimeStep';
+import { TimeStep } from './TimeStep.ts/TimeStep';
 import { GameConfig } from './types';
 
 export class Game {
