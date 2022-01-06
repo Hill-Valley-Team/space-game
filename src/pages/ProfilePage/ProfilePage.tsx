@@ -8,15 +8,74 @@ import { formScheme, InputNames } from '../../consts/formScheme';
 import { Form } from '../../components/Form/Form';
 import { InputFieldProfile } from '../../components/InputFieldProfile';
 import { InputFieldAvatar } from '../../components/InputFieldAvatar';
+import { useAppSelector } from '../../hooks/hooks';
+import { useFormInput } from '../../hooks/useFormInput';
 
 const b = block('profile-page');
 
 export const ProfilePage = () => {
+  const useSelector = useAppSelector;
   const [isEditMode, setIsEditMode] = useState(false);
+  const userData = useSelector((state) => state.user.data);
+
+  const [
+    { value: loginValue, isValid: loginIsValid, errorMessage: loginErrorMessage },
+    setLoginValue,
+  ] = useFormInput({ type: formScheme[InputNames.LOGIN].type, value: userData?.login });
+
+  const [
+    { value: firstNameValue, isValid: firstNameIsValid, errorMessage: firstNameErrorMessage },
+    setFirstNameValue,
+  ] = useFormInput({ type: formScheme[InputNames.FIRST_NAME].type, value: userData?.first_name });
+
+  const [
+    { value: secondNameValue, isValid: secondNameIsValid, errorMessage: secondNameErrorMessage },
+    setSecondNameValue,
+  ] = useFormInput({ type: formScheme[InputNames.SECOND_NAME].type, value: userData?.second_name });
+
+  const [
+    { value: emailValue, isValid: emailIsValid, errorMessage: emailErrorMessage },
+    setEmailValue,
+  ] = useFormInput({ type: formScheme[InputNames.EMAIL].type, value: userData?.email });
+
+  const [
+    { value: phoneValue, isValid: phoneIsValid, errorMessage: phoneErrorMessage },
+    setPhoneValue,
+  ] = useFormInput({ type: formScheme[InputNames.PHONE].type, value: userData?.phone });
+
+  const [
+    { value: passwordValue, isValid: passwordIsValid, errorMessage: passwordErrorMessage },
+    setPasswordValue,
+  ] = useFormInput({ type: formScheme[InputNames.PASSWORD].type, value: '********' });
+
+  const [
+    {
+      value: repeatPasswordValue,
+      isValid: repeatPasswordIsValid,
+      errorMessage: repeatPasswordErrorMessage,
+    },
+    setRepeatPasswordValue,
+  ] = useFormInput({ type: formScheme[InputNames.REPEAT_PASSWORD].type });
+
+  // const formSubmitHandle = useCallback(
+  //   () => (formData: FormData) => {
+  //     authController
+  //       .signUp(formData)
+  //       .then(() => {
+  //         navigate('/');
+  //       })
+  //       .catch((error) => {
+  //         if (error.response && error.response.data) {
+  //           setRequestError(error.response.data.reason ?? '');
+  //         }
+  //       });
+  //   },
+  //   [navigate],
+  // );
 
   const onBottomBtnClick = useCallback(() => {
     setIsEditMode(!isEditMode);
-  }, []);
+  }, [isEditMode]);
 
   const getBottomButtons = () => {
     if (isEditMode) {
@@ -87,8 +146,10 @@ export const ProfilePage = () => {
             <InputFieldProfile
               id={InputNames.FIRST_NAME}
               name={formScheme[InputNames.FIRST_NAME].name}
-              label="Имя"
-              value="sss"
+              value={firstNameValue}
+              isValid={firstNameIsValid}
+              errorText={firstNameErrorMessage}
+              onChangeHandle={setFirstNameValue}
               isEdit={isEditMode}
               className={b('input')}
             />
@@ -96,7 +157,10 @@ export const ProfilePage = () => {
               id={InputNames.SECOND_NAME}
               name={formScheme[InputNames.SECOND_NAME].name}
               label="Фамилия"
-              value="sdfsf"
+              value={secondNameValue}
+              isValid={secondNameIsValid}
+              errorText={secondNameErrorMessage}
+              onChangeHandle={setSecondNameValue}
               isEdit={isEditMode}
               className={b('input')}
             />
@@ -104,15 +168,21 @@ export const ProfilePage = () => {
               id={InputNames.LOGIN}
               name={formScheme[InputNames.LOGIN].name}
               label="Никнейм"
-              value="ффф"
               isEdit={isEditMode}
               className={b('input')}
+              value={loginValue}
+              isValid={loginIsValid}
+              errorText={loginErrorMessage}
+              onChangeHandle={setLoginValue}
             />
             <InputFieldProfile
               id={InputNames.EMAIL}
               name={formScheme[InputNames.EMAIL].name}
               label="Email"
-              value="aaa@aa.aa"
+              value={emailValue}
+              isValid={emailIsValid}
+              errorText={emailErrorMessage}
+              onChangeHandle={setEmailValue}
               type="email"
               isEdit={isEditMode}
               className={b('input')}
@@ -121,7 +191,10 @@ export const ProfilePage = () => {
               id={InputNames.PHONE}
               name={formScheme[InputNames.PHONE].name}
               label="Телефон"
-              value={+79999999999}
+              value={phoneValue}
+              isValid={phoneIsValid}
+              errorText={phoneErrorMessage}
+              onChangeHandle={setPhoneValue}
               type="tel"
               isEdit={isEditMode}
               className={b('input')}
@@ -131,7 +204,22 @@ export const ProfilePage = () => {
               type="password"
               name={formScheme[InputNames.PASSWORD].name}
               label="Пароль"
-              value="sdfsdf"
+              value={passwordValue}
+              isValid={passwordIsValid}
+              errorText={passwordErrorMessage}
+              onChangeHandle={setPasswordValue}
+              isEdit={isEditMode}
+              className={b('input')}
+            />
+            <InputFieldProfile
+              id={InputNames.REPEAT_PASSWORD}
+              type="password"
+              name={formScheme[InputNames.REPEAT_PASSWORD].name}
+              label="Повторите пароль"
+              value={repeatPasswordValue}
+              isValid={repeatPasswordIsValid}
+              errorText={repeatPasswordErrorMessage}
+              onChangeHandle={setRepeatPasswordValue}
               isEdit={isEditMode}
               className={b('input')}
             />
