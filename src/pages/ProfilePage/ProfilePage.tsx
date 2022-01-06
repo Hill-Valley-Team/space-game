@@ -1,5 +1,6 @@
 import block from 'bem-cn';
 import React, { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Title } from '../../components/Title';
 import './profilePage.css';
 import { PageContainer } from '../../components/PageContainer';
@@ -10,13 +11,16 @@ import { InputFieldProfile } from '../../components/InputFieldProfile';
 import { InputFieldAvatar } from '../../components/InputFieldAvatar';
 import { useAppSelector } from '../../hooks/hooks';
 import { useFormInput } from '../../hooks/useFormInput';
+import { authController } from '../../controllers/AuthController';
 
 const b = block('profile-page');
 
 export const ProfilePage = () => {
+  const navigate = useNavigate();
   const useSelector = useAppSelector;
   const [isEditMode, setIsEditMode] = useState(false);
   const userData = useSelector((state) => state.user.data);
+  console.log(userData);
 
   const [
     { value: loginValue, isValid: loginIsValid, errorMessage: loginErrorMessage },
@@ -112,18 +116,53 @@ export const ProfilePage = () => {
     );
   };
 
+  const getRepeatPasswordInput = () => {
+    if (isEditMode) {
+      return (
+        <InputFieldProfile
+          id={InputNames.REPEAT_PASSWORD}
+          type="password"
+          name={formScheme[InputNames.REPEAT_PASSWORD].name}
+          label="Повторите пароль"
+          value={repeatPasswordValue}
+          isValid={repeatPasswordIsValid}
+          errorText={repeatPasswordErrorMessage}
+          onChangeHandle={setRepeatPasswordValue}
+          isEdit={isEditMode}
+          className={b('input')}
+        />
+      );
+    }
+    return null;
+  };
+
   const getTitle = () =>
     isEditMode ? (
       <Title tag="h1" className={b('title').mix('hidden')} text="Профиль" />
     ) : (
-      <Title tag="h1" className={b('title')} text="sdfsdf" />
+      <Title tag="h1" className={b('title')} text={firstNameValue} />
     );
+
+  const navigateBackHandle = () => {
+    navigate(-1);
+  };
+
+  const logoutHandle = () => {
+    authController.logOut().then(() => navigate('/login'));
+  };
 
   const getLogoutBtn = () =>
     isEditMode ? (
       ''
     ) : (
-      <Button className={b('btn-logout')} type="button" text="Выйти" view="info" width="auto" />
+      <Button
+        className={b('btn-logout')}
+        type="button"
+        text="Выйти"
+        onClick={logoutHandle}
+        view="info"
+        width="auto"
+      />
     );
 
   return (
@@ -131,7 +170,14 @@ export const ProfilePage = () => {
       <PageContainer size="medium">
         <Form className={b('form')}>
           <div className={b('top-wrapper', { dual: isEditMode })}>
-            <Button className={b('btn-back')} type="button" text="" view="primary" width="auto" />
+            <Button
+              className={b('btn-back')}
+              type="button"
+              text=""
+              view="primary"
+              onClick={navigateBackHandle}
+              width="auto"
+            />
             <InputFieldAvatar
               id={InputNames.AVATAR}
               name={formScheme[InputNames.AVATAR].name}
@@ -145,6 +191,7 @@ export const ProfilePage = () => {
           <div className={b('input-wrapper')}>
             <InputFieldProfile
               id={InputNames.FIRST_NAME}
+              label="Имя"
               name={formScheme[InputNames.FIRST_NAME].name}
               value={firstNameValue}
               isValid={firstNameIsValid}
@@ -211,18 +258,7 @@ export const ProfilePage = () => {
               isEdit={isEditMode}
               className={b('input')}
             />
-            <InputFieldProfile
-              id={InputNames.REPEAT_PASSWORD}
-              type="password"
-              name={formScheme[InputNames.REPEAT_PASSWORD].name}
-              label="Повторите пароль"
-              value={repeatPasswordValue}
-              isValid={repeatPasswordIsValid}
-              errorText={repeatPasswordErrorMessage}
-              onChangeHandle={setRepeatPasswordValue}
-              isEdit={isEditMode}
-              className={b('input')}
-            />
+            {getRepeatPasswordInput()}
           </div>
           <div className={b('bottom-wrapper', { dual: isEditMode })}>{getBottomButtons()}</div>
         </Form>

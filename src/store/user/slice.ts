@@ -21,6 +21,7 @@ export const userSlice = createSlice({
         state.loading = false;
       })
       .addCase(getUserData.rejected, (state) => {
+        state.data = null;
         state.loading = false;
       });
   },
