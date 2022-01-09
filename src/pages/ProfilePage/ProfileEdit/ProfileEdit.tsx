@@ -1,11 +1,10 @@
-import React, { PropsWithChildren, useEffect } from 'react';
+import React, { PropsWithChildren } from 'react';
 import block from 'bem-cn';
 import { Button } from '../../../components/Button';
 import { formScheme, InputNames } from '../../../consts/formScheme';
 import { InputField } from '../../../components/InputField';
-import { useAppSelector } from '../../../hooks/hooks';
 import { useFormInput } from '../../../hooks/useFormInput';
-import { userAPI } from '../../../services/UserService';
+import { userAPI, useUpdateUserProfileMutation } from '../../../services/UserService';
 import { prepareDataToRequest } from '../../../controllers/utils/prepareDataToRequest';
 import { UserRequest } from '../../../services/types';
 import { UserRequestFields } from '../../../services/consts';
@@ -17,9 +16,7 @@ type ProfileEditProps = PropsWithChildren<{ viewHandle: () => void }>;
 
 export const ProfileEdit = (props: ProfileEditProps) => {
   const { viewHandle } = props;
-  const useSelector = useAppSelector;
-
-  const userData = useSelector((state) => state.user.data);
+  const { data: userData } = userAPI.useGetUserInfoQuery();
 
   const [
     { value: loginValue, isValid: loginIsValid, errorMessage: loginErrorMessage },
@@ -46,37 +43,7 @@ export const ProfileEdit = (props: ProfileEditProps) => {
     setPhoneValue,
   ] = useFormInput({ type: formScheme[InputNames.PHONE].type, value: userData?.phone });
 
-  useEffect(() => {
-    setFirstNameValue({
-      value: userData?.first_name,
-    });
-    setSecondNameValue({
-      value: userData?.second_name,
-    });
-    setLoginValue({
-      value: userData?.login,
-    });
-    setEmailValue({
-      value: userData?.email,
-    });
-    setPhoneValue({
-      value: userData?.phone,
-    });
-  }, [
-    setEmailValue,
-    setFirstNameValue,
-    setLoginValue,
-    setPhoneValue,
-    setSecondNameValue,
-    userData?.email,
-    userData?.first_name,
-    userData?.login,
-    userData?.phone,
-    userData?.second_name,
-  ]);
-
-  // eslint-disable-next-line no-empty-pattern
-  const [updateProfile, {}] = userAPI.useUpdateUserProfileMutation();
+  const [updateProfile] = useUpdateUserProfileMutation();
 
   const formSubmitHandle = async (formData: FormData) => {
     const preparedData = prepareDataToRequest<UserRequest>(UserRequestFields, formData);
@@ -148,6 +115,9 @@ export const ProfileEdit = (props: ProfileEditProps) => {
           className={b('save-btn')}
           view="primary"
           width="stretch"
+          disabled={
+            !(firstNameIsValid && secondNameIsValid && loginIsValid && emailIsValid && phoneIsValid)
+          }
         />
         <Button
           text="Отменить"

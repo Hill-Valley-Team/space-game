@@ -62,4 +62,8 @@
     border-bottom: 1px solid $primary-color;
     align-items: center;
   }
+
+  .input-field__error-text {
+    text-align: center;
+  }
 }

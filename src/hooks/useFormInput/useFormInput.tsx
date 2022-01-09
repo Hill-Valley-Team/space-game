@@ -5,15 +5,14 @@ import { HookResult, HookInputObject, HookOutputObject, HookOutputFunction } fro
 export const useFormInput = ({ value = '', type = 'text' }: HookInputObject): HookResult => {
   const [inputValue, setValue] = useState(value);
   const [validationType] = useState(type);
-  const [validationResult, setValidationResult] = useState<ValidationResult>({
-    errorMessage: '',
-    isValid: false,
-  });
+  const [validationResult, setValidationResult] = useState<ValidationResult>(
+    checkFormInput(value, type),
+  );
 
   const changeValue: HookOutputFunction = useCallback(
     ({ value: newValue, equal }) => {
       setValue(newValue!);
-      const result = checkFormInput(newValue!, validationType, equal!);
+      const result = checkFormInput(newValue!, validationType, equal);
       setValidationResult(result);
     },
     [validationType],

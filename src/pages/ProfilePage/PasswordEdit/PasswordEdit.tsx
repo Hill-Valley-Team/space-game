@@ -1,10 +1,14 @@
 import block from 'bem-cn';
-import React, { PropsWithChildren, useCallback } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Button } from '../../../components/Button';
 import { Form } from '../../../components/Form/Form';
 import { InputField } from '../../../components/InputField';
 import { formScheme, InputNames } from '../../../consts/formScheme';
-import { useFormInput } from '../../../hooks/useFormInput';
+import { prepareDataToRequest } from '../../../controllers/utils/prepareDataToRequest';
+import { useFormInput, withEqualValue } from '../../../hooks/useFormInput';
+import { PasswordEditRequestFields } from '../../../services/consts';
+import { PasswordRequest } from '../../../services/types';
+import { useUpdatePasswordMutation } from '../../../services/UserService';
 
 type PasswordEditProps = PropsWithChildren<{ viewHandle: () => void }>;
 
@@ -31,12 +35,16 @@ export const PasswordEdit = (props: PasswordEditProps) => {
     setRepeatPasswordValue,
   ] = useFormInput({ type: formScheme[InputNames.REPEAT_PASSWORD].type });
 
-  const saveHandle = useCallback(() => {
-    console.log(passwordValue, repeatPasswordValue);
-  }, [passwordValue, repeatPasswordValue]);
+  const [updatePassword] = useUpdatePasswordMutation();
+
+  const formSubmitHandle = async (formData: FormData) => {
+    const preparedData = prepareDataToRequest<PasswordRequest>(PasswordEditRequestFields, formData);
+    await updatePassword(preparedData);
+    viewHandle();
+  };
 
   return (
-    <Form className={b('form')}>
+    <Form className={b('form')} onSubmitHandler={formSubmitHandle}>
       <InputField
         id={InputNames.OLD_PASSWORD}
         type="password"
@@ -68,7 +76,7 @@ export const PasswordEdit = (props: PasswordEditProps) => {
         value={repeatPasswordValue}
         isValid={repeatPasswordIsValid}
         errorText={repeatPasswordErrorMessage}
-        onChangeHandle={setRepeatPasswordValue}
+        onChangeHandle={withEqualValue(setRepeatPasswordValue, passwordValue)}
         className={b('input')}
       />
       <div className={b('bottom-wrapper')}>
@@ -78,7 +86,7 @@ export const PasswordEdit = (props: PasswordEditProps) => {
           className={b('save-btn')}
           view="primary"
           width="stretch"
-          onClick={saveHandle}
+          disabled={!(passwordIsValid && oldPasswordIsValid && repeatPasswordIsValid)}
         />
         <Button
           text="Отменить"

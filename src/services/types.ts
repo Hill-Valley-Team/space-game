@@ -17,3 +17,8 @@ export type UserResponse = {
   phone: string;
   avatar: string;
 };
+
+export type PasswordRequest = {
+  oldPassword: string;
+  newPassword: string;
+};

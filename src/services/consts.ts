@@ -7,3 +7,5 @@ export const UserRequestFields = [
   'email',
   'phone',
 ];
+
+export const PasswordEditRequestFields = ['oldPassword', 'newPassword'];
