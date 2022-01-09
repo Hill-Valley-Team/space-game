@@ -5,7 +5,6 @@
   border-bottom: 1px solid $primary-color;
   padding: 10px 0;
 
-
   &:last-child {
     border-bottom: none;
   }
@@ -52,5 +51,9 @@
       line-height: 120%;
       color: $text-color;
     }
+  }
+
+  &__error-text {
+    width: 150px;
   }
 }

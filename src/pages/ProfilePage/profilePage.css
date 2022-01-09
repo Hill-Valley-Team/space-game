@@ -54,4 +54,12 @@
     border: none;
     padding: 0;
   }
+
+  &__editpass {
+    display: flex;
+    justify-content: space-between;
+    height: 37px;
+    border-bottom: 1px solid $primary-color;
+    align-items: center;
+  }
 }

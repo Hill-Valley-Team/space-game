@@ -16,7 +16,9 @@ export const InputFieldProfile = ({
   onChangeHandle,
   ...props
 }: InputFieldProfileProps) => {
-  const errorField = !isValid ? <div className={b('error-text')}>{errorText}</div> : null;
+  const errorField = !isValid ? (
+    <div className={b('error-text').mix('error-text')}>{errorText}</div>
+  ) : null;
 
   const labelField = label ? (
     <label htmlFor={id} className={b('label')}>
