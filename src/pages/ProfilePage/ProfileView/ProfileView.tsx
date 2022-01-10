@@ -17,8 +17,6 @@ export const ProfileView = (props: ProfileViewProps) => {
   const { editHandle, editPasswordHandle } = props;
   const { data: userData } = userAPI.useGetUserInfoQuery();
 
-  // useEffect(() => refetch());
-
   return (
     <>
       <Title tag="h1" className={b('title')} text={userData?.first_name} />

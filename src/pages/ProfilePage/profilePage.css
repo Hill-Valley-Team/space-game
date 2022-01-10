@@ -8,9 +8,9 @@
     display: flex;
     justify-content: center;
 
-    &_dual {
-      padding: 0 85px;
-      justify-content: space-between;
+    .button {
+      margin-left: 9px;
+      margin-right: 9px;
     }
   }
 
