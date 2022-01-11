@@ -1,0 +1,38 @@
+.list-item {
+  td {
+    padding: 20px;
+    border-top: 1px solid $primary-color;
+    border-bottom: 1px solid $primary-color;
+  }
+
+  td:first-child {
+    border-left: 1px solid $primary-color;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding-left: 30px;
+  }
+
+  td:last-child {
+    border-right: 1px solid $primary-color;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding-right: 30px;
+  }
+
+  td:not(:first-child) {
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 16px;
+
+    a {
+      color: black;
+    }
+  }
+
+  p {
+    margin-top: 10px;
+    color: $text-color-light;
+  }
+}

@@ -1,22 +1,17 @@
 import block from 'bem-cn';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { PageContainer } from '../../components/PageContainer';
 import { Title } from '../../components/Title';
+import { ListItem } from './ListItem/ListItem';
+import { ThreadListData } from './types';
+import { Button } from '../../components/Button';
+
+import './forumPage.css';
 
 const b = block('forum-page');
 
-type ThreadItem = {
-  id: number;
-  title: string;
-  text: string;
-  datatime: string;
-  userName: string;
-  comments: number;
-};
-type ThreadData = ThreadItem[];
-
-const threadData: ThreadData = [
+const threadData: ThreadListData = [
   {
     id: 1,
     title: 'Помогаем юзерам выбирать ПК конфигурации и обсуждаем их',
@@ -43,26 +38,40 @@ const threadData: ThreadData = [
   },
 ];
 
-const threadList = threadData.map((item) => {
-  const { id, title, text, datatime, userName, comments } = item;
+const threadList = threadData.map((item) => <ListItem data={item} />);
+
+export const ForumPage = () => {
+  const navigate = useNavigate();
+
+  const backHandle = () => {
+    navigate(-1);
+  };
+
   return (
-    <div className={b('thread-item')}>
-      <div>
-        <Link to={`/${id}`}>{title}</Link>
-      </div>
-      <div>{text}</div>
-      <div>{datatime}</div>
-      <div>{userName}</div>
-      <div>{comments}</div>
+    <div className={b()}>
+      <PageContainer size="large">
+        <div className={b('header')}>
+          <Button
+            className={b('btn-back')}
+            type="button"
+            text=""
+            view="primary"
+            onClick={backHandle}
+            width="auto"
+          />
+          <Title text="Форум" className={b('title')} />
+        </div>
+        <table className={b('thread-list')}>
+          <tr className={b('thead')}>
+            <td>Тема</td>
+            <td>Автор</td>
+            <td>Дата</td>
+            <td>Сообщений</td>
+          </tr>
+          {threadList}
+        </table>
+        <Button view="primary" align="center" className={b('button')} text="Добавить тему" />
+      </PageContainer>
     </div>
   );
-});
-
-export const ForumPage = () => (
-  <div className={b()}>
-    <PageContainer size="large">
-      <Title text="Форум" className={b('title')} />
-      <div className={b('threads')}>{threadList}</div>
-    </PageContainer>
-  </div>
-);
+};
