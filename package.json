@@ -6,7 +6,8 @@
   "version": "1.0.0",
   "description": "Project developed during course Middle Frontend Developer at Yandex Practicum",
   "scripts": {
-    "start": "webpack serve  --mode development",
+    "dev": "webpack serve  --mode development",
+    "start": "node server.js",
     "test": "test",
     "build": "webpack --mode production",
     "lint:p": "prettier --write src/**/*.{js,jsx,ts,tsx,test.tsx,test.ts,json}",
