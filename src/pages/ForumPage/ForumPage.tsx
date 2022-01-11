@@ -47,6 +47,10 @@ export const ForumPage = () => {
     navigate(-1);
   };
 
+  const createPostHandle = () => {
+    console.log('new post');
+  };
+
   return (
     <div className={b()}>
       <PageContainer size="large">
@@ -62,15 +66,23 @@ export const ForumPage = () => {
           <Title text="Форум" className={b('title')} />
         </div>
         <table className={b('thread-list')}>
-          <tr className={b('thead')}>
-            <td>Тема</td>
-            <td>Автор</td>
-            <td>Дата</td>
-            <td>Сообщений</td>
-          </tr>
-          {threadList}
+          <thead>
+            <tr className={b('thead')}>
+              <td>Тема</td>
+              <td>Автор</td>
+              <td>Дата</td>
+              <td>Сообщений</td>
+            </tr>
+          </thead>
+          <tbody>{threadList}</tbody>
         </table>
-        <Button view="primary" align="center" className={b('button')} text="Добавить тему" />
+        <Button
+          view="primary"
+          align="center"
+          onClick={createPostHandle}
+          className={b('button')}
+          text="Добавить тему"
+        />
       </PageContainer>
     </div>
   );
