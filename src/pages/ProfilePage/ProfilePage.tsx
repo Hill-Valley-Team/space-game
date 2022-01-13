@@ -42,10 +42,7 @@ export const ProfilePage = () => {
   return (
     <div className={b()}>
       <PageContainer size="medium">
-        <Header
-          withLogoutBtn={view === ProfileViews.VIEW}
-          withBackBtn={view === ProfileViews.VIEW}
-        />
+        <Header withLogoutBtn={view === ProfileViews.VIEW} />
         {inner}
       </PageContainer>
     </div>
