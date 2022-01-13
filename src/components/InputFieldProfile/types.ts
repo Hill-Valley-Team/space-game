@@ -1,4 +1,5 @@
 import { InputHTMLAttributes } from 'react';
+import { HookOutputFunction } from '../../hooks/useFormInput/types';
 
 export type InputFieldProfileOwnProps = {
   id?: string;
@@ -7,6 +8,7 @@ export type InputFieldProfileOwnProps = {
   errorText?: string | null;
   isValid?: boolean;
   isEdit?: boolean;
+  onChangeHandle?: HookOutputFunction;
 };
 
 export type InputFieldProfileProps = InputFieldProfileOwnProps &
