@@ -28,7 +28,3 @@ export const AppNavigation = (props: AppNavigationProps) => {
     </nav>
   );
 };
-
-AppNavigation.defaultProps = {
-  className: undefined,
-};
