@@ -17,7 +17,7 @@ export const InputFieldAvatar = ({
 }: InputFieldAvatarProps) => {
   const getImageSrc = () => src ?? avatarImg;
 
-  const onChangeHandle = (e: React.FormEvent<HTMLInputElement>) => {
+  const onAvatarChangeHandle = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     const input = e.currentTarget;
     input?.form?.requestSubmit();
@@ -32,7 +32,7 @@ export const InputFieldAvatar = ({
           type="file"
           accept="image/*"
           className={b('input')}
-          onChange={onChangeHandle}
+          onChange={onAvatarChangeHandle}
           {...props}
         />
         <label htmlFor={id} className={b('label')}>
