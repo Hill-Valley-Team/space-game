@@ -1,12 +1,25 @@
 .button {
   color: $text-color;
   border-radius: 50px;
-  padding: 10px;
+  padding: 10px 20px;
   border: none;
   cursor: pointer;
+  display: flex;
 
   &_width_stretch {
     width: 100%;
+  }
+
+  &_width_fixed {
+    width: 280px;
+  }
+
+  &_align_center {
+    margin: 0 auto;
+  }
+
+  &_align_right {
+    right: 0;
   }
 
   &_view_primary {
@@ -16,6 +29,16 @@
 
   &_view_default {
     background-color: $primary-bg-color;
+  }
+
+  &_view_link {
+    background-color: transparent;
+    color: $primary-color;
+    text-decoration: underline;
+    display: block;
+    align-items: center;
+    padding: 0;
+    border-radius: unset;
   }
 
   &_view_secondary {

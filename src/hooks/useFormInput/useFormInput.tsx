@@ -2,18 +2,17 @@ import { useCallback, useMemo, useState } from 'react';
 import { checkFormInput, ValidationResult } from '../../utils/validation';
 import { HookResult, HookInputObject, HookOutputObject, HookOutputFunction } from './types';
 
-export const useFormInput = ({ type = 'text', value = '' }: HookInputObject): HookResult => {
+export const useFormInput = ({ value = '', type = 'text' }: HookInputObject): HookResult => {
   const [inputValue, setValue] = useState(value);
   const [validationType] = useState(type);
-  const [validationResult, setValidationResult] = useState<ValidationResult>({
-    errorMessage: '',
-    isValid: false,
-  });
+  const [validationResult, setValidationResult] = useState<ValidationResult>(
+    checkFormInput(value, type),
+  );
 
-  const changeValue = useCallback(
-    ({ value: newValue, equal }: HookInputObject) => {
+  const changeValue: HookOutputFunction = useCallback(
+    ({ value: newValue, equal }) => {
       setValue(newValue!);
-      const result = checkFormInput(newValue!, validationType, equal!);
+      const result = checkFormInput(newValue!, validationType, equal);
       setValidationResult(result);
     },
     [validationType],
@@ -28,5 +27,5 @@ export const useFormInput = ({ type = 'text', value = '' }: HookInputObject): Ho
     [inputValue, validationResult],
   );
 
-  return [resultObject, changeValue as HookOutputFunction];
+  return [resultObject, changeValue];
 };

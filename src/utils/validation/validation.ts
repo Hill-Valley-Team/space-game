@@ -187,7 +187,7 @@ const checkPhoneValidaty = (value: string = '') => {
   return checker(checkList);
 };
 
-export const checkFormInput = (value: string, type: ValidationType, equal: string) => {
+export const checkFormInput = (value: string, type: ValidationType, equal?: string) => {
   let result: ValidationResult = {
     isValid: false,
     errorMessage: null,
@@ -214,7 +214,7 @@ export const checkFormInput = (value: string, type: ValidationType, equal: strin
         result = checkPhoneValidaty(value);
         break;
       case 'equal':
-        result = checkEqualValidaty(value, equal, 'Поля не равны');
+        result = checkEqualValidaty(value, equal!, 'Поля не равны');
         break;
       case 'text':
         result = checkTextValidaty(value);

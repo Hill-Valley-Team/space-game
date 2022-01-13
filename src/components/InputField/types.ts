@@ -9,6 +9,7 @@ export type InputFieldOwnProps = {
   label?: string;
   errorText?: string | null;
   isValid?: boolean;
+  isEdit?: boolean;
   view?: 'default' | 'labeled';
   onChangeHandle?: HookOutputFunction;
 };

@@ -14,7 +14,7 @@ class AuthApi extends BaseApi {
 
   public logOut = () => this.http.post('/logout');
 
-  public getUserInfo = () => this.http.get('/user');
+  // public getUserInfo = () => this.http.get('/user');
 }
 
 export const authApi = new AuthApi();

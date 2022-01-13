@@ -25,6 +25,7 @@ a {
 
 .error-text {
   color: $error-text-color;
+  font-size: 10px;
 }
 
 .hidden {
