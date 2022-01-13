@@ -46,10 +46,7 @@ export const checkPasswordValidaty = (value: string = ''): ValidationResult => {
     symbols: '!@#%&',
     minLength: 6,
   };
-  rules.pattern = new RegExp(
-    `^[0-9a-zA-Z${rules.symbols}]{${rules.minLength},${rules.maxLength}}$`,
-    'g',
-  );
+  rules.pattern = new RegExp(`^[0-9a-zA-Z${rules.symbols}]{${rules.minLength},}$`, 'g');
 
   const checkList: (string | boolean)[] = [
     checkMinLength(value.length, rules.minLength),
