@@ -11,6 +11,7 @@ const colors = {
   'pure-white': '#ffffff',
   'error-text-color': '#FF4D00',
   'error-text-color-light': '#fff501',
+  'light-blue': '#daecf8',
 };
 
 module.exports = {
