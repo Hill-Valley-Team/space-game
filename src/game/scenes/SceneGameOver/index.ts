@@ -1,0 +1,1 @@
+export { SceneGameOver } from './SceneGameOver';

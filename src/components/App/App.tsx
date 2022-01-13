@@ -1,18 +1,15 @@
 import block from 'bem-cn';
-import React, { useEffect } from 'react';
-import { useAppDispatch } from '../../hooks/hooks';
-import { getUserData } from '../../store/user';
+import React from 'react';
+import { userAPI } from '../../services/UserService';
 import { AppRoutes } from '../AppRoutes';
 import './app.css';
 
 const b = block('app');
 
 export const App = () => {
-  const dispatch = useAppDispatch();
+  const { isLoading } = userAPI.useGetUserInfoQuery();
 
-  useEffect(() => {
-    dispatch(getUserData());
-  }, [dispatch]);
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className={b()}>

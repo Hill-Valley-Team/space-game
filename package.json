@@ -6,13 +6,15 @@
   "version": "1.0.0",
   "description": "Project developed during course Middle Frontend Developer at Yandex Practicum",
   "scripts": {
-    "start": "webpack serve  --mode development",
+    "dev": "webpack serve  --mode development",
+    "start": "node server.js",
     "test": "test",
     "build": "webpack --mode production",
     "lint:p": "prettier --write src/**/*.{js,jsx,ts,tsx,test.tsx,test.ts,json}",
     "lint:ts": "eslint src/**/*.{ts,tsx}",
     "lint:style": "stylelint src/**/*.css",
-    "lint": "npm-run-all lint:p lint:ts lint:style"
+    "lint": "npm-run-all lint:p lint:ts lint:style",
+    "precommit:hook": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -28,13 +30,14 @@
   "bugs": {
     "url": "https://github.com/Hill-Valley-Team/space-game/issues"
   },
+  "precommit": "precommit:hook",
   "homepage": "https://github.com/Hill-Valley-Team/space-game#readme",
   "devDependencies": {
     "@types/qs": "^6.9.7",
     "@types/react": "17.0.37",
     "@types/react-dom": "17.0.11",
-    "@types/react-router-dom": "^5.3.2",
     "@types/react-redux": "^7.1.20",
+    "@types/react-router-dom": "^5.3.2",
     "@types/redux": "^3.6.0",
     "@typescript-eslint/eslint-plugin": "5.6.0",
     "@typescript-eslint/parser": "5.6.0",
@@ -76,6 +79,7 @@
     "@reduxjs/toolkit": "^1.7.1",
     "axios": "^0.24.0",
     "bem-cn": "3.0.1",
+    "express": "^4.17.2",
     "qs": "^6.10.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
