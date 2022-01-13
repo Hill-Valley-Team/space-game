@@ -24,7 +24,6 @@ export const ProfilePage = () => {
   const viewHandle = () => {
     setView(ProfileViews.VIEW);
   };
-
   let inner = null;
 
   switch (view) {
@@ -40,7 +39,6 @@ export const ProfilePage = () => {
       inner = <ProfileView editHandle={editHandle} editPasswordHandle={editPasswordHandle} />;
       break;
   }
-
   return (
     <div className={b()}>
       <PageContainer size="medium">
