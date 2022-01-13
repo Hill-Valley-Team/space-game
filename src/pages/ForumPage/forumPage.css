@@ -1,0 +1,46 @@
+.forum-page {
+  &__thread-list {
+    border-spacing: 0 20px;
+    border-collapse: separate;
+    margin-top: 30px;
+  }
+
+  &__thead {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    text-transform: uppercase;
+
+    td {
+      padding: 0 10px;
+    }
+
+    td:first-child {
+      padding-left: 30px;
+    }
+
+    td:last-child {
+      padding-right: 30px;
+    }
+
+    td:not(:first-child) {
+      text-align: center;
+    }
+  }
+
+  &__button {
+    margin-top: 20px;
+  }
+
+  &__btn-back {
+    background: url('./static/btn-back.svg') no-repeat;
+    width: 28px;
+    height: 28px;
+    display: block;
+  }
+
+  &__header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+}
