@@ -43,7 +43,7 @@ class Resources {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public async load({ images, spritesheets, audio }: SceneResourcesConfig, path: string) {
+  public load({ images, spritesheets, audio }: SceneResourcesConfig, path: string) {
     // TODO
     this.path = path;
     return Promise.all([this.loadImages(images!), this.loadSpriteSheets(spritesheets!)]);

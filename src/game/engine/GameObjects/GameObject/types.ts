@@ -29,4 +29,4 @@ export type TextProps = {
 } & GameObjectProps;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type DataObject = Record<string, any>;
+export type DataObject = Record<string, any>; //TODO убрать any
