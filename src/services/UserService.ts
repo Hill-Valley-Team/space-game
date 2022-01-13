@@ -17,6 +17,15 @@ export const userAPI = createApi({
       }),
       invalidatesTags: ['User'],
     }),
+    updateUserAvatar: builder.mutation<void, FormData>({
+      query: (data) => ({
+        url: '/user/profile/avatar',
+        body: data,
+        method: 'PUT',
+        credentials: 'include',
+      }),
+      invalidatesTags: ['User'],
+    }),
     updatePassword: builder.mutation<void, PasswordRequest>({
       query: (password) => ({
         url: '/user/password',
@@ -36,5 +45,9 @@ export const userAPI = createApi({
   }),
 });
 
-export const { useUpdateUserProfileMutation, useGetUserInfoQuery, useUpdatePasswordMutation } =
-  userAPI;
+export const {
+  useUpdateUserProfileMutation,
+  useGetUserInfoQuery,
+  useUpdatePasswordMutation,
+  useUpdateUserAvatarMutation,
+} = userAPI;

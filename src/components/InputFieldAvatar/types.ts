@@ -7,6 +7,8 @@ export type InputFieldAvatarOwnProps = {
   errorText?: string | null;
   isValid?: boolean;
   isEdit?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onChangeHandler: (data: any) => void;
 };
 
 export type InputFieldAvatarProps = InputFieldAvatarOwnProps &
