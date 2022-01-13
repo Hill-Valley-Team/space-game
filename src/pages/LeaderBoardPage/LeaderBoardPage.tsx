@@ -7,21 +7,22 @@ import './leaderBoardPage.css';
 import { PageContainer } from '../../components/PageContainer';
 
 const b = block('leader-board-page');
+const h = block('table-header');
 
 export const LeaderBoardPage = () => {
   const navigate = useNavigate();
 
-  const onBtnClick = useCallback(() => {
+  const onBtnClick = () => {
     navigate('/');
-  }, []);
+  };
 
   const onSortBtnClick = useCallback((event) => {
     // сортировка списка по дата-атрибуту
-    const tableHeaderButtons = document.querySelectorAll('.leader-board-page__table-header-btn');
+    const tableHeaderButtons = document.querySelectorAll('.table-header__btn');
     tableHeaderButtons.forEach((btn) => {
-      btn.classList.remove('leader-board-page__table-header-btn--active');
+      btn.classList.remove('table-header__btn_active');
     });
-    event.target.classList.add('leader-board-page__table-header-btn--active');
+    event.target.classList.add('table-header__btn_active');
   }, []);
 
   return (
@@ -38,29 +39,14 @@ export const LeaderBoardPage = () => {
           />
           <Title tag="h2" className={b('title')} text="Таблица достижений" />
         </div>
-        <div className={b('table-header')}>
-          <button
-            onClick={onSortBtnClick}
-            data-sort="name"
-            type="button"
-            className={b('table-header-btn')}
-          >
+        <div className={b('table-header').mix(h())}>
+          <button onClick={onSortBtnClick} data-sort="name" type="button" className={h('btn')}>
             Имя
           </button>
-          <button
-            onClick={onSortBtnClick}
-            data-sort="login"
-            type="button"
-            className={b('table-header-btn')}
-          >
+          <button onClick={onSortBtnClick} data-sort="login" type="button" className={h('btn')}>
             Логин
           </button>
-          <button
-            onClick={onSortBtnClick}
-            data-sort="points"
-            type="button"
-            className={b('table-header-btn')}
-          >
+          <button onClick={onSortBtnClick} data-sort="points" type="button" className={h('btn')}>
             Результат
           </button>
         </div>

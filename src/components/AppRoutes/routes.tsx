@@ -7,7 +7,7 @@ import { Error500Page } from '../../pages/Error500Page';
 import { Error404Page } from '../../pages/Error404Page';
 import { LoginPage } from '../../pages/LoginPage';
 import { ProfilePage } from '../../pages/ProfilePage';
-import {LeaderBoardPage} from "../../pages/LeaderBoardPage";
+import { LeaderBoardPage } from '../../pages/LeaderBoardPage';
 
 export const routes: RouteObject[] = [
   {

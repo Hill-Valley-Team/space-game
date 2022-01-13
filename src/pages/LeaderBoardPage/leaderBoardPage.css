@@ -1,5 +1,5 @@
 .leader-board-page {
-  & .page-container {
+  .page-container {
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -26,35 +26,6 @@
     margin: 0;
   }
 
-  &__table-header-btn {
-    border: none;
-    background: $light-blue;
-    padding: 20px;
-    font-size: 18px;
-    line-height: 11px;
-    text-align: left;
-    position: relative;
-    cursor: pointer;
-
-    &--active {
-      font-weight: 700;
-    }
-
-    &::before {
-      content: '';
-      width: 1px;
-      height: 30px;
-      position: absolute;
-      top: 10px;
-      left: 0;
-      background: $pure-white;
-    }
-
-    &:first-child::before {
-      content: none;
-    }
-  }
-
   &__table {
     list-style: none;
     padding: 0;
@@ -70,6 +41,35 @@
 
     & span {
       padding: 20px;
+    }
+  }
+
+  .table-header__btn {
+    border: none;
+    background: $light-blue;
+    padding: 20px;
+    font-size: 18px;
+    line-height: 11px;
+    text-align: left;
+    position: relative;
+    cursor: pointer;
+
+    &_active {
+      font-weight: 700;
+    }
+
+    &::before {
+      content: '';
+      width: 1px;
+      height: 30px;
+      position: absolute;
+      top: 10px;
+      left: 0;
+      background: $pure-white;
+    }
+
+    &:first-child::before {
+      content: none;
     }
   }
 }
