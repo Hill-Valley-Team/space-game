@@ -25,15 +25,29 @@ export const ProfilePage = () => {
     setView(ProfileViews.VIEW);
   };
 
-  let inner = <ProfileView editHandle={editHandle} editPasswordHandle={editPasswordHandle} />;
+  let inner = null;
 
-  if (view === 'edit') inner = <ProfileEdit viewHandle={viewHandle} />;
-  if (view === 'password') inner = <PasswordEdit viewHandle={viewHandle} />;
+  switch (view) {
+    case ProfileViews.EDIT:
+      inner = <ProfileEdit viewHandle={viewHandle} />;
+      break;
+
+    case ProfileViews.PASSWORD:
+      inner = <PasswordEdit viewHandle={viewHandle} />;
+      break;
+
+    default:
+      inner = <ProfileView editHandle={editHandle} editPasswordHandle={editPasswordHandle} />;
+      break;
+  }
 
   return (
     <div className={b()}>
       <PageContainer size="medium">
-        <Header withLogoutBtn={view === ProfileViews.VIEW} />
+        <Header
+          withLogoutBtn={view === ProfileViews.VIEW}
+          withBackBtn={view === ProfileViews.VIEW}
+        />
         {inner}
       </PageContainer>
     </div>

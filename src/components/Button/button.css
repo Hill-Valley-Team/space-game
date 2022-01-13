@@ -43,7 +43,7 @@
 
   &_view_secondary {
     border: 1px solid $primary-color;
-    background: $secondary-btn-bg-color;
+    background: $primary-bg-color;
     color: $primary-color;
     display: flex;
     justify-content: center;
