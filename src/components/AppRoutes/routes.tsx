@@ -7,6 +7,7 @@ import { Error500Page } from '../../pages/Error500Page';
 import { Error404Page } from '../../pages/Error404Page';
 import { LoginPage } from '../../pages/LoginPage';
 import { ProfilePage } from '../../pages/ProfilePage';
+import { ForumPage } from '../../pages/ForumPage/ForumPage';
 import { LeaderBoardPage } from '../../pages/LeaderBoardPage';
 
 export const routes: RouteObject[] = [
@@ -26,6 +27,10 @@ export const routes: RouteObject[] = [
       {
         path: 'profile',
         element: <ProfilePage />,
+      },
+      {
+        path: 'forum',
+        element: <ForumPage />,
       },
       {
         path: 'leaderboard',
