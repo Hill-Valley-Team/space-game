@@ -3,7 +3,7 @@ import { GameObject } from '../engine/GameObjects';
 import { Scene } from '../engine/Scene';
 
 export class Health extends GameObject {
-  private type: string;
+  public type: string;
 
   public health: number;
 

@@ -1,9 +1,4 @@
-import {
-  AudioResourceConfig,
-  ImageResourceConfig,
-  SceneResourcesConfig,
-  SpriteSheetConfig,
-} from './types';
+import { ImageResourceConfig, SceneResourcesConfig, SpriteSheetConfig } from './types';
 
 class Resources {
   public path: string | null;
@@ -36,19 +31,9 @@ class Resources {
   private loadSpriteSheets = (spritesheets: SpriteSheetConfig[]) =>
     Promise.all(spritesheets.map(({ name, path }) => this.setImage(name, path)));
 
-  private loadAudio = (audios: AudioResourceConfig[]) => {
-    audios.forEach(({ name, path }) => {
-      console.log(name, path);
-    });
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public load({ images, spritesheets, audio }: SceneResourcesConfig, path: string) {
-    // TODO
+  public load({ images, spritesheets }: SceneResourcesConfig, path: string) {
     this.path = path;
     return Promise.all([this.loadImages(images!), this.loadSpriteSheets(spritesheets!)]);
-
-    // if (audio) this._loadAudio(audio);
   }
 }
 

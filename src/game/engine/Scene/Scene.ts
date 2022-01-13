@@ -3,7 +3,7 @@ import { SceneManager } from '../SceneManager';
 import type { EventsMap, SceneProps } from './types';
 
 export abstract class Scene {
-  private key: string;
+  public key: string;
 
   public displayList: GameObject[];
 
