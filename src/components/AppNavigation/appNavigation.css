@@ -1,0 +1,27 @@
+.app-navigation {
+  margin: 10px 0;
+
+  ul li {
+    display: inline;
+    margin-right: 10px;
+  }
+
+  &_align_center {
+    text-align: center;
+  }
+
+  &_align_left {
+    text-align: left;
+  }
+
+  &_align_right {
+    text-align: right;
+  }
+
+  &__item {
+    &_active {
+      text-decoration: none;
+      color: red;
+    }
+  }
+}
