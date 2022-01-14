@@ -28,15 +28,27 @@ export const routes: RouteObject[] = [
       },
       {
         path: 'login',
-        element: <LoginPage />,
+        element: (
+          <RequireAuth to="/" requireAuth={false}>
+            <LoginPage />
+          </RequireAuth>
+        ),
       },
       {
         path: 'game',
-        element: <GamePage />,
+        element: (
+          <RequireAuth to="/login" requireAuth>
+            <GamePage />
+          </RequireAuth>
+        ),
       },
       {
         path: 'profile',
-        element: <ProfilePage />,
+        element: (
+          <RequireAuth to="/login" requireAuth>
+            <ProfilePage />
+          </RequireAuth>
+        ),
       },
       {
         path: 'forum',
