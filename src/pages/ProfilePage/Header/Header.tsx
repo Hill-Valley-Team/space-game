@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../components/Button';
 import { InputFieldAvatar } from '../../../components/InputFieldAvatar';
 import { formScheme, InputNames } from '../../../consts/formScheme';
-import { authController } from '../../../controllers/AuthController';
+import { useLogoutMutation } from '../../../services/UserService';
 
 type HeaderProps = PropsWithChildren<{
   withBackBtn?: boolean;
@@ -16,13 +16,14 @@ const b = block('profile-page');
 export const Header = (props: HeaderProps) => {
   const navigate = useNavigate();
   const { withLogoutBtn, withBackBtn } = props;
+  const [logout] = useLogoutMutation();
 
-  const backHandle = () => {
+  const handleBackBtnClick = () => {
     navigate(-1);
   };
 
-  const logoutHandle = () => {
-    authController.logOut().then(() => navigate('/login'));
+  const handleLogoutBtnClick = () => {
+    logout();
   };
 
   const logoutBtn = withLogoutBtn ? (
@@ -30,7 +31,7 @@ export const Header = (props: HeaderProps) => {
       className={b('btn-logout')}
       type="button"
       text="Выйти"
-      onClick={logoutHandle}
+      onClick={handleLogoutBtnClick}
       view="info"
       width="auto"
     />
@@ -42,7 +43,7 @@ export const Header = (props: HeaderProps) => {
       type="button"
       text=""
       view="primary"
-      onClick={backHandle}
+      onClick={handleBackBtnClick}
       width="auto"
     />
   ) : null;

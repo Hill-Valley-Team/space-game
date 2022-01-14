@@ -11,6 +11,7 @@ import { ProfilePage } from '../../pages/ProfilePage';
 import { ForumPage } from '../../pages/ForumPage/ForumPage';
 import { LeaderBoardPage } from '../../pages/LeaderBoardPage';
 import { RequireAuth } from '../RequireAuth';
+import { authorizedPath, nonAuthorizedPath } from './consts';
 
 export const routes: RouteObject[] = [
   {
@@ -21,7 +22,7 @@ export const routes: RouteObject[] = [
       {
         path: 'registration',
         element: (
-          <RequireAuth to="/" requireAuth={false}>
+          <RequireAuth to={authorizedPath} requireAuth={false}>
             <RegistrationPage />
           </RequireAuth>
         ),
@@ -29,7 +30,7 @@ export const routes: RouteObject[] = [
       {
         path: 'login',
         element: (
-          <RequireAuth to="/" requireAuth={false}>
+          <RequireAuth to={authorizedPath} requireAuth={false}>
             <LoginPage />
           </RequireAuth>
         ),
@@ -37,7 +38,7 @@ export const routes: RouteObject[] = [
       {
         path: 'game',
         element: (
-          <RequireAuth to="/login" requireAuth>
+          <RequireAuth to={nonAuthorizedPath} requireAuth>
             <GamePage />
           </RequireAuth>
         ),
@@ -45,7 +46,7 @@ export const routes: RouteObject[] = [
       {
         path: 'profile',
         element: (
-          <RequireAuth to="/login" requireAuth>
+          <RequireAuth to={nonAuthorizedPath} requireAuth>
             <ProfilePage />
           </RequireAuth>
         ),

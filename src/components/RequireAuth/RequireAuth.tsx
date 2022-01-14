@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { userAPI } from '../../services/UserService';
+import { useGetUserInfoQuery } from '../../services/UserService';
 
 type RequireAuthProps = {
   children: JSX.Element;
@@ -10,12 +10,12 @@ type RequireAuthProps = {
 
 export const RequireAuth = (props: RequireAuthProps) => {
   const { children, to, requireAuth } = props;
-  const { data: userData } = userAPI.endpoints.getUserInfo.useQueryState();
+  const { isSuccess } = useGetUserInfoQuery();
   const location = useLocation();
 
-  if (Boolean(userData) !== requireAuth) {
-    return <Navigate to={to} state={{ from: location }} replace />;
+  if (isSuccess === requireAuth) {
+    return children;
   }
 
-  return children;
+  return <Navigate to={to} state={{ from: location }} replace />;
 };
