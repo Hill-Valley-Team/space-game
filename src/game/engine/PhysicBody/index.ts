@@ -1,0 +1,1 @@
+export { PhysicBody } from './PhysicBody';

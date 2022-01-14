@@ -16,14 +16,16 @@ export const LeaderBoardPage = () => {
     navigate('/');
   };
 
-  const onSortBtnClick = useCallback((event) => {
+
+  const onSortBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     // сортировка списка по дата-атрибуту
     const tableHeaderButtons = document.querySelectorAll('.table-header__btn');
     tableHeaderButtons.forEach((btn) => {
       btn.classList.remove('table-header__btn_active');
     });
-    event.target.classList.add('table-header__btn_active');
-  }, []);
+    const btn = event.currentTarget;
+    btn.classList.add('table-header__btn_active');
+  };
 
   return (
     <div className={b()}>

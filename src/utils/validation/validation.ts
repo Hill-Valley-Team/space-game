@@ -45,15 +45,10 @@ export const checkPasswordValidaty = (value: string = ''): ValidationResult => {
   const rules: ValidationRules = {
     symbols: '!@#%&',
     minLength: 6,
-    maxLength: 10,
   };
-  rules.pattern = new RegExp(
-    `^[0-9a-zA-Z${rules.symbols}]{${rules.minLength},${rules.maxLength}}$`,
-    'g',
-  );
+  rules.pattern = new RegExp(`^[0-9a-zA-Z${rules.symbols}]{${rules.minLength},}$`, 'g');
 
   const checkList: (string | boolean)[] = [
-    checkMaxLength(value.length, rules.maxLength),
     checkMinLength(value.length, rules.minLength),
     checkHasNumber(value),
     checkHasSymbol(value, rules.symbols),
@@ -85,7 +80,7 @@ const checkLoginValidaty = (value: string = '') => {
       rules.pattern,
       `Поле может содержать только буквы латинского алфавита, цифры и символы ${rules.symbols}`,
     ),
-    checkMaxLength(value.length, rules.maxLength),
+    checkMaxLength(value.length, rules.maxLength!),
     checkMinLength(value.length, rules.minLength),
   ];
 
@@ -102,7 +97,7 @@ const checkEmailValidaty = (value: string = '') => {
 
   const checkList: (string | boolean)[] = [
     checkPattern(value, rules.pattern, 'Ошибка в электронной почте'),
-    checkMaxLength(value.length, rules.maxLength),
+    checkMaxLength(value.length, rules.maxLength!),
     checkMinLength(value.length, rules.minLength),
   ];
 
@@ -129,7 +124,7 @@ const checkNameValidaty = (value: string = '') => {
       rules.pattern,
       'Поле может содержать только буквы латинского или русского алфавита',
     ),
-    checkMaxLength(value.length, rules.maxLength),
+    checkMaxLength(value.length, rules.maxLength!),
     checkMinLength(value.length, rules.minLength),
   ];
 
@@ -146,7 +141,7 @@ const checkShortTextValidaty = (value: string = '') => {
 
   const checkList: (string | boolean)[] = [
     checkPattern(value, rules.pattern, 'Поле может содержать только буквы, цифры и знаки _-'),
-    checkMaxLength(value.length, rules.maxLength),
+    checkMaxLength(value.length, rules.maxLength!),
     checkMinLength(value.length, rules.minLength),
   ];
 
@@ -163,7 +158,7 @@ const checkTextValidaty = (value: string = '') => {
 
   const checkList: (string | boolean)[] = [
     checkPattern(value, rules.pattern, 'Поле может содержать только буквы, цифры и знаки _-'),
-    checkMaxLength(value.length, rules.maxLength),
+    checkMaxLength(value.length, rules.maxLength!),
     checkMinLength(value.length, rules.minLength),
   ];
 
@@ -180,7 +175,7 @@ const checkPhoneValidaty = (value: string = '') => {
 
   const checkList: (string | boolean)[] = [
     checkPattern(value, rules.pattern, 'Неверный номер телефона'),
-    checkMaxLength(value.length, rules.maxLength),
+    checkMaxLength(value.length, rules.maxLength!),
     checkMinLength(value.length, rules.minLength),
   ];
 

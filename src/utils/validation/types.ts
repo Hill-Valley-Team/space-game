@@ -1,7 +1,7 @@
 export type ValidationRules = {
   symbols: string;
   minLength: number;
-  maxLength: number;
+  maxLength?: number;
   pattern?: RegExp;
 };
 
