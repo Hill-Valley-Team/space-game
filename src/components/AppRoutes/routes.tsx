@@ -10,6 +10,7 @@ import { GamePage } from '../../pages/GamePage';
 import { ProfilePage } from '../../pages/ProfilePage';
 import { ForumPage } from '../../pages/ForumPage/ForumPage';
 import { LeaderBoardPage } from '../../pages/LeaderBoardPage';
+import { RequireAuth } from '../RequireAuth';
 
 export const routes: RouteObject[] = [
   {
@@ -19,7 +20,11 @@ export const routes: RouteObject[] = [
       { index: true, element: <HomePage /> },
       {
         path: 'registration',
-        element: <RegistrationPage />,
+        element: (
+          <RequireAuth to="/" requireAuth={false}>
+            <RegistrationPage />
+          </RequireAuth>
+        ),
       },
       {
         path: 'login',
