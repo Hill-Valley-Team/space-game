@@ -1,34 +1,31 @@
+import { Events } from '../Events/Events';
 import { GameObject } from '../GameObjects';
 import { SceneManager } from '../SceneManager';
-import type { EventsMap, SceneProps } from './types';
+import type { SceneProps } from './types';
 
 export abstract class Scene {
   public key: string;
 
-  public displayList: GameObject[];
+  public displayList: Map<string, GameObject>;
 
-  public scene: SceneManager;
+  public sceneManager: SceneManager;
 
   public isActive: boolean;
 
-  public events: EventsMap;
+  public events: Events;
 
-  public getEvent(key: string) {
-    return this.events.get(key);
-  }
-
-  public setEvent(key: string, event: (event: Event) => void) {
-    this.events.set(key, event);
+  get game() {
+    return this.sceneManager.game;
   }
 
   constructor(props: SceneProps) {
-    const { key, scene } = props;
+    const { key, sceneManager } = props;
 
     this.key = key;
-    this.displayList = [];
-    this.scene = scene;
+    this.displayList = new Map();
+    this.sceneManager = sceneManager;
     this.isActive = false;
-    this.events = new Map();
+    this.events = new Events();
   }
 
   protected init() {}
@@ -38,18 +35,33 @@ export abstract class Scene {
 
   protected create() {}
 
-  public render() {
+  private beforeRender() {
     this.displayList.forEach((item) => {
       item.render();
     });
   }
 
-  public destroy() {
-    this.deleteEventListeners();
+  protected onRender() {}
+
+  public render() {
+    if (!this.isActive) return;
+    this.beforeRender();
+    this.onRender();
+  }
+
+  private beforeDestroy() {
+    this.events.destroy();
     this.isActive = false;
   }
 
-  start() {
+  protected onDestroy() {}
+
+  public destroy() {
+    this.beforeDestroy();
+    this.onDestroy();
+  }
+
+  private beforeStart() {
     this.preload().then(() => {
       this.create();
       this.render();
@@ -57,25 +69,42 @@ export abstract class Scene {
     });
   }
 
-  public update(delay: number) {
+  protected onStart() {}
+
+  public start() {
+    this.beforeStart();
+    this.onStart();
+  }
+
+  private beforeUpdate(delay: number) {
     this.displayList.forEach((item) => {
       item.update(delay);
     });
   }
 
-  public add(item: GameObject) {
-    this.displayList.push(item);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected onUpdate(delay: number) {}
+
+  public update(delay: number) {
+    this.beforeUpdate(delay);
+    this.onUpdate(delay);
+  }
+
+  /** Add Child to displayList */
+  public add(obj: GameObject) {
+    this.displayList.set(obj.key, obj);
+  }
+
+  /** Remove Child from displayList */
+  private beforeDelete(obj: GameObject) {
+    this.displayList.delete(obj.key);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public delete(obj: GameObject) {}
+  protected onDelete(obj: GameObject) {}
 
-  public deleteEventListeners = () => {
-    if (this.events) {
-      this.events.forEach((value, key) => {
-        document.removeEventListener(key, value);
-      });
-      this.events.clear();
-    }
-  };
+  public delete(obj: GameObject) {
+    this.beforeDelete(obj);
+    this.onDelete(obj);
+  }
 }

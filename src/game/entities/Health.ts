@@ -7,20 +7,21 @@ export class Health extends GameObject {
 
   public health: number;
 
-  private height: number;
-
-  private width: number;
-
   constructor(scene: Scene) {
-    super({ scene, x: 0, y: 0, key: 'healthPannel' });
+    super({
+      scene,
+      x: 0,
+      y: 0,
+      key: 'healthPannel',
+      width: HEALTH_PANNEL_WIDTH,
+      height: HEALTH_PANNEL_HEIGHT,
+    });
     this.type = 'Health';
     this.health = PLAYER_HEALTH;
-    this.width = HEALTH_PANNEL_WIDTH;
-    this.height = HEALTH_PANNEL_HEIGHT;
   }
 
   render() {
-    const ctx = this.scene.scene.game.context;
+    const ctx = this.scene.game.context;
 
     const percent = this.health / PLAYER_HEALTH;
 

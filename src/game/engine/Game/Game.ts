@@ -1,3 +1,4 @@
+import { Collider } from '../Collider';
 import { gameResourses } from '../Resources';
 import { GameResourses } from '../Resources/types';
 import { SceneManager } from '../SceneManager';
@@ -32,6 +33,8 @@ export class Game {
 
   public height: number;
 
+  public collider: Collider;
+
   public add: Add = new Add(this);
 
   public res: GameResourses;
@@ -52,6 +55,7 @@ export class Game {
     this.add = new Add(this);
     this.res = gameResourses;
     this.scene = new SceneManager(this, config.scenes);
+    this.collider = new Collider(this);
     this.score = 0;
     this.create();
   }

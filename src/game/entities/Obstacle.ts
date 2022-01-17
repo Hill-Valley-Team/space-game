@@ -1,35 +1,52 @@
+import { Player } from '.';
 import { OBSTACLE_DAMAGE, OBSTACLE_SPEED } from '../consts';
-import { Sprite } from '../engine/GameObjects';
-import { ObstacleProps } from './types';
+import { getRandomInt } from '../engine/Game/helpers';
+import { GameObject, Sprite } from '../engine/GameObjects';
+import { Scene } from '../engine/Scene';
+import { sceneMainResources } from '../scenes/SceneMain/resources';
 
 export class Obstacle extends Sprite {
-  private _type: string;
+  static key = 'Obstacle';
 
-  private _speed: number;
+  public type: string;
 
-  private _damage: number;
+  public speed: number;
 
-  public get type() {
-    return this._type;
+  public damage: number;
+
+  constructor(scene: Scene, spriteKey: string, x?: number, y?: number) {
+    super({
+      scene,
+      x: x ?? getRandomInt(50, scene.game.width - 150),
+      y: y ?? 0,
+      spriteKey,
+      source: scene.game.res.getResource(Obstacle.key),
+    });
+
+    const ImgData = sceneMainResources.spritesheets?.find((item) => item.name === this.spriteKey);
+
+    if (ImgData) {
+      const { options } = ImgData;
+      const { frameWidth, frameHeight } = options;
+      this.height = frameHeight;
+      this.width = frameWidth;
+    }
+
+    this.type = 'Obstacle';
+    this.speed = OBSTACLE_SPEED;
+    this.damage = OBSTACLE_DAMAGE;
   }
 
-  public get speed() {
-    return this._speed;
+  render() {
+    this.scene.game.add.image(this.getProps());
   }
 
-  public get damage() {
-    return this._damage;
-  }
-
-  constructor(props: ObstacleProps) {
-    const { scene, x, y, key, source, width, height } = props;
-
-    super({ scene, x, y, key, source, width, height });
-
-    this._type = 'Obstacle';
-    this._speed = OBSTACLE_SPEED;
-    this._damage = OBSTACLE_DAMAGE;
-  }
+  onCollide = (object1: GameObject, object2: GameObject) => {
+    const player = object1 as Player;
+    const obs = object2 as Obstacle;
+    player.getDamage(obs.damage);
+    this.scene.delete(obs);
+  };
 
   update(delay: number) {
     this.body.setVelocity(0, this.speed);

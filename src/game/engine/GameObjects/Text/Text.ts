@@ -16,7 +16,7 @@ export class Text extends GameObject {
   }
 
   render() {
-    const ctx = this.scene.scene.game.context;
+    const ctx = this.scene.game.context;
 
     if (ctx) {
       ctx.font = '20px Inter';
