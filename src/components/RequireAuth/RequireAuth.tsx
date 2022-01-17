@@ -10,12 +10,15 @@ type RequireAuthProps = {
 
 export const RequireAuth = (props: RequireAuthProps) => {
   const { children, to, requireAuth } = props;
-  const { isSuccess } = useGetUserInfoQuery();
+  const { isSuccess, isLoading } = useGetUserInfoQuery();
   const location = useLocation();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   if (isSuccess === requireAuth) {
     return children;
   }
-
   return <Navigate to={to} state={{ from: location }} replace />;
 };
