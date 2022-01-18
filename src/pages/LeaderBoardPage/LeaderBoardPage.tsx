@@ -1,5 +1,5 @@
 import block from 'bem-cn';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Title } from '../../components/Title';
 import { Button } from '../../components/Button';
@@ -15,6 +15,7 @@ export const LeaderBoardPage = () => {
   const onBtnClick = () => {
     navigate('/');
   };
+
 
   const onSortBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     // сортировка списка по дата-атрибуту
