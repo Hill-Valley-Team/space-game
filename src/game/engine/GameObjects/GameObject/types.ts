@@ -1,3 +1,4 @@
+import { GameObject } from '.';
 import { Scene } from '../../Scene';
 
 export type GameObjectProps = {
@@ -7,6 +8,7 @@ export type GameObjectProps = {
   width?: number;
   height?: number;
   key?: string;
+  parent?: GameObject | null;
 };
 
 export type SpriteProps = {
@@ -22,9 +24,16 @@ export type ButtonProps = {
   onClick?: () => void;
 } & GameObjectProps;
 
+export type TextAlign = 'left' | 'center' | 'right';
+export type TextValign = 'top' | 'middle' | 'bottom';
+
 export type TextProps = {
   text?: string;
   color?: string;
+  size?: number;
+  font?: string;
+  align?: TextAlign;
+  valign?: TextValign;
 } & GameObjectProps;
 
 export type DataObject = Map<string, unknown>;

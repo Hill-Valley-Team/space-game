@@ -68,7 +68,7 @@ export class Player extends Sprite {
     }
   }
 
-  update(delay: number) {
+  onUpdate(delay: number) {
     const newX = this.x + this.body.velocity.x! * delay;
     const newY = this.y + this.body.velocity.y! * delay;
 
@@ -80,7 +80,7 @@ export class Player extends Sprite {
     }
   }
 
-  render() {
+  onRender() {
     this.scene.game.add.image(this.getProps());
   }
 

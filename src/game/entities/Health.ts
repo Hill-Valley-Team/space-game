@@ -1,4 +1,10 @@
-import { HEALTH_PANNEL_HEIGHT, HEALTH_PANNEL_WIDTH, PLAYER_HEALTH } from '../consts';
+import {
+  HEALTH_PANNEL_HEIGHT,
+  HEALTH_PANNEL_WIDTH,
+  HEALTH_PANNEL_X,
+  HEALTH_PANNEL_Y,
+  PLAYER_HEALTH,
+} from '../consts';
 import { GameObject } from '../engine/GameObjects';
 import { Scene } from '../engine/Scene';
 
@@ -10,8 +16,8 @@ export class Health extends GameObject {
   constructor(scene: Scene) {
     super({
       scene,
-      x: 0,
-      y: 0,
+      x: HEALTH_PANNEL_X,
+      y: HEALTH_PANNEL_Y,
       key: 'healthPannel',
       width: HEALTH_PANNEL_WIDTH,
       height: HEALTH_PANNEL_HEIGHT,
@@ -20,7 +26,7 @@ export class Health extends GameObject {
     this.health = PLAYER_HEALTH;
   }
 
-  render() {
+  onRender() {
     const ctx = this.scene.game.context;
 
     const percent = this.health / PLAYER_HEALTH;

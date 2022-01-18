@@ -41,10 +41,9 @@ export class Coins extends Sprite {
     const coin = object2 as Coins;
     this.scene.game.score += coin.value;
     this.scene.delete(coin);
-    console.log(this.scene.game.score);
   };
 
-  update(delay: number) {
+  onUpdate(delay: number) {
     this.body.setVelocity(0, this.speed);
     this.x += this.body.velocity.x! * delay;
     this.y += this.body.velocity.y! * delay;

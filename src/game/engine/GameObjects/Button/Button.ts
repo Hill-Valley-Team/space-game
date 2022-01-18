@@ -42,7 +42,7 @@ export class Button extends GameObject {
     this.scene.events.addListener(self, Mouse.NAMES.CLICK, this.checkClicked);
   }
 
-  render() {
+  onRender() {
     const ctx = this.scene.game.context;
 
     if (ctx) {

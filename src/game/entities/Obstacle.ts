@@ -37,7 +37,7 @@ export class Obstacle extends Sprite {
     this.damage = OBSTACLE_DAMAGE;
   }
 
-  render() {
+  onRender() {
     this.scene.game.add.image(this.getProps());
   }
 
@@ -48,7 +48,7 @@ export class Obstacle extends Sprite {
     this.scene.delete(obs);
   };
 
-  update(delay: number) {
+  onUpdate(delay: number) {
     this.body.setVelocity(0, this.speed);
     this.x += this.body.velocity.x! * delay;
     this.y += this.body.velocity.y! * delay;

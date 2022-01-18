@@ -20,7 +20,7 @@ export class GameObject {
 
   public parent: GameObject | null;
 
-  public children: GameObject[] | null;
+  public children: Map<string, GameObject>;
 
   protected body: PhysicBody;
 
@@ -33,7 +33,7 @@ export class GameObject {
   }
 
   constructor(props: GameObjectProps) {
-    const { scene, x, y, key, width, height } = props;
+    const { scene, x, y, key, width, height, parent } = props;
     this.scene = scene;
     this.x = x;
     this.y = y;
@@ -41,7 +41,8 @@ export class GameObject {
     this.data = new Map();
     this.body = new PhysicBody(0, 0);
     this.parent = null;
-    this.children = null;
+    this.children = new Map();
+    this.parent = parent ?? null;
     this.width = width ?? 0;
     this.height = height ?? 0;
   }
@@ -61,12 +62,30 @@ export class GameObject {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public onCollide = <T extends GameObject, P extends GameObject>(object1: T, object2: P) => {};
 
-  public render() {}
+  private beforeRender() {
+    this.children.forEach((child) => child.render());
+  }
+
+  protected onRender() {}
+
+  public render() {
+    this.beforeRender();
+    this.onRender();
+  }
 
   public delete() {
     this.scene.delete(this);
   }
 
+  private beforeUpdate(delay: number) {
+    this.children.forEach((child) => child.update(delay));
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public update(delay: number) {}
+  protected onUpdate(delay: number) {}
+
+  public update(delay: number) {
+    this.beforeUpdate(delay);
+    this.onUpdate(delay);
+  }
 }

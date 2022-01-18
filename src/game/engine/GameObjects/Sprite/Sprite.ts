@@ -31,7 +31,7 @@ export class Sprite extends GameObject {
     };
   }
 
-  render() {
+  onRender() {
     this.scene.game.add.sprite(this.getProps());
   }
 }

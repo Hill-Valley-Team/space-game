@@ -7,6 +7,7 @@ import { Player } from '../../entities';
 import { Coins } from '../../entities/Coins';
 import { Health } from '../../entities/Health';
 import { Obstacle } from '../../entities/Obstacle';
+import { ScorePannel } from '../../entities/ScorePannel';
 import { LEVEL_TIME } from './consts';
 import { sceneMainResources } from './resources';
 
@@ -19,6 +20,8 @@ export class SceneMain extends Scene {
 
   private healthPannel: Health | null;
 
+  private scorePannel: ScorePannel | null;
+
   private attackInterval: null | ReturnType<typeof setInterval>;
 
   private coinsInterval: null | ReturnType<typeof setInterval>;
@@ -26,6 +29,7 @@ export class SceneMain extends Scene {
   constructor(sceneManager: SceneManager) {
     super({ key: 'SceneMain', sceneManager });
     this.healthPannel = null;
+    this.scorePannel = null;
     this.attackInterval = null;
     this.coinsInterval = null;
     this.gameStartTime = 0;
@@ -41,6 +45,7 @@ export class SceneMain extends Scene {
     player.init();
 
     this.healthPannel = new Health(this);
+    this.scorePannel = new ScorePannel(this);
 
     this.createAttack();
   }
@@ -86,12 +91,14 @@ export class SceneMain extends Scene {
     });
 
     this.healthPannel?.render();
+    this.scorePannel?.render();
   }
 
   update(delay: number) {
     if (!this.isActive) return;
 
     this.healthPannel!.health = this.player!.health;
+    this.scorePannel!.score = this.game.score;
 
     if (this.gameStartTime >= LEVEL_TIME) {
       this.sceneManager.start(ScenesNames.WIN);
