@@ -7,6 +7,7 @@ import { InputFieldAvatar } from '../../../components/InputFieldAvatar';
 import { formScheme, InputNames } from '../../../consts/formScheme';
 import { authController } from '../../../controllers/AuthController';
 import { useGetUserInfoQuery, useUpdateUserAvatarMutation } from '../../../services/UserService';
+import { useLogoutMutation } from '../../../services/UserService';
 
 type HeaderProps = PropsWithChildren<{
   withBackBtn?: boolean;
@@ -20,13 +21,14 @@ export const Header = (props: HeaderProps) => {
   const { withLogoutBtn, withBackBtn } = props;
   const { data: userData } = useGetUserInfoQuery();
   const [updateAvatar] = useUpdateUserAvatarMutation();
+  const [logout] = useLogoutMutation();
 
-  const backHandle = () => {
+  const handleBackBtnClick = () => {
     navigate(-1);
   };
 
-  const logoutHandle = () => {
-    authController.logOut().then(() => navigate('/login'));
+  const handleLogoutBtnClick = () => {
+    logout();
   };
 
   const changeAvatarHandle = (formData: FormData) => updateAvatar(formData);
@@ -36,7 +38,7 @@ export const Header = (props: HeaderProps) => {
       className={b('btn-logout')}
       type="button"
       text="Выйти"
-      onClick={logoutHandle}
+      onClick={handleLogoutBtnClick}
       view="info"
       width="auto"
     />
@@ -48,7 +50,7 @@ export const Header = (props: HeaderProps) => {
       type="button"
       text=""
       view="primary"
-      onClick={backHandle}
+      onClick={handleBackBtnClick}
       width="auto"
     />
   ) : null;
