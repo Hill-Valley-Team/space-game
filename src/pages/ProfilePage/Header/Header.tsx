@@ -5,9 +5,11 @@ import { resourcesUrl } from '../../../api/consts';
 import { Button } from '../../../components/Button';
 import { InputFieldAvatar } from '../../../components/InputFieldAvatar';
 import { formScheme, InputNames } from '../../../consts/formScheme';
-import { authController } from '../../../controllers/AuthController';
-import { useGetUserInfoQuery, useUpdateUserAvatarMutation } from '../../../services/UserService';
-import { useLogoutMutation } from '../../../services/UserService';
+import {
+  useGetUserInfoQuery,
+  useUpdateUserAvatarMutation,
+  useLogoutMutation,
+} from '../../../services/UserService';
 
 type HeaderProps = PropsWithChildren<{
   withBackBtn?: boolean;
