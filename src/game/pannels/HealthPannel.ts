@@ -8,7 +8,7 @@ import {
 import { GameObject } from '../engine/GameObjects';
 import { Scene } from '../engine/Scene';
 
-export class Health extends GameObject {
+export class HealthPannel extends GameObject {
   public type: string;
 
   public health: number;

@@ -35,10 +35,8 @@ export class Obstacle extends Sprite {
     this.type = 'Obstacle';
     this.speed = OBSTACLE_SPEED;
     this.damage = OBSTACLE_DAMAGE;
-  }
-
-  onRender() {
-    this.scene.game.add.image(this.getProps());
+    this.animation.add({ type: 'MoveDown', speed: this.speed });
+    this.play();
   }
 
   onCollide = (object1: GameObject, object2: GameObject) => {
@@ -47,10 +45,4 @@ export class Obstacle extends Sprite {
     player.getDamage(obs.damage);
     this.scene.delete(obs);
   };
-
-  onUpdate(delay: number) {
-    this.body.setVelocity(0, this.speed);
-    this.x += this.body.velocity.x! * delay;
-    this.y += this.body.velocity.y! * delay;
-  }
 }

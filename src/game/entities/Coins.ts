@@ -35,6 +35,8 @@ export class Coins extends Sprite {
     this.type = 'Coins';
     this.speed = COINS_SPEED;
     this.value = COINS_VALUE;
+    this.animation.add({ type: 'MoveDown', speed: this.speed });
+    this.play();
   }
 
   onCollide = (object1: GameObject, object2: GameObject): void => {
@@ -42,10 +44,4 @@ export class Coins extends Sprite {
     this.scene.game.score += coin.value;
     this.scene.delete(coin);
   };
-
-  onUpdate(delay: number) {
-    this.body.setVelocity(0, this.speed);
-    this.x += this.body.velocity.x! * delay;
-    this.y += this.body.velocity.y! * delay;
-  }
 }

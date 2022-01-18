@@ -5,9 +5,9 @@ import { Scene } from '../../engine/Scene';
 import { SceneManager } from '../../engine/SceneManager';
 import { Player } from '../../entities';
 import { Coins } from '../../entities/Coins';
-import { Health } from '../../entities/Health';
+import { HealthPannel } from '../../pannels/HealthPannel';
 import { Obstacle } from '../../entities/Obstacle';
-import { ScorePannel } from '../../entities/ScorePannel';
+import { ScorePannel } from '../../pannels/ScorePannel';
 import { LEVEL_TIME } from './consts';
 import { sceneMainResources } from './resources';
 
@@ -18,7 +18,7 @@ export class SceneMain extends Scene {
     return this.displayList.get(Player.key) as Player;
   }
 
-  private healthPannel: Health | null;
+  private healthPannel: HealthPannel | null;
 
   private scorePannel: ScorePannel | null;
 
@@ -44,7 +44,7 @@ export class SceneMain extends Scene {
     const player = new Player(this);
     player.init();
 
-    this.healthPannel = new Health(this);
+    this.healthPannel = new HealthPannel(this);
     this.scorePannel = new ScorePannel(this);
 
     this.createAttack();

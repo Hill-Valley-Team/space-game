@@ -1,4 +1,5 @@
 import { GameObject } from '../GameObject/GameObject';
+import { AnimationManager } from '../../Animation';
 import { SpriteProps } from '../GameObject/types';
 
 export class Sprite extends GameObject {
@@ -8,6 +9,8 @@ export class Sprite extends GameObject {
 
   public spriteKey: string;
 
+  public animation: AnimationManager;
+
   constructor(props: SpriteProps) {
     const { scene, x, y, key, source, width, height, frame, spriteKey } = props;
 
@@ -15,6 +18,11 @@ export class Sprite extends GameObject {
     this.source = source;
     this.frame = frame ?? 0;
     this.spriteKey = spriteKey;
+    this.animation = new AnimationManager(this);
+  }
+
+  play() {
+    this.animation.startAll();
   }
 
   public getProps() {
@@ -29,6 +37,15 @@ export class Sprite extends GameObject {
       dHeight: this.height,
       spriteKey: this.spriteKey,
     };
+  }
+
+  public update(delay: number) {
+    this.beforeUpdate(delay);
+    this.onUpdate(delay);
+  }
+
+  protected onUpdate(delay: number): void {
+    this.animation.updateAll(delay);
   }
 
   onRender() {

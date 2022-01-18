@@ -22,7 +22,7 @@ export class GameObject {
 
   public children: Map<string, GameObject>;
 
-  protected body: PhysicBody;
+  public body: PhysicBody;
 
   public getData(key: string) {
     return this.data.get(key);
@@ -47,10 +47,6 @@ export class GameObject {
     this.height = height ?? 0;
   }
 
-  public play(animationName: string) {
-    console.log(animationName);
-  }
-
   public init() {
     this.addToScene();
   }
@@ -62,7 +58,7 @@ export class GameObject {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public onCollide = <T extends GameObject, P extends GameObject>(object1: T, object2: P) => {};
 
-  private beforeRender() {
+  protected beforeRender() {
     this.children.forEach((child) => child.render());
   }
 
@@ -77,7 +73,7 @@ export class GameObject {
     this.scene.delete(this);
   }
 
-  private beforeUpdate(delay: number) {
+  protected beforeUpdate(delay: number) {
     this.children.forEach((child) => child.update(delay));
   }
 
