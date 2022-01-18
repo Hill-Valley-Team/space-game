@@ -6,6 +6,9 @@ export enum NAMES {
 export enum CODES {
   ARROW_RIGHT = 'ArrowRight',
   ARROW_LEFT = 'ArrowLeft',
+  ARROW_UP = 'ArrowUp',
+  ARROW_DOWN = 'ArrowDown',
+  KEY_Q = 'KeyQ',
 }
 
 export abstract class Keyboard {
