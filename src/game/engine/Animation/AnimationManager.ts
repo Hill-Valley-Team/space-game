@@ -1,5 +1,6 @@
 import { GameObject } from '../GameObjects';
 import { Animation } from './Animation';
+import { DEFAULT_SPRITE_ANIMATION_SPEED } from './consts';
 import { AnimationProps, AnimationType } from './types';
 
 export class AnimationManager {
@@ -21,7 +22,7 @@ export class AnimationManager {
   }
 
   add(props: AnimationProps) {
-    const { type, speed = 0 } = props;
+    const { type, speed = DEFAULT_SPRITE_ANIMATION_SPEED } = props;
     this.animList.set(type, new Animation(this, type, speed));
   }
 

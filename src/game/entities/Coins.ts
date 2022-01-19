@@ -21,9 +21,8 @@ export class Coins extends Sprite {
       x: x ?? getRandomInt(50, scene.game.width - 150),
       y: y ?? 0,
       spriteKey: Coins.spriteKey,
-      source: scene.game.res.getResource(Coins.key),
+      source: scene.game.res.getResource(Coins.spriteKey),
     });
-
     const ImgData = sceneMainResources.spritesheets?.find((item) => item.name === Coins.spriteKey);
 
     if (ImgData) {
@@ -36,6 +35,7 @@ export class Coins extends Sprite {
     this.speed = COINS_SPEED;
     this.value = COINS_VALUE;
     this.animation.add({ type: 'MoveDown', speed: this.speed });
+    this.animation.add({ type: 'SpriteX' });
     this.play();
   }
 

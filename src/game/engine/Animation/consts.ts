@@ -1,0 +1,1 @@
+export const DEFAULT_SPRITE_ANIMATION_SPEED = 0.3;

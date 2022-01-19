@@ -24,7 +24,7 @@ export class Player extends Sprite {
       y: scene.game.height * 0.6,
       key: Player.key,
       spriteKey: Player.spriteKey,
-      source: scene.game.res.getResource(Player.key),
+      source: scene.game.res.getResource(Player.spriteKey),
     });
 
     const playerImgData = sceneMainResources.spritesheets?.find(

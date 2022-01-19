@@ -1,4 +1,5 @@
 import { AnimationManager } from '.';
+import { Sprite } from '../GameObjects';
 import { AnimationType } from './types';
 
 export class Animation {
@@ -29,7 +30,7 @@ export class Animation {
     this.repeatDelay = 0;
     this.timeFromStart = 0;
     this.isStart = false;
-    this.speed = speed ?? 0;
+    this.speed = speed;
   }
 
   start() {
@@ -49,6 +50,10 @@ export class Animation {
         this.bottom(delay);
         break;
 
+      case 'SpriteX':
+        this.spriteX(delay);
+        break;
+
       default:
         break;
     }
@@ -60,5 +65,25 @@ export class Animation {
     body.setVelocity(0, this.speed);
     parent.x += body.velocity.x! * delay;
     parent.y += body.velocity.y! * delay;
+  }
+
+  spriteX(delay: number) {
+    this.timeFromStart += delay;
+    if (this.timeFromStart >= this.speed) {
+      const { parent } = this.manager;
+
+      if (parent instanceof Sprite) {
+        const imgWidth = parent.source.width;
+        const frames = imgWidth / parent.width;
+
+        if (parent.frame >= frames - 1) {
+          parent.frame = 0;
+        } else {
+          parent.frame += 1;
+        }
+      }
+
+      this.timeFromStart = 0;
+    }
   }
 }
