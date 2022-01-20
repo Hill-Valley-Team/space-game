@@ -15,6 +15,7 @@ export type SpriteProps = {
   source: HTMLImageElement;
   frame?: number;
   spriteKey: string;
+  type: string;
 } & GameObjectProps;
 
 export type ButtonProps = {

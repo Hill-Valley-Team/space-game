@@ -27,3 +27,12 @@ export type ImageRes = {
   dWidth?: number;
   dHeight?: number;
 };
+
+export type GameBoundsProps = {
+  x: number;
+  y: number;
+  paddingTop?: number;
+  paddingRight?: number;
+  paddingLeft?: number;
+  paddingBottom?: number;
+};

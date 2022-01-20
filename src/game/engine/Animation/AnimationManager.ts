@@ -1,49 +1,51 @@
-import { GameObject } from '../GameObjects';
+import { Sprite } from '../GameObjects';
 import { Animation } from './Animation';
-import { DEFAULT_SPRITE_ANIMATION_SPEED } from './consts';
-import { AnimationProps, AnimationType } from './types';
+import { AnimationProps } from './types';
 
 export class AnimationManager {
-  public parent: GameObject;
+  public parent: Sprite;
 
-  private animList: Map<AnimationType, Animation>;
+  private animList: Map<string, Animation>;
 
-  constructor(parent: GameObject) {
+  constructor(parent: Sprite) {
     this.parent = parent;
     this.animList = new Map();
   }
 
-  public start(type: AnimationType) {
-    this.animList.get(type)?.start();
+  public start(key: string) {
+    this.animList.get(key)?.start();
   }
 
   public startAll() {
-    this.animList.forEach((anim) => anim.start());
+    this.animList.forEach((anim) => {
+      if (anim.autoRun) {
+        anim.start();
+      }
+    });
   }
 
-  add(props: AnimationProps) {
-    const { type, speed = DEFAULT_SPRITE_ANIMATION_SPEED } = props;
-    this.animList.set(type, new Animation(this, type, speed));
+  add(props: Omit<AnimationProps, 'manager'>) {
+    this.animList.set(props.key, new Animation({ manager: this, ...props }));
   }
 
-  get(type: AnimationType) {
-    return this.animList.get(type);
+  get(key: string) {
+    return this.animList.get(key);
   }
 
-  delete(type: AnimationType) {
-    this.animList.delete(type);
+  delete(key: string) {
+    this.animList.delete(key);
   }
 
-  public update(delay: number, type: AnimationType) {
-    this.animList.get(type)?.update(delay);
+  public update(delay: number, key: string) {
+    this.animList.get(key)?.update(delay);
   }
 
   public updateAll(delay: number) {
     this.animList.forEach((anim) => anim.update(delay));
   }
 
-  public stop(type: AnimationType) {
-    this.animList.get(type)?.stop();
+  public stop(key: string) {
+    this.animList.get(key)?.stop();
   }
 
   public stopAll() {

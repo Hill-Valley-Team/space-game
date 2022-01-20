@@ -6,62 +6,40 @@ export const sceneMainResources: SceneResourcesConfig = {
       name: 'sprBg0',
       path: 'sprBg0.png',
     },
-    {
-      name: 'sprBg1',
-      path: 'sprBg1.png',
-    },
-    {
-      name: 'sprEnemy1',
-      path: 'sprEnemy1.png',
-    },
-    {
-      name: 'sprLaserEnemy0',
-      path: 'sprLaserEnemy0.png',
-    },
-    {
-      name: 'sprLaserPlayer',
-      path: 'sprLaserPlayer.png',
-    },
   ],
   spritesheets: [
-    {
-      name: 'sprExplosion',
-      path: 'sprExplosion.png',
-      options: {
-        frameWidth: 32,
-        frameHeight: 32,
-      },
-    },
     {
       name: 'sprCoins',
       path: 'sprCoins.png',
       options: {
         frameWidth: 47,
         frameHeight: 47,
+        colls: 7,
       },
     },
     {
       name: 'sprEnemy0',
       path: 'sprEnemy0.png',
       options: {
-        frameWidth: 99,
-        frameHeight: 109,
+        frameWidth: 79,
+        frameHeight: 67,
       },
     },
     {
       name: 'sprEnemy1',
       path: 'sprEnemy1.png',
       options: {
-        frameWidth: 79,
-        frameHeight: 67,
+        frameWidth: 90,
+        frameHeight: 90,
+        colls: 6,
       },
     },
     {
       name: 'sprEnemy2',
       path: 'sprEnemy2.png',
       options: {
-        frameWidth: 108,
-        frameHeight: 110,
+        frameWidth: 90,
+        frameHeight: 90,
       },
     },
     {
@@ -70,6 +48,8 @@ export const sceneMainResources: SceneResourcesConfig = {
       options: {
         frameWidth: 54,
         frameHeight: 120,
+        colls: 8,
+        rows: 2,
       },
     },
   ],

@@ -1,6 +1,5 @@
 import { ASSETS_PATH, ScenesNames } from '../../consts';
 import { getRandomInt } from '../../engine/Game/helpers';
-import { Sprite } from '../../engine/GameObjects';
 import { Scene } from '../../engine/Scene';
 import { SceneManager } from '../../engine/SceneManager';
 import { Player } from '../../entities';
@@ -53,7 +52,7 @@ export class SceneMain extends Scene {
   createAttack() {
     const enemies = ['sprEnemy0', 'sprEnemy1', 'sprEnemy2'];
     this.attackInterval = setInterval(
-      () => this.createObstacle(enemies[getRandomInt(0, enemies.length - 1)]),
+      () => this.createObstacle(enemies[getRandomInt(0, enemies.length)]),
       3000,
     );
 
@@ -73,13 +72,22 @@ export class SceneMain extends Scene {
     });
   }
 
-  createObstacle(key: string, x?: number, y?: number) {
-    const obstacle = new Obstacle(this, key, x, y);
+  createObstacle(key: string) {
+    const obstacle = new Obstacle({
+      scene: this,
+      spriteKey: key,
+      x: getRandomInt(50, this.game.width - 150),
+      y: 0,
+    });
     obstacle.init();
   }
 
   createCoin(x?: number, y?: number) {
-    const coin = new Coins(this, x, y);
+    const coin = new Coins({
+      scene: this,
+      x: x ?? getRandomInt(50, this.game.width - 150),
+      y: y ?? 0,
+    });
     coin.init();
   }
 
@@ -94,7 +102,7 @@ export class SceneMain extends Scene {
     this.scorePannel?.render();
   }
 
-  update(delay: number) {
+  onUpdate(delay: number) {
     if (!this.isActive) return;
 
     this.healthPannel!.health = this.player!.health;
@@ -111,21 +119,5 @@ export class SceneMain extends Scene {
     this.gameStartTime += delay;
 
     this.checkCollisions();
-
-    this.displayList.forEach((element) => {
-      const outY = element instanceof Sprite ? element.height! : 50;
-      const outX = element instanceof Sprite ? element.height! : 50;
-
-      if (
-        element.y < 0 - outY ||
-        element.y > this.game.height ||
-        element.x > this.game.width ||
-        element.x < 0 - outX
-      ) {
-        this.delete(element);
-      } else {
-        element.update(delay);
-      }
-    });
   }
 }
