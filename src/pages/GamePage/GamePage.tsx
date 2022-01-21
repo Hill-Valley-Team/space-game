@@ -18,6 +18,7 @@ export const GamePage = () => {
   return (
     <div className={b()}>
       <div id="game" />
+      <p>Нажмите F11, чтобы переключить полноэкранный режим</p>
     </div>
   );
 };
