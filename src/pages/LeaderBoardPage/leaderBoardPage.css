@@ -47,10 +47,6 @@
     position: relative;
     cursor: pointer;
 
-    &_active {
-      font-weight: 700;
-    }
-
     &::before {
       content: '';
       width: 1px;
