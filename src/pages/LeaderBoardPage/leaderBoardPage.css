@@ -4,13 +4,6 @@
     padding-right: 20px;
   }
 
-  &__btn-back {
-    background: url('./static/btn-back.svg') no-repeat;
-    width: 28px;
-    height: 28px;
-    display: block;
-  }
-
   &__top-wrapper {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;

@@ -1,8 +1,7 @@
 import block from 'bem-cn';
-import React, { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { Title } from '../../components/Title';
-import { Button } from '../../components/Button';
+import { BackButton } from '../../components/BackButton';
 import './leaderBoardPage.css';
 import { PageContainer } from '../../components/PageContainer';
 
@@ -10,13 +9,6 @@ const b = block('leader-board-page');
 const h = block('table-header');
 
 export const LeaderBoardPage = () => {
-  const navigate = useNavigate();
-
-  const onBtnClick = () => {
-    navigate('/');
-  };
-
-
   const onSortBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     // сортировка списка по дата-атрибуту
     const tableHeaderButtons = document.querySelectorAll('.table-header__btn');
@@ -31,14 +23,7 @@ export const LeaderBoardPage = () => {
     <div className={b()}>
       <PageContainer size="medium">
         <div className={b('top-wrapper')}>
-          <Button
-            onClick={onBtnClick}
-            className={b('btn-back')}
-            type="button"
-            text=""
-            view="primary"
-            width="auto"
-          />
+          <BackButton className={b('back')} />
           <Title tag="h2" className={b('title')} text="Таблица достижений" />
         </div>
         <div className={b('table-header').mix(h())}>
