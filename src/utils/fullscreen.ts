@@ -7,12 +7,18 @@ export const toggleFullScreen = () => {
     }
   }
 }
-export const setFullscreenListener = () => {
-  document.addEventListener("keypress", function(e) {
-    if (e.code === '121') {
-      toggleFullScreen();
-    }
-  }, false);
 
+const onFullScreenKeyPress = (e: KeyboardEvent) => {
+
+  if (e.key.toLowerCase() === 'f' || e.key.toLowerCase() === 'а') { // русская буква а
+    toggleFullScreen();
+  }
 }
 
+export const setFullscreenListener = () => {
+  document.addEventListener("keydown", onFullScreenKeyPress, false);
+}
+
+export const removeFullscreenListener = () => {
+  document.removeEventListener("keydown", onFullScreenKeyPress, false);
+}
