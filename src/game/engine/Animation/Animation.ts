@@ -33,17 +33,7 @@ export class Animation {
 
   public autoRun: boolean;
 
-  constructor({
-    manager,
-    type,
-    speed,
-    direction,
-    frameRow,
-    frameColl,
-    autoRun,
-    key,
-    repeat,
-  }: AnimationProps) {
+  constructor({ manager, type, speed, direction, frameRow, autoRun, key, repeat }: AnimationProps) {
     this.manager = manager;
     this.type = type;
     this.key = key;
@@ -63,12 +53,6 @@ export class Animation {
 
     if (frameRow) {
       const { start, end } = manager.parent.frames.getRow(frameRow);
-      this.startFrame = start;
-      this.endFrame = end;
-    }
-
-    if (frameColl) {
-      const { start, end } = manager.parent.frames.getCol(frameColl);
       this.startFrame = start;
       this.endFrame = end;
     }
