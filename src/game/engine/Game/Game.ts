@@ -1,14 +1,13 @@
+import { Collider } from '../Collider';
 import { gameResourses } from '../Resources';
 import { GameResourses } from '../Resources/types';
 import { SceneManager } from '../SceneManager';
 import { Add } from './Add';
 import { defaultGameConfig } from './defaultGameConfig';
 import { TimeStep } from './TimeStep/TimeStep';
-import { GameConfig } from './types';
+import { GameBoundsProps, GameConfig } from './types';
 
 export class Game {
-  private parent: Element | null;
-
   private loop: TimeStep;
 
   private contextValue: CanvasRenderingContext2D | null;
@@ -19,6 +18,8 @@ export class Game {
     }
     return this.contextValue;
   }
+
+  public parent: Element | null;
 
   public isRunning: boolean;
 
@@ -31,6 +32,8 @@ export class Game {
   public width: number;
 
   public height: number;
+
+  public collider: Collider;
 
   public add: Add = new Add(this);
 
@@ -52,6 +55,7 @@ export class Game {
     this.add = new Add(this);
     this.res = gameResourses;
     this.scene = new SceneManager(this, config.scenes);
+    this.collider = new Collider(this);
     this.score = 0;
     this.create();
   }
@@ -97,5 +101,37 @@ export class Game {
   public render() {
     this.context.clearRect(0, 0, this.width, this.height);
     this.scene.current?.render();
+  }
+
+  /** get game area bounds with object padding  */
+  getGameArea(props: GameBoundsProps) {
+    const { paddingTop = 0, paddingRight = 0, paddingBottom = 0, paddingLeft = 0 } = props;
+    const xStart = paddingLeft;
+    const yStart = paddingTop;
+    const xEnd = this.width - paddingRight;
+    const yEnd = this.height - paddingBottom;
+    return { xStart, yStart, xEnd, yEnd };
+  }
+
+  /** is object in game area */
+  isOnGameArea(props: GameBoundsProps) {
+    const { x, y } = props;
+    const gameArea = this.getGameArea(props);
+    const { xStart, yStart, xEnd, yEnd } = gameArea;
+    return x > xStart && y > yStart && x < xEnd && y < yEnd;
+  }
+
+  /** is object on bounds of game area */
+  isOnGameBounds(props: GameBoundsProps) {
+    const { x, y } = props;
+    const gameArea = this.getGameArea(props);
+    const { xStart, yStart, xEnd, yEnd } = gameArea;
+
+    return {
+      isOnLeft: x <= xStart,
+      isOnRight: x >= xEnd,
+      isOnBottom: y >= yEnd,
+      isOnTop: y <= yStart,
+    };
   }
 }

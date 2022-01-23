@@ -1,39 +1,70 @@
+import { Player } from '.';
 import { OBSTACLE_DAMAGE, OBSTACLE_SPEED } from '../consts';
-import { Sprite } from '../engine/GameObjects';
-import { ObstacleProps } from './types';
+import { GameObject, Sprite } from '../engine/GameObjects';
+import type { ObstacleProps } from './types';
+import { sceneMainResources } from '../scenes/SceneMain/resources';
+
+enum ObstacleAnimationKeys {
+  FALLING = 'falling',
+  ANIMATE = 'animate',
+}
 
 export class Obstacle extends Sprite {
-  private _type: string;
+  static key = 'Obstacle';
 
-  private _speed: number;
+  public speed: number;
 
-  private _damage: number;
+  public damage: number;
 
-  public get type() {
-    return this._type;
+  constructor({ scene, spriteKey, x, y, type }: ObstacleProps) {
+    super({
+      scene,
+      x: x ?? 0,
+      y: y ?? 0,
+      spriteKey,
+      source: scene.game.res.getResource(spriteKey),
+      type: type ?? Obstacle.key,
+    });
+
+    const ImgData = sceneMainResources.spritesheets?.find((item) => item.name === this.spriteKey);
+
+    if (ImgData) {
+      const { options } = ImgData;
+      const { frameWidth, frameHeight, colls, rows } = options;
+      this.height = frameHeight;
+      this.width = frameWidth;
+
+      this.frames.init(colls ?? 1, rows ?? 1);
+    }
+
+    this.speed = OBSTACLE_SPEED;
+    this.damage = OBSTACLE_DAMAGE;
+
+    this.animation.add({ key: ObstacleAnimationKeys.ANIMATE, type: 'FrameRow', frameRow: 1 });
+    this.animation.add({ key: ObstacleAnimationKeys.FALLING, type: 'MoveDown', speed: this.speed });
+    this.play();
   }
 
-  public get speed() {
-    return this._speed;
+  onCollide = (object1: GameObject, object2: GameObject) => {
+    if (object1 instanceof Player) {
+      object1.collided(object2);
+      this.scene.delete(object2);
+    }
+  };
+
+  isOnGameBounds() {
+    return this.scene.game.isOnGameBounds({
+      x: this.x,
+      y: this.y,
+      paddingBottom: -this.height,
+    });
   }
 
-  public get damage() {
-    return this._damage;
-  }
+  onUpdate() {
+    if (this.isOnGameBounds().isOnBottom) {
+      this.delete();
+    }
 
-  constructor(props: ObstacleProps) {
-    const { scene, x, y, key, source, width, height } = props;
-
-    super({ scene, x, y, key, source, width, height });
-
-    this._type = 'Obstacle';
-    this._speed = OBSTACLE_SPEED;
-    this._damage = OBSTACLE_DAMAGE;
-  }
-
-  update(delay: number) {
-    this.body.setVelocity(0, this.speed);
-    this.x += this.body.velocity.x! * delay;
-    this.y += this.body.velocity.y! * delay;
+    // console.log(this.animation.get(ObstacleAnimationKeys.ANIMATE)?.currentFrame);
   }
 }

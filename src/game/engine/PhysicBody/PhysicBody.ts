@@ -1,26 +1,22 @@
 import { Velocity } from './types';
 
 export class PhysicBody {
-  private _velocity: Velocity;
+  public velocity: Velocity;
 
   constructor(x: number, y: number) {
-    this._velocity = { x, y };
+    this.velocity = { x, y };
   }
 
   public get x() {
-    return this._velocity.x;
+    return this.velocity.x;
   }
 
   public get y() {
-    return this._velocity.y;
-  }
-
-  public get velocity() {
-    return this._velocity;
+    return this.velocity.y;
   }
 
   public setVelocity(x: number, y?: number) {
-    this._velocity.x = x;
-    this._velocity.y = y!;
+    this.velocity.x = x;
+    this.velocity.y = y!;
   }
 }

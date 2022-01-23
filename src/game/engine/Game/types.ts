@@ -9,7 +9,7 @@ export type GameConfig = {
 };
 
 export type SpriteRes = {
-  key: string;
+  spriteKey: string;
   sx: number;
   sy: number;
   sWidth: number;
@@ -21,9 +21,18 @@ export type SpriteRes = {
 };
 
 export type ImageRes = {
-  key: string;
+  spriteKey: string;
   dx: number;
   dy: number;
   dWidth?: number;
   dHeight?: number;
+};
+
+export type GameBoundsProps = {
+  x: number;
+  y: number;
+  paddingTop?: number;
+  paddingRight?: number;
+  paddingLeft?: number;
+  paddingBottom?: number;
 };

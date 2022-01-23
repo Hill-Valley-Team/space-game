@@ -10,16 +10,16 @@ export class Add {
 
   public sprite(obj: SpriteRes) {
     const ctx = this.game.context;
-    const { key, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight } = obj;
-    const image = this.game.res.getResource(key);
+    const { spriteKey, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight } = obj;
+    const image = this.game.res.getResource(spriteKey);
 
     ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
   }
 
   public image(obj: ImageRes) {
     const ctx = this.game.context;
-    const { key, dx, dy, dWidth, dHeight } = obj;
-    const image = this.game.res.getResource(key);
+    const { spriteKey, dx, dy, dWidth, dHeight } = obj;
+    const image = this.game.res.getResource(spriteKey);
 
     if (dWidth && dHeight) {
       ctx.drawImage(image, dx, dy, dWidth, dHeight);

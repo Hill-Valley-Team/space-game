@@ -21,5 +21,6 @@ export const RequireAuth = (props: RequireAuthProps) => {
   if (isSuccess === requireAuth) {
     return children;
   }
+
   return <Navigate to={to} state={{ from: location }} replace />;
 };

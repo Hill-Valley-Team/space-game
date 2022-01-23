@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { PhysicBody } from '../../PhysicBody';
 import { Scene } from '../../Scene';
 import { DataObject, GameObjectProps } from './types';
@@ -7,39 +8,80 @@ export class GameObject {
 
   public y: number;
 
-  /** parent scene */
+  public width: number;
+
+  public height: number;
+
   public scene: Scene;
 
   public key: string;
 
   public data: DataObject;
 
-  protected body: PhysicBody;
+  public parent: GameObject | null;
+
+  public children: Map<string, GameObject>;
+
+  public body: PhysicBody;
 
   public getData(key: string) {
-    return this.data[key];
+    return this.data.get(key);
   }
 
-  public setData(...{ key, value }: DataObject) {
-    this.data[key] = value;
+  public setData(key: string, value: unknown) {
+    this.data.set(key, value);
   }
 
   constructor(props: GameObjectProps) {
-    const { scene, x, y, key } = props;
+    const { scene, x, y, key, width, height, parent } = props;
     this.scene = scene;
     this.x = x;
     this.y = y;
-    this.key = key;
-    this.data = {};
+    this.key = key ?? uuidv4();
+    this.data = new Map();
     this.body = new PhysicBody(0, 0);
+    this.parent = null;
+    this.children = new Map();
+    this.parent = parent ?? null;
+    this.width = width ?? 0;
+    this.height = height ?? 0;
   }
 
-  public play(animationName: string) {
-    console.log(animationName);
+  public init() {
+    this.addToScene();
   }
 
-  public render() {}
+  protected addToScene() {
+    this.scene.add(this);
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public update(delay: number) {}
+  public onCollide = <T extends GameObject, P extends GameObject>(object1: T, object2: P) => {};
+
+  protected beforeRender() {
+    this.children.forEach((child) => child.render());
+  }
+
+  protected onRender() {}
+
+  public render() {
+    this.beforeRender();
+    this.onRender();
+  }
+
+  public delete() {
+    this.scene.delete(this);
+  }
+
+  protected beforeUpdate(delay: number) {
+    this.children.forEach((child) => child.update(delay));
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected onUpdate(delay: number) {}
+
+  public update(delay: number) {
+    this.beforeUpdate(delay);
+    this.onUpdate(delay);
+  }
 }
