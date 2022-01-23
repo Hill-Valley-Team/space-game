@@ -15,6 +15,6 @@ export const Button = ({
   ...props
 }: ButtonProps) => (
   <button type={type} className={b({ view, width, align }).mix(className)} {...props}>
-    {text}
+    {text ?? props.children}
   </button>
 );

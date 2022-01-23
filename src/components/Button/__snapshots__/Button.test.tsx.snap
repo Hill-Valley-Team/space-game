@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button render with default props 1`] = `
+exports[`Button should render with rext as children 1`] = `
 <button
   className={
     Object {
@@ -13,6 +13,42 @@ exports[`Button render with default props 1`] = `
     }
   }
   type="submit"
+>
+  Button
+</button>
+`;
+
+exports[`Button should render with text as prop 1`] = `
+<button
+  className={
+    Object {
+      "has": [Function],
+      "is": [Function],
+      "mix": [Function],
+      "split": [Function],
+      "state": [Function],
+      "toString": [Function],
+    }
+  }
+  type="submit"
+>
+  Text
+</button>
+`;
+
+exports[`Button should render with type 1`] = `
+<button
+  className={
+    Object {
+      "has": [Function],
+      "is": [Function],
+      "mix": [Function],
+      "split": [Function],
+      "state": [Function],
+      "toString": [Function],
+    }
+  }
+  type="reset"
 >
   Button
 </button>
