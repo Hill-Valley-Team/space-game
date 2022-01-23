@@ -1,0 +1,6 @@
+.back-button {
+  background: url('./static/btn-back.svg') no-repeat;
+  width: 28px;
+  height: 28px;
+  display: block;
+}
