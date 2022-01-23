@@ -34,12 +34,6 @@ export class FrameManager {
     return this.frames[n];
   }
 
-  getCol(n: number) {
-    //TODO
-
-    return { start: n, end: 4 };
-  }
-
   createFrameSet() {
     const img = this.parent.source;
     if (img) {

@@ -6,15 +6,13 @@ class AuthApi extends BaseApi {
     super('/auth');
   }
 
-  //login
   public signIn = (data: SignInRequest) => this.http.post('/signin', data);
 
-  //registration
   public signUp = (data: SignUpRequest) => this.http.post('/signup', data);
 
   public logOut = () => this.http.post('/logout');
 
-  // public getUserInfo = () => this.http.get('/user');
+  public getUserInfo = () => this.http.get('/user');
 }
 
 export const authApi = new AuthApi();

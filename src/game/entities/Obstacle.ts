@@ -64,7 +64,5 @@ export class Obstacle extends Sprite {
     if (this.isOnGameBounds().isOnBottom) {
       this.delete();
     }
-
-    // console.log(this.animation.get(ObstacleAnimationKeys.ANIMATE)?.currentFrame);
   }
 }
