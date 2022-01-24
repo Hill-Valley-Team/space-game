@@ -4,7 +4,7 @@ import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { InputField } from './InputField';
 
-describe('InputField snapshots', () => {
+describe('InputField', () => {
   it('should render with default props', () => {
     expect.assertions(1);
 
