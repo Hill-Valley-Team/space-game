@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button should render with rext as children 1`] = `
+exports[`Button should render with text as children 1`] = `
 <button
   className={
     Object {

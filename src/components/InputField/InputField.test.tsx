@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { InputField } from './InputField';
 
@@ -55,5 +55,18 @@ describe('InputField snapshots', () => {
     const parent = container.firstChild;
 
     expect(parent).toHaveClass(className);
+  });
+
+  it('should be changeable', () => {
+    expect.assertions(1);
+
+    const newValue = 'test_value';
+    const handleOnChange = jest.fn();
+    const { getByRole } = render(<InputField onChangeHandle={handleOnChange} />);
+    const input = getByRole('textbox');
+
+    fireEvent.change(input, { target: { value: newValue } });
+
+    expect(handleOnChange).toHaveBeenCalledTimes(1);
   });
 });
