@@ -13,7 +13,7 @@ describe('Button', () => {
     expect(button).toMatchSnapshot();
   });
 
-  it('should render with rext as children', () => {
+  it('should render with text as children', () => {
     expect.assertions(1);
 
     const button = renderer.create(<Button>Children</Button>).toJSON();
