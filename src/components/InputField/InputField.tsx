@@ -25,7 +25,6 @@ export const InputField = ({
   ) : null;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, equal?: string) => {
-    console.log('here');
     const newValue = e.target.value;
     if (onChangeHandle) {
       return onChangeHandle({ value: newValue, equal });

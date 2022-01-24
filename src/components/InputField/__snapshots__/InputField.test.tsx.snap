@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`InputField should render valid 1`] = `
+exports[`InputField snapshots should render valid 1`] = `
 <div
   className={
     Object {
@@ -30,7 +30,7 @@ exports[`InputField should render valid 1`] = `
 </div>
 `;
 
-exports[`InputField should render with default props 1`] = `
+exports[`InputField snapshots should render with default props 1`] = `
 <div
   className={
     Object {
@@ -74,7 +74,7 @@ exports[`InputField should render with default props 1`] = `
 </div>
 `;
 
-exports[`InputField should render with label 1`] = `
+exports[`InputField snapshots should render with label 1`] = `
 <div
   className={
     Object {
@@ -132,7 +132,7 @@ exports[`InputField should render with label 1`] = `
 </div>
 `;
 
-exports[`InputField should render with type 1`] = `
+exports[`InputField snapshots should render with type 1`] = `
 <div
   className={
     Object {
@@ -176,7 +176,7 @@ exports[`InputField should render with type 1`] = `
 </div>
 `;
 
-exports[`InputField should render with value 1`] = `
+exports[`InputField snapshots should render with value 1`] = `
 <div
   className={
     Object {

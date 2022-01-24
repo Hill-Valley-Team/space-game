@@ -1,10 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { InputField } from './InputField';
 
-describe('InputField', () => {
+describe('InputField snapshots', () => {
   it('should render with default props', () => {
     expect.assertions(1);
 
@@ -55,17 +55,5 @@ describe('InputField', () => {
     const parent = container.firstChild;
 
     expect(parent).toHaveClass(className);
-  });
-
-  it('should be changeable', () => {
-    // expect.assertions(1);
-    const newValue = 'test_value';
-    const handleOnChange = jest.fn();
-    const { getByRole } = render(<InputField onChangeHandle={handleOnChange} />);
-    const input = getByRole('textbox');
-
-    fireEvent.change(input, { target: { newValue } });
-
-    expect(handleOnChange).toHaveBeenCalledTimes(1);
   });
 });
