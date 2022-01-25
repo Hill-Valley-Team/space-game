@@ -1,17 +1,105 @@
 import block from 'bem-cn';
-import React from 'react';
-import { AppNavigation } from '../../components/AppNavigation/AppNavigation';
-import { PageContainer } from '../../components/PageContainer';
-import { Title } from '../../components/Title';
+import React, { useCallback } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useGetUserInfoQuery } from '../../services/UserService';
 import './homePage.css';
+import teamLogoImg from './static/team-logo.png';
+import logoImg from './static/logo.png';
+import { Button } from '../../components/Button';
 
 const b = block('home-page');
+export const HomePage = () => {
+  const { isSuccess } = useGetUserInfoQuery();
+  const navigate = useNavigate();
 
-export const HomePage = () => (
-  <div className={b()}>
-    <PageContainer size="large">
-      <Title text="Главная страница" />
-      <AppNavigation className={b('navigation')} align="center" />
-    </PageContainer>
-  </div>
-);
+  const onPlayBtnClick = useCallback(() => {
+    navigate('/game');
+  }, [navigate]);
+
+  const onEnterBtnClick = useCallback(() => {
+    navigate('/login');
+  }, [navigate]);
+
+  const onRegisterBtnClick = useCallback(() => {
+    navigate('/registration');
+  }, [navigate]);
+
+  const getBtnBlock = () => {
+    if (isSuccess) {
+      return (
+        <Button
+          width="fixed"
+          view="primary"
+          text="Играть!"
+          className={b('play-button')}
+          onClick={onPlayBtnClick}
+        />
+      );
+    }
+    return (
+      <>
+        <Button
+          width="fixed"
+          view="primary"
+          text="Войти"
+          className={b('enter-button')}
+          onClick={onEnterBtnClick}
+        />
+        <Button
+          width="fixed"
+          view="secondary"
+          text="Зарегистрироваться"
+          className={b('registration-button')}
+          onClick={onRegisterBtnClick}
+        />
+      </>
+    );
+  };
+
+  const getLinkBlock = () => {
+    if (isSuccess) {
+      return (
+        <>
+          <NavLink className={b('link')} to="/profile">
+            Профиль
+          </NavLink>
+          <NavLink className={b('link')} to="/forum">
+            Форум
+          </NavLink>
+          <NavLink className={b('link')} to="/leaderboard">
+            Таблица игроков
+          </NavLink>
+        </>
+      );
+    }
+    return (
+      <>
+        <NavLink className={b('link')} to="/forum">
+          Форум
+        </NavLink>
+        <NavLink className={b('link')} to="/leaderboard">
+          Таблица игроков
+        </NavLink>
+      </>
+    );
+  };
+
+  return (
+    <div className={b()}>
+      <div className={b('container')}>
+        <div className={b('left')}>
+          <img src={logoImg} alt="Лого" width="167" height="64" />
+          <h1 className={b('title')}>Космические гонки</h1>
+          <p className={b('text')}>
+            Собирай монеты и избегай столкновений. Становись лучшим космическим гонщиком!
+          </p>
+          <div className={b('btn-block')}>{getBtnBlock()}</div>
+          <div className={b('link-block')}>{getLinkBlock()}</div>
+        </div>
+        <div className={b('right')}>
+          <img src={teamLogoImg} alt="Лого команды" />
+        </div>
+      </div>
+    </div>
+  );
+};

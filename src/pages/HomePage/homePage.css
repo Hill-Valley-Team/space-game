@@ -2,4 +2,82 @@
   &__navigation {
     margin-top: 40px;
   }
+
+  &__container {
+    width: 100%;
+    min-height: 720px;
+    max-width: 1280px;
+    padding-bottom: 57px;
+    display: flex;
+    margin: 0 auto;
+    background: url('./static/home-background.jpg') no-repeat top right;
+  }
+
+  &__left {
+    width: 50%;
+    padding-top: 68px;
+    padding-left: 100px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  &__right {
+    width: 50%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  & h1 {
+    margin-top: 112px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 58px;
+    color: $purple;
+  }
+
+  &__text {
+    max-width: 484px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 135.02%;
+    color: $text-color;
+  }
+
+  &__btn-block {
+    margin-top: 50px;
+    display: flex;
+  }
+
+  &__play-button.button {
+    height: 47px;
+    max-width: 153px;
+    background-color: $orange;
+    font-size: 18px;
+  }
+
+  &__enter-button.button {
+    max-width: 127px;
+    margin-right: 20px;
+  }
+
+  &__registration-button.button {
+    max-width: 250px;
+  }
+
+  &__link-block {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+  }
+
+  &__link {
+    margin-right: 28px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
