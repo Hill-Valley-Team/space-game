@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+import { nanoid } from '@reduxjs/toolkit';
 import { PhysicBody } from '../../PhysicBody';
 import { Scene } from '../../Scene';
 import { DataObject, GameObjectProps } from './types';
@@ -37,7 +37,7 @@ export class GameObject {
     this.scene = scene;
     this.x = x;
     this.y = y;
-    this.key = key ?? uuidv4();
+    this.key = key ?? nanoid();
     this.data = new Map();
     this.body = new PhysicBody(0, 0);
     this.parent = null;
