@@ -22,3 +22,7 @@ export type PasswordRequest = {
   oldPassword: string;
   newPassword: string;
 };
+
+export type SignInErrorResponse = {
+  reason: string;
+};
