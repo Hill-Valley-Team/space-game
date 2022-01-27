@@ -1,5 +1,85 @@
 .home-page {
-  &__navigation {
-    margin-top: 40px;
+  background: center / cover no-repeat url('../../assets/images/bg.jpg') $secondary-color;
+
+  &__logo {
+    margin-bottom: 50px;
+  }
+
+  &__container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    margin: 0 auto;
+  }
+
+  &__left {
+    width: 60%;
+    min-width: 550px;
+    padding: 58px 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    background: url('./static/home-left-background.png') no-repeat top right;
+    background-size: cover;
+  }
+
+  &__right {
+    width: 40%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 58px 20px;
+  }
+
+  & h1 {
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 42px;
+    line-height: 58px;
+    color: $purple;
+  }
+
+  &__text {
+    max-width: 484px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 135.02%;
+    color: $text-color;
+    margin-bottom: 50px;
+  }
+
+  &__btn-block {
+    display: flex;
+    margin-bottom: 50px;
+  }
+
+  &__play-button.button {
+    height: 47px;
+    max-width: 153px;
+    background-color: $orange;
+    font-size: 18px;
+    padding: 13px 20px;
+  }
+
+  &__enter-button.button {
+    max-width: 127px;
+    margin-right: 20px;
+  }
+
+  &__registration-button.button {
+    max-width: 250px;
+  }
+
+  &__link-block {
+    display: flex;
+  }
+
+  &__link {
+    margin-right: 28px;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }

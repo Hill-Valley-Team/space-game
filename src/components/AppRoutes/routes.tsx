@@ -14,11 +14,11 @@ import { RequireAuth } from '../RequireAuth';
 import { authorizedPath, nonAuthorizedPath } from './consts';
 
 export const routes: RouteObject[] = [
+  { path: '/', index: true, element: <HomePage /> },
   {
     path: '/',
     element: <PageLayout />,
     children: [
-      { index: true, element: <HomePage /> },
       {
         path: 'registration',
         element: (
