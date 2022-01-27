@@ -88,12 +88,16 @@ export const HomePage = () => {
     <div className={b()}>
       <div className={b('container')}>
         <div className={b('left')}>
-          <img src={logoImg} alt="Лого" width="167" height="64" />
-          <h1 className={b('title')}>Космические гонки</h1>
-          <p className={b('text')}>
-            Собирай монеты и избегай столкновений. Становись лучшим космическим гонщиком!
-          </p>
-          <div className={b('btn-block')}>{getBtnBlock()}</div>
+          <div className={b('logo')}>
+            <img src={logoImg} alt="Лого" width="200" />
+          </div>
+          <div>
+            <h1 className={b('title')}>Космические гонки</h1>
+            <p className={b('text')}>
+              Собирай монеты и избегай столкновений. Становись лучшим космическим гонщиком!
+            </p>
+            <div className={b('btn-block')}>{getBtnBlock()}</div>
+          </div>
           <div className={b('link-block')}>{getLinkBlock()}</div>
         </div>
         <div className={b('right')}>
