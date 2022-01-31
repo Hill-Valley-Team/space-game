@@ -12,7 +12,7 @@ export const serverConfig: Configuration = {
   name: 'server',
   target: 'node',
   node: { __dirname: false },
-  entry: path.join(SRC_DIR, 'server'),
+  entry: path.join(SRC_DIR, 'server.ts'),
   module: {
     rules: [fileLoader.ssr, cssLoader.ssr, tsLoader.ssr, imageLoader.ssr],
   },
@@ -20,7 +20,7 @@ export const serverConfig: Configuration = {
     filename: 'server.js',
     libraryTarget: 'commonjs2',
     path: DIST_DIR,
-    publicPath: '/dist/',
+    publicPath: '/',
   },
   resolve: {
     modules: ['src', 'node_modules'],

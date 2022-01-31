@@ -1,9 +1,26 @@
 import { Request, Response } from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom/server';
+import { Provider as ReduxProvider } from 'react-redux';
 import { App } from './components/App';
 
-const getHtml = (reactHtml: string) => `
+export default (req: Request, res: Response) => {
+  const location = req.url;
+  const jsx = (
+    <ReduxProvider store={store}>
+      <StaticRouter location={location}>
+        <App />
+      </StaticRouter>
+    </ReduxProvider>
+  );
+  const reactHtml = ReactDOMServer.renderToString(jsx);
+
+  res.status(200).send(getHtml(reactHtml));
+};
+
+function getHtml(reactHtml: string) {
+  `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -20,11 +37,4 @@ const getHtml = (reactHtml: string) => `
     </body>
     </html>
     `;
-
-export default (req: Request, res: Response) => {
-  const jsx = <App />;
-  //   const jsx = <div>123</div>;
-  const reactHtml = ReactDOMServer.renderToString(jsx);
-
-  res.send(getHtml(reactHtml));
-};
+}
