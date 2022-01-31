@@ -1,7 +1,6 @@
 import path from 'path';
 import nodeExternals from 'webpack-node-externals';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
-
 import type { Configuration } from 'webpack';
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 import fileLoader from './loaders/file';
@@ -21,7 +20,7 @@ export const serverConfig: Configuration = {
     filename: 'server.js',
     libraryTarget: 'commonjs2',
     path: DIST_DIR,
-    publicPath: '/static/',
+    publicPath: '/dist/',
   },
   resolve: {
     modules: ['src', 'node_modules'],

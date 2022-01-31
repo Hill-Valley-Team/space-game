@@ -1,4 +1,9 @@
-export const getHtml = (reactHtml: string) => `
+import { Request, Response } from 'express';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import { App } from './components/App';
+
+const getHtml = (reactHtml: string) => `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -15,3 +20,11 @@ export const getHtml = (reactHtml: string) => `
     </body>
     </html>
     `;
+
+export default (req: Request, res: Response) => {
+  const jsx = <App />;
+  //   const jsx = <div>123</div>;
+  const reactHtml = ReactDOMServer.renderToString(jsx);
+
+  res.send(getHtml(reactHtml));
+};
