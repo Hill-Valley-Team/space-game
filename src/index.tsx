@@ -6,7 +6,7 @@ import { App } from './components/App';
 import { store } from './store';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <Provider store={store}>
     <BrowserRouter>
       <ErrorBoundary>
