@@ -1,12 +1,13 @@
 import path from 'path';
-import { Configuration } from 'webpack';
 import nodeExternals from 'webpack-node-externals';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 
+import type { Configuration } from 'webpack';
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 import fileLoader from './loaders/file';
 import cssLoader from './loaders/css';
 import tsLoader from './loaders/ts';
+import imageLoader from './loaders/image';
 
 export const serverConfig: Configuration = {
   name: 'server',
@@ -14,7 +15,7 @@ export const serverConfig: Configuration = {
   node: { __dirname: false },
   entry: path.join(SRC_DIR, 'server'),
   module: {
-    rules: [fileLoader.ssr, cssLoader.ssr, tsLoader.ssr],
+    rules: [fileLoader.ssr, cssLoader.ssr, tsLoader.ssr, imageLoader.ssr],
   },
   output: {
     filename: 'server.js',

@@ -8,6 +8,7 @@ import ImageMinimizerPlugin from 'image-minimizer-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 import fileLoader from './loaders/file';
+import imageLoader from './loaders/image';
 import cssLoader from './loaders/css';
 import tsLoader from './loaders/ts';
 // import { config } from 'dotenv';
@@ -23,7 +24,7 @@ export const clientConfig = {
   // ].filter(Boolean) as unknown as Entry,
   entry: path.join(SRC_DIR, 'index.tsx'),
   module: {
-    rules: [fileLoader.client, cssLoader.client, tsLoader.client],
+    rules: [fileLoader.client, cssLoader.client, tsLoader.client, imageLoader.client],
   },
   output: {
     path: DIST_DIR,

@@ -1,6 +1,5 @@
 {
   "name": "space_racing",
-  "type": "module",
   "engines": {
     "node": "16.13"
   },
@@ -13,7 +12,7 @@
     "start": "NODE_ENV=development npm-run-all --print-label --parallel start:*",
     "test": "jest",
     "clean": "rimraf dist",
-    "build": "NODE_ENV=production webpack --mode development",
+    "build": "NODE_ENV=production webpack",
     "lint:p": "prettier --write src/**/*.{js,jsx,ts,tsx,test.tsx,test.ts,json}",
     "lint:ts": "eslint src/**/*.{ts,tsx}",
     "lint:style": "stylelint src/**/*.css",
