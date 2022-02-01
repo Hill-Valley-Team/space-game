@@ -55,7 +55,6 @@ export const userAPI = createApi({
     signin: builder.mutation<void, FormData>({
       query: (formData) => {
         const preparedData = prepareDataToRequest<SignInRequest>(signInRequestFields, formData);
-
         return {
           url: '/auth/signin',
           body: preparedData,

@@ -1,8 +1,8 @@
-import path from 'path';
+// import path from 'path';
 import express from 'express';
-import compression from 'compression';
+// import compression from 'compression';
 // import 'babel-polyfill';
-import serverRenderMiddleware from './serverRenderMiddleware';
+import serverRenderMiddleware from './server/serverRenderMiddleware';
 
 const app = express();
 
