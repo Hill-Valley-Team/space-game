@@ -1,6 +1,7 @@
-import { useAuth } from 'hooks/useAuth/useAuth';
+import { useAuth } from 'hooks/useAuth';
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+// import { useGetUserInfoQuery } from 'services/UserService';
 // import { useGetUserInfoQuery } from '../../services/UserService';
 
 type RequireAuthProps = {

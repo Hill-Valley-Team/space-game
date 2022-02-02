@@ -1,11 +1,11 @@
 import path from 'path';
 
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-// import CompressionPlugin from 'compression-webpack-plugin';
+import CompressionPlugin from 'compression-webpack-plugin';
 
 import ImageMinimizerPlugin from 'image-minimizer-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 import fileLoader from './loaders/file';
 import imageLoader from './loaders/image';
@@ -30,15 +30,12 @@ export const clientConfig = {
     path: DIST_DIR,
     publicPath: '/',
     filename: '[name].bundle.js',
-    clean: true,
-    // library: {
-    //   type: 'umd',
-    //   name: 'GameLibrary',
-    // },
+    library: {
+      type: 'umd',
+      name: 'GameLibrary',
+    },
   },
   resolve: {
-    modules: ['src', 'node_modules'],
-    alias: { 'react-dom': '@hot-loader/react-dom' },
     extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
     plugins: [new TsconfigPathsPlugin()],
   },
@@ -70,9 +67,8 @@ export const clientConfig = {
         ],
       },
     }),
-    // !IS_DEV && new CompressionPlugin(),
-    // ].filter(Boolean) as [],
-  ],
+    !IS_DEV && new CompressionPlugin(),
+  ].filter(Boolean) as [],
 
   devtool: 'source-map',
 

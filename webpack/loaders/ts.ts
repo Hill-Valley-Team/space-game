@@ -1,28 +1,19 @@
 const tsRegexp = /\.ts(x?)$/;
 
+const loaderConfig = {
+  test: tsRegexp,
+  exclude: /node_modules/,
+  use: [
+    {
+      loader: 'ts-loader',
+      options: {
+        transpileOnly: true,
+      },
+    },
+  ],
+};
+
 export default {
-  client: {
-    test: tsRegexp,
-    exclude: /node_modules/,
-    use: [
-      {
-        loader: 'ts-loader',
-        options: {
-          transpileOnly: true,
-        },
-      },
-    ],
-  },
-  ssr: {
-    test: tsRegexp,
-    exclude: /node_modules/,
-    use: [
-      {
-        loader: 'ts-loader',
-        options: {
-          transpileOnly: true,
-        },
-      },
-    ],
-  },
+  client: { ...loaderConfig },
+  ssr: { ...loaderConfig },
 };

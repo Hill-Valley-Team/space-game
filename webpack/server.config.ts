@@ -1,7 +1,7 @@
-import path from 'path';
+import { join } from 'path';
 import nodeExternals from 'webpack-node-externals';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
-import type { Configuration } from 'webpack';
+import { Configuration, ProvidePlugin } from 'webpack';
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 import fileLoader from './loaders/file';
 import cssLoader from './loaders/css';
@@ -12,12 +12,13 @@ export const serverConfig: Configuration = {
   name: 'server',
   target: 'node',
   node: { __dirname: false },
-  entry: path.join(SRC_DIR, 'server.ts'),
+  entry: join(SRC_DIR, 'server.ts'),
   module: {
     rules: [fileLoader.ssr, cssLoader.ssr, tsLoader.ssr, imageLoader.ssr],
   },
   output: {
     filename: 'server.js',
+    clean: true,
     libraryTarget: 'commonjs2',
     path: DIST_DIR,
     publicPath: '/',
@@ -33,6 +34,14 @@ export const serverConfig: Configuration = {
   performance: {
     hints: IS_DEV ? false : 'warning',
   },
+
+  plugins: [
+    new ProvidePlugin({
+      window: join(__dirname, './mock/window.mock'),
+      localStorage: join(__dirname, './mock/localStorage.mock'),
+      document: 'global/document',
+    }),
+  ].filter(Boolean) as [],
 
   externals: [nodeExternals({ allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i] })],
 

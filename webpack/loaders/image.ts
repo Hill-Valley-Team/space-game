@@ -1,12 +1,15 @@
 const imgRegexp = /\.(?:ico|gif|png|jpg|jpeg)$/i;
 
+const loaderConfig = {
+  test: imgRegexp,
+  type: 'asset/resource',
+};
+
 export default {
   client: {
-    test: imgRegexp,
-    type: 'asset/resource',
+    ...loaderConfig,
   },
   ssr: {
-    test: imgRegexp,
-    loader: 'null-loader',
+    ...loaderConfig,
   },
 };

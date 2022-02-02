@@ -11,7 +11,7 @@ export const getHtml = (reactHtml: string, reduxState: unknown) =>
             <link href="/main.css" rel="stylesheet">
         </head>
         <body>
-            <div id="mount">${reactHtml}</div>
+            <div id="root">${reactHtml}</div>
             <script>
               window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
             </script>
