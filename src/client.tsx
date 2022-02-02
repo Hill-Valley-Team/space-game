@@ -16,8 +16,6 @@ const initialState = window.__INITIAL_STATE__;
 
 const store = createAppStore(initialState);
 
-console.log(store.getState());
-
 ReactDOM.hydrate(
   <Provider store={store}>
     <BrowserRouter>
