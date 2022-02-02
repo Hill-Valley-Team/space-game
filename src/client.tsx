@@ -2,9 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { createAppStore, RootState } from './store';
 import { App } from './components/App';
-import { store } from './store';
 import { ErrorBoundary } from './components/ErrorBoundary';
+
+declare global {
+  interface Window {
+    __INITIAL_STATE__: RootState;
+  }
+}
+
+const initialState = window.__INITIAL_STATE__;
+
+const store = createAppStore(initialState);
+
+console.log(store.getState());
 
 ReactDOM.hydrate(
   <Provider store={store}>

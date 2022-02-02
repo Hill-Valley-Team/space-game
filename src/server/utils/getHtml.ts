@@ -1,4 +1,7 @@
-export const getHtml = (reactHtml: string, reduxState: unknown) =>
+import { RootState } from 'store';
+import { renderObject } from './renderObject';
+
+export const getHtml = (reactHtml: string, reduxState: RootState) =>
   `
         <!DOCTYPE html>
         <html lang="en">
@@ -13,7 +16,7 @@ export const getHtml = (reactHtml: string, reduxState: unknown) =>
         <body>
             <div id="root">${reactHtml}</div>
             <script>
-              window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
+              window.__INITIAL_STATE__ = ${renderObject(reduxState)}
             </script>
             <script src="/main.bundle.js"></script>
         </body>

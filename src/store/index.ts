@@ -1,2 +1,2 @@
-export { store } from './store';
+export { createAppStore } from './store';
 export { RootState, AppDispatch } from './types';
