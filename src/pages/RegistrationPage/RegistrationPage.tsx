@@ -1,4 +1,5 @@
 import block from 'bem-cn';
+import { useGetUserInfo } from 'hooks/useGetUserInfo';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/Button';
@@ -17,6 +18,7 @@ const b = block('registration-page');
 
 export const RegistrationPage = () => {
   const [requestError, setRequestError] = useState('');
+  const { requestUserInfo } = useGetUserInfo();
 
   const [
     { value: loginValue, isValid: loginIsValid, errorMessage: loginErrorMessage },
@@ -62,6 +64,7 @@ export const RegistrationPage = () => {
   const formSubmitHandle = (formData: FormData) => {
     signup(formData)
       .unwrap()
+      .then(() => requestUserInfo())
       .catch((error) => {
         if (error.data && 'reason' in error.data) {
           setRequestError(JSON.stringify(error.data.reason));

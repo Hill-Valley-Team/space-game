@@ -1,10 +1,10 @@
 import block from 'bem-cn';
+import { useGetUserInfo } from 'hooks/useGetUserInfo';
 import React, { PropsWithChildren } from 'react';
 import { Button } from '../../../components/Button';
 import { InputFieldProfile } from '../../../components/InputFieldProfile';
 import { Title } from '../../../components/Title';
 import { formScheme, InputNames } from '../../../consts/formScheme';
-import { useGetUserInfoQuery } from '../../../services/UserService';
 
 type ProfileViewProps = PropsWithChildren<{
   editHandle: () => void;
@@ -15,7 +15,7 @@ const b = block('profile-page');
 
 export const ProfileView = (props: ProfileViewProps) => {
   const { editHandle, editPasswordHandle } = props;
-  const { data: userData } = useGetUserInfoQuery();
+  const { userData } = useGetUserInfo();
 
   return (
     <>
