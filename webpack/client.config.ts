@@ -22,7 +22,7 @@ export const clientConfig = {
   //   IS_DEV && 'css-hot-loader/hotModuleReplacement',
   //   path.join(SRC_DIR, 'client'),
   // ].filter(Boolean) as unknown as Entry,
-  entry: path.join(SRC_DIR, 'client.tsx'),
+  entry: path.join(SRC_DIR, 'index.tsx'),
   module: {
     rules: [fileLoader.client, cssLoader.client, tsLoader.client, imageLoader.client],
   },

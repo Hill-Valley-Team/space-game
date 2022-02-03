@@ -1,6 +1,6 @@
 import path from 'path';
 import express from 'express';
-import serverRenderMiddleware from './server/serverRenderMiddleware';
+import serverRenderMiddleware from './serverRenderMiddleware';
 
 const app = express();
 

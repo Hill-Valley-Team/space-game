@@ -12,7 +12,7 @@ export const serverConfig: Configuration = {
   name: 'server',
   target: 'node',
   node: { __dirname: false },
-  entry: join(SRC_DIR, 'server.ts'),
+  entry: join(SRC_DIR, 'server/index.ts'),
   module: {
     rules: [fileLoader.ssr, cssLoader.ssr, tsLoader.ssr, imageLoader.ssr],
   },
