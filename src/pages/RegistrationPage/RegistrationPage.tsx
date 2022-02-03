@@ -60,11 +60,13 @@ export const RegistrationPage = () => {
   const [signup] = useSignupMutation();
 
   const formSubmitHandle = (formData: FormData) => {
-    signup(formData).catch((error) => {
-      if (error.response && error.response.data) {
-        setRequestError(error.response.data.reason ?? '');
-      }
-    });
+    signup(formData)
+      .unwrap()
+      .catch((error) => {
+        if (error.data && 'reason' in error.data) {
+          setRequestError(JSON.stringify(error.data.reason));
+        }
+      });
   };
 
   return (

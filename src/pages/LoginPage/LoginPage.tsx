@@ -31,11 +31,13 @@ export const LoginPage = () => {
   const [signin] = useSigninMutation();
 
   const formSubmitHandle = (formData: FormData) => {
-    signin(formData).catch((error) => {
-      if (error.response && error.response.data) {
-        setRequestError(error.response.data.reason ?? '');
-      }
-    });
+    signin(formData)
+      .unwrap()
+      .catch((error) => {
+        if (error.data && 'reason' in error.data) {
+          setRequestError(JSON.stringify(error.data.reason));
+        }
+      });
   };
 
   return (
