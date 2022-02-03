@@ -7,6 +7,7 @@ export type InputFieldAvatarOwnProps = {
   errorText?: string | null;
   isValid?: boolean;
   isEdit?: boolean;
+  onChangeHandler: (formData: FormData) => void;
 };
 
 export type InputFieldAvatarProps = InputFieldAvatarOwnProps &

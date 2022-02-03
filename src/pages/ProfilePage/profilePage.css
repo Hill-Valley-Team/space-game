@@ -30,18 +30,11 @@
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
   }
 
   &__avatar {
     justify-self: center;
-  }
-
-  &__btn-back {
-    background: url('./static/btn-back.svg') no-repeat;
-    width: 28px;
-    height: 28px;
-    display: block;
   }
 
   &__btn-logout {

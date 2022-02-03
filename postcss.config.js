@@ -12,6 +12,8 @@ const colors = {
   'error-text-color': '#FF4D00',
   'error-text-color-light': '#fff501',
   'light-blue': '#daecf8',
+  'purple': '#5d32bb',
+  'orange': '#ff8652',
 };
 
 module.exports = {

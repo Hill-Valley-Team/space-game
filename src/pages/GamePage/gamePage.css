@@ -4,4 +4,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+
+  & p {
+    color: $pure-white;
+    margin-top: 40px;
+  }
 }

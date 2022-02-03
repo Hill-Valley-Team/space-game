@@ -1,32 +1,40 @@
+import { GameObject } from '.';
 import { Scene } from '../../Scene';
 
 export type GameObjectProps = {
   scene: Scene;
   x: number;
   y: number;
-  key: string;
+  width?: number;
+  height?: number;
+  key?: string;
+  parent?: GameObject | null;
 };
 
 export type SpriteProps = {
-  width?: number;
-  height?: number;
   source: HTMLImageElement;
   frame?: number;
+  spriteKey: string;
+  type: string;
 } & GameObjectProps;
 
 export type ButtonProps = {
-  width?: number;
-  height?: number;
   text?: string;
   color?: string;
   bgColor?: string;
   onClick?: () => void;
 } & GameObjectProps;
 
+export type TextAlign = 'left' | 'center' | 'right';
+export type TextValign = 'top' | 'middle' | 'bottom';
+
 export type TextProps = {
   text?: string;
   color?: string;
+  size?: number;
+  font?: string;
+  align?: TextAlign;
+  valign?: TextValign;
 } & GameObjectProps;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type DataObject = Record<string, any>; //TODO убрать any
+export type DataObject = Map<string, unknown>;

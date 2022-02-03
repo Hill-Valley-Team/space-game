@@ -4,7 +4,7 @@ import { Button } from '../../../components/Button';
 import { InputFieldProfile } from '../../../components/InputFieldProfile';
 import { Title } from '../../../components/Title';
 import { formScheme, InputNames } from '../../../consts/formScheme';
-import { userAPI } from '../../../services/UserService';
+import { useGetUserInfoQuery } from '../../../services/UserService';
 
 type ProfileViewProps = PropsWithChildren<{
   editHandle: () => void;
@@ -15,7 +15,7 @@ const b = block('profile-page');
 
 export const ProfileView = (props: ProfileViewProps) => {
   const { editHandle, editPasswordHandle } = props;
-  const { data: userData } = userAPI.useGetUserInfoQuery();
+  const { data: userData } = useGetUserInfoQuery();
 
   return (
     <>

@@ -1,6 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { UserData } from '../api/Auth';
-import { baseUrl } from '../api/consts';
+import { baseUrl, signInRequestFields, signUpRequestFields } from '../api/consts';
+import { SignInRequest, SignUpRequest } from '../api/types';
+import { prepareDataToRequest } from '../controllers/utils/prepareDataToRequest';
 import { PasswordRequest, UserRequest, UserResponse } from './types';
 
 export const userAPI = createApi({
@@ -12,6 +14,15 @@ export const userAPI = createApi({
       query: (profile) => ({
         url: '/user/profile',
         body: profile,
+        method: 'PUT',
+        credentials: 'include',
+      }),
+      invalidatesTags: ['User'],
+    }),
+    updateUserAvatar: builder.mutation<void, FormData>({
+      query: (data) => ({
+        url: '/user/profile/avatar',
+        body: data,
         method: 'PUT',
         credentials: 'include',
       }),
@@ -33,8 +44,49 @@ export const userAPI = createApi({
       }),
       providesTags: ['User'],
     }),
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: '/auth/logout',
+        method: 'POST',
+        credentials: 'include',
+      }),
+      invalidatesTags: ['User'],
+    }),
+    signin: builder.mutation<void, FormData>({
+      query: (formData) => {
+        const preparedData = prepareDataToRequest<SignInRequest>(signInRequestFields, formData);
+
+        return {
+          url: '/auth/signin',
+          body: preparedData,
+          method: 'POST',
+          credentials: 'include',
+        };
+      },
+      invalidatesTags: ['User'],
+    }),
+    signup: builder.mutation<void, FormData>({
+      query: (formData) => {
+        const preparedData = prepareDataToRequest<SignUpRequest>(signUpRequestFields, formData);
+
+        return {
+          url: '/auth/signup',
+          body: preparedData,
+          method: 'POST',
+          credentials: 'include',
+        };
+      },
+      invalidatesTags: ['User'],
+    }),
   }),
 });
 
-export const { useUpdateUserProfileMutation, useGetUserInfoQuery, useUpdatePasswordMutation } =
-  userAPI;
+export const {
+  useUpdateUserProfileMutation,
+  useGetUserInfoQuery,
+  useUpdatePasswordMutation,
+  useUpdateUserAvatarMutation,
+  useLogoutMutation,
+  useSigninMutation,
+  useSignupMutation,
+} = userAPI;

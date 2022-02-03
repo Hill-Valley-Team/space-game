@@ -6,6 +6,8 @@ export type SpriteSheetConfig = {
   options: {
     frameWidth: number;
     frameHeight: number;
+    colls?: number;
+    rows?: number;
   };
 };
 

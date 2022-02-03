@@ -10,28 +10,46 @@ import { GamePage } from '../../pages/GamePage';
 import { ProfilePage } from '../../pages/ProfilePage';
 import { ForumPage } from '../../pages/ForumPage/ForumPage';
 import { LeaderBoardPage } from '../../pages/LeaderBoardPage';
+import { RequireAuth } from '../RequireAuth';
+import { authorizedPath, nonAuthorizedPath } from './consts';
 
 export const routes: RouteObject[] = [
+  { path: '/', index: true, element: <HomePage /> },
   {
     path: '/',
     element: <PageLayout />,
     children: [
-      { index: true, element: <HomePage /> },
       {
         path: 'registration',
-        element: <RegistrationPage />,
+        element: (
+          <RequireAuth to={authorizedPath} requireAuth={false}>
+            <RegistrationPage />
+          </RequireAuth>
+        ),
       },
       {
         path: 'login',
-        element: <LoginPage />,
+        element: (
+          <RequireAuth to={authorizedPath} requireAuth={false}>
+            <LoginPage />
+          </RequireAuth>
+        ),
       },
       {
         path: 'game',
-        element: <GamePage />,
+        element: (
+          <RequireAuth to={nonAuthorizedPath} requireAuth>
+            <GamePage />
+          </RequireAuth>
+        ),
       },
       {
         path: 'profile',
-        element: <ProfilePage />,
+        element: (
+          <RequireAuth to={nonAuthorizedPath} requireAuth>
+            <ProfilePage />
+          </RequireAuth>
+        ),
       },
       {
         path: 'forum',
