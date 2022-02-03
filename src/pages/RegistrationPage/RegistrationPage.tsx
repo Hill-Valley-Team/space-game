@@ -63,7 +63,6 @@ export const RegistrationPage = () => {
 
   const formSubmitHandle = (formData: FormData) => {
     signup(formData)
-      .unwrap()
       .then(() => requestUserInfo())
       .catch((error) => {
         if (error.data && 'reason' in error.data) {

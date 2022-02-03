@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { Meta } from 'components/Meta';
 import { createAppStore, RootState } from './store';
 import { App } from './components/App';
 import { ErrorBoundary } from './components/ErrorBoundary';

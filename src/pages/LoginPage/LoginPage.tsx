@@ -34,7 +34,6 @@ export const LoginPage = () => {
 
   const formSubmitHandle = (formData: FormData) => {
     signin(formData)
-      .unwrap()
       .then(() => requestUserInfo())
       .catch((error) => {
         if (error.data && 'reason' in error.data) {
