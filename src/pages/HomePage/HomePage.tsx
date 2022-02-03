@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './homePage.css';
 import { useGetUserInfo } from 'hooks/useGetUserInfo';
+import { Meta } from 'components/Meta';
 import teamLogoImg from './static/team-logo.png';
 import logoImg from './static/logo.png';
 import { Button } from '../../components/Button';
@@ -86,6 +87,7 @@ export const HomePage = () => {
 
   return (
     <div className={b()}>
+      <Meta title="Space Racing Game - Главная страница игры" />
       <div className={b('container')}>
         <div className={b('left')}>
           <div className={b('logo')}>
