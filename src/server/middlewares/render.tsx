@@ -4,9 +4,9 @@ import { StaticRouter } from 'react-router-dom/server';
 import { Provider as ReduxProvider } from 'react-redux';
 import Helmet from 'react-helmet';
 import { renderToString } from 'react-dom/server';
-import { App } from '../components/App';
-import { createAppStore } from '../store';
-import { getHtml } from './utils/getHtml';
+import { App } from '../../components/App';
+import { createAppStore } from '../../store';
+import { getHtml } from '../utils/getHtml';
 
 export default (req: Request, res: Response) => {
   const store = createAppStore();

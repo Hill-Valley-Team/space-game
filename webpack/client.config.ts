@@ -6,7 +6,7 @@ import CompressionPlugin from 'compression-webpack-plugin';
 import ImageMinimizerPlugin from 'image-minimizer-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import { DllReferencePlugin } from 'webpack';
+import { Configuration, DllReferencePlugin, HotModuleReplacementPlugin } from 'webpack';
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 import fileLoader from './loaders/file';
 import imageLoader from './loaders/image';
@@ -16,7 +16,7 @@ import tsLoader from './loaders/ts';
 
 // config();
 
-export const clientConfig = {
+export const clientConfig: Configuration = {
   // entry: [
   //   IS_DEV && 'react-hot-loader/patch',
   //   IS_DEV && 'webpack-hot-middleware/client',
@@ -72,6 +72,7 @@ export const clientConfig = {
         ],
       },
     }),
+    new HotModuleReplacementPlugin(),
     !IS_DEV && new CompressionPlugin(),
   ].filter(Boolean) as [],
 
