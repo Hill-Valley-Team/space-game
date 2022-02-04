@@ -17,7 +17,7 @@
     "lint:style": "stylelint src/**/*.css",
     "lint": "npm-run-all lint:p lint:ts lint:style",
     "precommit:hook": "npm run lint",
-    "build:dev:vendors": "NODE_ENV=development webpack --mode=development --hide-modules --config webpack/vendors.config.ts",
+    "build:dev:vendors": "NODE_ENV=development webpack --mode=development --config webpack/vendors.config.ts",
     "init": "npm install && npm run build:dev:vendors"
   },
   "repository": {
@@ -89,7 +89,6 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "@types/react-helmet": "^6.1.5",
-    "react-helmet": "^6.1.0",
     "axios": "^0.24.0",
     "bem-cn": "3.0.1",
     "compression": "^1.7.4",
@@ -98,11 +97,13 @@
     "dotenv": "^15.0.0",
     "express": "^4.17.2",
     "image-minimizer-webpack-plugin": "2.2.0",
+    "clean-webpack-plugin": "^4.0.0",
     "mini-css-extract-plugin": "^2.5.3",
     "postcss-nested": "5.0.6",
     "qs": "^6.10.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-helmet": "^6.1.0",
     "react-hot-loader": "^4.13.0",
     "react-redux": "^7.2.6",
     "react-router-dom": "6.1.1",

@@ -2,6 +2,7 @@ import { join } from 'path';
 import nodeExternals from 'webpack-node-externals';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import { Configuration, ProvidePlugin } from 'webpack';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 import fileLoader from './loaders/file';
 import cssLoader from './loaders/css';
@@ -18,9 +19,9 @@ export const serverConfig: Configuration = {
   },
   output: {
     filename: 'server.js',
-    clean: true,
     libraryTarget: 'commonjs2',
     path: DIST_DIR,
+    assetModuleFilename: 'assets/images/[hash][ext][query]',
     publicPath: '/',
   },
   resolve: {
@@ -36,6 +37,9 @@ export const serverConfig: Configuration = {
   },
 
   plugins: [
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['main*', '!vendors/**'],
+    }),
     new ProvidePlugin({
       window: join(__dirname, './mock/window.mock'),
       localStorage: join(__dirname, './mock/localStorage.mock'),

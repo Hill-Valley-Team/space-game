@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import React from 'react';
-import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import { Provider as ReduxProvider } from 'react-redux';
 import Helmet from 'react-helmet';
+import { renderToString } from 'react-dom/server';
 import { App } from '../components/App';
 import { createAppStore } from '../store';
 import { getHtml } from './utils/getHtml';

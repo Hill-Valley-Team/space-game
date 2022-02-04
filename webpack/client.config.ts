@@ -1,4 +1,4 @@
-import path from 'path';
+import { join } from 'path';
 
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
@@ -6,6 +6,7 @@ import CompressionPlugin from 'compression-webpack-plugin';
 import ImageMinimizerPlugin from 'image-minimizer-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { DllReferencePlugin } from 'webpack';
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 import fileLoader from './loaders/file';
 import imageLoader from './loaders/image';
@@ -22,7 +23,7 @@ export const clientConfig = {
   //   IS_DEV && 'css-hot-loader/hotModuleReplacement',
   //   path.join(SRC_DIR, 'client'),
   // ].filter(Boolean) as unknown as Entry,
-  entry: path.join(SRC_DIR, 'index.tsx'),
+  entry: join(SRC_DIR, 'index.tsx'),
   module: {
     rules: [fileLoader.client, cssLoader.client, tsLoader.client, imageLoader.client],
   },
@@ -30,6 +31,7 @@ export const clientConfig = {
     path: DIST_DIR,
     publicPath: '/',
     filename: '[name].bundle.js',
+    assetModuleFilename: 'assets/images/[hash][ext][query]',
     library: {
       type: 'umd',
       name: 'GameLibrary',
@@ -45,6 +47,9 @@ export const clientConfig = {
         { from: './src/assets/images/', to: './assets/images/' },
         { from: './src/game/assets/images/', to: './assets/images/' },
       ],
+    }),
+    new DllReferencePlugin({
+      manifest: join(DIST_DIR, 'vendors', 'vendors-manifest.json'),
     }),
     new MiniCssExtractPlugin({ filename: '[name].css' }),
     new ImageMinimizerPlugin({

@@ -6,17 +6,17 @@ const config: Configuration = {
   target: 'web',
   devtool: 'source-map',
   entry: {
-    vendors: ['react', 'react-dom', 'react-helmet'],
+    vendors: ['react', 'react-dom', 'react-helmet', 'redux', 'react-redux'],
   },
   output: {
-    library: '[name]_[hash]',
-    filename: '[name]_[hash].js',
-    path: join(DIST_DIR, 'client', '_'),
+    library: '[name]',
+    filename: '[name].js',
+    path: join(DIST_DIR, 'vendors'),
   },
   plugins: [
     new DllPlugin({
-      name: '[name]_[hash]',
-      path: join(DIST_DIR, 'webpack', 'vendors-manifest.json'),
+      name: '[name]',
+      path: join(DIST_DIR, 'vendors', 'vendors-manifest.json'),
     }),
   ],
 };
