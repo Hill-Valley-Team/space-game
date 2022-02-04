@@ -18,7 +18,6 @@ type ProfileEditProps = PropsWithChildren<{ viewHandle: () => void }>;
 export const ProfileEdit = (props: ProfileEditProps) => {
   const { viewHandle } = props;
   const { userData } = useGetUserInfo();
-
   const [
     { value: loginValue, isValid: loginIsValid, errorMessage: loginErrorMessage },
     setLoginValue,
