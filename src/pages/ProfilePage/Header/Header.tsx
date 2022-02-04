@@ -23,6 +23,7 @@ export const Header = (props: HeaderProps) => {
 
   const handleLogoutBtnClick = () => {
     logout().then(() => requestUserInfo());
+  };
 
   const changeAvatarHandle = (formData: FormData) => updateAvatar(formData);
 
@@ -52,9 +53,4 @@ export const Header = (props: HeaderProps) => {
       {logoutBtn}
     </div>
   );
-};
-
-Header.defaultProps = {
-  withLogoutBtn: true,
-  withBackBtn: true,
 };
