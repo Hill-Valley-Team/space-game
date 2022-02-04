@@ -11,7 +11,6 @@ const b = block('game-page');
 export const GamePage = () => {
   useEffect(() => {
     setFullscreenListener();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const game = new Game(gameConfig);
     game.scene.start(ScenesNames.START);
   }, []);

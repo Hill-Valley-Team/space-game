@@ -9,6 +9,7 @@ import { Obstacle } from '../../entities/Obstacle';
 import { ScorePannel } from '../../pannels/ScorePannel';
 import { LEVEL_TIME } from './consts';
 import { sceneMainResources } from './resources';
+import { pointerLock, pointerUnlock } from '../../../utils/pointerLock';
 
 export class SceneMain extends Scene {
   private gameStartTime: number;
@@ -40,6 +41,7 @@ export class SceneMain extends Scene {
   }
 
   create() {
+    pointerLock(this.game.canvas!);
     const player = new Player(this);
     player.init();
 
@@ -62,6 +64,7 @@ export class SceneMain extends Scene {
   onDestroy() {
     clearInterval(this.attackInterval!);
     clearInterval(this.coinsInterval!);
+    pointerUnlock();
   }
 
   checkCollisions() {
