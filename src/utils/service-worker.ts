@@ -1,5 +1,7 @@
 export const enableServiceWorker = () => {
-  if ('serviceWorker' in navigator) {
+  console.log(process.env.NODE_ENV);
+  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+    console.log('sw');
     window.addEventListener('load', () => {
       navigator.serviceWorker
         .register('/service-worker.js')

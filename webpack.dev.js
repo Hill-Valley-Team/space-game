@@ -1,5 +1,6 @@
 const path = require('path');
-const webpack = require('webpack');
+const { DefinePlugin } = require('webpack');
+
 
 module.exports = {
   mode: 'development',
@@ -15,7 +16,7 @@ module.exports = {
     port: 8080,
   },
   plugins: [
-    new webpack.DefinePlugin({
+    new DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
     }),
   ],

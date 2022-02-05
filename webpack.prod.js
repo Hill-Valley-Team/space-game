@@ -1,7 +1,5 @@
-const path = require('path');
 const { DefinePlugin } = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
-
 
 module.exports = {
   mode: 'production',
@@ -11,6 +9,8 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
     new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
       exclude: [/\.(?:png|jpg|jpeg|svg)$/],
       runtimeCaching: [{
         urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
