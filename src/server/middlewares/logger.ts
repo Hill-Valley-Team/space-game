@@ -5,7 +5,6 @@ export default expressWinston.logger({
   transports: [
     new winston.transports.File({ filename: 'error.log', level: 'error' }),
     new winston.transports.File({ filename: 'combined.log', level: 'info' }),
-    new winston.transports.Console({ level: 'info' }),
   ],
   format: winston.format.combine(winston.format.colorize(), winston.format.json()),
   meta: true, // optional: control whether you want to log the meta data about the request (default to true)

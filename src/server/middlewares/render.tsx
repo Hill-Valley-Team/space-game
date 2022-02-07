@@ -21,5 +21,5 @@ export default (req: Request, res: Response) => {
   const preloadedState = store.getState();
   const helmet = Helmet.renderStatic();
 
-  res.status(200).send(getHtml(reactHtml, preloadedState, helmet, res.locals.nonce));
+  res.status(200).send(getHtml(reactHtml, preloadedState, helmet, req.csrfToken()));
 };
