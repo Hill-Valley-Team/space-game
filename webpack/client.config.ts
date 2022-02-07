@@ -2,11 +2,10 @@ import { join } from 'path';
 
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
-
 import ImageMinimizerPlugin from 'image-minimizer-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import { Configuration, DllReferencePlugin, HotModuleReplacementPlugin } from 'webpack';
+import { Configuration, DllReferencePlugin, Entry, HotModuleReplacementPlugin } from 'webpack';
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 import fileLoader from './loaders/file';
 import imageLoader from './loaders/image';
@@ -17,13 +16,13 @@ import tsLoader from './loaders/ts';
 // config();
 
 export const clientConfig: Configuration = {
-  // entry: [
-  //   IS_DEV && 'react-hot-loader/patch',
-  //   IS_DEV && 'webpack-hot-middleware/client',
-  //   IS_DEV && 'css-hot-loader/hotModuleReplacement',
-  //   path.join(SRC_DIR, 'client'),
-  // ].filter(Boolean) as unknown as Entry,
-  entry: join(SRC_DIR, 'index.tsx'),
+  entry: [
+    IS_DEV && 'react-hot-loader/patch',
+    IS_DEV && 'webpack-hot-middleware/client',
+    IS_DEV && 'css-hot-loader/hotModuleReplacement',
+    join(SRC_DIR, 'index.tsx'),
+  ].filter(Boolean) as Entry,
+  // entry: join(SRC_DIR, 'index.tsx'),
   module: {
     rules: [fileLoader.client, cssLoader.client, tsLoader.client, imageLoader.client],
   },

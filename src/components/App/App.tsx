@@ -1,7 +1,7 @@
 import block from 'bem-cn';
 import { Meta } from 'components/Meta';
 import React from 'react';
-import { hot } from 'react-hot-loader/root';
+// import { hot } from 'react-hot-loader/root';
 import { AppRoutes } from '../AppRoutes';
 import './app.css';
 // import { enableServiceWorker } from '../../utils/service-worker';
@@ -16,6 +16,6 @@ const App = () => (
   </div>
 );
 
-const Component = hot(App);
+const Component = App;
 
 export { Component as App };

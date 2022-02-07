@@ -8,7 +8,7 @@
   "scripts": {
     "build:dev:vendors": "webpack --mode=development --config webpack/vendors.config.ts",
     "start:dev:webpack": "webpack --mode=development --watch",
-    "start:dev:server": "nodemon index.js --watch dist/server.js",
+    "start:dev:server": "node index.js --watch dist/server.js",
     "dev": "NODE_ENV=development npm-run-all --print-label --parallel start:dev:*",
     "build:prod:vendors": "NODE_ENV=production webpack --config webpack/vendors.config.ts",
     "build:prod": "NODE_ENV=production webpack",
@@ -58,6 +58,7 @@
     "@types/webpack-node-externals": "^2.5.3",
     "@typescript-eslint/eslint-plugin": "5.6.0",
     "@typescript-eslint/parser": "5.6.0",
+    "css-hot-loader": "^1.4.4",
     "css-loader": "6.5.1",
     "eslint": "8.4.1",
     "eslint-config-airbnb": "19.0.2",
@@ -90,6 +91,7 @@
     "typescript": "^4.5.2",
     "webpack-cli": "4.9.1",
     "webpack-dev-server": "4.6.0",
+    "webpack-hot-middleware": "^2.25.1",
     "workbox-webpack-plugin": "^6.4.2"
   },
   "dependencies": {
@@ -126,7 +128,6 @@
     "tsconfig-paths-webpack-plugin": "^3.5.2",
     "webpack": "^5.61.0",
     "webpack-dev-middleware": "^5.3.1",
-    "webpack-hot-middleware": "^2.25.1",
     "webpack-node-externals": "^3.0.0",
     "winston": "^3.5.1"
   }
