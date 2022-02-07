@@ -2,7 +2,12 @@ import { HelmetData } from 'react-helmet';
 import { RootState } from 'store';
 import { renderObject } from './renderObject';
 
-export const getHtml = (reactHtml: string, reduxState: RootState, helmet: HelmetData) =>
+export const getHtml = (
+  reactHtml: string,
+  reduxState: RootState,
+  helmet: HelmetData,
+  nonce: string,
+) =>
   `
   <!doctype html>
     <html lang="ru">
@@ -18,8 +23,8 @@ export const getHtml = (reactHtml: string, reduxState: RootState, helmet: Helmet
       </head>
       <body>
         <div id="root">${reactHtml}</div>
-        <script>window.__INITIAL_STATE__ = ${renderObject(reduxState)}</script>
-        <script  src="/vendors/vendors.js"></script>
-        <script src="/main.bundle.js"></script>
+        <script nonce=${nonce}>window.__INITIAL_STATE__ = ${renderObject(reduxState)}</script>
+        <script nonce=${nonce} src="/vendors/vendors.js"></script>
+        <script nonce=${nonce} src="/main.bundle.js"></script>
       </body>
     </html> `;
