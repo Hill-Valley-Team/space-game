@@ -7,18 +7,17 @@
   "description": "Project developed during course Middle Frontend Developer at Yandex Practicum",
   "scripts": {
     "build:dev:vendors": "webpack --mode=development --config webpack/vendors.config.ts",
-    "start:dev:webpack": "webpack --mode=development --watch",
-    "start:dev:server": "node index.js --watch dist/server.js",
-    "dev": "NODE_ENV=development npm-run-all --print-label --parallel start:dev:*",
+    "start:dev:webpack": "webpack --mode=development",
+    "start:dev:server": "nodemon index.js dist/server.js",
+    "dev": "NODE_ENV=development run-s start:dev:webpack start:dev:server",
     "build:prod:vendors": "NODE_ENV=production webpack --config webpack/vendors.config.ts",
-    "build:prod": "NODE_ENV=production webpack",
-    "start:prod": "NODE_ENV=production node index.js",
-    "test": "jest",
     "build": "NODE_ENV=production webpack",
+    "start": "NODE_ENV=production node index.js",
     "lint:p": "prettier --write src/**/*.{js,jsx,ts,tsx,test.tsx,test.ts,json}",
     "lint:ts": "eslint src/**/*.{ts,tsx}",
     "lint:style": "stylelint src/**/*.css",
-    "lint": "npm-run-all lint:p lint:ts lint:style",
+    "lint": "run-s lint:p lint:ts lint:style",
+    "test": "jest",
     "precommit:hook": "npm run lint",
     "init": "npm install && npm run build:dev:vendors"
   },
@@ -95,6 +94,7 @@
     "workbox-webpack-plugin": "^6.4.2"
   },
   "dependencies": {
+    "@hot-loader/react-dom": "^17.0.2",
     "@reduxjs/toolkit": "^1.7.1",
     "@types/react-helmet": "^6.1.5",
     "axios": "^0.24.0",
