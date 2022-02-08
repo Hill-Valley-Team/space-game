@@ -39,6 +39,7 @@ export const clientConfig: Configuration = {
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
     plugins: [new TsconfigPathsPlugin()],
+    alias: { 'react-dom': '@hot-loader/react-dom' },
   },
   plugins: [
     new CopyPlugin({
