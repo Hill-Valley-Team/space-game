@@ -1,0 +1,18 @@
+import { authApi } from 'api/Auth';
+import { Request, Response, NextFunction } from 'express';
+
+export const auth = async (request: Request, response: Response, next: NextFunction) => {
+  response.locals.user = undefined;
+  try {
+    const { data, status } = await authApi.getUserInfo({
+      headers: { cookie: request.headers.cookie! },
+    });
+    if (status === 200) {
+      response.locals.user = data;
+    }
+    console.log(response);
+  } catch (error: unknown) {
+    response.locals.error = error;
+  }
+  next();
+};

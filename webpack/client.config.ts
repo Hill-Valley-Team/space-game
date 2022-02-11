@@ -11,9 +11,6 @@ import fileLoader from './loaders/file';
 import imageLoader from './loaders/image';
 import cssLoader from './loaders/css';
 import tsLoader from './loaders/ts';
-// import { config } from 'dotenv';
-
-// config();
 
 export const clientConfig: Configuration = {
   entry: [
