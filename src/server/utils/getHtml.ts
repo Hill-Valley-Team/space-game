@@ -1,6 +1,5 @@
 import { HelmetData } from 'react-helmet';
 import { RootState } from 'store';
-import { DIST_DIR } from '../../../webpack/env';
 import { renderObject } from './renderObject';
 
 export const getHtml = (
