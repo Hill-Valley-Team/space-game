@@ -14,12 +14,12 @@ Loadable.preloadAll().then(() => {
     };
 
     https.createServer(options, app).listen(port, () => {
-      console.log('Application is started on', `https://localhost:${port}`);
+      console.log('Application is started on', `https://local.ya-praktikum.tech:${port}/`);
     });
     return;
   }
 
   app.listen(port, () => {
-    console.log('Application is started on', `http://localhost:${port}`);
+    console.log('Application is started on', `http://local.ya-praktikum.tech:${port}/`);
   });
 });

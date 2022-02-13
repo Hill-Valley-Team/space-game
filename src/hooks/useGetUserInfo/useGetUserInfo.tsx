@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from 'hooks/hooks';
-import { fetchUser } from 'store/slices/userSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { fetchUser } from '../../store/slices/userSlice';
 
 export const useGetUserInfo = () => {
   const { data, error, status } = useAppSelector((state) => state.user);

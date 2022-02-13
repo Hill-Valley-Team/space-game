@@ -9,8 +9,7 @@ import { createAppStore } from '../../store';
 import { getHtml } from '../utils/getHtml';
 
 export default (req: Request, res: Response) => {
-  // console.log(res.locals.user);
-  const store = createAppStore();
+  const store = createAppStore({ userData: res.locals.user });
   const jsx = (
     <ReduxProvider store={store}>
       <StaticRouter location={req.url}>

@@ -1,10 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { authApi } from 'api/Auth';
+import { authApi, UserData } from 'api/Auth';
 import { FetchStatus } from 'store/consts';
-import { RootState } from 'store/types';
 import { UserState } from './types';
 
-const initialUserState: UserState = {
+let initialUserState: UserState = {
   status: FetchStatus.IDLE,
   data: null,
   error: null,
@@ -41,8 +40,16 @@ export const userSlice = createSlice({
   },
 });
 
+export const createUserSlice = (data?: UserData) => {
+  if (data) {
+    initialUserState = {
+      data,
+      status: FetchStatus.SUCCESS,
+      error: null,
+    };
+  }
+  return userSlice.reducer;
+};
+
 export const { resetUser } = userSlice.actions;
-
-export const selectUser = (state: RootState) => state.user.data;
-
 export default userSlice.reducer;
