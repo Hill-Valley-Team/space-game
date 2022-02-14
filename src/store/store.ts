@@ -1,11 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { isServer } from 'utils/isServer';
 import { userAPI } from '../services/UserService';
-// eslint-disable-next-line import/no-named-as-default
 import { createUserSlice } from './slices/userSlice';
-import { PreloadedData, RootState } from './types';
+import { PreloadedData } from './types';
 
-export const createAppStore = (preloadedData?: PreloadedData | RootState) => {
+export const createAppStore = (preloadedData?: PreloadedData | object) => {
   let userReducer;
   let preloadedState;
 
