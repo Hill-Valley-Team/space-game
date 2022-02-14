@@ -31,7 +31,7 @@ export const HomePage = () => {
         <Button
           width="fixed"
           view="primary"
-          text="Играть2233!"
+          text="Играть!"
           className={b('play-button')}
           onClick={onPlayBtnClick}
         />

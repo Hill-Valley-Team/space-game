@@ -6,11 +6,6 @@ export const useGetUserInfo = () => {
   const dispatch = useAppDispatch();
   const requestUserInfo = async () => dispatch(fetchUser());
 
-  /** data = null only from server */
-  if (data === null) {
-    requestUserInfo();
-  }
-
   const isAuth = Boolean(data);
 
   return {

@@ -38,7 +38,7 @@ export const Header = (props: HeaderProps) => {
     />
   ) : null;
 
-  const backBtn = withBackBtn ? <BackButton className={b('back')} /> : null;
+  const backBtn = withBackBtn ? <BackButton className={b('back')} /> : <div />;
 
   return (
     <div className={b('top-wrapper')}>

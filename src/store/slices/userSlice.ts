@@ -1,55 +1,55 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authApi, UserData } from 'api/Auth';
 import { FetchStatus } from 'store/consts';
-import { UserState } from './types';
-
-let initialUserState: UserState = {
-  status: FetchStatus.IDLE,
-  data: null,
-  error: null,
-};
+import { UserSlice, UserState } from './types';
 
 export const fetchUser = createAsyncThunk('users/fetch', async () => {
   const response = await authApi.getUserInfo();
   return response.data;
 });
 
-export const userSlice = createSlice({
-  name: 'user',
-  initialState: initialUserState,
-  reducers: {
-    resetUser(state) {
-      state.status = FetchStatus.IDLE;
-      state.data = undefined;
-      state.error = null;
-    },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(fetchUser.fulfilled, (state, action) => {
-      state.data = action.payload;
-      state.status = FetchStatus.SUCCESS;
-    });
-    builder.addCase(fetchUser.rejected, (state, action) => {
-      state.error = action.error.message ?? null;
-      state.status = FetchStatus.FAILURE;
-      state.data = undefined;
-    });
-    builder.addCase(fetchUser.pending, (state) => {
-      state.status = FetchStatus.LOADING;
-    });
-  },
-});
-
 export const createUserSlice = (data?: UserData) => {
+  const initialUserState: UserState = {
+    status: FetchStatus.IDLE,
+    data: undefined,
+    error: undefined,
+  };
+
   if (data) {
-    initialUserState = {
-      data,
-      status: FetchStatus.SUCCESS,
-      error: null,
-    };
+    initialUserState.data = data;
+    initialUserState.status = FetchStatus.SUCCESS;
+    initialUserState.error = undefined;
   }
-  return userSlice.reducer;
+
+  return createSlice({
+    name: 'user',
+    initialState: initialUserState,
+    reducers: {
+      resetUser() {
+        initialUserState;
+      },
+      setUser(state, action) {
+        state.status = FetchStatus.SUCCESS;
+        state.data = action.payload as UserData;
+        state.error = undefined;
+      },
+    },
+    extraReducers: (builder) => {
+      builder.addCase(fetchUser.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.status = FetchStatus.SUCCESS;
+      });
+      builder.addCase(fetchUser.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.status = FetchStatus.FAILURE;
+        state.data = undefined;
+      });
+      builder.addCase(fetchUser.pending, (state) => {
+        state.status = FetchStatus.LOADING;
+      });
+    },
+  });
 };
 
-export const { resetUser } = userSlice.actions;
-export default userSlice.reducer;
+// export const { resetUser } = userSlice.actions;
+// export default userSlice.reducer;

@@ -5,11 +5,12 @@ import { Provider as ReduxProvider } from 'react-redux';
 import Helmet from 'react-helmet';
 import { renderToString } from 'react-dom/server';
 import { App } from '../../components/App';
-import { createAppStore } from '../../store';
 import { getHtml } from '../utils/getHtml';
+import { createAppStore } from 'store/store';
 
 export default (req: Request, res: Response) => {
   const store = createAppStore({ userData: res.locals.user });
+
   const jsx = (
     <ReduxProvider store={store}>
       <StaticRouter location={req.url}>

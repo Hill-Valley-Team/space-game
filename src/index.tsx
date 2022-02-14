@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createAppStore, RootState } from './store';
+import { RootState } from './store';
 import { App } from './components/App';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { createAppStore } from 'store/store';
 
 declare global {
   interface Window {
@@ -13,7 +14,6 @@ declare global {
 }
 
 const initialState = window.__INITIAL_STATE__;
-
 const store = createAppStore(initialState);
 
 ReactDOM.hydrate(

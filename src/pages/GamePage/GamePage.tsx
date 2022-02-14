@@ -16,7 +16,6 @@ export const GamePage = () => {
   }, []);
   useEffect(
     () => () => {
-      console.log('remove');
       removeFullscreenListener();
     },
     [],
