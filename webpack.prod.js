@@ -2,7 +2,6 @@ const path = require('path');
 const { DefinePlugin } = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
-
 module.exports = {
   mode: 'production',
   devtool: 'source-map',
@@ -10,18 +9,10 @@ module.exports = {
     new DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
-    new WorkboxPlugin.GenerateSW({
-      exclude: [/\.(?:png|jpg|jpeg|svg)$/],
-      runtimeCaching: [{
-        urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
-        handler: 'CacheFirst',
-        options: {
-          cacheName: 'images',
-          expiration: {
-            maxEntries: 5,
-          },
-        },
-      }],
-    }),
+    new WorkboxPlugin.InjectManifest({
+      swSrc: path.resolve(__dirname, './src/utils/service-worker.ts'),
+      swDest: "./service-worker.js",
+      mode: 'production'
+    })
   ],
 };
