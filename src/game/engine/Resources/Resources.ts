@@ -21,8 +21,6 @@ class Resources {
         res(img);
         this.cache[name] = img;
       };
-      console.log(this.path);
-      console.log(path);
       img.src = this.path + path;
     });
   }

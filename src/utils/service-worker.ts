@@ -12,8 +12,6 @@ declare global {
 
 const manifest = self.__WB_MANIFEST;
 if (manifest) {
-  console.log(manifest);
-
   precacheAndRoute(manifest);
   registerRoute(
     ({ request }) => request.destination === 'image',
@@ -34,7 +32,6 @@ if (manifest) {
 
 export const enableServiceWorker = () => {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-    console.log('sw');
     window.addEventListener('load', () => {
       navigator.serviceWorker
         .register('/service-worker.js')
