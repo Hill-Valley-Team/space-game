@@ -7,9 +7,10 @@
   "description": "Project developed during course Middle Frontend Developer at Yandex Practicum",
   "scripts": {
     "build:dev:vendors": "NODE_ENV=development webpack --config webpack/vendors.config.ts",
-    "start:dev:webpack": "webpack --mode=development",
-    "start:dev:server": "NODE_ENV=development nodemon index.ts --watch dist/server.js",
-    "dev": "NODE_ENV=development run-s start:dev:webpack start:dev:server",
+    "build:dev:server": "webpack --mode=development --config webpack/server.config.ts",
+    "start:dev:webpack": "webpack --mode=development --watch",
+    "start:dev:server": "NODE_ENV=development node index.js --watch dist/server.js",
+    "dev": "NODE_ENV=development run-p start:dev:webpack start:dev:server",
     "prebuild": "NODE_ENV=production webpack --config webpack/vendors.config.ts",
     "build": "NODE_ENV=production webpack",
     "start": "NODE_ENV=production node index.js",
@@ -19,7 +20,7 @@
     "lint": "run-s lint:p lint:ts lint:style",
     "test": "jest",
     "precommit:hook": "npm run lint",
-    "init": "npm install && npm run build:dev:vendors"
+    "init": "npm install && npm run build:dev:vendors && npm run build:dev:server"
   },
   "repository": {
     "type": "git",

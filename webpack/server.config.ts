@@ -9,7 +9,7 @@ import cssLoader from './loaders/css';
 import tsLoader from './loaders/ts';
 import imageLoader from './loaders/image';
 
-export const serverConfig: Configuration = {
+const serverConfig: Configuration = {
   name: 'server',
   target: 'node',
   node: { __dirname: false },
@@ -21,7 +21,7 @@ export const serverConfig: Configuration = {
     filename: 'server.js',
     libraryTarget: 'commonjs2',
     path: DIST_DIR,
-    assetModuleFilename: 'assets/images/[hash][ext][query]',
+    assetModuleFilename: 'assets/images/[contenthash][ext]',
     publicPath: '/',
   },
   resolve: {
@@ -51,3 +51,5 @@ export const serverConfig: Configuration = {
 
   optimization: { nodeEnv: false },
 };
+
+export default serverConfig;
