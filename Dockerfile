@@ -1,6 +1,8 @@
-FROM alpine:3.14
-WORKDIR /var/www
+FROM node:16.13
+WORKDIR /usr/webapp
 
 COPY . .
-RUN npm install
+RUN npm install \
+  && npm run build
 EXPOSE 3000
+CMD npm run start 
