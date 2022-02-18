@@ -41,7 +41,7 @@ export class Game {
 
   public score: number;
 
-  constructor(config: GameConfig) {
+  constructor(config: GameConfig, cb: Function) {
     const { width, height, parent, backgroundColor } = config;
 
     this.width = width ?? defaultGameConfig.width;
@@ -54,7 +54,7 @@ export class Game {
     this.contextValue = null;
     this.add = new Add(this);
     this.res = gameResourses;
-    this.scene = new SceneManager(this, config.scenes);
+    this.scene = new SceneManager(this, config.scenes, cb);
     this.collider = new Collider(this);
     this.score = 0;
     this.create();
