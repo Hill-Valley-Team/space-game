@@ -38,6 +38,5 @@ export class SceneManager {
       this.cb(this.game.score);
     }
     this.current.start();
-
   }
 }

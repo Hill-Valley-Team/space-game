@@ -22,4 +22,3 @@ export type PasswordRequest = {
   oldPassword: string;
   newPassword: string;
 };
-

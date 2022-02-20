@@ -1,12 +1,12 @@
 import block from 'bem-cn';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Title } from '../../components/Title';
 import { BackButton } from '../../components/BackButton';
 import './leaderBoardPage.css';
 import { PageContainer } from '../../components/PageContainer';
 import { SortEnum } from '../../utils/sort';
-import {getLeaderBoard} from "../../controllers/LeaderBoardController";
-import {LeaderBoardAllRequest, LeaderBoardData} from "../../api/LeaderBoardApi/types";
+import { getLeaderBoard } from '../../controllers/LeaderBoardController';
+import { LeaderBoardAllRequest, LeaderBoardData } from '../../api/LeaderBoardApi/types';
 
 const b = block('leader-board-page');
 const h = block('table-header');
@@ -17,7 +17,6 @@ export const LeaderBoardPage = () => {
   const updateResults = (type: string) => {
     getLeaderBoard(type)
       .then((data: LeaderBoardData[]) => {
-        console.log(data);
         if (!data?.length) {
           setResults([]);
         } else {
@@ -28,12 +27,10 @@ export const LeaderBoardPage = () => {
       .catch(() => {
         console.log('error loading leaderboard');
       });
-  }
+  };
   useEffect(() => {
-    updateResults('name');
+    updateResults('points');
   }, []);
-
-
 
   const onSortBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     updateResults(event.currentTarget.dataset.sort ?? 'name');
