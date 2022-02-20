@@ -1,36 +1,17 @@
-import { DataType, Model, Sequelize } from 'sequelize-typescript';
-import { UserTheme } from '../UserTheme';
+import { AllowNull, Column, DataType, Model, Table, Unique } from 'sequelize-typescript';
 
+@Table({
+  tableName: 'site_theme',
+  timestamps: true,
+  paranoid: true,
+})
 export class SiteTheme extends Model {
-  declare theme: string;
-  declare description: string;
+  @AllowNull(false)
+  @Unique(true)
+  @Column(DataType.STRING)
+  theme!: string;
+
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  description!: string;
 }
-
-export const initSiteTheme = (sequelize: Sequelize) => {
-  SiteTheme.init(
-    {
-      theme: {
-        type: DataType.STRING,
-        unique: true,
-        allowNull: false,
-      },
-      description: {
-        type: DataType.STRING,
-        allowNull: false,
-      },
-    },
-    {
-      tableName: 'site_theme',
-      timestamps: true,
-      paranoid: true,
-      sequelize,
-    },
-  );
-};
-
-// SiteTheme.hasOne(UserTheme, {
-//   onDelete: 'CASCADE',
-//   foreignKey: {
-//     allowNull: false,
-//   },
-// });

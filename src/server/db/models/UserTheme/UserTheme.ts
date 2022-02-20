@@ -1,26 +1,15 @@
-import { DataType, Model, Sequelize } from 'sequelize-typescript';
+import { AllowNull, Column, DataType, Model, Sequelize, Table } from 'sequelize-typescript';
 
+@Table({
+  tableName: 'user_theme',
+  timestamps: true,
+  paranoid: true,
+})
 export class UserTheme extends Model {
-  declare theme: string;
-  declare device: string;
-}
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  theme!: string;
 
-export const initUserTheme = (sequelize: Sequelize) => {
-  UserTheme.init(
-    {
-      theme: {
-        type: DataType.STRING,
-        allowNull: false,
-      },
-      device: {
-        type: DataType.STRING,
-      },
-    },
-    {
-      tableName: 'user_theme',
-      timestamps: true,
-      paranoid: true,
-      sequelize,
-    },
-  );
-};
+  @Column(DataType.STRING)
+  device!: string;
+}

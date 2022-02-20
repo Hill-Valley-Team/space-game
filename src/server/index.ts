@@ -2,18 +2,28 @@ import path from 'path';
 import express from 'express';
 import render from './middlewares/render';
 import { middlewares } from './middlewares';
-import { sequelize } from './db/sequelize';
-import { initUser } from './db/models/User';
-import { initUserTheme, UserTheme } from './db/models/UserTheme';
-import { initSiteTheme } from './db/models/SiteTheme';
+import { sequelize, dbConnect } from './db/sequelize';
+import { User } from './db/models/User';
+import { UserTheme } from './db/models/UserTheme';
+import { SiteTheme } from './db/models/SiteTheme';
 
-initUserTheme(sequelize);
-// initSiteTheme(sequelize);
-// initUser(sequelize);
+sequelize.addModels([User, SiteTheme, UserTheme]);
 
-sequelize.sync().then(() => {
-  console.log('db');
+SiteTheme.hasMany(UserTheme, {
+  onDelete: 'SET NULL',
+  foreignKey: {
+    allowNull: true,
+  },
 });
+
+User.hasOne(UserTheme, {
+  onDelete: 'CASCADE',
+  foreignKey: {
+    allowNull: false,
+  },
+});
+
+dbConnect();
 
 const app = express();
 

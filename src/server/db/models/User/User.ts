@@ -1,34 +1,14 @@
-import { DataType, Model, Sequelize } from 'sequelize-typescript';
-import { UserTheme } from '../UserTheme';
+import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
+@Table({
+  tableName: 'users',
+  timestamps: true,
+  paranoid: true,
+})
 export class User extends Model {
-  declare firstName: string;
-  declare lastName: string;
+  @Column(DataType.STRING)
+  firstName!: string;
+
+  @Column(DataType.STRING)
+  lastName!: number;
 }
-
-export const initUser = (sequelize: Sequelize) => {
-  User.init(
-    {
-      firstName: {
-        type: DataType.STRING,
-        allowNull: false,
-      },
-      lastName: {
-        type: DataType.STRING,
-      },
-    },
-    {
-      tableName: 'users',
-      timestamps: true,
-      paranoid: true,
-      sequelize,
-    },
-  );
-};
-
-// User.hasOne(UserTheme, {
-//   onDelete: 'CASCADE',
-//   foreignKey: {
-//     allowNull: false,
-//   },
-// });
