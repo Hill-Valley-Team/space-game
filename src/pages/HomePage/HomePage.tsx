@@ -7,11 +7,20 @@ import { Meta } from 'components/Meta';
 import teamLogoImg from './static/team-logo.png';
 import logoImg from './static/logo.png';
 import { Button } from '../../components/Button';
+import { themeApi } from 'api/Theme/ThemeApi';
 
 const b = block('home-page');
 export const HomePage = () => {
   const { isAuth } = useGetUserInfo();
   const navigate = useNavigate();
+
+  const onAddThemeClick = () => {
+    const result = themeApi.addTheme({
+      title: 'light',
+      description: 'Светлая тема, используется по умолчанию',
+    });
+    console.log(result);
+  };
 
   const onPlayBtnClick = useCallback(() => {
     navigate('/game');
@@ -104,6 +113,9 @@ export const HomePage = () => {
         </div>
         <div className={b('right')}>
           <img src={teamLogoImg} alt="Лого команды" />
+        </div>
+        <div>
+          <Button onClick={onAddThemeClick}>Добавить тему</Button>
         </div>
       </div>
     </div>

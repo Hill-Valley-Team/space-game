@@ -1,4 +1,4 @@
-import { AllowNull, Column, DataType, Model, Table, Unique } from 'sequelize-typescript';
+import { AllowNull, Column, DataType, Length, Model, Table, Unique } from 'sequelize-typescript';
 
 @Table({
   tableName: 'site_theme',
@@ -9,6 +9,7 @@ import { AllowNull, Column, DataType, Model, Table, Unique } from 'sequelize-typ
 export class SiteTheme extends Model {
   @AllowNull(false)
   @Unique(true)
+  @Length({ min: 3, max: 20 })
   @Column(DataType.STRING)
   theme!: string;
 

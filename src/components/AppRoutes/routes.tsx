@@ -63,10 +63,11 @@ export const routes: RouteObject[] = [
         path: '500',
         element: <Error500Page />,
       },
-      {
-        path: '*',
-        element: <Error404Page />,
-      },
+      // TODO
+      // {
+      //   path: '*',
+      //   element: <Error404Page />,
+      // },
     ],
   },
 ];

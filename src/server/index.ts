@@ -6,6 +6,7 @@ import { sequelize, dbConnect } from './db/sequelize';
 import { User } from './db/models/User';
 import { UserTheme } from './db/models/UserTheme';
 import { SiteTheme } from './db/models/SiteTheme';
+import router from './router';
 
 sequelize.addModels([User, SiteTheme, UserTheme]);
 
@@ -31,6 +32,7 @@ dbConnect();
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, '../dist')));
+app.use('/api/v1', router);
 
 app.get('/*', [...middlewares], render);
 
