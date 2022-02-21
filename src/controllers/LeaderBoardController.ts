@@ -7,11 +7,9 @@ export const getLeaderBoard = async (type: string) => {
     cursor: 0,
     limit: 100,
   });
-  console.log(response);
   return response.data.map((item) => item.data);
 };
 
 export const updateLeaderBoard = async (data: LeaderBoardRequest) => {
   const response = await leaderBoardApi.addResult(data);
-  console.log(response);
 };
