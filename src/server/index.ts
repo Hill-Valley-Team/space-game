@@ -23,6 +23,9 @@ User.hasOne(UserTheme, {
   },
 });
 
+UserTheme.belongsTo(User);
+UserTheme.belongsTo(SiteTheme);
+
 dbConnect();
 
 const app = express();

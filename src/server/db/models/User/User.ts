@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, HasOne, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import { UserTheme } from '../UserTheme';
 
 @Table({
   tableName: 'users',
@@ -6,6 +7,10 @@ import { Column, DataType, Model, Table } from 'sequelize-typescript';
   paranoid: true,
 })
 export class User extends Model {
+  @PrimaryKey
+  @Column(DataType.INTEGER.UNSIGNED)
+  id!: number;
+
   @Column(DataType.STRING)
   firstName!: string;
 

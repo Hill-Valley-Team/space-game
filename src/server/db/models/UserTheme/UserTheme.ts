@@ -1,4 +1,16 @@
-import { AllowNull, Column, DataType, Model, Sequelize, Table } from 'sequelize-typescript';
+import {
+  AllowNull,
+  AutoIncrement,
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  PrimaryKey,
+  Sequelize,
+  Table,
+} from 'sequelize-typescript';
+import { User } from '../User';
 
 @Table({
   tableName: 'user_theme',
