@@ -4,6 +4,7 @@ import { AllowNull, Column, DataType, Model, Table, Unique } from 'sequelize-typ
   tableName: 'site_theme',
   timestamps: true,
   paranoid: true,
+  underscored: true,
 })
 export class SiteTheme extends Model {
   @AllowNull(false)
