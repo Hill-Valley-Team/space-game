@@ -12,14 +12,13 @@ import imageLoader from './loaders/image';
 import cssLoader from './loaders/css';
 import tsLoader from './loaders/ts';
 
-export const clientConfig: Configuration = {
+const clientConfig: Configuration = {
   entry: [
     IS_DEV && 'react-hot-loader/patch',
     IS_DEV && 'webpack-hot-middleware/client',
     IS_DEV && 'css-hot-loader/hotModuleReplacement',
     join(SRC_DIR, 'index.tsx'),
   ].filter(Boolean) as Entry,
-  // entry: join(SRC_DIR, 'index.tsx'),
   module: {
     rules: [fileLoader.client, cssLoader.client, tsLoader.client, imageLoader.client],
   },
@@ -27,7 +26,7 @@ export const clientConfig: Configuration = {
     path: DIST_DIR,
     publicPath: '/',
     filename: '[name].bundle.js',
-    assetModuleFilename: 'assets/images/[hash][ext][query]',
+    assetModuleFilename: 'assets/images/[contenthash][ext]',
     library: {
       type: 'umd',
       name: 'GameLibrary',
@@ -79,3 +78,5 @@ export const clientConfig: Configuration = {
     hints: IS_DEV ? false : 'warning',
   },
 };
+
+export default clientConfig;

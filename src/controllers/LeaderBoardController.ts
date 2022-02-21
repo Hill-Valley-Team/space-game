@@ -11,5 +11,5 @@ export const getLeaderBoard = async (type: string) => {
 };
 
 export const updateLeaderBoard = async (data: LeaderBoardRequest) => {
-  const response = await leaderBoardApi.addResult(data);
+  await leaderBoardApi.addResult(data);
 };
