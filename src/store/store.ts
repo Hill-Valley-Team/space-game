@@ -3,6 +3,7 @@ import { isServer } from 'utils/isServer';
 import { userAPI } from '../services/UserService';
 import { createUserSlice } from './slices/userSlice';
 import { PreloadedData } from './types';
+import { leaderBoardAPI } from '../services/LeaderBoardS';
 
 export const createAppStore = (preloadedData?: PreloadedData | object) => {
   let userReducer;
