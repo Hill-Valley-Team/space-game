@@ -1,15 +1,16 @@
 import block from 'bem-cn';
 import React, { useCallback } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useGetUserInfoQuery } from '../../services/UserService';
 import './homePage.css';
+import { useGetUserInfo } from 'hooks/useGetUserInfo';
+import { Meta } from 'components/Meta';
 import teamLogoImg from './static/team-logo.png';
 import logoImg from './static/logo.png';
 import { Button } from '../../components/Button';
 
 const b = block('home-page');
 export const HomePage = () => {
-  const { isSuccess } = useGetUserInfoQuery();
+  const { isAuth } = useGetUserInfo();
   const navigate = useNavigate();
 
   const onPlayBtnClick = useCallback(() => {
@@ -25,7 +26,7 @@ export const HomePage = () => {
   }, [navigate]);
 
   const getBtnBlock = () => {
-    if (isSuccess) {
+    if (isAuth) {
       return (
         <Button
           width="fixed"
@@ -57,7 +58,7 @@ export const HomePage = () => {
   };
 
   const getLinkBlock = () => {
-    if (isSuccess) {
+    if (isAuth) {
       return (
         <>
           <NavLink className={b('link')} to="/profile">
@@ -86,6 +87,7 @@ export const HomePage = () => {
 
   return (
     <div className={b()}>
+      <Meta title="Space Racing Game - Главная страница игры" />
       <div className={b('container')}>
         <div className={b('left')}>
           <div className={b('logo')}>

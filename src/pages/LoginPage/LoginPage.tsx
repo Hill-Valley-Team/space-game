@@ -1,4 +1,5 @@
 import block from 'bem-cn';
+import { useGetUserInfo } from 'hooks/useGetUserInfo';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/Button';
@@ -29,10 +30,11 @@ export const LoginPage = () => {
   ] = useFormInput({ type: formScheme[InputNames.PASSWORD].type });
 
   const [signin] = useSigninMutation();
+  const { requestUserInfo } = useGetUserInfo();
 
   const formSubmitHandle = (formData: FormData) => {
     signin(formData)
-      .unwrap()
+      .then(() => requestUserInfo())
       .catch((error) => {
         if (error.data && 'reason' in error.data) {
           setRequestError(JSON.stringify(error.data.reason));

@@ -1,10 +1,11 @@
 import React, { PropsWithChildren } from 'react';
 import block from 'bem-cn';
+import { useGetUserInfo } from 'hooks/useGetUserInfo';
 import { Button } from '../../../components/Button';
 import { formScheme, InputNames } from '../../../consts/formScheme';
 import { InputField } from '../../../components/InputField';
 import { useFormInput } from '../../../hooks/useFormInput';
-import { useGetUserInfoQuery, useUpdateUserProfileMutation } from '../../../services/UserService';
+import { useUpdateUserProfileMutation } from '../../../services/UserService';
 import { prepareDataToRequest } from '../../../controllers/utils/prepareDataToRequest';
 import { UserRequest } from '../../../services/types';
 import { UserRequestFields } from '../../../services/consts';
@@ -16,7 +17,7 @@ type ProfileEditProps = PropsWithChildren<{ viewHandle: () => void }>;
 
 export const ProfileEdit = (props: ProfileEditProps) => {
   const { viewHandle } = props;
-  const { data: userData } = useGetUserInfoQuery();
+  const { userData } = useGetUserInfo();
 
   const [
     { value: loginValue, isValid: loginIsValid, errorMessage: loginErrorMessage },

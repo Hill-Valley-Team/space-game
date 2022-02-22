@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { UserData } from '../api/Auth';
 import { baseUrl, signInRequestFields, signUpRequestFields } from '../api/consts';
 import { SignInRequest, SignUpRequest } from '../api/types';
 import { prepareDataToRequest } from '../controllers/utils/prepareDataToRequest';
@@ -17,7 +16,6 @@ export const userAPI = createApi({
         method: 'PUT',
         credentials: 'include',
       }),
-      invalidatesTags: ['User'],
     }),
     updateUserAvatar: builder.mutation<void, FormData>({
       query: (data) => ({
@@ -26,7 +24,6 @@ export const userAPI = createApi({
         method: 'PUT',
         credentials: 'include',
       }),
-      invalidatesTags: ['User'],
     }),
     updatePassword: builder.mutation<void, PasswordRequest>({
       query: (password) => ({
@@ -35,14 +32,6 @@ export const userAPI = createApi({
         method: 'PUT',
         credentials: 'include',
       }),
-      invalidatesTags: ['User'],
-    }),
-    getUserInfo: builder.query<UserData, void>({
-      query: () => ({
-        url: '/auth/user',
-        credentials: 'include',
-      }),
-      providesTags: ['User'],
     }),
     logout: builder.mutation<void, void>({
       query: () => ({
@@ -50,12 +39,10 @@ export const userAPI = createApi({
         method: 'POST',
         credentials: 'include',
       }),
-      invalidatesTags: ['User'],
     }),
     signin: builder.mutation<void, FormData>({
       query: (formData) => {
         const preparedData = prepareDataToRequest<SignInRequest>(signInRequestFields, formData);
-
         return {
           url: '/auth/signin',
           body: preparedData,
@@ -63,7 +50,6 @@ export const userAPI = createApi({
           credentials: 'include',
         };
       },
-      invalidatesTags: ['User'],
     }),
     signup: builder.mutation<void, FormData>({
       query: (formData) => {
@@ -76,14 +62,12 @@ export const userAPI = createApi({
           credentials: 'include',
         };
       },
-      invalidatesTags: ['User'],
     }),
   }),
 });
 
 export const {
   useUpdateUserProfileMutation,
-  useGetUserInfoQuery,
   useUpdatePasswordMutation,
   useUpdateUserAvatarMutation,
   useLogoutMutation,

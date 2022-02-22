@@ -1,6 +1,6 @@
+import { useGetUserInfo } from 'hooks/useGetUserInfo';
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useGetUserInfoQuery } from '../../services/UserService';
 
 type RequireAuthProps = {
   children: JSX.Element;
@@ -10,10 +10,10 @@ type RequireAuthProps = {
 
 export const RequireAuth = (props: RequireAuthProps) => {
   const { children, to, requireAuth } = props;
-  const { isSuccess } = useGetUserInfoQuery();
+  const { isAuth } = useGetUserInfo();
   const location = useLocation();
 
-  if (isSuccess === requireAuth) {
+  if (isAuth === requireAuth) {
     return children;
   }
 
