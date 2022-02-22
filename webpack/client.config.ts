@@ -12,6 +12,8 @@ import imageLoader from './loaders/image';
 import cssLoader from './loaders/css';
 import tsLoader from './loaders/ts';
 
+const WorkboxPlugin = require('workbox-webpack-plugin');
+
 const clientConfig: Configuration = {
   entry: [
     IS_DEV && 'react-hot-loader/patch',
@@ -67,6 +69,11 @@ const clientConfig: Configuration = {
           ],
         ],
       },
+    }),
+    !IS_DEV && new WorkboxPlugin.InjectManifest({
+      swSrc: join(SRC_DIR, 'utils', 'service-worker.ts'),
+      swDest: "./service-worker.js",
+      mode: 'production'
     }),
     new HotModuleReplacementPlugin(),
     !IS_DEV && new CompressionPlugin(),
