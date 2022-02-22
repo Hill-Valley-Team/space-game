@@ -12,20 +12,13 @@ sequelize.addModels([User, SiteTheme, UserTheme]);
 
 SiteTheme.hasMany(UserTheme, {
   onDelete: 'SET NULL',
-  foreignKey: {
-    allowNull: true,
-  },
+  foreignKey: 'theme_id',
 });
 
 User.hasOne(UserTheme, {
   onDelete: 'CASCADE',
-  foreignKey: {
-    allowNull: false,
-  },
+  foreignKey: 'user_id',
 });
-
-UserTheme.belongsTo(User);
-UserTheme.belongsTo(SiteTheme);
 
 dbConnect();
 
