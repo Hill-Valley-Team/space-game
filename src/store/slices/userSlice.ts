@@ -50,6 +50,3 @@ export const createUserSlice = (data?: UserData) => {
     },
   });
 };
-
-// export const { resetUser } = userSlice.actions;
-// export default userSlice.reducer;

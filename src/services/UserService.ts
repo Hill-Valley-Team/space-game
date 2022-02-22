@@ -16,7 +16,6 @@ export const userAPI = createApi({
         method: 'PUT',
         credentials: 'include',
       }),
-      // invalidatesTags: ['User'],
     }),
     updateUserAvatar: builder.mutation<void, FormData>({
       query: (data) => ({
@@ -25,7 +24,6 @@ export const userAPI = createApi({
         method: 'PUT',
         credentials: 'include',
       }),
-      // invalidatesTags: ['User'],
     }),
     updatePassword: builder.mutation<void, PasswordRequest>({
       query: (password) => ({
@@ -34,22 +32,13 @@ export const userAPI = createApi({
         method: 'PUT',
         credentials: 'include',
       }),
-      // invalidatesTags: ['User'],
     }),
-    // getUserInfo: builder.query<UserData, void>({
-    //   query: () => ({
-    //     url: '/auth/user',
-    //     credentials: 'include',
-    //   }),
-    //   providesTags: ['User'],
-    // }),
     logout: builder.mutation<void, void>({
       query: () => ({
         url: '/auth/logout',
         method: 'POST',
         credentials: 'include',
       }),
-      // invalidatesTags: ['User'],
     }),
     signin: builder.mutation<void, FormData>({
       query: (formData) => {
@@ -61,7 +50,6 @@ export const userAPI = createApi({
           credentials: 'include',
         };
       },
-      // invalidatesTags: ['User'],
     }),
     signup: builder.mutation<void, FormData>({
       query: (formData) => {
@@ -74,14 +62,12 @@ export const userAPI = createApi({
           credentials: 'include',
         };
       },
-      // invalidatesTags: ['User'],
     }),
   }),
 });
 
 export const {
   useUpdateUserProfileMutation,
-  // useGetUserInfoQuery,
   useUpdatePasswordMutation,
   useUpdateUserAvatarMutation,
   useLogoutMutation,

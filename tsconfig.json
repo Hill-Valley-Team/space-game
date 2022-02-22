@@ -20,12 +20,6 @@
     "skipLibCheck": true,
     "baseUrl": "src"
   },
-  "include": [
-    // "typings/**/*.d.ts",
-    // "src/declarations.d.ts",
-    // "./node_modules/@types",
-    "src",
-    "webpack"
-  ],
+  "include": ["src", "webpack"],
   "exclude": ["**/*.js", "./node_modules/"]
 }
