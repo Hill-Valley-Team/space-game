@@ -16,3 +16,7 @@ export type UserSlice = Slice<
   },
   string
 >;
+
+export type ThemeState = {
+  id: number | undefined;
+};

@@ -5,6 +5,7 @@ import { UserTheme } from '../UserTheme';
   tableName: 'users',
   timestamps: true,
   paranoid: true,
+  underscored: true,
 })
 export class User extends Model {
   @PrimaryKey

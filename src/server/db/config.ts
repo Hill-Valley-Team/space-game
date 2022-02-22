@@ -1,7 +1,11 @@
 import { SequelizeOptions } from 'sequelize-typescript';
+import { config } from 'dotenv';
 
-const { POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB } = process.env;
-console.log(process.env);
+config();
+
+const { NODE_ENV, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB } =
+  process.env;
+console.log(POSTGRES_HOST);
 
 export const sequelizeOptions: SequelizeOptions = {
   host: POSTGRES_HOST,

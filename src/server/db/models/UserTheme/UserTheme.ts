@@ -1,21 +1,10 @@
-import {
-  AllowNull,
-  AutoIncrement,
-  BelongsTo,
-  Column,
-  DataType,
-  ForeignKey,
-  Model,
-  PrimaryKey,
-  Sequelize,
-  Table,
-} from 'sequelize-typescript';
-import { User } from '../User';
+import { AllowNull, Column, DataType, Model, Table } from 'sequelize-typescript';
 
 @Table({
   tableName: 'user_theme',
   timestamps: true,
   paranoid: true,
+  underscored: true,
 })
 export class UserTheme extends Model {
   @AllowNull(false)
