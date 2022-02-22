@@ -7,20 +7,15 @@ import { Meta } from 'components/Meta';
 import teamLogoImg from './static/team-logo.png';
 import logoImg from './static/logo.png';
 import { Button } from '../../components/Button';
-import { themeApi } from 'api/Theme/ThemeApi';
+import { Switcher } from 'components/Switcher/Switcher';
+import { useUserTheme } from 'hooks/useUserTheme';
+import { useAppSelector } from 'hooks/hooks';
 
 const b = block('home-page');
 export const HomePage = () => {
   const { isAuth } = useGetUserInfo();
+  const { data: themeData, requestUserTheme } = useUserTheme();
   const navigate = useNavigate();
-
-  const onAddThemeClick = () => {
-    const result = themeApi.addTheme({
-      theme: 'light',
-      description: 'Светлая тема, используется по умолчанию',
-    });
-    console.log(result);
-  };
 
   const onPlayBtnClick = useCallback(() => {
     navigate('/game');
@@ -112,10 +107,13 @@ export const HomePage = () => {
           <div className={b('link-block')}>{getLinkBlock()}</div>
         </div>
         <div className={b('right')}>
+          <Switcher
+            from="Светлая тема"
+            to="Тёмная тема"
+            checked={true}
+            onClick={requestUserTheme}
+          />
           <img src={teamLogoImg} alt="Лого команды" />
-        </div>
-        <div>
-          <Button onClick={onAddThemeClick}>Добавить тему</Button>
         </div>
       </div>
     </div>

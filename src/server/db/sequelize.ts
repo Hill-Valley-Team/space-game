@@ -9,9 +9,11 @@ export async function dbConnect() {
     await sequelize.authenticate();
     await sequelize.sync({ force: true });
     console.log('Connection has been established successfully.');
-    await initThemes();
-    await initUser();
-    await initDefaultUserTheme();
+    if (process.env.NODE_ENV === 'development') {
+      await initThemes();
+      await initUser();
+      await initDefaultUserTheme();
+    }
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }

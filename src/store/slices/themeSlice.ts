@@ -1,20 +1,59 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { authApi, UserData } from 'api/Auth';
+import { themeApi } from 'api/Theme/ThemeApi';
 import { FetchStatus } from 'store/consts';
-import { ThemeState, UserSlice, UserState } from './types';
+import { ThemeState } from './types';
 
 export const createThemeSlice = (themeId?: number) => {};
 
 const initialState: ThemeState = {
-  id: undefined,
+  data: undefined,
+  error: undefined,
+  status: FetchStatus.IDLE,
 };
+
+export const fetchUserTheme = createAsyncThunk('theme/fetch', async (userId) => {
+  const response = await themeApi.getUserTheme(userId);
+  return response.data;
+});
+
+export const setUserTheme = createAsyncThunk('theme/set', async (userId, themeId) => {
+  const response = await themeApi.setUserTheme(userId, themeId);
+  return response.data;
+});
 
 export const themeSlice = createSlice({
   name: 'theme',
   initialState,
   reducers: {
     setTheme(state, action) {
-      state.id = action.payload;
+      state.data = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchUserTheme.fulfilled, (state, action) => {
+      state.data = action.payload;
+      state.status = FetchStatus.SUCCESS;
+    });
+    builder.addCase(fetchUserTheme.rejected, (state, action) => {
+      state.error = action.error.message;
+      state.status = FetchStatus.FAILURE;
+      state.data = undefined;
+    });
+    builder.addCase(fetchUserTheme.pending, (state) => {
+      state.status = FetchStatus.LOADING;
+    });
+
+    builder.addCase(setUserTheme.fulfilled, (state, action) => {
+      state.data = action.payload;
+      state.status = FetchStatus.SUCCESS;
+    });
+    builder.addCase(setUserTheme.rejected, (state, action) => {
+      state.error = action.error.message;
+      state.status = FetchStatus.FAILURE;
+      state.data = undefined;
+    });
+    builder.addCase(setUserTheme.pending, (state) => {
+      state.status = FetchStatus.LOADING;
+    });
   },
 });

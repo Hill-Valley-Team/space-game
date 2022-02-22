@@ -1,7 +1,7 @@
 import { localBaseUrl } from 'api/consts';
 import { AxiosRequestConfig } from 'axios';
 import { BaseApi } from '../BaseApi';
-import { AddThemeRequest } from './types';
+import { AddThemeRequest, GetUserThemeRequest } from './types';
 
 class ThemeApi extends BaseApi {
   constructor() {
@@ -9,6 +9,11 @@ class ThemeApi extends BaseApi {
   }
 
   public addTheme = (data: AddThemeRequest) => this.http.post('', data);
+
+  public getUserTheme = (userId: number) => this.http.get(`/theme/${userId}`);
+  public setUserTheme = (userId: number, themeId: number) => this.http.put(`/theme/${userId}`);
+  public deleteUserTheme = (userId: number, themeId: number) =>
+    this.http.delete(`/theme/${userId}`);
 
   //   public signUp = (data: SignUpRequest) => this.http.post('/signup', data);
 
