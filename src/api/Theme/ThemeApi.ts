@@ -5,10 +5,10 @@ import { AddThemeRequest } from './types';
 
 class ThemeApi extends BaseApi {
   constructor() {
-    super('/auth', localBaseUrl);
+    super('/theme', localBaseUrl);
   }
 
-  public addTheme = (data: AddThemeRequest) => this.http.post('/theme', data);
+  public addTheme = (data: AddThemeRequest) => this.http.post('', data);
 
   //   public signUp = (data: SignUpRequest) => this.http.post('/signup', data);
 

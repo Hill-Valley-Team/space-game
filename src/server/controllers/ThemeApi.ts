@@ -8,8 +8,8 @@ export class ThemeAPI {
     try {
       await themeService.create(body);
       return response.sendStatus(201);
-    } catch {
-      response.sendStatus(400);
+    } catch (error) {
+      return response.sendStatus(400);
     }
   };
 

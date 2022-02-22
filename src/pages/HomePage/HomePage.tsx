@@ -16,7 +16,7 @@ export const HomePage = () => {
 
   const onAddThemeClick = () => {
     const result = themeApi.addTheme({
-      title: 'light',
+      theme: 'light',
       description: 'Светлая тема, используется по умолчанию',
     });
     console.log(result);

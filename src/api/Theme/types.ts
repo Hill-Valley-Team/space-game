@@ -1,4 +1,4 @@
 export type AddThemeRequest = {
-  title: string;
+  theme: string;
   description: string;
 };
