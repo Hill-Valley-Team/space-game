@@ -5,8 +5,9 @@ import { createAppStore } from './store';
 
 // export type RootState = ReturnType<typeof store.getState>;
 // export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof createAppStore>;
-export type AppDispatch = Dispatch<RootState>;
+export type RootStore = ReturnType<typeof createAppStore>;
+export type RootState = ReturnType<RootStore['getState']>;
+export type AppDispatch = RootStore['dispatch'];
 export type PreloadedData = {
   userData: UserData;
 };

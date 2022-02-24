@@ -14,11 +14,11 @@ export class UserThemeAPI {
   };
 
   public static find = async (request: Request, response: Response) => {
-    const { body } = request;
+    const { userId } = request.params;
 
     try {
-      const data = await userThemeService.find(body.userId);
-      return response.json(data);
+      const data = await userThemeService.find(Number(userId));
+      return response.json(data[0]);
     } catch {
       response.sendStatus(400);
     }

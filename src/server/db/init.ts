@@ -17,6 +17,7 @@ export const initThemes = async () => {
 export const initUser = async () => {
   try {
     await User.create({ id: 166307, firstName: 'Наталья', lastName: 'Гарипова' });
+    await User.create({ id: 455, firstName: 'fdfdf', lastName: 'gghhhh' });
     console.log('Users have been added');
   } catch {
     console.log('Users have not been added');
@@ -26,6 +27,7 @@ export const initUser = async () => {
 export const initDefaultUserTheme = async () => {
   try {
     await UserTheme.create({ userId: 166307, themeId: 1, device: '' });
+    await UserTheme.create({ userId: 455, themeId: 2, device: '' });
     console.log('Users Theme have been setted');
   } catch {
     console.log('Users Theme have not been setted');

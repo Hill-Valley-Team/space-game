@@ -11,22 +11,26 @@ const initialState: ThemeState = {
   status: FetchStatus.IDLE,
 };
 
-export const fetchUserTheme = createAsyncThunk('theme/fetch', async (userId) => {
+export const fetchUserTheme = createAsyncThunk('theme/fetch', async (userId: number) => {
   const response = await themeApi.getUserTheme(userId);
   return response.data;
 });
 
-export const setUserTheme = createAsyncThunk('theme/set', async (userId, themeId) => {
-  const response = await themeApi.setUserTheme(userId, themeId);
-  return response.data;
-});
+export const setUserTheme = createAsyncThunk(
+  'theme/set',
+  async (userData: { userId: number; themeId: number }) => {
+    const { userId, themeId } = userData;
+    const response = await themeApi.setUserTheme(userId, themeId);
+    return response.data;
+  },
+);
 
 export const themeSlice = createSlice({
   name: 'theme',
   initialState,
   reducers: {
     setTheme(state, action) {
-      state.data = action.payload;
+      state.data = action.payload.themeId;
     },
   },
   extraReducers: (builder) => {

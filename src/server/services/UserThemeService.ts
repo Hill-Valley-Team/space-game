@@ -1,5 +1,8 @@
+import { Op } from 'sequelize/types';
 import { SiteTheme } from 'server/db/models/SiteTheme';
+import { User } from 'server/db/models/User';
 import { UserTheme } from 'server/db/models/UserTheme';
+import { sequelize } from 'server/db/sequelize';
 import { BaseService } from './BaseService';
 
 interface FindRequest {
@@ -21,15 +24,15 @@ interface UpdateRequest {
 }
 
 class UserThemeService implements BaseService {
-  public find = ({ userId }: FindRequest) => {
-    if (userId) {
-      return UserTheme.findOne({
-        where: {
-          user_id: userId,
-        },
-      });
-    }
-    return UserTheme.findAll();
+  public find = async (userId: number) => {
+    return UserTheme.findOrCreate({
+      where: {
+        user_id: userId,
+      },
+      defaults: {
+        theme_id: 1,
+      },
+    });
   };
 
   public create = (data: CreateRequest) => {

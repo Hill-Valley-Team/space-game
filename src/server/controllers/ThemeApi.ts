@@ -14,10 +14,10 @@ export class ThemeAPI {
   };
 
   public static find = async (request: Request, response: Response) => {
-    const { body } = request;
+    const { id } = request.params;
 
     try {
-      const data = await themeService.find(body);
+      const data = await themeService.find(Number(id));
       return response.json(data);
     } catch {
       response.sendStatus(400);

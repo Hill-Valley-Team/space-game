@@ -1,10 +1,6 @@
 import { SiteTheme } from 'server/db/models/SiteTheme';
 import { BaseService } from './BaseService';
 
-interface FindRequest {
-  id: number;
-}
-
 interface CreateRequest {
   title: string;
   description: string;
@@ -21,7 +17,7 @@ interface UpdateRequest {
 }
 
 class ThemeService implements BaseService {
-  public find = ({ id }: FindRequest) => {
+  public find = (id: number) => {
     return SiteTheme.findByPk(id);
   };
 
@@ -33,7 +29,7 @@ class ThemeService implements BaseService {
     return SiteTheme.create(data);
   };
 
-  public delete = ({ id }: DeleteRequest) => {
+  public delete = (id: number) => {
     return SiteTheme.destroy({
       where: {
         id,
