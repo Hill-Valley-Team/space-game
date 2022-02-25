@@ -1,5 +1,5 @@
 import block from 'bem-cn';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './homePage.css';
 import { useGetUserInfo } from 'hooks/useGetUserInfo';
@@ -8,18 +8,20 @@ import teamLogoImg from './static/team-logo.png';
 import logoImg from './static/logo.png';
 import { Button } from '../../components/Button';
 import { Switcher } from 'components/Switcher/Switcher';
-import { fetchUserTheme } from 'store/slices/themeSlice';
-import { useAppSelector } from 'hooks/hooks';
 import { useUserTheme } from 'hooks/useUserTheme';
+import { DEFAULT_THEME_ID, SECOND_THEME_ID } from 'hooks/useUserTheme/consts';
 
 const b = block('home-page');
 export const HomePage = () => {
   const { isAuth } = useGetUserInfo();
-  const { data: themeData } = useUserTheme();
-
-  console.log(themeData);
-
+  const { data: themeData, toggleUserTheme } = useUserTheme();
   const navigate = useNavigate();
+
+  const onThemeSwitch = useCallback(() => {
+    if (themeData) {
+      toggleUserTheme(themeData.id);
+    }
+  }, [themeData]);
 
   const onPlayBtnClick = useCallback(() => {
     navigate('/game');
@@ -111,7 +113,12 @@ export const HomePage = () => {
           <div className={b('link-block')}>{getLinkBlock()}</div>
         </div>
         <div className={b('right')}>
-          <Switcher from="Светлая тема" to="Тёмная тема" checked={true} />
+          <Switcher
+            from="Светлая тема"
+            to="Тёмная тема"
+            value={themeData?.id}
+            onChangeHandler={onThemeSwitch}
+          />
           <img src={teamLogoImg} alt="Лого команды" />
         </div>
       </div>

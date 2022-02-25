@@ -1,24 +1,27 @@
 import React from 'react';
 import block from 'bem-cn';
 import './switcher.css';
+import { DEFAULT_THEME_ID } from 'hooks/useUserTheme/consts';
 
 const b = block('switcher');
 
 type SwitcherProps = {
   from: string;
   to: string;
-  checked: boolean;
+  value: number | undefined;
+  onChangeHandler?: () => void;
 };
 
 export const Switcher = (props: SwitcherProps) => {
+  const { from, to, value, onChangeHandler } = props;
   return (
     <div className={b()}>
-      <div className={b('from')}>{props.from}</div>
+      <div className={b('from')}>{from}</div>
       <label className={b('switch')}>
-        <input type="checkbox" checked={props.checked} />
+        <input type="checkbox" checked={value === DEFAULT_THEME_ID} onClick={onChangeHandler} />
         <span className="slider round"></span>
       </label>
-      <div className={b('to')}>{props.to}</div>
+      <div className={b('to')}>{to}</div>
     </div>
   );
 };

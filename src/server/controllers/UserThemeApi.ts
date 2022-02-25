@@ -3,10 +3,27 @@ import { userThemeService } from 'server/services/UserThemeService';
 
 export class UserThemeAPI {
   public static create = async (request: Request, response: Response) => {
-    const { body } = request;
+    const { userId, themeId } = request.params;
 
     try {
-      await userThemeService.create(body);
+      await userThemeService.create({
+        userId: Number(userId),
+        themeId: Number(themeId),
+      });
+      return response.sendStatus(201);
+    } catch {
+      response.sendStatus(400);
+    }
+  };
+
+  public static update = async (request: Request, response: Response) => {
+    const { userId, themeId } = request.params;
+
+    try {
+      await userThemeService.update({
+        userId: Number(userId),
+        themeId: Number(themeId),
+      });
       return response.sendStatus(201);
     } catch {
       response.sendStatus(400);
@@ -18,8 +35,9 @@ export class UserThemeAPI {
 
     try {
       const data = await userThemeService.find(Number(userId));
-      return response.json(data[0]);
-    } catch {
+      return response.json(data);
+    } catch (e) {
+      console.log(e);
       response.sendStatus(400);
     }
   };

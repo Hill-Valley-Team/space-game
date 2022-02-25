@@ -1,6 +1,5 @@
 import { AllowNull, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
 import { SiteTheme } from '../SiteTheme';
-import { User } from '../User';
 
 @Table({
   tableName: 'user_theme',
@@ -15,11 +14,8 @@ import { User } from '../User';
   ],
 })
 export class UserTheme extends Model {
-  @Column(DataType.STRING)
-  device!: string;
-
-  @AllowNull(false)
-  @ForeignKey(() => User)
+  // @AllowNull(false)
+  // @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
     field: 'user_id',

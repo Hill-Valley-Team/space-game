@@ -16,12 +16,31 @@ export const fetchUserTheme = createAsyncThunk('theme/fetch', async (userId: num
   return response.data;
 });
 
-export const setUserTheme = createAsyncThunk(
+export const updateUserTheme = createAsyncThunk(
   'theme/set',
   async (userData: { userId: number; themeId: number }) => {
     const { userId, themeId } = userData;
-    const response = await themeApi.setUserTheme(userId, themeId);
-    return response.data;
+    const setResponse = await themeApi.setUserTheme(userId, themeId);
+    if (setResponse.data === 'Created') {
+      const getResponse = await themeApi.getUserTheme(userId);
+      return getResponse.data;
+    }
+  },
+);
+
+export const fetchOrCreateUserTheme = createAsyncThunk(
+  'theme/fetchOrCreate',
+  async (userData: { userId: number; themeId: number }) => {
+    const { userId, themeId } = userData;
+    const getResponse = await themeApi.getUserTheme(userId);
+    if (getResponse.data === null) {
+      const addResponse = await themeApi.addUserTheme(userId, themeId);
+      if (addResponse.data === 'Created') {
+        const createdResponse = await themeApi.getUserTheme(userId);
+        return createdResponse.data;
+      }
+    }
+    return getResponse.data;
   },
 );
 
@@ -47,16 +66,29 @@ export const themeSlice = createSlice({
       state.status = FetchStatus.LOADING;
     });
 
-    builder.addCase(setUserTheme.fulfilled, (state, action) => {
+    builder.addCase(updateUserTheme.fulfilled, (state, action) => {
       state.data = action.payload;
       state.status = FetchStatus.SUCCESS;
     });
-    builder.addCase(setUserTheme.rejected, (state, action) => {
+    builder.addCase(updateUserTheme.rejected, (state, action) => {
       state.error = action.error.message;
       state.status = FetchStatus.FAILURE;
       state.data = undefined;
     });
-    builder.addCase(setUserTheme.pending, (state) => {
+    builder.addCase(updateUserTheme.pending, (state) => {
+      state.status = FetchStatus.LOADING;
+    });
+
+    builder.addCase(fetchOrCreateUserTheme.fulfilled, (state, action) => {
+      state.data = action.payload;
+      state.status = FetchStatus.SUCCESS;
+    });
+    builder.addCase(fetchOrCreateUserTheme.rejected, (state, action) => {
+      state.error = action.error.message;
+      state.status = FetchStatus.FAILURE;
+      state.data = undefined;
+    });
+    builder.addCase(fetchOrCreateUserTheme.pending, (state) => {
       state.status = FetchStatus.LOADING;
     });
   },
