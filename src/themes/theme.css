@@ -1,0 +1,36 @@
+@import './lightTheme.css';
+@import './darkTheme.css';
+
+.theme-light {
+  --primary-color: $light-theme-primary-color;
+  --secondary-color: $light-theme-secondary-color;
+  --text-color: $light-theme-text-color;
+  --text-color-light: $light-theme-text-color-light;
+  --primary-bg-color: $light-theme-primary-bg-color;
+  --secondary-btn-bg-color: $light-theme-secondary-btn-bg-color;
+  --disabled-bg-color: $light-theme-disabled-bg-color;
+  --accent-color: $light-theme-accent-color;
+  --pure-white: $light-theme-accent-color;
+  --error-text-color: $light-theme-error-text-color;
+  --error-text-color-light: $light-theme-error-text-color-light;
+  --light-blue: $light-theme-error-text-color-light;
+  --purple: $light-theme-purple;
+  --orange: $light-theme-orange;
+}
+
+.theme-dark {
+  --primary-color: $dark-theme-primary-color;
+  --secondary-color: $dark-theme-secondary-color;
+  --text-color: $dark-theme-text-color;
+  --text-color-light: $dark-theme-text-color-light;
+  --primary-bg-color: $dark-theme-primary-bg-color;
+  --secondary-btn-bg-color: $dark-theme-secondary-btn-bg-color;
+  --disabled-bg-color: $dark-theme-disabled-bg-color;
+  --accent-color: $dark-theme-accent-color;
+  --pure-white: $dark-theme-accent-color;
+  --error-text-color: $dark-theme-error-text-color;
+  --error-text-color-light: $dark-theme-error-text-color-light;
+  --light-blue: $dark-theme-error-text-color-light;
+  --purple: $dark-theme-purple;
+  --orange: $dark-theme-orange;
+}

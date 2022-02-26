@@ -3,12 +3,12 @@
   align-items: center;
 
   &__from {
-    color: $pure-white;
+    color: var(--pure-white);
     padding-right: 10px;
   }
 
   &__to {
-    color: $pure-white;
+    color: var(--pure-white);
     padding-left: 10px;
   }
 
@@ -42,16 +42,16 @@
       content: '';
       height: 26px;
       width: 26px;
-      background-color: $pure-white;
+      background-color: var(--pure-white);
       transition: 0.4s;
     }
 
     input:checked + .slider {
-      background-color: $primary-color;
+      background-color: var(--primary-color);
     }
 
     input:focus + .slider {
-      box-shadow: 0 0 1px $primary-color;
+      box-shadow: 0 0 1px var(--primary-color);
     }
 
     input:checked + .slider::before {

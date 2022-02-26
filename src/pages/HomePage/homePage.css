@@ -1,5 +1,5 @@
 .home-page {
-  background: center / cover no-repeat url('../../assets/images/bg.jpg') $secondary-color;
+  background: center / cover no-repeat url('../../assets/images/bg.jpg') var(--secondary-color);
 
   &__logo {
     margin-bottom: 50px;
@@ -38,7 +38,7 @@
     font-weight: 600;
     font-size: 42px;
     line-height: 58px;
-    color: $purple;
+    color: var(--purple);
   }
 
   &__text {
@@ -46,7 +46,7 @@
     font-weight: 500;
     font-size: 20px;
     line-height: 135.02%;
-    color: $text-color;
+    color: var(--text-color);
     margin-bottom: 50px;
   }
 
@@ -58,7 +58,7 @@
   &__play-button.button {
     height: 47px;
     max-width: 153px;
-    background-color: $orange;
+    background-color: var(--orange);
     font-size: 18px;
     padding: 13px 20px;
   }

@@ -1,5 +1,5 @@
 .page-container {
-  background: $primary-bg-color;
+  background: var(--primary-bg-color);
   box-shadow: 0 0 6px rgb(0 0 0 / 14%);
   border-radius: 50px;
   margin-top: 10px;

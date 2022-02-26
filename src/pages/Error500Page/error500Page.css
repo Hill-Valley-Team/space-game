@@ -11,7 +11,7 @@
     margin-bottom: 4px;
     font-size: 96px;
     line-height: 120%;
-    color: $pure-white;
+    color: var(--pure-white);
     font-weight: 500;
   }
 
@@ -19,7 +19,7 @@
     margin-bottom: 40px;
     font-size: 36px;
     line-height: 120%;
-    color: $pure-white;
+    color: var(--pure-white);
     font-weight: 500;
   }
 
@@ -28,6 +28,6 @@
     font-size: 20px;
     line-height: 120%;
     font-weight: 500;
-    color: $error-text-color-light;
+    color: var(--error-text-color-light);
   }
 }
