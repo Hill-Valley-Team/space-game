@@ -71,7 +71,7 @@ const clientConfig: Configuration = {
       },
     }),
     !IS_DEV && new WorkboxPlugin.InjectManifest({
-      swSrc: join(SRC_DIR, 'utils', 'service-worker.ts'),
+      swSrc: join(SRC_DIR, 'index.tsx'),
       swDest: "./service-worker.js",
       mode: 'production'
     }),
