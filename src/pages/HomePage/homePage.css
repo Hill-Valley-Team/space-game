@@ -14,14 +14,17 @@
 
   &__left {
     width: 60%;
-    min-width: 550px;
+    min-width: 610px;
     padding: 58px 100px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    background: url('./static/home-left-background.png') no-repeat top right;
-    background-size: cover;
+    background-color: var(--main-page-bg);
+    mask-image: url('./static/home-left-bg.svg');
+    mask-position: top right;
+    mask-repeat: no-repeat;
+    mask-size: cover;
   }
 
   &__right {

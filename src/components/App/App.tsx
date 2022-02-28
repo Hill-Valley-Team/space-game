@@ -8,6 +8,7 @@ import { useAppSelector } from 'hooks/hooks';
 
 const App = () => {
   const theme = useAppSelector((store) => store.theme.data?.theme);
+
   return (
     // enableServiceWorker();
     <div className={`app theme-${theme ?? 'light'}`}>

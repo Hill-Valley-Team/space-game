@@ -21,7 +21,7 @@ export const Switcher = (props: SwitcherProps) => {
       <label className={b('switch')}>
         <input
           type="checkbox"
-          defaultChecked={value === DEFAULT_THEME_ID}
+          defaultChecked={value !== DEFAULT_THEME_ID}
           onClick={onChangeHandler}
         />
         <span className="slider round"></span>

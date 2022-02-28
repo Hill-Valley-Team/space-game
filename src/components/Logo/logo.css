@@ -1,4 +1,11 @@
 .logo {
   width: 100%;
-  text-align: center;
+
+  &_align_center {
+    text-align: center;
+  }
+
+  &_align_left {
+    text-align: left;
+  }
 }

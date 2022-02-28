@@ -5,11 +5,10 @@ import './homePage.css';
 import { useGetUserInfo } from 'hooks/useGetUserInfo';
 import { Meta } from 'components/Meta';
 import teamLogoImg from './static/team-logo.png';
-import logoImg from './static/logo.png';
 import { Button } from '../../components/Button';
-import { Switcher } from 'components/Switcher/Switcher';
-import { useUserTheme } from 'hooks/useUserTheme';
-import { DEFAULT_THEME_ID, SECOND_THEME_ID } from 'hooks/useUserTheme/consts';
+import { Switcher } from '../../components/Switcher/Switcher';
+import { useUserTheme } from '../../hooks/useUserTheme';
+import { Logo } from '../../components/Logo';
 
 const b = block('home-page');
 export const HomePage = () => {
@@ -95,14 +94,23 @@ export const HomePage = () => {
     );
   };
 
+  const switcher = isAuth ? (
+    <Switcher
+      from="Светлая тема"
+      to="Тёмная тема"
+      value={themeData?.id}
+      onChangeHandler={onThemeSwitch}
+    />
+  ) : (
+    <div />
+  );
+
   return (
     <div className={b()}>
       <Meta title="Space Racing Game - Главная страница игры" />
       <div className={b('container')}>
         <div className={b('left')}>
-          <div className={b('logo')}>
-            <img src={logoImg} alt="Лого" width="200" />
-          </div>
+          <Logo className={b('logo')} />
           <div>
             <h1 className={b('title')}>Космические гонки</h1>
             <p className={b('text')}>
@@ -113,12 +121,7 @@ export const HomePage = () => {
           <div className={b('link-block')}>{getLinkBlock()}</div>
         </div>
         <div className={b('right')}>
-          <Switcher
-            from="Светлая тема"
-            to="Тёмная тема"
-            value={themeData?.id}
-            onChangeHandler={onThemeSwitch}
-          />
+          {switcher}
           <img src={teamLogoImg} alt="Лого команды" />
         </div>
       </div>
