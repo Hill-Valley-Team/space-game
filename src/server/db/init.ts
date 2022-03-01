@@ -1,31 +1,42 @@
-import { THEMES } from 'hooks/useUserTheme/consts';
+import { ForumTopic } from './models/ForumTopic';
 import { SiteTheme } from './models/SiteTheme';
-import { User } from './models/User';
-import { UserTheme } from './models/UserTheme';
+
+const DEMO_USER_ID = 166307;
+
+const DEMO_TOPICS = [
+  {
+    title: 'Помогаем юзерам выбирать ПК конфигурации и обсуждаем их',
+    description:
+      'Не долго думая создаю тему для общих благ (надеюсь полезную) где будем обсуждать ПК конфигурации. Предлагаю &quot;страждущим&quot; сделать апгрейд или&nbsp;купить новый компьютер кидать сю',
+    userId: DEMO_USER_ID,
+  },
+  {
+    title: 'Всё о компьютерном разгоне (PC Overclocking - OC)',
+    description:
+      'Начнём, надеюсь будет ПОЛЕЗНОЙ инфой!&nbsp;&nbsp; Всё о компьютерном разгоне (PC Overclocking - OC) Небольшой, скромный о разгоне &nbsp; &nbsp; Базовые понятия: &nbsp; 1. Q:Что такое разгон? От чего',
+    userId: DEMO_USER_ID,
+  },
+];
+
+export const DEMO_THEMES = [
+  { theme: 'light', description: 'Light theme used by default' },
+  { theme: 'dark', description: 'Dark theme' },
+];
 
 export const initThemes = async () => {
   try {
-    await SiteTheme.bulkCreate(THEMES);
+    await SiteTheme.bulkCreate(DEMO_THEMES);
     console.log('Themes have been created');
   } catch {
     console.log('Themes have not been created');
   }
 };
 
-export const initUser = async () => {
+export const initForumTopics = async () => {
   try {
-    await User.create({ id: 166307, firstName: 'Наталья', lastName: 'Гарипова' });
-    console.log('Users have been added');
+    await ForumTopic.bulkCreate(DEMO_TOPICS);
+    console.log('Demo topics have been created');
   } catch {
-    console.log('Users have not been added');
-  }
-};
-
-export const initDefaultUserTheme = async () => {
-  try {
-    await UserTheme.create({ userId: 166307, themeId: 1, device: '' });
-    console.log('Users Theme have been setted');
-  } catch {
-    console.log('Users Theme have not been setted');
+    console.log('Demo topics have not been created');
   }
 };

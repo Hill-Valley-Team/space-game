@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import { sequelizeOptions } from './config';
-import { initDefaultUserTheme, initThemes } from './init';
+import { initForumTopics, initThemes } from './init';
 
 export const sequelize = new Sequelize(sequelizeOptions);
 
@@ -11,7 +11,7 @@ export async function dbConnect() {
     console.log('Connection has been established successfully.');
     if (process.env.NODE_ENV === 'development') {
       await initThemes();
-      // await initDefaultUserTheme();
+      await initForumTopics();
     }
   } catch (error) {
     console.error('Unable to connect to the database:', error);

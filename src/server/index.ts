@@ -7,18 +7,14 @@ import { User } from './db/models/User';
 import { UserTheme } from './db/models/UserTheme';
 import { SiteTheme } from './db/models/SiteTheme';
 import router from './router';
+import { ForumTopic } from './db/models/ForumTopic';
 
-sequelize.addModels([SiteTheme, UserTheme]);
+sequelize.addModels([SiteTheme, UserTheme, ForumTopic]);
 
 SiteTheme.hasMany(UserTheme, {
   onDelete: 'SET NULL',
   foreignKey: 'theme_id',
 });
-
-// User.hasOne(UserTheme, {
-//   onDelete: 'CASCADE',
-//   foreignKey: 'user_id',
-// });
 
 dbConnect();
 
