@@ -4,8 +4,8 @@ import { UserThemeAPI } from 'server/controllers/UserThemeApi';
 
 export const themesRoutes = (router: Router) => {
   router.post('/theme', ThemeAPI.create);
-  router.get('/theme', ThemeAPI.find);
-  router.get('/theme/:userId', UserThemeAPI.find);
-  router.post('/theme/:userId/:themeId', UserThemeAPI.update);
-  router.put('/theme/:userId/:themeId', UserThemeAPI.create);
+  router.get('/theme/:themeId', ThemeAPI.find);
+  router.get('/usertheme/:userId', UserThemeAPI.find);
+  router.post('/usertheme/:userId/:themeId', UserThemeAPI.update);
+  router.put('/usertheme/:userId/:themeId', UserThemeAPI.create);
 };

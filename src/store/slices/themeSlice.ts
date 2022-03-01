@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { themeApi } from 'api/Theme/ThemeApi';
+import { userThemeApi } from 'api/Theme/UserThemeApi';
 import { FetchStatus } from 'store/consts';
 import { ThemeState } from './types';
 
-export const createThemeSlice = (themeId?: number) => {};
+export const createThemeSlice = () => {};
 
 const initialState: ThemeState = {
   data: undefined,
@@ -11,8 +12,13 @@ const initialState: ThemeState = {
   status: FetchStatus.IDLE,
 };
 
+export const getTheme = createAsyncThunk('theme/get', async (themeId: number) => {
+  const response = await themeApi.getTheme(themeId);
+  return response.data;
+});
+
 export const fetchUserTheme = createAsyncThunk('theme/fetch', async (userId: number) => {
-  const response = await themeApi.getUserTheme(userId);
+  const response = await userThemeApi.getUserTheme(userId);
   return response.data;
 });
 
@@ -20,10 +26,15 @@ export const updateUserTheme = createAsyncThunk(
   'theme/set',
   async (userData: { userId: number; themeId: number }) => {
     const { userId, themeId } = userData;
-    const setResponse = await themeApi.setUserTheme(userId, themeId);
-    if (setResponse.data === 'Created') {
-      const getResponse = await themeApi.getUserTheme(userId);
+    if (userId === 0) {
+      const getResponse = await themeApi.getTheme(themeId);
       return getResponse.data;
+    } else {
+      const setResponse = await userThemeApi.setUserTheme(userId, themeId);
+      if (setResponse.data === 'Created') {
+        const getResponse = await userThemeApi.getUserTheme(userId);
+        return getResponse.data;
+      }
     }
   },
 );
@@ -32,11 +43,11 @@ export const fetchOrCreateUserTheme = createAsyncThunk(
   'theme/fetchOrCreate',
   async (userData: { userId: number; themeId: number }) => {
     const { userId, themeId } = userData;
-    const getResponse = await themeApi.getUserTheme(userId);
+    const getResponse = await userThemeApi.getUserTheme(userId);
     if (getResponse.data === null) {
-      const addResponse = await themeApi.addUserTheme(userId, themeId);
+      const addResponse = await userThemeApi.addUserTheme(userId, themeId);
       if (addResponse.data === 'Created') {
-        const createdResponse = await themeApi.getUserTheme(userId);
+        const createdResponse = await userThemeApi.getUserTheme(userId);
         return createdResponse.data;
       }
     }
@@ -48,8 +59,8 @@ export const themeSlice = createSlice({
   name: 'theme',
   initialState,
   reducers: {
-    setTheme(state, action) {
-      state.data = action.payload.themeId;
+    setThemeData(state, action) {
+      state.data = action.payload;
     },
   },
   extraReducers: (builder) => {

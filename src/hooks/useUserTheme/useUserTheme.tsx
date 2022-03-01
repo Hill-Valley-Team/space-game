@@ -13,25 +13,37 @@ export const useUserTheme = () => {
   const { data: themeData, status, error } = useAppSelector((state) => state.theme);
 
   const requestUserTheme = async () => {
-    dispatch(fetchUserTheme(Number(userData!.id)));
+    if (userData) {
+      dispatch(fetchUserTheme(Number(userData.id)));
+    }
   };
 
-  const setUserTheme = async (theme?: number) => {
-    const userId = Number(userData!.id);
-    const themeId = theme ?? DEFAULT_THEME_ID;
+  const getUserId = () => {
+    return userData ? Number(userData.id) : 0;
+  };
+
+  const setUserTheme = async (themeId: number) => {
+    const userId = getUserId();
     dispatch(updateUserTheme({ userId, themeId }));
   };
 
-  const toggleUserTheme = async (themeId: number) => {
-    const newId = themeId === DEFAULT_THEME_ID ? SECOND_THEME_ID : DEFAULT_THEME_ID;
+  const toggleUserTheme = async () => {
+    let newId;
+    if (themeData) {
+      newId = themeData.id === DEFAULT_THEME_ID ? SECOND_THEME_ID : DEFAULT_THEME_ID;
+    } else {
+      newId = DEFAULT_THEME_ID;
+    }
     await setUserTheme(newId);
   };
 
   useEffect(() => {
+    const userId = getUserId();
+    const themeId = DEFAULT_THEME_ID;
     if (userData) {
-      const userId = Number(userData.id);
-      const themeId = DEFAULT_THEME_ID;
       dispatch(fetchOrCreateUserTheme({ userId, themeId }));
+    } else {
+      dispatch(updateUserTheme({ userId, themeId }));
     }
   }, []);
 

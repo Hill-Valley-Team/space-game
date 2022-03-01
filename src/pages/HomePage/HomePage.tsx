@@ -17,9 +17,7 @@ export const HomePage = () => {
   const navigate = useNavigate();
 
   const onThemeSwitch = useCallback(() => {
-    if (themeData) {
-      toggleUserTheme(themeData.id);
-    }
+    toggleUserTheme();
   }, [themeData]);
 
   const onPlayBtnClick = useCallback(() => {
@@ -94,17 +92,6 @@ export const HomePage = () => {
     );
   };
 
-  const switcher = isAuth ? (
-    <Switcher
-      from="Светлая тема"
-      to="Тёмная тема"
-      value={themeData?.id}
-      onChangeHandler={onThemeSwitch}
-    />
-  ) : (
-    <div />
-  );
-
   return (
     <div className={b()}>
       <Meta title="Space Racing Game - Главная страница игры" />
@@ -121,7 +108,12 @@ export const HomePage = () => {
           <div className={b('link-block')}>{getLinkBlock()}</div>
         </div>
         <div className={b('right')}>
-          {switcher}
+          <Switcher
+            from="Светлая тема"
+            to="Тёмная тема"
+            value={themeData?.id}
+            onChangeHandler={onThemeSwitch}
+          />
           <img src={teamLogoImg} alt="Лого команды" />
         </div>
       </div>
