@@ -39,6 +39,8 @@
   "precommit": "precommit:hook",
   "homepage": "https://github.com/Hill-Valley-Team/space-game#readme",
   "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/node": "^7.16.8",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@types/compression": "^1.7.2",
@@ -57,6 +59,7 @@
     "@types/serialize-javascript": "^5.0.2",
     "@types/webpack-hot-middleware": "^2.25.5",
     "@types/webpack-node-externals": "^2.5.3",
+    "@types/workbox-webpack-plugin": "^5.1.8",
     "@typescript-eslint/eslint-plugin": "5.6.0",
     "@typescript-eslint/parser": "5.6.0",
     "cross-env": "^7.0.3",
@@ -97,12 +100,13 @@
     "webpack-cli": "4.9.1",
     "webpack-dev-server": "4.6.0",
     "webpack-hot-middleware": "^2.25.1",
-    "workbox-webpack-plugin": "^6.4.2"
+    "workbox-webpack-plugin": "^6.0.0"
   },
   "dependencies": {
     "@hot-loader/react-dom": "^17.0.2",
     "@reduxjs/toolkit": "^1.7.1",
     "@types/react-helmet": "^6.1.5",
+    "@types/workbox-cacheable-response": "^4.3.1",
     "axios": "^0.24.0",
     "bem-cn": "3.0.1",
     "clean-webpack-plugin": "^4.0.0",
@@ -134,6 +138,10 @@
     "webpack": "^5.61.0",
     "webpack-dev-middleware": "^5.3.1",
     "webpack-node-externals": "^3.0.0",
-    "winston": "^3.5.1"
+    "winston": "^3.5.1",
+    "workbox-cacheable-response": "^6.5.0",
+    "workbox-precaching": "^6.5.0",
+    "workbox-routing": "^6.5.0",
+    "workbox-strategies": "^6.5.0"
   }
 }

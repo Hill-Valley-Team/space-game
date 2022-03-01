@@ -15,6 +15,7 @@ import { useSigninMutation } from '../../services/UserService';
 import './loginPage.css';
 
 const b = block('login-page');
+const REDIRECT = 'https://local.ya-praktikum.tech/';
 
 export const LoginPage = () => {
   const [requestError, setRequestError] = useState('');
@@ -41,6 +42,18 @@ export const LoginPage = () => {
         }
       });
   };
+
+  async function onOauthClick() {
+    const response = await fetch(
+      `https://ya-praktikum.tech/api/v2/oauth/yandex/service-id/?redirect_uri=${REDIRECT}`,
+      { method: 'GET', credentials: 'include' },
+    );
+
+    if (response.ok) {
+      const serviceId = await response.json();
+      window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${serviceId.service_id}&redirect_uri=${REDIRECT}`;
+    }
+  }
 
   return (
     <div className={b()}>
@@ -81,6 +94,13 @@ export const LoginPage = () => {
             </Link>
           </Footer>
         </Form>
+        <Button
+          width="stretch"
+          view="secondary"
+          text="OAuth"
+          className={b('button')}
+          onClick={onOauthClick}
+        />
         <div>{requestError}</div>
       </PageContainer>
     </div>
