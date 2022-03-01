@@ -1,13 +1,11 @@
+import { THEMES } from 'hooks/useUserTheme/consts';
 import { SiteTheme } from './models/SiteTheme';
 import { User } from './models/User';
 import { UserTheme } from './models/UserTheme';
 
 export const initThemes = async () => {
   try {
-    await SiteTheme.bulkCreate([
-      { theme: 'light', description: 'Light theme used by default' },
-      { theme: 'dark', description: 'Dark theme' },
-    ]);
+    await SiteTheme.bulkCreate(THEMES);
     console.log('Themes have been created');
   } catch {
     console.log('Themes have not been created');

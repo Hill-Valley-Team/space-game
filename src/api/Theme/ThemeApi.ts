@@ -1,6 +1,6 @@
 import { localBaseUrl } from 'api/consts';
 import { BaseApi } from '../BaseApi';
-import { AddThemeRequest, GetUserThemeRequest } from './types';
+import { AddThemeRequest } from './types';
 
 class ThemeApi extends BaseApi {
   constructor() {
@@ -8,11 +8,7 @@ class ThemeApi extends BaseApi {
   }
 
   public addTheme = (data: AddThemeRequest) => this.http.post('', data);
-  public getUserTheme = (userId: number) => this.http.get(`/${userId}`);
-  public setUserTheme = (userId: number, themeId: number) =>
-    this.http.post(`/${userId}/${themeId}`);
-  public addUserTheme = (userId: number, themeId: number) => this.http.put(`/${userId}/${themeId}`);
-  public deleteUserTheme = (userId: number) => this.http.delete(`/${userId}`);
+  public getTheme = (themeId: number) => this.http.get(`/${themeId}`);
 }
 
 export const themeApi = new ThemeApi();
