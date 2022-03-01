@@ -8,12 +8,24 @@ import { UserTheme } from './db/models/UserTheme';
 import { SiteTheme } from './db/models/SiteTheme';
 import router from './router';
 import { ForumTopic } from './db/models/ForumTopic';
+import { ForumComment } from './db/models/ForumComment';
+import { ForumAnswer } from './db/models/ForumAnswers';
 
-sequelize.addModels([SiteTheme, UserTheme, ForumTopic]);
+sequelize.addModels([SiteTheme, UserTheme, ForumTopic, ForumComment, ForumAnswer]);
 
 SiteTheme.hasMany(UserTheme, {
   onDelete: 'SET NULL',
   foreignKey: 'theme_id',
+});
+
+ForumTopic.hasMany(ForumComment, {
+  onDelete: 'CASCADE',
+  foreignKey: 'topic_id',
+});
+
+ForumComment.hasMany(ForumAnswer, {
+  onDelete: 'CASCADE',
+  foreignKey: 'comment_id',
 });
 
 dbConnect();
