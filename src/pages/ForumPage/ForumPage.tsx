@@ -1,5 +1,5 @@
 import block from 'bem-cn';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PageContainer } from '../../components/PageContainer';
 import { Title } from '../../components/Title';
@@ -8,6 +8,7 @@ import { ThreadListData } from './types';
 import { Button } from '../../components/Button';
 
 import './forumPage.css';
+import { getTopics } from 'controllers/ForumController';
 
 const b = block('forum-page');
 
@@ -41,6 +42,28 @@ const threadData: ThreadListData = [
 const threadList = threadData.map((item) => <ListItem data={item} />);
 
 export const ForumPage = () => {
+  const [results, setResults] = useState<any[]>([]);
+
+  console.log(results);
+
+  const updateResults = () => {
+    getTopics()
+      .then((data) => {
+        if (!data?.length) {
+          setResults([]);
+        } else {
+          setResults(data);
+        }
+        return true;
+      })
+      .catch(() => {
+        console.log('error loading forum threads');
+      });
+  };
+  useEffect(() => {
+    updateResults();
+  }, []);
+
   const navigate = useNavigate();
 
   const backHandle = () => {

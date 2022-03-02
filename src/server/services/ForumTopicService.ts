@@ -24,7 +24,7 @@ class ForumTopicService implements BaseService {
   };
 
   public getAll = ({ limit, offset }: GetAllRequest) => {
-    return ForumTopic.findAndCountAll({
+    return ForumTopic.findAll({
       limit,
       offset,
     });

@@ -1,9 +1,6 @@
 import { Request, Response } from 'express';
 import { forumTopicService } from 'server/services/ForumTopicService';
 
-const DEFAULT_LIMIT = 12;
-const DEFAULT_OFFSET = 12;
-
 export class ForumTopicAPI {
   public static create = async (request: Request, response: Response) => {
     const { userId, title, description } = request.params;
@@ -36,10 +33,10 @@ export class ForumTopicAPI {
   };
 
   public static find = async (request: Request, response: Response) => {
-    const { id } = request.params;
+    const { topicId } = request.params;
 
     try {
-      const data = await forumTopicService.find(Number(id));
+      const data = await forumTopicService.find(Number(topicId));
       return response.json(data);
     } catch (e) {
       console.log(e);
@@ -48,12 +45,23 @@ export class ForumTopicAPI {
   };
 
   public static findAll = async (request: Request, response: Response) => {
-    const { limit, offset } = request.params;
+    const { limit, offset } = request.body;
     try {
       const data = await forumTopicService.getAll({
-        limit: limit ? Number(limit) : DEFAULT_LIMIT,
-        offset: offset ? Number(offset) : DEFAULT_OFFSET,
+        limit,
+        offset,
       });
+      return response.json(data);
+    } catch (e) {
+      console.log(e);
+      response.sendStatus(400);
+    }
+  };
+
+  public static delete = async (request: Request, response: Response) => {
+    const { topicId } = request.params;
+    try {
+      const data = await forumTopicService.delete(Number(topicId));
       return response.json(data);
     } catch (e) {
       console.log(e);

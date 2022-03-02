@@ -33,6 +33,7 @@ dbConnect();
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, '../dist')));
+app.use(express.json());
 app.use('/api/v1', router);
 
 app.get('/*', [...middlewares], render);
