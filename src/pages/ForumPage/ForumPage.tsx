@@ -9,6 +9,8 @@ import { Button } from '../../components/Button';
 
 import './forumPage.css';
 import { getTopics } from 'controllers/ForumController';
+import { ForumTopic } from 'server/db/models/ForumTopic';
+import { ForumTopic as Topic } from '../../api/Forum/types';
 
 const b = block('forum-page');
 
@@ -42,17 +44,17 @@ const threadData: ThreadListData = [
 const threadList = threadData.map((item) => <ListItem data={item} />);
 
 export const ForumPage = () => {
-  const [results, setResults] = useState<any[]>([]);
+  const [topics, setTopics] = useState<Topic[]>([]);
 
-  console.log(results);
+  console.log(topics);
 
-  const updateResults = () => {
+  const updateTopics = () => {
     getTopics()
       .then((data) => {
         if (!data?.length) {
-          setResults([]);
+          setTopics([]);
         } else {
-          setResults(data);
+          setTopics(data);
         }
         return true;
       })
@@ -60,8 +62,9 @@ export const ForumPage = () => {
         console.log('error loading forum threads');
       });
   };
+
   useEffect(() => {
-    updateResults();
+    updateTopics();
   }, []);
 
   const navigate = useNavigate();
