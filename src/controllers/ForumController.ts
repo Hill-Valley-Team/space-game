@@ -1,9 +1,6 @@
 import { forumTopicApi } from 'api/Forum/ForumTopicApi';
 import { GetForumTopicsRequest, GetForumTopicsResponse } from 'api/Forum/types';
-import { GetUserResponse } from 'api/User/types';
-import { userApi } from 'api/User/UserApi';
 import { AxiosResponse } from 'axios';
-import { userAPI } from 'services/UserService';
 
 const DEFAULT_LIMIT = 100;
 const DEFAULT_OFFSET = 0;
