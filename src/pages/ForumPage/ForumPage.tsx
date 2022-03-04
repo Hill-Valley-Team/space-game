@@ -9,8 +9,6 @@ import { Button } from '../../components/Button';
 
 import './forumPage.css';
 import { getTopics } from 'controllers/ForumController';
-import { ForumTopic } from 'server/db/models/ForumTopic';
-import { ForumTopic as Topic } from '../../api/Forum/types';
 
 const b = block('forum-page');
 
@@ -41,26 +39,49 @@ const threadData: ThreadListData = [
   },
 ];
 
-const threadList = threadData.map((item) => <ListItem data={item} />);
-
 export const ForumPage = () => {
-  const [topics, setTopics] = useState<Topic[]>([]);
+  const [topics, setTopics] = useState<ThreadListData>([]);
+
+  const threadList = topics.length > 0 ? topics.map((item) => <ListItem data={item} />) : null;
 
   console.log(topics);
 
-  const updateTopics = () => {
-    getTopics()
-      .then((data) => {
-        if (!data?.length) {
-          setTopics([]);
-        } else {
-          setTopics(data);
-        }
-        return true;
-      })
-      .catch(() => {
-        console.log('error loading forum threads');
-      });
+  // const updateTopics = () => {
+  //   getTopics()
+  //     .then((data) => {
+  //       if (!data?.length) {
+  //         setTopics([]);
+  //       } else {
+  //         setTopics(data);
+  //       }
+  //       return true;
+  //     })
+  //     .catch(() => {
+  //       console.log('error loading forum threads');
+  //     });
+  // };
+
+  const updateTopics = async () => {
+    try {
+      const topics = await getTopics();
+      if (!topics?.length) {
+        setTopics([]);
+      } else {
+        const threads = topics.map((topic) => {
+          return {
+            id: topic.id,
+            title: topic.title,
+            text: topic.description,
+            datatime: topic.createdAt,
+            userName: undefined,
+            comments: undefined,
+          };
+        });
+        setTopics(threads);
+      }
+    } catch {
+      console.log('error loading forum threads');
+    }
   };
 
   useEffect(() => {
