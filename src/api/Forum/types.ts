@@ -25,4 +25,27 @@ export type ForumTopic = {
   userId: number;
 };
 
+export type ForumComment = {
+  id: number;
+  createdAt: string;
+  deletedAt: string | null;
+  text: string;
+  topicId: number;
+  userId: number;
+};
+
+export type GetForumCommentsRequest = {
+  topicId: number;
+  limit: number;
+  offset: number;
+};
+
+export type AddForumCommentRequest = {
+  userId: number;
+  title: string;
+  description: string;
+};
+
+export type GetForumCommentsResponse = ForumComment[];
+
 export type GetForumTopicsResponse = ForumTopic[];

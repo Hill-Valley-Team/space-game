@@ -10,8 +10,9 @@ export const forumRoutes = (router: Router) => {
   router.post('/forum/topic', jsonParser, ForumTopicAPI.findAll);
   router.put('/forum/topic', jsonParser, ForumTopicAPI.create);
 
-  router.get('/forum/comments/:id', ForumCommentAPI.find);
-  router.delete('/forum/comments/:id', ForumCommentAPI.delete);
-  router.post('/forum/comments', jsonParser, ForumCommentAPI.findAll);
+  router.get('/forum/comment/:id', ForumCommentAPI.find);
+  router.delete('/forum/comment/:id', ForumCommentAPI.delete);
+
+  router.post('/forum/comments', jsonParser, ForumCommentAPI.findAllByTopic);
   router.put('/forum/comments', jsonParser, ForumCommentAPI.create);
 };
