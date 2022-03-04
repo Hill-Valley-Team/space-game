@@ -11,6 +11,7 @@ import './forumPage.css';
 import { getTopics } from 'controllers/ForumController';
 import { userApi } from 'api/User/UserApi';
 import { ForumTopic } from 'api/Forum/types';
+import { dateFormat } from 'utils/dateFormat';
 
 const b = block('forum-page');
 
@@ -31,11 +32,6 @@ export const ForumPage = () => {
       userName: userName,
       comments: count,
     };
-  };
-
-  const dateFormat = (dt: string) => {
-    const date = Date.parse(dt);
-    return new Date().toLocaleDateString();
   };
 
   const initTopics = async () => {
