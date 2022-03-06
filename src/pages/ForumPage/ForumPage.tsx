@@ -1,6 +1,5 @@
 import block from 'bem-cn';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { PageContainer } from '../../components/PageContainer';
 import { Title } from '../../components/Title';
 import { ListItem } from './ListItem/ListItem';

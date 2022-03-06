@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import { sequelizeOptions } from './config';
-import { initForumTopics, initThemes } from './init';
+import { initForumComments, initForumTopics, initThemes } from './init';
 
 export const sequelize = new Sequelize(sequelizeOptions);
 
@@ -12,6 +12,7 @@ export async function dbConnect() {
     if (process.env.NODE_ENV === 'development') {
       await initThemes();
       await initForumTopics();
+      await initForumComments();
     }
   } catch (error) {
     console.error('Unable to connect to the database:', error);

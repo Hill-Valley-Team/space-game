@@ -8,7 +8,7 @@ import { AllowNull, Column, DataType, Length, Model, Table } from 'sequelize-typ
 })
 export class ForumTopic extends Model {
   @AllowNull(false)
-  @Length({ min: 3, max: 255 })
+  // @Length({ min: 3, max: 255 })
   @Column(DataType.STRING)
   title!: string;
 

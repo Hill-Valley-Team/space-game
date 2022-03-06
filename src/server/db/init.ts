@@ -1,3 +1,4 @@
+import { ForumComment } from './models/ForumComment';
 import { ForumTopic } from './models/ForumTopic';
 import { SiteTheme } from './models/SiteTheme';
 
@@ -15,6 +16,19 @@ const DEMO_TOPICS = [
     description:
       'Начнём, надеюсь будет ПОЛЕЗНОЙ инфой!&nbsp;&nbsp; Всё о компьютерном разгоне (PC Overclocking - OC) Небольшой, скромный о разгоне &nbsp; &nbsp; Базовые понятия: &nbsp; 1. Q:Что такое разгон? От чего',
     userId: DEMO_USER_ID,
+  },
+];
+
+const DEMO_COMMENTS = [
+  {
+    text: 'Мы заранее проверяли связь, всё работало стабильно. После сбоя испробовали несколько вариантов — увы, найти решение, кроме обычной конференции в Zoom, быстро не получилось. В Zoom есть ограничение по количеству мест.',
+    userId: DEMO_USER_ID,
+    topicId: 1,
+  },
+  {
+    text: 'P.S. Если вам нужна личная поддержка любые вопросы, сомнения, переживания можно обсудить со своим куратором в личных сообщениях. Мы постараемся сделать всё, что в наших силах. :heart_hands:',
+    userId: DEMO_USER_ID,
+    topicId: 1,
   },
 ];
 
@@ -38,5 +52,14 @@ export const initForumTopics = async () => {
     console.log('Demo topics have been created');
   } catch {
     console.log('Demo topics have not been created');
+  }
+};
+
+export const initForumComments = async () => {
+  try {
+    await ForumComment.bulkCreate(DEMO_COMMENTS);
+    console.log('Demo comments have been created');
+  } catch {
+    console.log('Demo comments have not been created');
   }
 };

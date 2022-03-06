@@ -14,9 +14,11 @@ export const ListItem = (props: ListItemProps) => {
 
   return (
     <div className={b()} key={id}>
-      <div>{text}</div>
-      <div>{datatime}</div>
-      <div>{userName}</div>
+      <div className={b('info')}>
+        <div>{userName}</div>
+        <div>{datatime}</div>
+      </div>
+      <div className={b('text')}>{text}</div>
     </div>
   );
 };

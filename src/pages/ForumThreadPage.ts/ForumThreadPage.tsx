@@ -56,6 +56,7 @@ export const ForumThreadPage = () => {
         };
       });
       setComments(comments);
+      Promise.all(promises).then((values) => setComments(values));
     }
   };
 
@@ -65,7 +66,7 @@ export const ForumThreadPage = () => {
   }, []);
 
   const createCommentHandle = () => {
-    console.log('new post');
+    console.log('new comment');
   };
 
   const commentsList = comments.map((comment) => <ListItem data={comment} />);
