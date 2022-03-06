@@ -2,7 +2,7 @@ import block from 'bem-cn';
 import React, { useEffect, useState } from 'react';
 import { PageContainer } from '../../components/PageContainer';
 import { Title } from '../../components/Title';
-import { ListItem } from './ListItem/ListItem';
+import { ListItem } from './ListItem';
 import { ThreadListData, ThreadListItem } from './types';
 import { Button } from '../../components/Button';
 

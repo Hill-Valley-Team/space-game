@@ -9,10 +9,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { dateFormat } from 'utils/dateFormat';
 import { PageContainer } from '../../components/PageContainer';
-
-import './forumPage.css';
-import { ListItem } from './ListItem';
-import { CommentListData, CommentListItem } from './ListItem/types';
+import { ThreadListItem } from './ThreadListItem';
+import { CommentListData, CommentListItem } from './ThreadListItem/types';
+import './forumThreadPage.css';
 
 const b = block('forum-thread-page');
 
@@ -69,17 +68,19 @@ export const ForumThreadPage = () => {
     console.log('new comment');
   };
 
-  const commentsList = comments.map((comment) => <ListItem data={comment} />);
+  const commentsList = comments.map((comment) => <ThreadListItem data={comment} />);
 
   return (
     <div className={b()}>
       <PageContainer size="large">
         <div className={b('header')}>
           <BackButton />
-          <Title text="Форум" className={b('title')} />
-          <Title text={parent?.title} tag="h4" />
+          <Title text="Форум" className={b('title')} tag="h1" />
         </div>
-        <div className={b('comments-list')}>{commentsList}</div>
+        <div className={b('comments-list')}>
+          <Title text={parent?.title} tag="h3" className={b('topic-name')} />
+          {commentsList}
+        </div>
         <Button
           view="primary"
           align="center"
