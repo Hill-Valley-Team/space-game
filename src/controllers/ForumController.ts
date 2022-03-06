@@ -8,6 +8,7 @@ import {
 } from 'api/Forum/types';
 import { AxiosResponse } from 'axios';
 import { response } from 'express';
+import { ForumTopic } from 'server/db/models/ForumTopic';
 
 const DEFAULT_LIMIT = 100;
 const DEFAULT_OFFSET = 0;

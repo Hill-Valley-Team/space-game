@@ -33,10 +33,10 @@ export class ForumTopicAPI {
   };
 
   public static find = async (request: Request, response: Response) => {
-    const { topicId } = request.params;
+    const { id } = request.params;
 
     try {
-      const data = await forumTopicService.find(Number(topicId));
+      const data = await forumTopicService.find(Number(id));
       return response.json(data);
     } catch (e) {
       console.log(e);

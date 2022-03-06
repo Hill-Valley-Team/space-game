@@ -12,6 +12,7 @@ import { getTopics } from 'controllers/ForumController';
 import { userApi } from 'api/User/UserApi';
 import { ForumTopic } from 'api/Forum/types';
 import { dateFormat } from 'utils/dateFormat';
+import { BackButton } from 'components/BackButton';
 
 const b = block('forum-page');
 
@@ -66,12 +67,6 @@ export const ForumPage = () => {
     initTopics();
   }, []);
 
-  const navigate = useNavigate();
-
-  const backHandle = () => {
-    navigate(-1);
-  };
-
   const createPostHandle = () => {
     console.log('new post');
   };
@@ -80,14 +75,7 @@ export const ForumPage = () => {
     <div className={b()}>
       <PageContainer size="large">
         <div className={b('header')}>
-          <Button
-            className={b('btn-back')}
-            type="button"
-            text=""
-            view="primary"
-            onClick={backHandle}
-            width="auto"
-          />
+          <BackButton />
           <Title text="Форум" className={b('title')} />
         </div>
         <table className={b('thread-list')}>
