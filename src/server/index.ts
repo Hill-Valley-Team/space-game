@@ -3,13 +3,14 @@ import express from 'express';
 import render from './middlewares/render';
 import { middlewares } from './middlewares';
 import { sequelize, dbConnect } from './db/sequelize';
-import { User } from './db/models/User';
 import { UserTheme } from './db/models/UserTheme';
 import { SiteTheme } from './db/models/SiteTheme';
 import router from './router';
 import { ForumTopic } from './db/models/ForumTopic';
 import { ForumComment } from './db/models/ForumComment';
 import { ForumAnswer } from './db/models/ForumAnswers';
+import logger from './middlewares/logger';
+import { auth } from './middlewares/auth';
 
 sequelize.addModels([SiteTheme, UserTheme, ForumTopic, ForumComment, ForumAnswer]);
 
@@ -32,9 +33,12 @@ dbConnect();
 
 const app = express();
 
-app.use(express.static(path.resolve(__dirname, '../dist')));
-app.use(express.json());
-app.use('/api/v1', router);
+app
+  .use(express.static(path.resolve(__dirname, '../dist')))
+  .use(express.json())
+  .use(logger)
+  .use(auth)
+  .use('/api/v1', router);
 
 app.get('/*', [...middlewares], render);
 
