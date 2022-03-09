@@ -1,11 +1,9 @@
 export type SetForumTopicRequest = {
-  userId: number;
   title: string;
   description: string;
 };
 
 export type AddForumTopicRequest = {
-  userId: number;
   title: string;
   description: string;
 };
@@ -41,7 +39,6 @@ export type GetForumCommentsRequest = {
 };
 
 export type AddForumCommentRequest = {
-  userId: number;
   title: string;
   description: string;
 };

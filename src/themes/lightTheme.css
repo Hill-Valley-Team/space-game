@@ -7,6 +7,8 @@ $light-theme__primary-bg-color: rgb(255 255 255 / 90%);
 $light-theme__secondary-btn-bg-color: rgb(255 255 255 / 40%);
 $light-theme__main-page-bg-color: #fff;
 $light-theme__disabled-bg-color: #999;
+$light-theme__textarea-bg-color: #fff;
+$light-theme__textarea-text-color: #000;
 $light-theme__accent-color: #ffc701;
 $light-theme__pure-white: #fff;
 $light-theme__error-text-color: #ff4d00;

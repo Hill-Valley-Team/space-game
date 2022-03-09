@@ -17,6 +17,8 @@
   --purple: $light-theme__purple;
   --orange: $light-theme__orange;
   --main-page-bg: $light-theme__main-page-bg-color;
+  --textarea-bg-color: $light-theme__textarea-bg-color;
+  --textarea-text-color: $light-theme__textarea-text-color;
 }
 
 .theme-dark {
@@ -35,4 +37,6 @@
   --purple: $dark-theme__purple;
   --orange: $dark-theme__orange;
   --main-page-bg: $dark-theme__main-page-bg-color;
+  --textarea-bg-color: $dark-theme__textarea-bg-color;
+  --textarea-text-color: $dark-theme__textarea-text-color;
 }

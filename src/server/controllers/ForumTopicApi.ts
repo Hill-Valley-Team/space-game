@@ -3,7 +3,8 @@ import { forumTopicService } from 'server/services/ForumTopicService';
 
 export class ForumTopicAPI {
   public static create = async (request: Request, response: Response) => {
-    const { userId, title, description } = request.params;
+    const { title, description } = request.body;
+    const userId = response.locals.id;
 
     try {
       await forumTopicService.create({
@@ -18,7 +19,7 @@ export class ForumTopicAPI {
   };
 
   public static update = async (request: Request, response: Response) => {
-    const { id, description, title } = request.params;
+    const { id, description, title } = request.body;
 
     try {
       await forumTopicService.update({
@@ -33,7 +34,7 @@ export class ForumTopicAPI {
   };
 
   public static find = async (request: Request, response: Response) => {
-    const { id } = request.params;
+    const { id } = request.body;
 
     try {
       const data = await forumTopicService.find(Number(id));

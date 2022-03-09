@@ -3,7 +3,8 @@ import { forumCommentService } from 'server/services/ForumCommentService';
 
 export class ForumCommentAPI {
   public static create = async (request: Request, response: Response) => {
-    const { userId, title, description } = request.params;
+    const { title, description } = request.params;
+    const userId = response.locals.id;
 
     try {
       await forumCommentService.create({

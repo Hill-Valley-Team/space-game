@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import block from 'bem-cn';
 import './switcher.css';
 import { DEFAULT_THEME_ID } from 'hooks/useUserTheme/consts';

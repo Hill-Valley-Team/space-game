@@ -4,7 +4,6 @@ import { PageContainer } from '../../components/PageContainer';
 import { Title } from '../../components/Title';
 import { ListItem } from './ListItem';
 import { ThreadListData, ThreadListItem } from './types';
-import { Button } from '../../components/Button';
 
 import './forumPage.css';
 import { getTopics } from 'controllers/ForumController';
@@ -12,6 +11,7 @@ import { userApi } from 'api/User/UserApi';
 import { ForumTopic } from 'api/Forum/types';
 import { dateFormat } from 'utils/dateFormat';
 import { BackButton } from 'components/BackButton';
+import { AddBlock } from './AddBlock';
 
 const b = block('forum-page');
 
@@ -88,12 +88,10 @@ export const ForumPage = () => {
           </thead>
           <tbody>{threadList}</tbody>
         </table>
-        <Button
-          view="primary"
-          align="center"
-          onClick={createPostHandle}
-          className={b('button')}
-          text="Добавить тему"
+        <AddBlock
+          buttonText="Добавить тему"
+          className={b('add-block')}
+          onClickHandler={createPostHandle}
         />
       </PageContainer>
     </div>

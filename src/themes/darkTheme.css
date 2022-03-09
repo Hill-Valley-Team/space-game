@@ -7,6 +7,8 @@ $dark-theme__primary-bg-color: rgb(33 52 103 / 90%);
 $dark-theme__main-page-bg-color: #1b305a;
 $dark-theme__secondary-btn-bg-color: rgb(255 255 255 / 40%);
 $dark-theme__disabled-bg-color: #999;
+$dark-theme__textarea-bg-color: #fff;
+$dark-theme__textarea-text-color: #000;
 $dark-theme__accent-color: #ffc701;
 $dark-theme__pure-white: #fff;
 $dark-theme__error-text-color: #ff4d00;
