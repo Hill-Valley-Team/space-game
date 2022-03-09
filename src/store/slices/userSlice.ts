@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authApi, UserData } from 'api/Auth';
 import { FetchStatus } from 'store/consts';
-import { UserSlice, UserState } from './types';
+import { UserState } from './types';
 
 export const fetchUser = createAsyncThunk('users/fetch', async () => {
   const response = await authApi.getUserInfo();
@@ -50,6 +50,3 @@ export const createUserSlice = (data?: UserData) => {
     },
   });
 };
-
-// export const { resetUser } = userSlice.actions;
-// export default userSlice.reducer;

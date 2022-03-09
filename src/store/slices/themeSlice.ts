@@ -17,37 +17,32 @@ export const getTheme = createAsyncThunk('theme/get', async (themeId: number) =>
   return response.data;
 });
 
-export const fetchUserTheme = createAsyncThunk('theme/fetch', async (userId: number) => {
-  const response = await userThemeApi.getUserTheme(userId);
+export const fetchUserTheme = createAsyncThunk('theme/fetch', async () => {
+  const response = await userThemeApi.getUserTheme();
   return response.data;
 });
 
-export const updateUserTheme = createAsyncThunk(
-  'theme/set',
-  async (userData: { userId: number; themeId: number }) => {
-    const { userId, themeId } = userData;
-    if (userId === 0) {
-      const getResponse = await themeApi.getTheme(themeId);
-      return getResponse.data;
-    } else {
-      const setResponse = await userThemeApi.setUserTheme(userId, themeId);
-      if (setResponse.data === 'Created') {
-        const getResponse = await userThemeApi.getUserTheme(userId);
-        return getResponse.data;
-      }
-    }
-  },
-);
+export const updateUserTheme = createAsyncThunk('theme/set', async (themeId: number) => {
+  const setResponse = await userThemeApi.setUserTheme(themeId);
+  if (setResponse.data === 'Created') {
+    const getResponse = await userThemeApi.getUserTheme();
+    return getResponse.data;
+  }
+});
+
+export const updateLocalUserTheme = createAsyncThunk('theme/setLocal', async (themeId: number) => {
+  const getResponse = await themeApi.getTheme(themeId);
+  return getResponse.data;
+});
 
 export const fetchOrCreateUserTheme = createAsyncThunk(
   'theme/fetchOrCreate',
-  async (userData: { userId: number; themeId: number }) => {
-    const { userId, themeId } = userData;
-    const getResponse = await userThemeApi.getUserTheme(userId);
+  async (themeId: number) => {
+    const getResponse = await userThemeApi.getUserTheme();
     if (getResponse.data === null) {
-      const addResponse = await userThemeApi.addUserTheme(userId, themeId);
+      const addResponse = await userThemeApi.addUserTheme(themeId);
       if (addResponse.data === 'Created') {
-        const createdResponse = await userThemeApi.getUserTheme(userId);
+        const createdResponse = await userThemeApi.getUserTheme();
         return createdResponse.data;
       }
     }
@@ -100,6 +95,19 @@ export const themeSlice = createSlice({
       state.data = undefined;
     });
     builder.addCase(fetchOrCreateUserTheme.pending, (state) => {
+      state.status = FetchStatus.LOADING;
+    });
+
+    builder.addCase(updateLocalUserTheme.fulfilled, (state, action) => {
+      state.data = action.payload;
+      state.status = FetchStatus.SUCCESS;
+    });
+    builder.addCase(updateLocalUserTheme.rejected, (state, action) => {
+      state.error = action.error.message;
+      state.status = FetchStatus.FAILURE;
+      state.data = undefined;
+    });
+    builder.addCase(updateLocalUserTheme.pending, (state) => {
       state.status = FetchStatus.LOADING;
     });
   },

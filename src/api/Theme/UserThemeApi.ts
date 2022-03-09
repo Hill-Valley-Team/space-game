@@ -6,10 +6,9 @@ class UserThemeApi extends BaseApi {
     super('/usertheme', localBaseUrl);
   }
 
-  public getUserTheme = (userId: number) => this.http.get(`/${userId}`);
-  public setUserTheme = (userId: number, themeId: number) =>
-    this.http.post(`/${userId}/${themeId}`);
-  public addUserTheme = (userId: number, themeId: number) => this.http.put(`/${userId}/${themeId}`);
+  public getUserTheme = () => this.http.get('');
+  public setUserTheme = (themeId: number) => this.http.post('', { themeId });
+  public addUserTheme = (themeId: number) => this.http.put('', { themeId });
 }
 
 export const userThemeApi = new UserThemeApi();

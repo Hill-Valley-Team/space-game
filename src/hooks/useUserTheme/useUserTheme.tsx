@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import {
   fetchOrCreateUserTheme,
   fetchUserTheme,
+  updateLocalUserTheme,
   updateUserTheme,
 } from '../../store/slices/themeSlice';
 import { DEFAULT_THEME_ID, SECOND_THEME_ID } from './consts';
@@ -14,17 +15,12 @@ export const useUserTheme = () => {
 
   const requestUserTheme = async () => {
     if (userData) {
-      dispatch(fetchUserTheme(Number(userData.id)));
+      dispatch(fetchUserTheme());
     }
   };
 
-  const getUserId = () => {
-    return userData ? Number(userData.id) : 0;
-  };
-
   const setUserTheme = async (themeId: number) => {
-    const userId = getUserId();
-    dispatch(updateUserTheme({ userId, themeId }));
+    dispatch(updateUserTheme(themeId));
   };
 
   const toggleUserTheme = async () => {
@@ -38,12 +34,12 @@ export const useUserTheme = () => {
   };
 
   useEffect(() => {
-    const userId = getUserId();
-    const themeId = DEFAULT_THEME_ID;
+    const themeId = themeData?.id ?? DEFAULT_THEME_ID;
+
     if (userData) {
-      dispatch(fetchOrCreateUserTheme({ userId, themeId }));
+      dispatch(fetchOrCreateUserTheme(themeId));
     } else {
-      dispatch(updateUserTheme({ userId, themeId }));
+      dispatch(updateLocalUserTheme(themeId));
     }
   }, []);
 

@@ -8,12 +8,12 @@ import { App } from '../../components/App';
 import { getHtml } from '../utils/getHtml';
 import { createAppStore } from 'store/store';
 
-export default (req: Request, res: Response) => {
-  const store = createAppStore({ userData: res.locals.user });
+export default (request: Request, response: Response) => {
+  const store = createAppStore({ userData: response.locals.user });
 
   const jsx = (
     <ReduxProvider store={store}>
-      <StaticRouter location={req.url}>
+      <StaticRouter location={request.url}>
         <App />
       </StaticRouter>
     </ReduxProvider>
@@ -22,5 +22,5 @@ export default (req: Request, res: Response) => {
   const preloadedState = store.getState();
   const helmet = Helmet.renderStatic();
 
-  res.send(getHtml(reactHtml, preloadedState, helmet, req.csrfToken()));
+  response.send(getHtml(reactHtml, preloadedState, helmet, request.csrfToken()));
 };
