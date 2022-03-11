@@ -8,6 +8,16 @@
     outline: none;
   }
 
+  &__placeholder {
+    position: absolute;
+    padding: 20px;
+    color: var(--text-color-light);
+
+    &_hide {
+      display: none;
+    }
+  }
+
   &__controls {
     position: relative;
     display: flex;
