@@ -11,7 +11,7 @@ import { userApi } from 'api/User/UserApi';
 import { ForumTopic } from 'api/Forum/types';
 import { dateFormat } from 'utils/dateFormat';
 import { BackButton } from 'components/BackButton';
-import { AddBlock } from './AddBlock';
+import { Message } from 'components/Message';
 
 const b = block('forum-page');
 
@@ -88,11 +88,12 @@ export const ForumPage = () => {
           </thead>
           <tbody>{threadList}</tbody>
         </table>
-        <AddBlock
+        {/* <AddBlock
           buttonText="Добавить тему"
           className={b('add-block')}
           onClickHandler={createPostHandle}
-        />
+        /> */}
+        <Message />
       </PageContainer>
     </div>
   );
