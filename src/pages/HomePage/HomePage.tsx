@@ -1,5 +1,5 @@
 import block from 'bem-cn';
-import React, {useCallback, useEffect} from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
 import './homePage.css';
 import { useGetUserInfo } from 'hooks/useGetUserInfo';
@@ -7,8 +7,8 @@ import { Meta } from 'components/Meta';
 import teamLogoImg from './static/team-logo.png';
 import logoImg from './static/logo.png';
 import { Button } from '../../components/Button';
-import {removeFullscreenListener} from "../../utils/fullscreen";
-import {loginWithOAuth} from "../../controllers/OAuthController";
+import { removeFullscreenListener } from '../../utils/fullscreen';
+import { loginWithOAuth } from '../../controllers/OAuthController';
 
 const b = block('home-page');
 export const HomePage = () => {
@@ -19,17 +19,17 @@ export const HomePage = () => {
 
   useEffect(() => {
     // если пришли сюда с параметром code - это была авторизация через oauth
-    const code = searchParams.get("code");
+    const code = searchParams.get('code');
     if (code) {
-      loginWithOAuth(code).then(result => {
-        if (result.status === 200) {
-          requestUserInfo();
-        }
-      });
-      console.log('sdfm');
+      loginWithOAuth(code)
+        .then((result) => {
+          if (result.status === 200) {
+            requestUserInfo();
+          }
+        })
+        .then(() => navigate('/'));
     }
   }, []);
-
 
   const onPlayBtnClick = useCallback(() => {
     navigate('/game');

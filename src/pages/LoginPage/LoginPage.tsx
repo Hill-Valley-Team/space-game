@@ -13,9 +13,11 @@ import { formScheme, InputNames } from '../../consts/formScheme';
 import { useFormInput } from '../../hooks/useFormInput';
 import { useSigninMutation } from '../../services/UserService';
 import './loginPage.css';
+import { OAUTH_URL, REDIRECT_URI } from '../../consts/urls';
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 const b = block('login-page');
-const REDIRECT = 'https://local.ya-praktikum.tech/';
 
 export const LoginPage = () => {
   const [requestError, setRequestError] = useState('');
@@ -44,14 +46,15 @@ export const LoginPage = () => {
   };
 
   async function onOauthClick() {
-    const response = await fetch(
-      `https://ya-praktikum.tech/api/v2/oauth/yandex/service-id/?redirect_uri=${REDIRECT}`,
-      { method: 'GET', credentials: 'include' },
-    );
+    try {
+      const response = await axios.get(OAUTH_URL);
 
-    if (response.ok) {
-      const serviceId = await response.json();
-      window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${serviceId.service_id}&redirect_uri=${REDIRECT}`;
+      if (response.status === 200) {
+        const serviceId = await response.data;
+        window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${serviceId.service_id}&redirect_uri=${REDIRECT_URI}`;
+      }
+    } catch (e) {
+      console.error(e);
     }
   }
 

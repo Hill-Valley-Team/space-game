@@ -18,7 +18,6 @@ declare global {
   }
 }
 
-
 const manifest = self.__WB_MANIFEST;
 if (manifest) {
   precacheAndRoute(manifest);
@@ -34,7 +33,6 @@ if (manifest) {
     }),
   );
 }
-
 
 const initialState = window.__INITIAL_STATE__;
 const store = createAppStore(initialState);
@@ -61,4 +59,4 @@ if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
         console.log('SW registration failed: ', registrationError);
       });
   });
-};
+}

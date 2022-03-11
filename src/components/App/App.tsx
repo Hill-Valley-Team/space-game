@@ -11,10 +11,10 @@ const App = () => {
   return (
     <div className={b()}>
       <Meta />
-      <AppRoutes/>
+      <AppRoutes />
     </div>
   );
-}
+};
 
 const Component = hot(App);
 

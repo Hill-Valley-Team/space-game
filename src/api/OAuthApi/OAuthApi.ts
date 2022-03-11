@@ -1,5 +1,5 @@
 import { BaseApi } from '../BaseApi';
-import {OAuthRequest} from './types';
+import { OAuthRequest } from './types';
 
 class OAuthApi extends BaseApi {
   constructor() {

@@ -4,3 +4,5 @@ dev
 .idea
 .vscode
 .DS_Store
+error.log
+combined.log
