@@ -93,7 +93,7 @@ export const ForumPage = () => {
           className={b('add-block')}
           onClickHandler={createPostHandle}
         /> */}
-        <Message onSubmit={handleCreatePost} />
+        <Message withTitle={true} onSubmit={handleCreatePost} />
       </PageContainer>
     </div>
   );
