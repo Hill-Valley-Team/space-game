@@ -1,0 +1,31 @@
+import React, { useState } from 'react';
+import 'emoji-mart/css/emoji-mart.css';
+import { BaseEmoji, Picker } from 'emoji-mart';
+import block from 'bem-cn';
+import './emojiPannel.css';
+
+const b = block('emoji-pannel');
+
+type EmojiPannelProps = {
+  className?: string;
+  onEmojiSelect: (emoji: BaseEmoji) => void;
+};
+
+export const EmojiPannel = (props: EmojiPannelProps) => {
+  const { className, onEmojiSelect } = props;
+  const [isVisiblePicker, setIsVisiblePicker] = useState(false);
+
+  const handleEmojiSelect = (emoji: BaseEmoji) => onEmojiSelect(emoji);
+  const handlePickerVisibility = () => {
+    setIsVisiblePicker(!isVisiblePicker);
+  };
+
+  return (
+    <div className={b.mix(className)}>
+      <button className={b('button')} onClick={handlePickerVisibility} />
+      <div className={b('picker', { hide: !isVisiblePicker })}>
+        <Picker native={true} title="Выбери смайлик..." emojiTooltip onSelect={handleEmojiSelect} />
+      </div>
+    </div>
+  );
+};

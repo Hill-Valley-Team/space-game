@@ -6,19 +6,19 @@
 
   &_small {
     max-width: 350px;
-    width: 350px;
+    width: 100%;
     padding: 30px;
   }
 
   &_medium {
     max-width: 731px;
-    width: 731px;
+    width: 100%;
     padding: 40px 110px;
   }
 
   &_large {
     max-width: 1100px;
-    width: 1100px;
+    width: 100%;
     padding: 40px 110px;
   }
 }
