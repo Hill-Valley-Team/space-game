@@ -2,7 +2,7 @@
   &__picker {
     position: absolute;
     z-index: 100;
-    bottom: 0;
+    bottom: 45px;
     display: block;
 
     &_hide {

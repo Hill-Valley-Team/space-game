@@ -24,7 +24,7 @@ export const EmojiPannel = (props: EmojiPannelProps) => {
     <div className={b.mix(className)}>
       <button className={b('button')} onClick={handlePickerVisibility} />
       <div className={b('picker', { hide: !isVisiblePicker })}>
-        <Picker native={true} title="Выбери смайлик..." emojiTooltip onSelect={handleEmojiSelect} />
+        <Picker native={true} emojiTooltip onSelect={handleEmojiSelect} />
       </div>
     </div>
   );
