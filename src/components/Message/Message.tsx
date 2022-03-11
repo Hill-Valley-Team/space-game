@@ -121,7 +121,7 @@ export const Message = (props: MessageProps) => {
             <EmojiPannel onEmojiSelect={handleEmojiSelect} />
             <button
               className={b('send-btn')}
-              disabled={messageValue.length === 0}
+              disabled={!(messageIsValid && titleIsValid)}
               onClick={handleMessageSubmit}
             ></button>
           </div>
