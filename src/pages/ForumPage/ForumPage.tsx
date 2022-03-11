@@ -66,8 +66,8 @@ export const ForumPage = () => {
     initTopics();
   }, []);
 
-  const createPostHandle = () => {
-    console.log('new post');
+  const handleCreatePost = (message: string) => {
+    console.log(message);
   };
 
   return (
@@ -93,7 +93,7 @@ export const ForumPage = () => {
           className={b('add-block')}
           onClickHandler={createPostHandle}
         /> */}
-        <Message />
+        <Message onSubmit={handleCreatePost} />
       </PageContainer>
     </div>
   );
