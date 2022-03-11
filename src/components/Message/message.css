@@ -35,5 +35,10 @@
     border: none;
     cursor: pointer;
     color: #fff;
+
+    &:disabled {
+      cursor: auto;
+      filter: grayscale(1);
+    }
   }
 }

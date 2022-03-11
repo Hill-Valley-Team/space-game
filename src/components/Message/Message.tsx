@@ -13,15 +13,16 @@ type MessageProps = {
   placeholder?: string;
   name?: string;
   form?: string;
-  onChange?: (fieldName: string, value: string) => void;
-};
-
-const handleEmojiSelect = (emoji: BaseEmoji) => {
-  console.log(emoji);
+  onSubmit?: (message: string) => void;
 };
 
 export const Message = (props: MessageProps) => {
-  const { className, placeholder = 'New message...', message: initialMessage = '' } = props;
+  const {
+    className,
+    placeholder = 'New message...',
+    message: initialMessage = '',
+    onSubmit,
+  } = props;
   const [message, setMessage] = useState(initialMessage);
   const [cursor, setCursor] = useState(0);
   const input = React.createRef<HTMLDivElement>();
@@ -36,8 +37,20 @@ export const Message = (props: MessageProps) => {
     }
   };
 
+  const handleEmojiSelect = (emoji: BaseEmoji) => {
+    const newMessage = message.slice(0, cursor) + emoji.native + message.slice(cursor + 1);
+    setCursor(cursor + 1);
+    setMessage(newMessage);
+  };
+
   const handleInputFocus = () => {
     input.current?.focus();
+  };
+
+  const handleMessageSubmit = () => {
+    if (onSubmit) {
+      onSubmit(message);
+    }
   };
 
   useEffect(() => {
@@ -65,7 +78,11 @@ export const Message = (props: MessageProps) => {
           </div>
           <div className={b('controls')}>
             <EmojiPannel onEmojiSelect={handleEmojiSelect} />
-            <button className={b('send-btn')}></button>
+            <button
+              className={b('send-btn')}
+              disabled={message.length === 0}
+              onClick={handleMessageSubmit}
+            ></button>
           </div>
         </div>
       </div>

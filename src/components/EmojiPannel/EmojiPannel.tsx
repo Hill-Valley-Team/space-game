@@ -15,9 +15,13 @@ export const EmojiPannel = (props: EmojiPannelProps) => {
   const { className, onEmojiSelect } = props;
   const [isVisiblePicker, setIsVisiblePicker] = useState(false);
 
-  const handleEmojiSelect = (emoji: BaseEmoji) => onEmojiSelect(emoji);
   const handlePickerVisibility = () => {
     setIsVisiblePicker(!isVisiblePicker);
+  };
+
+  const handleEmojiSelect = (emoji: BaseEmoji) => {
+    onEmojiSelect(emoji);
+    handlePickerVisibility();
   };
 
   return (
