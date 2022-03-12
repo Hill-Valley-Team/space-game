@@ -4,7 +4,7 @@ import { forumTopicService } from 'server/services/ForumTopicService';
 export class ForumTopicAPI {
   public static create = async (request: Request, response: Response) => {
     const { title, description } = request.body;
-    const userId = response.locals.id;
+    const userId = response.locals.user.id;
 
     try {
       await forumTopicService.create({

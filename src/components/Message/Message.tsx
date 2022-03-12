@@ -39,7 +39,7 @@ export const Message = (props: MessageProps) => {
   const [
     { value: messageValue, isValid: messageIsValid, errorMessage: messageErrorMessage },
     setMessageValue,
-  ] = useFormInput({ type: ValidationType.MESSAGE });
+  ] = useFormInput({ value: initialMessage, type: ValidationType.MESSAGE });
 
   const handleMessageInput = (event: ChangeEvent<HTMLDivElement>) => {
     const value = event.target.textContent;
@@ -66,9 +66,15 @@ export const Message = (props: MessageProps) => {
     input.current?.focus();
   };
 
+  const reset = () => {
+    setTitleValue({ value: initialMessage });
+    setMessageValue({ value: '' });
+  };
+
   const handleMessageSubmit = () => {
     if (onSubmit) {
       onSubmit(messageValue, titleValue);
+      reset();
     }
   };
 

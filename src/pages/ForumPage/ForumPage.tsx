@@ -6,7 +6,7 @@ import { ListItem } from './ListItem';
 import { ThreadListData, ThreadListItem } from './types';
 
 import './forumPage.css';
-import { getTopics } from 'controllers/ForumController';
+import { getTopics, addTopic } from 'controllers/ForumController';
 import { userApi } from 'api/User/UserApi';
 import { ForumTopic } from 'api/Forum/types';
 import { dateFormat } from 'utils/dateFormat';
@@ -67,7 +67,7 @@ export const ForumPage = () => {
   }, []);
 
   const handleCreatePost = (message: string, title?: string) => {
-    console.log(message, title);
+    addTopic(message, title).then(() => initTopics());
   };
 
   return (
