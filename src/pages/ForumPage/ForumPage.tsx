@@ -66,8 +66,8 @@ export const ForumPage = () => {
     initTopics();
   }, []);
 
-  const handleCreatePost = (message: string) => {
-    console.log(message);
+  const handleCreatePost = (message: string, title?: string) => {
+    console.log(message, title);
   };
 
   return (
@@ -88,11 +88,6 @@ export const ForumPage = () => {
           </thead>
           <tbody>{threadList}</tbody>
         </table>
-        {/* <AddBlock
-          buttonText="Добавить тему"
-          className={b('add-block')}
-          onClickHandler={createPostHandle}
-        /> */}
         <Message withTitle={true} onSubmit={handleCreatePost} />
       </PageContainer>
     </div>

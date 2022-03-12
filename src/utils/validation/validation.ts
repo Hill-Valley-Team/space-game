@@ -181,6 +181,21 @@ const checkMessageValidaty = (value: string = '') => {
   return checker(checkList);
 };
 
+const checkMessageTitleValidaty = (value: string = '') => {
+  const rules: ValidationRules = {
+    symbols: '',
+    minLength: 2,
+    maxLength: 255,
+  };
+
+  const checkList: (string | boolean)[] = [
+    checkMaxLength(value.length, rules.maxLength!),
+    checkMinLength(value.length, rules.minLength),
+  ];
+
+  return checker(checkList);
+};
+
 const checkPhoneValidaty = (value: string = '') => {
   const rules: ValidationRules = {
     symbols: '',
@@ -232,6 +247,9 @@ export const checkFormInput = (value: string, type: ValidationType, equal?: stri
         break;
       case ValidationType.MESSAGE:
         result = checkMessageValidaty(value);
+        break;
+      case ValidationType.MESSAGE_TITLE:
+        result = checkMessageTitleValidaty(value);
         break;
       default:
         break;

@@ -34,12 +34,12 @@ export const Message = (props: MessageProps) => {
   const [
     { value: titleValue, isValid: titleIsValid, errorMessage: titleErrorMessage },
     setTitleValue,
-  ] = useFormInput({ type: ValidationType.SHORT_TEXT });
+  ] = useFormInput({ type: ValidationType.MESSAGE_TITLE });
 
   const [
     { value: messageValue, isValid: messageIsValid, errorMessage: messageErrorMessage },
     setMessageValue,
-  ] = useFormInput({ type: ValidationType.TEXT });
+  ] = useFormInput({ type: ValidationType.MESSAGE });
 
   const handleMessageInput = (event: ChangeEvent<HTMLDivElement>) => {
     const value = event.target.textContent;
@@ -121,7 +121,7 @@ export const Message = (props: MessageProps) => {
             <EmojiPannel onEmojiSelect={handleEmojiSelect} />
             <button
               className={b('send-btn')}
-              disabled={!(messageIsValid && titleIsValid)}
+              disabled={!(messageIsValid && (withTitle ? titleIsValid : true))}
               onClick={handleMessageSubmit}
             ></button>
           </div>

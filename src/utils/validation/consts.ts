@@ -9,4 +9,5 @@ export enum ValidationType {
   EQUAL = 'equal',
   FILE = 'file',
   MESSAGE = 'message',
+  MESSAGE_TITLE = 'messsageTitle',
 }
