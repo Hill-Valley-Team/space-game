@@ -21,6 +21,7 @@ module.exports = {
     'spaced-comment': 'off',
     'import/extensions': 'off',
     'import/no-cycle': 'warn',
+    'func-names': 'as-needed',
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/default-param-last': 'off',
     'react-hooks/rules-of-hooks': 'error',

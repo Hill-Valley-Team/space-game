@@ -1,14 +1,11 @@
 import block from 'bem-cn';
 import React, { PropsWithChildren } from 'react';
+import { useGetUserInfo } from 'hooks/useGetUserInfo';
 import { resourcesUrl } from '../../../api/consts';
 import { Button } from '../../../components/Button';
 import { InputFieldAvatar } from '../../../components/InputFieldAvatar';
 import { formScheme, InputNames } from '../../../consts/formScheme';
-import {
-  useGetUserInfoQuery,
-  useUpdateUserAvatarMutation,
-  useLogoutMutation,
-} from '../../../services/UserService';
+import { useUpdateUserAvatarMutation, useLogoutMutation } from '../../../services/UserService';
 import { BackButton } from '../../../components/BackButton';
 
 type HeaderProps = PropsWithChildren<{
@@ -20,12 +17,12 @@ const b = block('profile-page');
 
 export const Header = (props: HeaderProps) => {
   const { withLogoutBtn, withBackBtn } = props;
-  const { data: userData } = useGetUserInfoQuery();
   const [updateAvatar] = useUpdateUserAvatarMutation();
   const [logout] = useLogoutMutation();
+  const { requestUserInfo, userData } = useGetUserInfo();
 
   const handleLogoutBtnClick = () => {
-    logout();
+    logout().then(() => requestUserInfo());
   };
 
   const changeAvatarHandle = (formData: FormData) => updateAvatar(formData);
@@ -41,7 +38,7 @@ export const Header = (props: HeaderProps) => {
     />
   ) : null;
 
-  const backBtn = withBackBtn ? <BackButton className={b('back')} /> : null;
+  const backBtn = withBackBtn ? <BackButton className={b('back')} /> : <div />;
 
   return (
     <div className={b('top-wrapper')}>
@@ -56,9 +53,4 @@ export const Header = (props: HeaderProps) => {
       {logoutBtn}
     </div>
   );
-};
-
-Header.defaultProps = {
-  withLogoutBtn: true,
-  withBackBtn: true,
 };

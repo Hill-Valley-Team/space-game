@@ -1,4 +1,5 @@
 import block from 'bem-cn';
+import { useGetUserInfo } from 'hooks/useGetUserInfo';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/Button';
@@ -12,6 +13,9 @@ import { formScheme, InputNames } from '../../consts/formScheme';
 import { useFormInput } from '../../hooks/useFormInput';
 import { useSigninMutation } from '../../services/UserService';
 import './loginPage.css';
+import { OAUTH_URL, REDIRECT_URI } from '../../consts/urls';
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 const b = block('login-page');
 
@@ -29,16 +33,30 @@ export const LoginPage = () => {
   ] = useFormInput({ type: formScheme[InputNames.PASSWORD].type });
 
   const [signin] = useSigninMutation();
+  const { requestUserInfo } = useGetUserInfo();
 
   const formSubmitHandle = (formData: FormData) => {
     signin(formData)
-      .unwrap()
+      .then(() => requestUserInfo())
       .catch((error) => {
         if (error.data && 'reason' in error.data) {
           setRequestError(JSON.stringify(error.data.reason));
         }
       });
   };
+
+  async function onOauthClick() {
+    try {
+      const response = await axios.get(OAUTH_URL);
+
+      if (response.status === 200) {
+        const serviceId = await response.data;
+        window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${serviceId.service_id}&redirect_uri=${REDIRECT_URI}`;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   return (
     <div className={b()}>
@@ -79,6 +97,13 @@ export const LoginPage = () => {
             </Link>
           </Footer>
         </Form>
+        <Button
+          width="stretch"
+          view="secondary"
+          text="OAuth"
+          className={b('button')}
+          onClick={onOauthClick}
+        />
         <div>{requestError}</div>
       </PageContainer>
     </div>
