@@ -4,7 +4,7 @@ import { forumCommentService } from 'server/services/ForumCommentService';
 export class ForumCommentAPI {
   public static create = async (request: Request, response: Response) => {
     const { title, description } = request.params;
-    const userId = response.locals.id;
+    const userId = response.locals.user.id;
 
     try {
       await forumCommentService.create({

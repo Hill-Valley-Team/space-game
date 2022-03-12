@@ -25,6 +25,14 @@ export const getTopic = async (topicId: number) => {
   return response.data;
 };
 
+export const addTopic = async (message: string, title: string) => {
+  const response = await forumTopicApi.addForumTopic({
+    title,
+    description: message,
+  });
+  return response.data;
+};
+
 export const getComments = async (
   topicId: number,
   offset = DEFAULT_OFFSET,

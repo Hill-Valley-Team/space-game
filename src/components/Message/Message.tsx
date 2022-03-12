@@ -2,10 +2,9 @@ import block from 'bem-cn';
 import { EmojiPannel } from 'components/EmojiPannel';
 import { BaseEmoji } from 'emoji-mart';
 import { useFormInput } from 'hooks/useFormInput';
-import React, { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { ValidationType } from 'utils/validation/consts';
 import './message.css';
-import { getCursorPosition, setCursorPosition } from './utils';
 
 const b = block('message-pannel');
 
@@ -29,25 +28,25 @@ export const Message = (props: MessageProps) => {
   } = props;
 
   const [cursor, setCursor] = useState(0);
-  const input = React.createRef<HTMLDivElement>();
 
   const [
     { value: titleValue, isValid: titleIsValid, errorMessage: titleErrorMessage },
     setTitleValue,
-  ] = useFormInput({ type: ValidationType.SHORT_TEXT });
+  ] = useFormInput({ type: ValidationType.MESSAGE_TITLE });
 
   const [
     { value: messageValue, isValid: messageIsValid, errorMessage: messageErrorMessage },
     setMessageValue,
-  ] = useFormInput({ type: ValidationType.TEXT });
+  ] = useFormInput({ value: initialMessage, type: ValidationType.MESSAGE });
 
-  const handleMessageInput = (event: ChangeEvent<HTMLDivElement>) => {
-    const value = event.target.textContent;
-    if (value !== null) {
-      setCursor(getCursorPosition(input));
-      input.current?.blur();
-      setMessageValue({ value });
-    }
+  const handleMessageInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const target = event.target;
+    setMessageValue({ value: target.value });
+  };
+
+  const handleMessageSelect = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const target = event.target;
+    setCursor(target.selectionEnd);
   };
 
   const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -58,25 +57,20 @@ export const Message = (props: MessageProps) => {
   const handleEmojiSelect = (emoji: BaseEmoji) => {
     const newMessage =
       messageValue.slice(0, cursor) + emoji.native + messageValue.slice(cursor + 1);
-    setCursor(cursor + 1);
     setMessageValue({ value: newMessage });
   };
 
-  const handleInputFocus = () => {
-    input.current?.focus();
+  const reset = () => {
+    setTitleValue({ value: initialMessage });
+    setMessageValue({ value: '' });
   };
 
   const handleMessageSubmit = () => {
     if (onSubmit) {
       onSubmit(messageValue, titleValue);
+      reset();
     }
   };
-
-  useEffect(() => {
-    if (cursor !== 0) {
-      setCursorPosition(input, cursor);
-    }
-  }, [messageValue]);
 
   const titleErrorBlock = !titleIsValid ? (
     <div className={b('error-message')}>{titleErrorMessage}</div>
@@ -99,29 +93,20 @@ export const Message = (props: MessageProps) => {
     <div className={b.mix(className)}>
       {titleInput}
       <div className={b('container')}>
-        <div
-          className={b('placeholder', { hide: messageValue.length > 0 })}
-          onClick={handleInputFocus}
-        >
-          {placeholder}
-        </div>
         <div className={b('inner-main')}>
-          <div
-            contentEditable="true"
-            role="textbox"
+          <textarea
+            placeholder={placeholder}
             className={b('input')}
-            onInput={handleMessageInput}
-            suppressContentEditableWarning={true}
-            ref={input}
-          >
-            {messageValue}
-          </div>
+            onChange={handleMessageInput}
+            onSelect={handleMessageSelect}
+            value={messageValue}
+          />
           {messageErrorBlock}
           <div className={b('controls')}>
             <EmojiPannel onEmojiSelect={handleEmojiSelect} />
             <button
               className={b('send-btn')}
-              disabled={!(messageIsValid && (!withTitle || titleIsValid))}
+              disabled={!(messageIsValid && (withTitle ? titleIsValid : true))}
               onClick={handleMessageSubmit}
             ></button>
           </div>

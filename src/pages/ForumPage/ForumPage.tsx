@@ -6,7 +6,7 @@ import { ListItem } from './ListItem';
 import { ThreadListData, ThreadListItem } from './types';
 
 import './forumPage.css';
-import { getTopics } from 'controllers/ForumController';
+import { getTopics, addTopic } from 'controllers/ForumController';
 import { userApi } from 'api/User/UserApi';
 import { ForumTopic } from 'api/Forum/types';
 import { dateFormat } from 'utils/dateFormat';
@@ -66,8 +66,10 @@ export const ForumPage = () => {
     initTopics();
   }, []);
 
-  const handleCreatePost = (message: string) => {
-    console.log(message);
+  const handleCreatePost = (message: string, title?: string) => {
+    if (title) {
+      addTopic(message, title).then(() => initTopics());
+    }
   };
 
   return (
@@ -88,11 +90,6 @@ export const ForumPage = () => {
           </thead>
           <tbody>{threadList}</tbody>
         </table>
-        {/* <AddBlock
-          buttonText="Добавить тему"
-          className={b('add-block')}
-          onClickHandler={createPostHandle}
-        /> */}
         <Message withTitle={true} onSubmit={handleCreatePost} />
       </PageContainer>
     </div>
