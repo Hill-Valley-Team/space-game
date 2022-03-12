@@ -41,7 +41,7 @@ export class Game {
 
   public score: number;
 
-  constructor(config: GameConfig, cb: Function) {
+  constructor(config: GameConfig, cb: (score: number) => void) {
     const { width, height, parent, backgroundColor } = config;
 
     this.width = width ?? defaultGameConfig.width;

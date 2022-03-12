@@ -38,7 +38,7 @@ const threadData: ThreadListData = [
   },
 ];
 
-const threadList = threadData.map((item) => <ListItem data={item} />);
+const threadList = threadData.map((item) => <ListItem data={item} key={item.id} />);
 
 export const ForumPage = () => {
   const navigate = useNavigate();

@@ -9,13 +9,13 @@ export class SceneManager {
 
   private scenes: ScenesConfig;
 
-  public cb: Function;
+  public cb: (score: number) => void;
 
   public get(key: string) {
     return this.scenes[key];
   }
 
-  constructor(game: Game, config: ScenesConfig, cb: Function) {
+  constructor(game: Game, config: ScenesConfig, cb: (score: number) => void) {
     this.game = game;
     this.current = null;
     this.scenes = config;

@@ -4,7 +4,7 @@ const Loadable = require('react-loadable');
 const { app } = require('./dist/server.js');
 const { readFileSync } = require('fs');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 443;
 
 Loadable.preloadAll().then(() => {
   if (process.env.NODE_ENV === 'development') {
