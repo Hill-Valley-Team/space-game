@@ -1,17 +1,15 @@
-import React from 'react';
-
-export const getCursorPosition = (parent: React.RefObject<HTMLDivElement>) => {
+export const getCursorPosition = (parent: Node) => {
   const selection = document.getSelection();
   const range = new Range();
-  range.setStart(parent.current as Node, 0);
+  range.setStart(parent, 0);
   if (selection !== null && selection.anchorNode) {
     range.setEnd(selection.anchorNode, selection.anchorOffset);
   }
   return range.toString().length;
 };
 
-export const setCursorPosition = (parent: React.RefObject<HTMLDivElement>, position: number) => {
-  let child = (parent.current as Node).firstChild;
+export const setCursorPosition = (parent: Node, position: number) => {
+  let child = parent.firstChild;
   while (position > 0 && child !== null && child.textContent) {
     const length = child.textContent.length;
     if (position > length) {
