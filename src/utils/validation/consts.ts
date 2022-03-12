@@ -8,4 +8,5 @@ export enum ValidationType {
   PHONE = 'phone',
   EQUAL = 'equal',
   FILE = 'file',
+  MESSAGE = 'message',
 }
