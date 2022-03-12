@@ -12,6 +12,7 @@ import { PageContainer } from '../../components/PageContainer';
 import { ThreadListItem } from './ThreadListItem';
 import { CommentListData, CommentListItem } from './ThreadListItem/types';
 import './forumThreadPage.css';
+import {Message} from "../../components/Message";
 
 const b = block('forum-thread-page');
 
@@ -19,6 +20,7 @@ export const ForumThreadPage = () => {
   const { topicId } = useParams<'topicId'>();
   const [comments, setComments] = useState<CommentListData>([]);
   const [parent, setParent] = useState<ForumTopic>();
+  const [isCommentShow, setIsCommentShow] = useState(false);
 
   const getParent = async () => {
     if (topicId) {
@@ -49,9 +51,21 @@ export const ForumThreadPage = () => {
         return {
           id: comment.id,
           text: comment.text,
+          parentId: undefined,
           datatime: dateFormat(comment.createdAt),
           userName: undefined,
-          comments: undefined,
+          comments: [
+            {
+              id: 234324,
+              text: 'blabla',
+              parentId: comment.id,
+              datatime: dateFormat(comment.createdAt),
+              userName: undefined,
+              comments: [],
+              level: 1,
+            }
+          ],
+          level: 0,
         };
       });
       setComments(comments);
@@ -66,9 +80,18 @@ export const ForumThreadPage = () => {
 
   const createCommentHandle = () => {
     console.log('new comment');
+    setIsCommentShow(true);
   };
 
-  const commentsList = comments.map((comment) => <ThreadListItem data={comment} />);
+  const addComment = (message: string) => {
+    setIsCommentShow(false);
+  }
+
+  const getCommentMessageForm = () => {
+    return isCommentShow ? <Message withTitle={false} onSubmit={addComment} /> : '';
+  }
+
+  const commentsList = comments.map((comment) => <ThreadListItem data={comment} key={comment.id} />);
 
   return (
     <div className={b()}>
@@ -88,6 +111,7 @@ export const ForumThreadPage = () => {
           className={b('button')}
           text="Добавить комментарий"
         />
+        {getCommentMessageForm()}
       </PageContainer>
     </div>
   );

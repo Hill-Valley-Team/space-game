@@ -3,5 +3,8 @@ export type CommentListItem = {
   text: string;
   datatime: string;
   userName: string | undefined;
+  parentId?: number; // для древовидности
+  level?: number;
+  comments?: CommentListItem[];
 };
 export type CommentListData = CommentListItem[];
