@@ -7,7 +7,6 @@ import {
   GetForumTopicsResponse,
 } from 'api/Forum/types';
 import { AxiosResponse } from 'axios';
-import htmlescape from 'htmlescape';
 
 const DEFAULT_LIMIT = 100;
 const DEFAULT_OFFSET = 0;
@@ -26,10 +25,10 @@ export const getTopic = async (topicId: number) => {
   return response.data;
 };
 
-export const addTopic = async (message: string, title?: string) => {
+export const addTopic = async (message: string, title: string) => {
   const response = await forumTopicApi.addForumTopic({
-    title: htmlescape(title),
-    description: htmlescape(message),
+    title,
+    description: message,
   });
   return response.data;
 };

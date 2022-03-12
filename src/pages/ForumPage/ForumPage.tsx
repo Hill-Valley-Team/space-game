@@ -67,7 +67,9 @@ export const ForumPage = () => {
   }, []);
 
   const handleCreatePost = (message: string, title?: string) => {
-    addTopic(message, title).then(() => initTopics());
+    if (title) {
+      addTopic(message, title).then(() => initTopics());
+    }
   };
 
   return (
