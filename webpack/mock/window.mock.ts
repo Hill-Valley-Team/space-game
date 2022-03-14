@@ -1,5 +1,3 @@
-// webpack/mock/window.mock.ts
-
 // eslint-disable-next-line import/no-mutable-exports
 let win;
 
