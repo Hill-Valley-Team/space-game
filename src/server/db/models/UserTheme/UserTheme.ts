@@ -15,7 +15,7 @@ import { SiteTheme } from '../SiteTheme';
 })
 export class UserTheme extends Model {
   @Column({
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER,
     field: 'user_id',
   })
   userId!: number;
@@ -23,7 +23,7 @@ export class UserTheme extends Model {
   @AllowNull(false)
   @ForeignKey(() => SiteTheme)
   @Column({
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER,
     field: 'theme_id',
     defaultValue: 1,
   })

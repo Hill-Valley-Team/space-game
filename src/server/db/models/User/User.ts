@@ -9,7 +9,7 @@ import { UserTheme } from '../UserTheme';
 })
 export class User extends Model {
   @PrimaryKey
-  @Column(DataType.INTEGER.UNSIGNED)
+  @Column(DataType.INTEGER)
   id!: number;
 
   @Column(DataType.STRING)

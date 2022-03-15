@@ -18,7 +18,7 @@ export class ForumTopic extends Model {
 
   @AllowNull(false)
   @Column({
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER,
     field: 'user_id',
   })
   userId!: number;

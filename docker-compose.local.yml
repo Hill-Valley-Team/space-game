@@ -13,7 +13,7 @@ services:
     env_file:
       - .env
     command:
-      - ./utils/wait-for.sh postgres:5432 -- npm run start
+      - ./wait-for.sh postgres:5432 -- npm run start
     networks:
       - appNetwork
 

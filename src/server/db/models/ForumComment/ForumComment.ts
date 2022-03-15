@@ -13,14 +13,14 @@ export class ForumComment extends Model {
 
   @AllowNull(false)
   @Column({
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER,
     field: 'topic_id',
   })
   topicId!: string;
 
   @AllowNull(false)
   @Column({
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER,
     field: 'user_id',
   })
   userId!: number;
