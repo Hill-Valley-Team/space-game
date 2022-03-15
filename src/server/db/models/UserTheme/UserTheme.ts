@@ -1,12 +1,4 @@
-import {
-  Model,
-  InferAttributes,
-  InferCreationAttributes,
-  Sequelize,
-  DataTypes,
-  NonAttribute,
-} from 'sequelize';
-import { SiteTheme } from '../SiteTheme';
+import { Model, InferAttributes, InferCreationAttributes, Sequelize, DataTypes } from 'sequelize';
 
 export class UserTheme extends Model<
   InferAttributes<UserTheme>,
@@ -16,7 +8,7 @@ export class UserTheme extends Model<
   declare themeId: number;
 }
 
-export const initUserThemeModel = (sequelize: Sequelize) => {
+export const initUserThemeModel = (sequelize: Sequelize) =>
   UserTheme.init(
     {
       userId: {
@@ -44,7 +36,6 @@ export const initUserThemeModel = (sequelize: Sequelize) => {
       paranoid: true,
     },
   );
-};
 // import { AllowNull, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
 // import { SiteTheme } from '../SiteTheme';
 

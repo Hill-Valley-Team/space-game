@@ -1,1 +1,1 @@
-export { UserTheme } from './UserTheme';
+export { UserTheme, initUserThemeModel } from './UserTheme';

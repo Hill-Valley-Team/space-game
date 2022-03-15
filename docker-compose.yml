@@ -12,8 +12,8 @@ services:
     restart: always
     env_file:
       - .env
-    command:
-      - ./utils/wait-for.sh postgres:5432 -- npm run start
+    entrypoint: ./utils/wait-for.sh
+    command: postgres:5432 -- npm run start
     networks:
       - appNetwork
 

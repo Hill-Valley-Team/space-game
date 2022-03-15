@@ -1,19 +1,14 @@
-import {
-  Model,
-  InferAttributes,
-  InferCreationAttributes,
-  Sequelize,
-  DataTypes,
-  Association,
-} from 'sequelize';
-import { UserTheme } from '../UserTheme';
+import { Model, InferAttributes, InferCreationAttributes, Sequelize, DataTypes } from 'sequelize';
 
-class SiteTheme extends Model<InferAttributes<SiteTheme>, InferCreationAttributes<SiteTheme>> {
+export class SiteTheme extends Model<
+  InferAttributes<SiteTheme>,
+  InferCreationAttributes<SiteTheme>
+> {
   declare theme: string;
   declare description: string;
 }
 
-export const initSiteThemeModel = (sequelize: Sequelize) => {
+export const initSiteThemeModel = (sequelize: Sequelize) =>
   SiteTheme.init(
     {
       theme: {
@@ -33,7 +28,6 @@ export const initSiteThemeModel = (sequelize: Sequelize) => {
       paranoid: true,
     },
   );
-};
 
 // import { AllowNull, Column, DataType, Length, Model, Table, Unique } from 'sequelize-typescript';
 
