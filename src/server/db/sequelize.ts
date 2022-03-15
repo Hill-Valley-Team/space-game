@@ -1,6 +1,10 @@
-import { Sequelize } from 'sequelize-typescript';
+import { Sequelize } from 'sequelize';
 import { sequelizeOptions } from './config';
-import { initForumComments, initForumTopics, initThemes } from './init';
+import { ForumAnswer } from './models/ForumAnswers';
+import { ForumComment } from './models/ForumComment';
+import { ForumTopic } from './models/ForumTopic';
+import { SiteTheme } from './models/SiteTheme';
+import { UserTheme } from './models/UserTheme';
 
 export const sequelize = new Sequelize(sequelizeOptions);
 
@@ -9,11 +13,11 @@ export async function dbConnect() {
     await sequelize.authenticate();
     await sequelize.sync({ force: true });
     console.log('Connection has been established successfully.');
-    if (process.env.NODE_ENV === 'development') {
-      await initThemes();
-      await initForumTopics();
-      await initForumComments();
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    //   await initThemes();
+    //   await initForumTopics();
+    //   await initForumComments();
+    // }
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
