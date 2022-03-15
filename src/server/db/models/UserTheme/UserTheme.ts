@@ -6,7 +6,7 @@ import {
   DataTypes,
   NonAttribute,
 } from 'sequelize';
-import { SiteTheme } from '../SiteTheme/SiteTheme copy';
+import { SiteTheme } from '../SiteTheme';
 
 export class UserTheme extends Model<
   InferAttributes<UserTheme>,
@@ -14,7 +14,6 @@ export class UserTheme extends Model<
 > {
   declare userId: number;
   declare themeId: number;
-  declare theme?: NonAttribute<SiteTheme>;
 }
 
 export const initUserThemeModel = (sequelize: Sequelize) => {

@@ -11,9 +11,6 @@ import { UserTheme } from '../UserTheme';
 class SiteTheme extends Model<InferAttributes<SiteTheme>, InferCreationAttributes<SiteTheme>> {
   declare theme: string;
   declare description: string;
-  declare static associations: {
-    projects: Association<SiteTheme, UserTheme>;
-  };
 }
 
 export const initSiteThemeModel = (sequelize: Sequelize) => {
@@ -37,3 +34,23 @@ export const initSiteThemeModel = (sequelize: Sequelize) => {
     },
   );
 };
+
+// import { AllowNull, Column, DataType, Length, Model, Table, Unique } from 'sequelize-typescript';
+
+// @Table({
+//   tableName: 'site_theme',
+//   timestamps: true,
+//   paranoid: true,
+//   underscored: true,
+// })
+// export class SiteTheme extends Model {
+//   @AllowNull(false)
+//   @Unique(true)
+//   @Length({ min: 3, max: 20 })
+//   @Column(DataType.STRING)
+//   theme!: string;
+
+//   @AllowNull(false)
+//   @Column(DataType.STRING)
+//   description!: string;
+// }
