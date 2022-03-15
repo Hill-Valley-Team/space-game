@@ -25,4 +25,10 @@
     font-size: 15px;
     line-height: 22px;
   }
+
+   &__comments-list {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
 }

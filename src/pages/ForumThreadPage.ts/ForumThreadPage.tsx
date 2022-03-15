@@ -13,6 +13,8 @@ import { ThreadListItem } from './ThreadListItem';
 import { CommentListData, CommentListItem } from './ThreadListItem/types';
 import './forumThreadPage.css';
 import {Message} from "../../components/Message";
+import {nanoid} from "@reduxjs/toolkit";
+import {comment} from "postcss";
 
 const b = block('forum-thread-page');
 
@@ -34,6 +36,7 @@ export const ForumThreadPage = () => {
     const userName = `${user.data.first_name} ${user.data.second_name}`;
     return {
       id: comment.id,
+      parentId: comment.parentId,
       text: comment.text,
       datatime: dateFormat(comment.createdAt),
       userName: userName,
@@ -68,7 +71,7 @@ export const ForumThreadPage = () => {
           level: 0,
         };
       });
-      setComments(comments);
+      //setComments(comments);
       Promise.all(promises).then((values) => setComments(values));
     }
   };
@@ -85,13 +88,23 @@ export const ForumThreadPage = () => {
 
   const addComment = (message: string) => {
     setIsCommentShow(false);
+    comments.push(
+      {
+        id: nanoid(),
+      text: message,
+      parentId: null,
+      datatime: Date.now().toLocaleString('ru'),
+      userName: undefined,
+      comments: [],
+  });
+    setComments(comments);
   }
 
   const getCommentMessageForm = () => {
     return isCommentShow ? <Message withTitle={false} onSubmit={addComment} /> : '';
   }
 
-  const commentsList = comments.map((comment) => <ThreadListItem data={comment} key={comment.id} />);
+  const commentsList = comments.map((comment) => <ThreadListItem data={comment} key={comment.id} addComment={addComment} createCommentHandle={createCommentHandle} />);
 
   return (
     <div className={b()}>

@@ -1,9 +1,9 @@
 export type CommentListItem = {
-  id: number;
+  id: number | string;
   text: string;
-  datatime: string;
+  datatime: string | Date;
   userName: string | undefined;
-  parentId?: number; // для древовидности
+  parentId: number | string | null; // для древовидности
   level?: number;
   comments?: CommentListItem[];
 };

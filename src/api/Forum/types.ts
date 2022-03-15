@@ -30,6 +30,7 @@ export type ForumComment = {
   text: string;
   topicId: number;
   userId: number;
+  parentId: number | null;
 };
 
 export type GetForumCommentsRequest = {

@@ -23,5 +23,17 @@ export class ForumComment extends Model {
     type: DataType.INTEGER.UNSIGNED,
     field: 'user_id',
   })
+
+  @AllowNull(false)
+  @Column({
+    type: DataType.INTEGER.UNSIGNED,
+    field: 'comment_id',
+  })
+
+  @AllowNull(true)
+  @Column({
+    type: DataType.INTEGER.UNSIGNED,
+    field: 'parent_id',
+  })
   userId!: number;
 }
