@@ -20,17 +20,17 @@ export const initUserThemeModel = (sequelize: Sequelize) =>
   UserTheme.init(
     {
       id: {
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
       userId: {
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER,
         allowNull: false,
         field: 'user_id',
       },
       themeId: {
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 1,
         field: 'theme_id',

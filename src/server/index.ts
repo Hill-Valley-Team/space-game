@@ -8,12 +8,13 @@ import logger from './middlewares/logger';
 import { auth } from './middlewares/auth';
 import { initSiteThemeModel, SiteTheme } from './db/models/SiteTheme/SiteTheme';
 import { initUserThemeModel, UserTheme } from './db/models/UserTheme/UserTheme';
-// import { SiteTheme } from './db/models/SiteTheme';
-
-// sequelize.addModels([SiteTheme, UserTheme, ForumTopic, ForumComment, ForumAnswer]);
+import { ForumTopic, initForumTopicModel } from './db/models/ForumTopic';
+import { ForumComment, initForumCommentModel } from './db/models/ForumComment';
 
 initUserThemeModel(sequelize);
 initSiteThemeModel(sequelize);
+initForumTopicModel(sequelize);
+initForumCommentModel(sequelize);
 
 SiteTheme.hasMany(UserTheme, {
   onDelete: 'SET NULL',
@@ -21,10 +22,11 @@ SiteTheme.hasMany(UserTheme, {
   as: 'user_theme',
 });
 
-// ForumTopic.hasMany(ForumComment, {
-//   onDelete: 'CASCADE',
-//   foreignKey: 'topic_id',
-// });
+ForumTopic.hasMany(ForumComment, {
+  onDelete: 'CASCADE',
+  foreignKey: 'topic_id',
+});
+
 dbConnect();
 
 const app = express();

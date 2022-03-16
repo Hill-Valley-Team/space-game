@@ -1,9 +1,6 @@
 import { Sequelize } from 'sequelize';
 import { sequelizeOptions } from './config';
-import { initThemes } from './init';
-import { ForumAnswer } from './models/ForumAnswers';
-import { ForumComment } from './models/ForumComment';
-import { ForumTopic } from './models/ForumTopic';
+import { initForumComments, initForumTopics, initThemes } from './init';
 
 export const sequelize = new Sequelize(sequelizeOptions);
 
@@ -12,12 +9,11 @@ export async function dbConnect() {
     await sequelize.authenticate();
     await sequelize.sync({ force: true });
     console.log('Connection has been established successfully.');
-    // if (process.env.NODE_ENV === 'development') {
-    //   await initThemes();
-    //   await initForumTopics();
-    //   await initForumComments();
-    // }
     await initThemes();
+    if (process.env.NODE_ENV === 'development') {
+      await initForumTopics();
+      await initForumComments();
+    }
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
