@@ -21,11 +21,14 @@ SiteTheme.hasMany(UserTheme, {
   foreignKey: 'themeId',
   as: 'user_theme',
 });
+UserTheme.belongsTo(SiteTheme);
 
 ForumTopic.hasMany(ForumComment, {
   onDelete: 'CASCADE',
-  foreignKey: 'topic_id',
+  foreignKey: 'topicId',
+  as: 'forum_comment',
 });
+ForumComment.belongsTo(ForumTopic);
 
 dbConnect();
 

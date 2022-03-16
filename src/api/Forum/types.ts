@@ -39,8 +39,9 @@ export type GetForumCommentsRequest = {
 };
 
 export type AddForumCommentRequest = {
-  title: string;
-  description: string;
+  text: string;
+  parentId?: number;
+  topicId: number;
 };
 
 export type GetForumCommentsResponse = ForumComment[];
