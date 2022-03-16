@@ -1,17 +1,11 @@
 import { Sequelize } from 'sequelize';
 import { sequelizeOptions } from './config';
+import { initThemes } from './init';
 import { ForumAnswer } from './models/ForumAnswers';
 import { ForumComment } from './models/ForumComment';
 import { ForumTopic } from './models/ForumTopic';
-import { initSiteThemeModel, SiteTheme } from './models/SiteTheme';
-import { initUserThemeModel, UserTheme } from './models/UserTheme';
 
 export const sequelize = new Sequelize(sequelizeOptions);
-
-export const dbInit = () => {
-  initUserThemeModel(sequelize);
-  initSiteThemeModel(sequelize);
-};
 
 export async function dbConnect() {
   try {
@@ -23,6 +17,7 @@ export async function dbConnect() {
     //   await initForumTopics();
     //   await initForumComments();
     // }
+    await initThemes();
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }

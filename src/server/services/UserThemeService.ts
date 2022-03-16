@@ -31,6 +31,7 @@ class UserThemeService implements BaseService {
         where: {
           user_id: userId,
         },
+        as: 'user_theme',
       },
     });
   };
@@ -38,7 +39,7 @@ class UserThemeService implements BaseService {
   public findOrCreate = async (userId: number) => {
     return UserTheme.findOrCreate({
       where: {
-        user_id: userId,
+        userId,
       },
     });
   };
@@ -60,7 +61,7 @@ class UserThemeService implements BaseService {
       { themeId },
       {
         where: {
-          user_id: userId,
+          userId,
         },
       },
     );

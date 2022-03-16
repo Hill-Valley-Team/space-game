@@ -1,9 +1,17 @@
-import { Model, InferAttributes, InferCreationAttributes, Sequelize, DataTypes } from 'sequelize';
+import {
+  Model,
+  InferAttributes,
+  InferCreationAttributes,
+  Sequelize,
+  DataTypes,
+  CreationOptional,
+} from 'sequelize';
 
 export class UserTheme extends Model<
   InferAttributes<UserTheme>,
   InferCreationAttributes<UserTheme>
 > {
+  declare id: CreationOptional<number>;
   declare userId: number;
   declare themeId: number;
 }
@@ -11,13 +19,18 @@ export class UserTheme extends Model<
 export const initUserThemeModel = (sequelize: Sequelize) =>
   UserTheme.init(
     {
+      id: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       userId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
         field: 'user_id',
       },
       themeId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
         defaultValue: 1,
         field: 'theme_id',
