@@ -16,6 +16,7 @@ export class ForumComment extends Model<
   declare topicId: number;
   declare userId: number;
   declare parentId: number | null;
+  declare level: number;
 }
 
 export const initForumCommentModel = (sequelize: Sequelize) =>
@@ -42,6 +43,10 @@ export const initForumCommentModel = (sequelize: Sequelize) =>
       },
       parentId: {
         field: 'parent_id',
+        type: DataTypes.INTEGER,
+      },
+      level: {
+        field: 'level',
         type: DataTypes.INTEGER,
       },
     },

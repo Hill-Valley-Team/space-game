@@ -8,28 +8,28 @@ const b = block('thread-list-item');
 
 type ThreadListItemProps = PropsWithChildren<{
   data: CommentListItem;
-  addComment: (message: string, title?: string | undefined) => void;
-  createCommentHandle: () => void;
+  addComment: (message: string) => void;
 }>;
 
 export const ThreadListItem = (props: ThreadListItemProps) => {
   const [isCommentShow, setIsCommentShow] = useState(false);
-
-  const { id, text, datatime, userName, comments } = props.data;
+  const { id, text, datatime, userName, comments} = props.data;
   const addComment = props.addComment;
-  const createCommentHandle = props.createCommentHandle;
 
   const getCommentsList = (comments: CommentListItem[] | undefined) => {
-    const commentsList = comments ? comments.map((comment) => <ThreadListItem data={comment} key={comment.id} addComment={addComment} createCommentHandle={createCommentHandle} />) : '';
+    const commentsList = comments ? comments.map((comment) => <ThreadListItem data={comment} key={comment.id} addComment={addComment} />) : '';
     if (commentsList && commentsList.length) {
       return <div className={b('comments-list')}>{commentsList}</div>
     }
     return <div />;
   }
 
-  const getCommentMessageForm = () => {
+  const createCommentHandle = () => {
+    setIsCommentShow(true);
+  };
 
-    return isCommentShow ? <Message withTitle={false} onSubmit={addComment} /> : '';
+  const getCommentMessageForm = (comment?: CommentListItem) => {
+    return isCommentShow ? <Message withTitle={false} onSubmit={addComment} comment={comment} closeForm={() => setIsCommentShow(false)}/> : '';
   }
 
   return (
@@ -41,15 +41,15 @@ export const ThreadListItem = (props: ThreadListItemProps) => {
         </div>
         <div className={b('comment')}>{text}</div>
       </div>
-      {getCommentsList(comments)}
       <Button
-        view="primary"
+        view="error"
         align="center"
         onClick={createCommentHandle}
         className={b('button')}
         text="Добавить комментарий"
       />
-      {getCommentMessageForm()}
+      {getCommentMessageForm(props.data)}
+      {getCommentsList(comments)}
     </div>
   );
 };

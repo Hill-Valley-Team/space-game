@@ -4,7 +4,7 @@ import block from 'bem-cn';
 import { BackButton } from 'components/BackButton';
 import { Button } from 'components/Button';
 import { Title } from 'components/Title';
-import { getComments, getTopic } from 'controllers/ForumController';
+import {addNewComment, getComments, getTopic} from 'controllers/ForumController';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { dateFormat } from 'utils/dateFormat';
@@ -13,8 +13,6 @@ import { ThreadListItem } from './ThreadListItem';
 import { CommentListData, CommentListItem } from './ThreadListItem/types';
 import './forumThreadPage.css';
 import {Message} from "../../components/Message";
-import {nanoid} from "@reduxjs/toolkit";
-import {comment} from "postcss";
 
 const b = block('forum-thread-page');
 
@@ -49,30 +47,10 @@ export const ForumThreadPage = () => {
       setComments([]);
     } else {
       const promises: Promise<CommentListItem>[] = [];
-      const comments = data.map((comment) => {
+      data.forEach((comment) => {
         promises.push(setUserToComment(comment));
-        return {
-          id: comment.id,
-          text: comment.text,
-          parentId: undefined,
-          datatime: dateFormat(comment.createdAt),
-          userName: undefined,
-          comments: [
-            {
-              id: 234324,
-              text: 'blabla',
-              parentId: comment.id,
-              datatime: dateFormat(comment.createdAt),
-              userName: undefined,
-              comments: [],
-              level: 1,
-            }
-          ],
-          level: 0,
-        };
       });
-      //setComments(comments);
-      Promise.all(promises).then((values) => setComments(values));
+      Promise.all(promises).then((values) => setComments(createCommentsList(values)));
     }
   };
 
@@ -82,29 +60,72 @@ export const ForumThreadPage = () => {
   }, []);
 
   const createCommentHandle = () => {
-    console.log('new comment');
     setIsCommentShow(true);
   };
 
-  const addComment = (message: string) => {
+  const addComment = async (message: string, title?: string, comment?: CommentListItem) => {
     setIsCommentShow(false);
-    comments.push(
-      {
-        id: nanoid(),
-      text: message,
-      parentId: null,
-      datatime: Date.now().toLocaleString('ru'),
-      userName: undefined,
-      comments: [],
-  });
-    setComments(comments);
+    await addNewComment(message, comment?.id ?? null, Number(topicId) ?? 0, comment?.level ?? 0).then();
+    await initComments();
+    setIsCommentShow(false);
   }
 
-  const getCommentMessageForm = () => {
-    return isCommentShow ? <Message withTitle={false} onSubmit={addComment} /> : '';
+  const getCommentMessageForm = (comment?: CommentListItem) => {
+    return isCommentShow ? <Message withTitle={false} onSubmit={addComment} comment={comment} /> : '';
   }
 
-  const commentsList = comments.map((comment) => <ThreadListItem data={comment} key={comment.id} addComment={addComment} createCommentHandle={createCommentHandle} />);
+  const createCommentsList = (arr: CommentListData) => {
+    if (!arr || arr.length === 0) {
+      return [];
+    }
+    const tc = arr.slice();
+    let levelsDone = tc.length;
+    let maxLevel = 0;
+    tc.forEach(item => {
+      if (!item.parentId) {
+        item.level = 0;
+        item.comments = [];
+        levelsDone--;
+      }
+    }); // первый проход для определения уровня 0
+    while (levelsDone > 0) {
+      tc.forEach(item => {
+        const parent = tc.find(p => p.id === item.parentId);
+        if (parent && parent.level !== undefined) {
+          item.level = parent.level + 1;
+          item.comments = [];
+          if (item.level > maxLevel) {
+            maxLevel = item.level;
+          }
+          levelsDone--;
+        }
+      });
+    }
+
+    const leveledComments: CommentListItem[] = [];
+    while (maxLevel >= 0) {
+      tc.forEach(item => {
+        if (item.level === maxLevel) {
+          const parent = tc.find(p => p.id === item.parentId);
+          if (parent) {
+            parent.comments?.push(item);
+          }
+
+        }
+      })
+      maxLevel--;
+      if (!maxLevel) {
+        tc.forEach(item => {
+          if (item.level === maxLevel) {
+            leveledComments.push(item);
+          }
+        })
+      }
+    }
+    return leveledComments;
+  }
+
+  const commentsList = comments.map((comment) => <ThreadListItem data={comment} key={comment.id} addComment={addComment} />);
 
   return (
     <div className={b()}>

@@ -1,9 +1,9 @@
 import { config } from 'dotenv';
 import { Options } from 'sequelize';
 
-const configPath = process.env.NODE_ENV === 'production' ? '.prod.env' : '.dev.env';
+//const configPath = process.env.NODE_ENV === 'production' ? '.prod.env' : '.dev.env';
 
-config({ path: configPath });
+config();
 
 const { POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB } = process.env;
 

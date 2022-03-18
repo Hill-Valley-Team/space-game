@@ -6,6 +6,7 @@ interface CreateRequest {
   userId: number;
   parentId: number;
   topicId: number;
+  level: number;
 }
 
 interface UpdateRequest {

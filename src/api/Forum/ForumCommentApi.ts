@@ -8,7 +8,7 @@ class ForumCommentApi extends BaseApi {
   }
   public getForumComment = (commentId: number) => this.http.get(`/comment/${commentId}`);
   public getForumComments = (data: GetForumCommentsRequest) => this.http.post('/comments', data);
-  public addForumComment = (data: AddForumCommentRequest) => this.http.put('', data);
+  public addForumComment = (data: AddForumCommentRequest) => this.http.put('/comments', data);
   public setForumComment = (data: SetForumTopicRequest) => this.http.post('/comments', data);
   public deleteForumComment = (topicId: number) => this.http.delete(`/comment/${topicId}`);
 }
