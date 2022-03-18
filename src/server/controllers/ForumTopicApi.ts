@@ -4,11 +4,11 @@ import { forumTopicService } from 'server/services/ForumTopicService';
 export class ForumTopicAPI {
   public static create = async (request: Request, response: Response) => {
     const { title, description } = request.body;
-    const userId = response.locals.user.id;
+    const userId = Number(response.locals.user.id);
 
     try {
       await forumTopicService.create({
-        userId: Number(userId),
+        userId: userId,
         title,
         description,
       });
@@ -34,7 +34,7 @@ export class ForumTopicAPI {
   };
 
   public static find = async (request: Request, response: Response) => {
-    const { id } = request.body;
+    const { id } = request.params;
 
     try {
       const data = await forumTopicService.find(Number(id));

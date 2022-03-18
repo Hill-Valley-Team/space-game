@@ -1,20 +1,20 @@
-import { Column, DataType, HasOne, Model, PrimaryKey, Table } from 'sequelize-typescript';
-import { UserTheme } from '../UserTheme';
+// import { Column, DataType, HasOne, Model, PrimaryKey, Table } from 'sequelize-typescript';
+// import { UserTheme } from '../UserTheme';
 
-@Table({
-  tableName: 'users',
-  timestamps: true,
-  paranoid: true,
-  underscored: true,
-})
-export class User extends Model {
-  @PrimaryKey
-  @Column(DataType.INTEGER.UNSIGNED)
-  id!: number;
+// @Table({
+//   tableName: 'users',
+//   timestamps: true,
+//   paranoid: true,
+//   underscored: true,
+// })
+// export class User extends Model {
+//   @PrimaryKey
+//   @Column(DataType.INTEGER)
+//   id!: number;
 
-  @Column(DataType.STRING)
-  firstName!: string;
+//   @Column(DataType.STRING)
+//   firstName!: string;
 
-  @Column(DataType.STRING)
-  lastName!: number;
-}
+//   @Column(DataType.STRING)
+//   lastName!: number;
+// }

@@ -2,7 +2,7 @@ import { BaseApi } from '../BaseApi';
 import { localBaseUrl } from '../consts';
 import { AddForumCommentRequest, GetForumCommentsRequest, SetForumTopicRequest } from './types';
 
-class ForumThreadApi extends BaseApi {
+class ForumCommentApi extends BaseApi {
   constructor() {
     super('/forum', localBaseUrl);
   }
@@ -13,4 +13,4 @@ class ForumThreadApi extends BaseApi {
   public deleteForumComment = (topicId: number) => this.http.delete(`/comment/${topicId}`);
 }
 
-export const forumThreadApi = new ForumThreadApi();
+export const forumCommentApi = new ForumCommentApi();

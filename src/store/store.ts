@@ -4,6 +4,7 @@ import { userAPI } from '../services/UserService';
 import { createThemeSlice, themeSlice } from './slices/themeSlice';
 import { createUserSlice } from './slices/userSlice';
 import { PreloadedData } from './types';
+import { leaderBoardAPI } from '../services/LeaderBoardS';
 
 export const createAppStore = (preloadedData?: PreloadedData | object) => {
   let userReducer;

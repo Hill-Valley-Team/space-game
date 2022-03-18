@@ -1,1 +1,1 @@
-export { ForumTopic } from './ForumTopic';
+export { ForumTopic, initForumTopicModel } from './ForumTopic';

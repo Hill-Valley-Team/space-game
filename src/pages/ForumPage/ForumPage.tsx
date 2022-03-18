@@ -17,7 +17,6 @@ const b = block('forum-page');
 
 export const ForumPage = () => {
   const [topics, setTopics] = useState<ThreadListData>([]);
-
   const threadList = topics.map((item) => <ListItem key={item.id} data={item} />);
 
   const setUserToTopic = async (topic: ForumTopic) => {

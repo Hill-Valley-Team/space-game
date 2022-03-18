@@ -1,4 +1,4 @@
-import { forumThreadApi } from 'api/Forum/ForumThreadApi';
+import { forumCommentApi } from 'api/Forum/ForumCommentApi';
 import { forumTopicApi } from 'api/Forum/ForumTopicApi';
 import {
   GetForumCommentsRequest,
@@ -39,6 +39,6 @@ export const getComments = async (
   limit = DEFAULT_LIMIT,
 ) => {
   const response: AxiosResponse<GetForumCommentsResponse, GetForumCommentsRequest> =
-    await forumThreadApi.getForumComments({ topicId, limit, offset });
+    await forumCommentApi.getForumComments({ topicId, limit, offset });
   return response.data.map((item) => item);
 };

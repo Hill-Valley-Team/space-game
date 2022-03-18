@@ -16,7 +16,6 @@ export const getHtml = (
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
         <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
-        <link href="/main.css" rel="stylesheet" />
         ${helmet.title.toString()}
         ${helmet.meta.toString()}
         ${helmet.link.toString()}
