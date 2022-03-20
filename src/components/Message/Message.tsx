@@ -5,7 +5,7 @@ import { useFormInput } from 'hooks/useFormInput';
 import React, { ChangeEvent, useState } from 'react';
 import { ValidationType } from 'utils/validation/consts';
 import './message.css';
-import {CommentListItem} from "../../pages/ForumThreadPage.ts/ThreadListItem/types";
+import { CommentListItem } from '../../pages/ForumThreadPage.ts/ThreadListItem/types';
 
 const b = block('message-pannel');
 
@@ -18,7 +18,7 @@ type MessageProps = {
   withTitle?: boolean;
   onSubmit?: (message: string, title?: string, comment?: CommentListItem) => void;
   closeForm?: () => void;
-  comment?: CommentListItem,
+  comment?: CommentListItem;
 };
 
 export const Message = (props: MessageProps) => {

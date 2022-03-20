@@ -3,7 +3,7 @@ export type CommentListItem = {
   text: string;
   datatime: string | Date;
   userName: string | undefined;
-  parentId: number  | null; // для древовидности
+  parentId: number | null; // для древовидности
   comments?: CommentListItem[];
   level?: number;
 };

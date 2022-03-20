@@ -20,7 +20,7 @@ export const ListItem = (props: ListItemProps) => {
         <h3>
           <Link to={`${id}`}>{title}</Link>
         </h3>
-        <p>{text}</p>
+        <p dangerouslySetInnerHTML={{ __html: text }} />
       </td>
       <td className={b('userName')}>{userName ?? <Spinner />}</td>
       <td className={b('datetime')}>{datatime}</td>

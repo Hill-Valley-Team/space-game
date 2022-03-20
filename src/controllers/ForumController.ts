@@ -47,7 +47,12 @@ export const addNewComment = async (
   text: string,
   parentId: number | null,
   topicId: number,
-  level: number
+  level: number,
 ) => {
-  await forumCommentApi.addForumComment({ text: text, parentId: parentId, topicId: topicId, level: level });
+  await forumCommentApi.addForumComment({
+    text: text,
+    parentId: parentId,
+    topicId: topicId,
+    level: level,
+  });
 };

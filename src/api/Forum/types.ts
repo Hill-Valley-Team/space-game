@@ -1,4 +1,4 @@
-import {CommentListItem} from "../../pages/ForumThreadPage.ts/ThreadListItem/types";
+import { CommentListItem } from '../../pages/ForumThreadPage.ts/ThreadListItem/types';
 
 export type SetForumTopicRequest = {
   title: string;

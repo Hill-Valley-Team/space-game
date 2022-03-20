@@ -86,4 +86,3 @@ export const initForumCommentModel = (sequelize: Sequelize) =>
 //   })
 //   userId!: number;
 // }
-
