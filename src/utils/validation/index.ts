@@ -1,2 +1,3 @@
 export { checkFormInput } from './validation';
-export { ValidationRules, ValidationType, ValidationResult, ValidationFunction } from './types';
+export { ValidationRules, ValidationResult, ValidationFunction } from './types';
+export { ValidationType } from './consts';

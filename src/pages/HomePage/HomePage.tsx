@@ -1,6 +1,6 @@
 import block from 'bem-cn';
-import React, { useCallback } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import React, { useCallback, useEffect } from 'react';
+import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
 import './homePage.css';
 import { useGetUserInfo } from 'hooks/useGetUserInfo';
 import { Meta } from 'components/Meta';
@@ -9,12 +9,30 @@ import { Button } from '../../components/Button';
 import { Switcher } from '../../components/Switcher/Switcher';
 import { useUserTheme } from '../../hooks/useUserTheme';
 import { Logo } from '../../components/Logo';
+import { removeFullscreenListener } from '../../utils/fullscreen';
+import { loginWithOAuth } from '../../controllers/OAuthController';
 
 const b = block('home-page');
 export const HomePage = () => {
   const { isAuth } = useGetUserInfo();
   const { data: themeData, toggleUserTheme } = useUserTheme();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { requestUserInfo, userData } = useGetUserInfo();
+
+  useEffect(() => {
+    // если пришли сюда с параметром code - это была авторизация через oauth
+    const code = searchParams.get('code');
+    if (code) {
+      loginWithOAuth(code)
+        .then((result) => {
+          if (result.status === 200) {
+            requestUserInfo();
+          }
+        })
+        .then(() => navigate('/'));
+    }
+  }, []);
 
   const onThemeSwitch = useCallback(() => {
     toggleUserTheme();

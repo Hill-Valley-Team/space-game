@@ -6,7 +6,7 @@ import { ListItem } from './ListItem';
 import { ThreadListData, ThreadListItem } from './types';
 
 import './forumPage.css';
-import { getTopics } from 'controllers/ForumController';
+import { getTopics, addTopic, getComments } from 'controllers/ForumController';
 import { userApi } from 'api/User/UserApi';
 import { ForumTopic } from 'api/Forum/types';
 import { dateFormat } from 'utils/dateFormat';
@@ -18,19 +18,17 @@ const b = block('forum-page');
 export const ForumPage = () => {
   const [topics, setTopics] = useState<ThreadListData>([]);
 
-  const threadList = topics.map((item) => <ListItem key={item.id} data={item} />);
-
   const setUserToTopic = async (topic: ForumTopic) => {
     const user = await userApi.getUserById(topic.userId);
     const userName = `${user.data.first_name} ${user.data.second_name}`;
-    const count = 0; // TODO
+    const comments = await getComments(topic.id);
     return {
       id: topic.id,
       title: topic.title,
       text: topic.description,
       datatime: dateFormat(topic.createdAt),
       userName: userName,
-      comments: count,
+      comments: comments.length,
     };
   };
 
@@ -44,17 +42,7 @@ export const ForumPage = () => {
 
         const threads = topics.map((topic) => {
           promises.push(setUserToTopic(topic));
-          return {
-            id: topic.id,
-            title: topic.title,
-            text: topic.description,
-            datatime: dateFormat(topic.createdAt),
-            userName: undefined,
-            comments: undefined,
-          };
         });
-
-        setTopics(threads);
         Promise.all(promises).then((values) => setTopics(values));
       }
     } catch {
@@ -66,9 +54,13 @@ export const ForumPage = () => {
     initTopics();
   }, []);
 
-  const handleCreatePost = (message: string) => {
-    console.log(message);
+  const handleCreatePost = (message: string, title?: string) => {
+    if (title) {
+      addTopic(message, title).then(() => initTopics());
+    }
   };
+
+  const threadList = topics.map((item) => <ListItem key={item.id} data={item} />);
 
   return (
     <div className={b()}>
@@ -79,20 +71,15 @@ export const ForumPage = () => {
         </div>
         <table className={b('thread-list')}>
           <thead>
-            <tr className={b('thead')}>
-              <td>Тема</td>
-              <td>Автор</td>
-              <td>Дата</td>
-              <td>Сообщений</td>
-            </tr>
+          <tr className={b('thead')}>
+            <td>Тема</td>
+            <td>Автор</td>
+            <td>Дата</td>
+            <td>Сообщений</td>
+          </tr>
           </thead>
           <tbody>{threadList}</tbody>
         </table>
-        {/* <AddBlock
-          buttonText="Добавить тему"
-          className={b('add-block')}
-          onClickHandler={createPostHandle}
-        /> */}
         <Message withTitle={true} onSubmit={handleCreatePost} />
       </PageContainer>
     </div>

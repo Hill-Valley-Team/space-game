@@ -1,4 +1,5 @@
-import { ValidationRules, ValidationType, ValidationResult } from './types';
+import { ValidationType } from './consts';
+import { ValidationRules, ValidationResult } from './types';
 
 const checkMaxLength = (length: number, maxLength: number) =>
   length > maxLength ? `Поле может быть не более ${maxLength} символов` : false;
@@ -165,6 +166,36 @@ const checkTextValidaty = (value: string = '') => {
   return checker(checkList);
 };
 
+const checkMessageValidaty = (value: string = '') => {
+  const rules: ValidationRules = {
+    symbols: '',
+    minLength: 1,
+    maxLength: 800,
+  };
+
+  const checkList: (string | boolean)[] = [
+    checkMaxLength(value.length, rules.maxLength!),
+    checkMinLength(value.length, rules.minLength),
+  ];
+
+  return checker(checkList);
+};
+
+const checkMessageTitleValidaty = (value: string = '') => {
+  const rules: ValidationRules = {
+    symbols: '',
+    minLength: 2,
+    maxLength: 255,
+  };
+
+  const checkList: (string | boolean)[] = [
+    checkMaxLength(value.length, rules.maxLength!),
+    checkMinLength(value.length, rules.minLength),
+  ];
+
+  return checker(checkList);
+};
+
 const checkPhoneValidaty = (value: string = '') => {
   const rules: ValidationRules = {
     symbols: '',
@@ -190,29 +221,35 @@ export const checkFormInput = (value: string, type: ValidationType, equal?: stri
 
   if (value && type) {
     switch (type) {
-      case 'password':
+      case ValidationType.PASSWORD:
         result = checkPasswordValidaty(value);
         break;
-      case 'login':
+      case ValidationType.LOGIN:
         result = checkLoginValidaty(value);
         break;
-      case 'email':
+      case ValidationType.EMAIL:
         result = checkEmailValidaty(value);
         break;
-      case 'name':
+      case ValidationType.NAME:
         result = checkNameValidaty(value);
         break;
-      case 'shortText':
+      case ValidationType.SHORT_TEXT:
         result = checkShortTextValidaty(value);
         break;
-      case 'phone':
+      case ValidationType.PHONE:
         result = checkPhoneValidaty(value);
         break;
-      case 'equal':
+      case ValidationType.EQUAL:
         result = checkEqualValidaty(value, equal!, 'Поля не равны');
         break;
-      case 'text':
+      case ValidationType.TEXT:
         result = checkTextValidaty(value);
+        break;
+      case ValidationType.MESSAGE:
+        result = checkMessageValidaty(value);
+        break;
+      case ValidationType.MESSAGE_TITLE:
+        result = checkMessageTitleValidaty(value);
         break;
       default:
         break;

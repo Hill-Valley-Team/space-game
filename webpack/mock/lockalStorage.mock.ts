@@ -1,5 +1,3 @@
-// webpack/mock/localStorage.mock.ts
-
 // eslint-disable-next-line import/no-mutable-exports
 let localStorage;
 
