@@ -3,6 +3,7 @@ import { Meta } from 'components/Meta';
 import React from 'react';
 import { AppRoutes } from '../AppRoutes';
 import './app.css';
+
 import { useUserTheme } from 'hooks/useUserTheme';
 
 const App = () => {
