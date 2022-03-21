@@ -1,0 +1,17 @@
+$light-theme__primary-color: #35a7ee;
+$light-theme__secondary-color: #1b305a;
+$light-theme__text-color: #000;
+$light-theme__text-color-light: #999;
+$light-theme__primary-bg-color: rgb(255 255 255 / 90%);
+$light-theme__secondary-btn-bg-color: rgb(255 255 255 / 40%);
+$light-theme__main-page-bg-color: #fff;
+$light-theme__disabled-bg-color: #999;
+$light-theme__textarea-bg-color: #fff;
+$light-theme__textarea-text-color: #000;
+$light-theme__accent-color: #ffc701;
+$light-theme__pure-white: #fff;
+$light-theme__error-text-color: #ff4d00;
+$light-theme__error-text-color-light: #fff501;
+$light-theme__light-blue: #daecf8;
+$light-theme__purple: #5d32bb;
+$light-theme__orange: #ff8652;

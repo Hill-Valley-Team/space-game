@@ -1,88 +1,86 @@
 import block from 'bem-cn';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { PageContainer } from '../../components/PageContainer';
 import { Title } from '../../components/Title';
-import { ListItem } from './ListItem/ListItem';
-import { ThreadListData } from './types';
-import { Button } from '../../components/Button';
+import { ListItem } from './ListItem';
+import { ThreadListData, ThreadListItem } from './types';
 
 import './forumPage.css';
+import { getTopics, addTopic, getComments } from 'controllers/ForumController';
+import { userApi } from 'api/User/UserApi';
+import { ForumTopic } from 'api/Forum/types';
+import { dateFormat } from 'utils/dateFormat';
+import { BackButton } from 'components/BackButton';
+import { Message } from 'components/Message';
 
 const b = block('forum-page');
 
-const threadData: ThreadListData = [
-  {
-    id: 1,
-    title: 'Помогаем юзерам выбирать ПК конфигурации и обсуждаем их',
-    text: 'Не долго думая создаю&nbsp;тему для общих благ&nbsp;(надеюсь полезную) где будем обсуждать ПК конфигурации. Предлагаю &quot;страждущим&quot; сделать апгрейд или&nbsp;купить новый компьютер кидать сю',
-    datatime: '21:28, 25.07.2011',
-    userName: 'DaRkSoUl72',
-    comments: 200,
-  },
-  {
-    id: 2,
-    title: 'Всё о компьютерном разгоне (PC Overclocking - OC)',
-    text: 'Начнём, надеюсь будет ПОЛЕЗНОЙ инфой!&nbsp;&nbsp; Всё о компьютерном разгоне (PC Overclocking - OC) Небольшой, скромный о разгоне &nbsp; &nbsp; Базовые понятия: &nbsp; 1. Q:Что такое разгон? От чего',
-    datatime: '21:28, 25.07.2011',
-    userName: 'DaRkSoUl72',
-    comments: 33,
-  },
-  {
-    id: 3,
-    title: 'Выбираем, обсуждаем, покупаем игр.мышки',
-    text: 'Так как тема была создана немногим раньше (получил бан за рекламу, ХЗ почему, ну пусть будет, это крайнее) пере-создаю её ещё разок, теперь без рекламы, картинок, и без описании мышек. ДАВАЙТЕ-КА буде',
-    datatime: '21:28, 25.07.2011',
-    userName: 'DaRkSoUl72',
-    comments: 17,
-  },
-];
-
-const threadList = threadData.map((item) => <ListItem data={item} key={item.id} />);
-
 export const ForumPage = () => {
-  const navigate = useNavigate();
+  const [topics, setTopics] = useState<ThreadListData>([]);
 
-  const backHandle = () => {
-    navigate(-1);
+  const setUserToTopic = async (topic: ForumTopic) => {
+    const user = await userApi.getUserById(topic.userId);
+    const userName = `${user.data.first_name} ${user.data.second_name}`;
+    const comments = await getComments(topic.id);
+    return {
+      id: topic.id,
+      title: topic.title,
+      text: topic.description,
+      datatime: dateFormat(topic.createdAt),
+      userName: userName,
+      comments: comments.length,
+    };
   };
 
-  const createPostHandle = () => {
-    console.log('new post');
+  const initTopics = async () => {
+    try {
+      const topics = await getTopics();
+      if (!topics?.length) {
+        setTopics([]);
+      } else {
+        const promises: Promise<ThreadListItem>[] = [];
+
+        const threads = topics.map((topic) => {
+          promises.push(setUserToTopic(topic));
+        });
+        Promise.all(promises).then((values) => setTopics(values));
+      }
+    } catch {
+      console.log('error loading forum threads');
+    }
   };
+
+  useEffect(() => {
+    initTopics();
+  }, []);
+
+  const handleCreatePost = (message: string, title?: string) => {
+    if (title) {
+      addTopic(message, title).then(() => initTopics());
+    }
+  };
+
+  const threadList = topics.map((item) => <ListItem key={item.id} data={item} />);
 
   return (
     <div className={b()}>
       <PageContainer size="large">
         <div className={b('header')}>
-          <Button
-            className={b('btn-back')}
-            type="button"
-            text=""
-            view="primary"
-            onClick={backHandle}
-            width="auto"
-          />
+          <BackButton />
           <Title text="Форум" className={b('title')} />
         </div>
         <table className={b('thread-list')}>
           <thead>
-            <tr className={b('thead')}>
-              <td>Тема</td>
-              <td>Автор</td>
-              <td>Дата</td>
-              <td>Сообщений</td>
-            </tr>
+          <tr className={b('thead')}>
+            <td>Тема</td>
+            <td>Автор</td>
+            <td>Дата</td>
+            <td>Сообщений</td>
+          </tr>
           </thead>
           <tbody>{threadList}</tbody>
         </table>
-        <Button
-          view="primary"
-          align="center"
-          onClick={createPostHandle}
-          className={b('button')}
-          text="Добавить тему"
-        />
+        <Message withTitle={true} onSubmit={handleCreatePost} />
       </PageContainer>
     </div>
   );

@@ -55,7 +55,7 @@ const clientConfig: Configuration = {
         plugins: [
           ['gifsicle', { interlaced: true }],
           ['jpegtran', { progressive: true }],
-          ['optipng', { optimizationLevel: 5 }],
+          // ['optipng', { optimizationLevel: 5 }], //TODO расскомментировать перед деплоем
           [
             'svgo',
             {

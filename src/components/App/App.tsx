@@ -1,15 +1,18 @@
-import block from 'bem-cn';
 import { hot } from 'react-hot-loader/root';
 import { Meta } from 'components/Meta';
 import React from 'react';
 import { AppRoutes } from '../AppRoutes';
 import './app.css';
 
-const b = block('app');
+import { useUserTheme } from 'hooks/useUserTheme';
 
 const App = () => {
+  const { data: themeData } = useUserTheme();
+  const theme = themeData && themeData.id === 1 ? 'light' : 'dark';
+
   return (
-    <div className={b()}>
+    <div className={`app theme-${theme ?? 'light'}`}>
+  return (
       <Meta />
       <AppRoutes />
     </div>

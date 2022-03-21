@@ -1,0 +1,17 @@
+.add-block {
+  &__text-area {
+    padding: 20px;
+    width: 100%;
+    resize: none;
+    outline: none;
+    border: 1px solid var(--primary-color);
+    background-color: var(--textarea-bg-color);
+    border-radius: 20px;
+    height: 100px;
+    color: var(--textarea-text-color);
+  }
+
+  &__button {
+    margin-top: 20px;
+  }
+}

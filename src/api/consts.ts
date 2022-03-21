@@ -11,3 +11,5 @@ export const signUpRequestFields = [
 ];
 
 export const signInRequestFields = ['login', 'password'];
+
+export const localBaseUrl = '/api/v1';

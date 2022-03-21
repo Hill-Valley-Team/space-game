@@ -3,7 +3,7 @@ export type ThreadListItem = {
   title: string;
   text: string;
   datatime: string;
-  userName: string;
-  comments: number;
+  userName: string | undefined;
+  comments: number | undefined;
 };
 export type ThreadListData = ThreadListItem[];

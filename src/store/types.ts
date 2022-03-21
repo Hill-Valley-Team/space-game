@@ -1,5 +1,4 @@
 import { UserData } from 'api/Auth';
-import { Dispatch } from 'react';
 import { createAppStore } from './store';
 
 export type RootStore = ReturnType<typeof createAppStore>;

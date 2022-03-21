@@ -1,0 +1,42 @@
+@import './lightTheme.css';
+@import './darkTheme.css';
+
+.theme-light {
+  --primary-color: $light-theme__primary-color;
+  --secondary-color: $light-theme__secondary-color;
+  --text-color: $light-theme__text-color;
+  --text-color-light: $light-theme__text-color-light;
+  --primary-bg-color: $light-theme__primary-bg-color;
+  --secondary-btn-bg-color: $light-theme__secondary-btn-bg-color;
+  --disabled-bg-color: $light-theme__disabled-bg-color;
+  --accent-color: $light-theme__accent-color;
+  --pure-white: $light-theme__pure-white;
+  --error-text-color: $light-theme__error-text-color;
+  --error-text-color-light: $light-theme__error-text-color-light;
+  --light-blue: $light-theme__light-blue;
+  --purple: $light-theme__purple;
+  --orange: $light-theme__orange;
+  --main-page-bg: $light-theme__main-page-bg-color;
+  --textarea-bg-color: $light-theme__textarea-bg-color;
+  --textarea-text-color: $light-theme__textarea-text-color;
+}
+
+.theme-dark {
+  --primary-color: $dark-theme__primary-color;
+  --secondary-color: $dark-theme__secondary-color;
+  --text-color: $dark-theme__text-color;
+  --text-color-light: $dark-theme__text-color-light;
+  --primary-bg-color: $dark-theme__primary-bg-color;
+  --secondary-btn-bg-color: $dark-theme__secondary-btn-bg-color;
+  --disabled-bg-color: $dark-theme__disabled-bg-color;
+  --accent-color: $dark-theme__accent-color;
+  --pure-white: $dark-theme__pure-white;
+  --error-text-color: $dark-theme__error-text-color;
+  --error-text-color-light: $dark-theme__error-text-color-light;
+  --light-blue: $dark-theme__light-blue;
+  --purple: $dark-theme__purple;
+  --orange: $dark-theme__orange;
+  --main-page-bg: $dark-theme__main-page-bg-color;
+  --textarea-bg-color: $dark-theme__textarea-bg-color;
+  --textarea-text-color: $dark-theme__textarea-text-color;
+}

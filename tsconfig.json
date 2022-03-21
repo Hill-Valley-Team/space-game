@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["es5", "dom"],
+    "target": "es6",
+    "lib": ["es6", "dom"],
     "jsx": "react",
     "module": "CommonJS",
     "moduleResolution": "node",
@@ -18,7 +18,9 @@
     "noImplicitThis": true,
     "noUnusedLocals": false,
     "skipLibCheck": true,
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": ["src", "webpack"],
   "exclude": ["**/*.js", "./node_modules/"]

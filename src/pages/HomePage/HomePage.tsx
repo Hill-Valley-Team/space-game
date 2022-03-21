@@ -5,14 +5,16 @@ import './homePage.css';
 import { useGetUserInfo } from 'hooks/useGetUserInfo';
 import { Meta } from 'components/Meta';
 import teamLogoImg from './static/team-logo.png';
-import logoImg from './static/logo.png';
 import { Button } from '../../components/Button';
-import { removeFullscreenListener } from '../../utils/fullscreen';
+import { Switcher } from '../../components/Switcher/Switcher';
+import { useUserTheme } from '../../hooks/useUserTheme';
+import { Logo } from '../../components/Logo';
 import { loginWithOAuth } from '../../controllers/OAuthController';
 
 const b = block('home-page');
 export const HomePage = () => {
   const { isAuth } = useGetUserInfo();
+  const { data: themeData, toggleUserTheme } = useUserTheme();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { requestUserInfo, userData } = useGetUserInfo();
@@ -30,6 +32,10 @@ export const HomePage = () => {
         .then(() => navigate('/'));
     }
   }, []);
+
+  const onThemeSwitch = useCallback(() => {
+    toggleUserTheme();
+  }, [themeData]);
 
   const onPlayBtnClick = useCallback(() => {
     navigate('/game');
@@ -108,9 +114,7 @@ export const HomePage = () => {
       <Meta title="Space Racing Game - Главная страница игры" />
       <div className={b('container')}>
         <div className={b('left')}>
-          <div className={b('logo')}>
-            <img src={logoImg} alt="Лого" width="200" />
-          </div>
+          <Logo className={b('logo')} />
           <div>
             <h1 className={b('title')}>Космические гонки</h1>
             <p className={b('text')}>
@@ -121,6 +125,12 @@ export const HomePage = () => {
           <div className={b('link-block')}>{getLinkBlock()}</div>
         </div>
         <div className={b('right')}>
+          <Switcher
+            from="Светлая тема"
+            to="Тёмная тема"
+            value={themeData?.id}
+            onChangeHandler={onThemeSwitch}
+          />
           <img src={teamLogoImg} alt="Лого команды" />
         </div>
       </div>

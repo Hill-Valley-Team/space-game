@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { isServer } from 'utils/isServer';
 import { userAPI } from '../services/UserService';
+import { createThemeSlice, themeSlice } from './slices/themeSlice';
 import { createUserSlice } from './slices/userSlice';
 import { PreloadedData } from './types';
 import { leaderBoardAPI } from '../services/LeaderBoardS';
@@ -21,6 +22,7 @@ export const createAppStore = (preloadedData?: PreloadedData | object) => {
     reducer: {
       [userAPI.reducerPath]: userAPI.reducer,
       user: userReducer,
+      theme: themeSlice.reducer,
     },
     devTools: !isServer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userAPI.middleware),

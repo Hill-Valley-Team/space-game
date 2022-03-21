@@ -1,0 +1,22 @@
+.emoji-pannel {
+  &__picker {
+    position: absolute;
+    z-index: 100;
+    bottom: 45px;
+    display: block;
+
+    &_hide {
+      display: none;
+    }
+  }
+
+  &__button {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    background: url('./static/emoji.svg') no-repeat center center transparent;
+  }
+}

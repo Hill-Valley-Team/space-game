@@ -5,8 +5,13 @@ import logoImg from './static/logo.png';
 
 const b = block('logo');
 
-export const Logo = () => (
-  <div className={b()}>
+type LogoProps = {
+  align?: 'center' | 'left';
+  className?: string;
+};
+
+export const Logo = ({ align, className, ...props }: LogoProps) => (
+  <div className={b({ align }).mix(className)} {...props}>
     <img src={logoImg} alt="Space Racing Game" />
   </div>
 );

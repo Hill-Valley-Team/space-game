@@ -1,8 +1,11 @@
 node_modules
 dist
 dev
+logs
+.env
 .idea
 .vscode
 .DS_Store
+postgresdata
 error.log
 combined.log

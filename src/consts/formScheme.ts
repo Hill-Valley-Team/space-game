@@ -17,47 +17,47 @@ export enum InputNames {
 export const formScheme: Record<InputNames, { name: string; type: ValidationType }> = {
   [InputNames.LOGIN]: {
     name: 'login',
-    type: 'login',
+    type: ValidationType.LOGIN,
   },
   [InputNames.EMAIL]: {
     name: 'email',
-    type: 'email',
+    type: ValidationType.EMAIL,
   },
   [InputNames.FIRST_NAME]: {
     name: 'first_name',
-    type: 'shortText',
+    type: ValidationType.SHORT_TEXT,
   },
   [InputNames.SECOND_NAME]: {
     name: 'second_name',
-    type: 'shortText',
+    type: ValidationType.SHORT_TEXT,
   },
   [InputNames.PHONE]: {
     name: 'phone',
-    type: 'phone',
+    type: ValidationType.PHONE,
   },
   [InputNames.PASSWORD]: {
     name: 'password',
-    type: 'password',
+    type: ValidationType.PASSWORD,
   },
   [InputNames.REPEAT_PASSWORD]: {
     name: 'repeat_password',
-    type: 'equal',
+    type: ValidationType.EQUAL,
   },
   [InputNames.OLD_PASSWORD]: {
     name: 'old_password',
-    type: 'password',
+    type: ValidationType.PASSWORD,
   },
 
   [InputNames.DISPLAY_NAME]: {
     name: 'display_name',
-    type: 'shortText',
+    type: ValidationType.SHORT_TEXT,
   },
   [InputNames.NEW_PASSWORD]: {
     name: 'new_password',
-    type: 'password',
+    type: ValidationType.PASSWORD,
   },
   [InputNames.AVATAR]: {
     name: 'avatar',
-    type: 'file',
+    type: ValidationType.FILE,
   },
 };

@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid $primary-color;
+  border-bottom: 1px solid var(--primary-color);
   padding: 10px 0;
 
   &:last-child {
@@ -14,7 +14,7 @@
     font-size: 13px;
     line-height: 120%;
     font-weight: 500;
-    color: $text-color;
+    color: var(--text-color);
   }
 
   & input {
@@ -26,7 +26,7 @@
     font-weight: 500;
     font-size: 13px;
     line-height: 120%;
-    color: $text-color-light;
+    color: var(--text-color-light);
   }
 
   &_edit {
@@ -37,7 +37,7 @@
       font-size: 13px;
       line-height: 120%;
       font-weight: 500;
-      color: $text-color-light;
+      color: var(--text-color-light);
     }
 
     & input {
@@ -49,7 +49,7 @@
       font-weight: 500;
       font-size: 13px;
       line-height: 120%;
-      color: $text-color;
+      color: var(--text-color);
     }
   }
 
