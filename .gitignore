@@ -7,3 +7,5 @@ logs
 .vscode
 .DS_Store
 postgresdata
+error.log
+combined.log

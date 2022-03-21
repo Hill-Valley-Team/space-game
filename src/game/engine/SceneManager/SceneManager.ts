@@ -9,14 +9,17 @@ export class SceneManager {
 
   private scenes: ScenesConfig;
 
+  public cb: (score: number) => void;
+
   public get(key: string) {
     return this.scenes[key];
   }
 
-  constructor(game: Game, config: ScenesConfig) {
+  constructor(game: Game, config: ScenesConfig, cb: (score: number) => void) {
     this.game = game;
     this.current = null;
     this.scenes = config;
+    this.cb = (score: number) => cb(score);
   }
 
   private create(key: string) {
@@ -31,6 +34,9 @@ export class SceneManager {
     }
     const newScene = this.create(key);
     this.current = newScene;
+    if (key === 'win' || key === 'end') {
+      this.cb(this.game.score);
+    }
     this.current.start();
   }
 }
