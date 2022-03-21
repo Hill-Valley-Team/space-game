@@ -12,6 +12,7 @@ const App = () => {
 
   return (
     <div className={`app theme-${theme ?? 'light'}`}>
+  return (
       <Meta />
       <AppRoutes />
     </div>

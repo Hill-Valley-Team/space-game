@@ -7,6 +7,5 @@ logs
 .vscode
 .DS_Store
 postgresdata
-<<<<<<< HEAD
 error.log
 combined.log
