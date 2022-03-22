@@ -5,6 +5,7 @@ import { useFormInput } from 'hooks/useFormInput';
 import React, { ChangeEvent, useState } from 'react';
 import { ValidationType } from 'utils/validation/consts';
 import './message.css';
+import { CommentListItem } from '../../pages/ForumThreadPage.ts/ThreadListItem/types';
 
 const b = block('message-pannel');
 
@@ -15,7 +16,9 @@ type MessageProps = {
   name?: string;
   form?: string;
   withTitle?: boolean;
-  onSubmit?: (message: string, title?: string) => void;
+  onSubmit?: (message: string, title?: string, comment?: CommentListItem) => void;
+  closeForm?: () => void;
+  comment?: CommentListItem;
 };
 
 export const Message = (props: MessageProps) => {
@@ -25,6 +28,8 @@ export const Message = (props: MessageProps) => {
     message: initialMessage = '',
     withTitle = false,
     onSubmit,
+    comment,
+    closeForm,
   } = props;
 
   const [cursor, setCursor] = useState(0);
@@ -67,7 +72,10 @@ export const Message = (props: MessageProps) => {
 
   const handleMessageSubmit = () => {
     if (onSubmit) {
-      onSubmit(messageValue, titleValue);
+      onSubmit(messageValue, titleValue, comment);
+      if (closeForm) {
+        closeForm();
+      }
       reset();
     }
   };

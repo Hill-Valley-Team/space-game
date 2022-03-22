@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 
 config();
 
-const { NODE_ENV, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB } =
+const { POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB } =
   process.env;
 
 export const sequelizeOptions: SequelizeOptions = {

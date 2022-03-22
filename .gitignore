@@ -3,6 +3,8 @@ dist
 dev
 logs
 .env
+.dev.env
+.prod.env
 .idea
 .vscode
 .DS_Store

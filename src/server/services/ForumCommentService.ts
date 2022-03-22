@@ -2,15 +2,16 @@ import { ForumComment } from 'server/db/models/ForumComment';
 import { BaseService } from './BaseService';
 
 interface CreateRequest {
-  title: string;
-  description: string;
+  text: string;
   userId: number;
+  parentId: number;
+  topicId: number;
+  level: number;
 }
 
 interface UpdateRequest {
   id: number;
-  description?: string;
-  title?: string;
+  text?: string;
 }
 
 interface GetAllRequest {
@@ -38,8 +39,9 @@ class ForumCommentService implements BaseService {
   public getAllByTopicId = ({ topicId, limit, offset }: GetAllByTopicRequest) => {
     return ForumComment.findAll({
       where: {
-        topic_id: topicId,
+        topicId,
       },
+      order: [['createdAt', 'DESC']],
       limit,
       offset,
     });
@@ -57,9 +59,11 @@ class ForumCommentService implements BaseService {
     });
   };
 
-  public update = ({ id, description, title }: UpdateRequest) => {
+  public update = ({ id, text }: UpdateRequest) => {
     return ForumComment.update(
-      { description, title },
+      {
+        text,
+      },
       {
         where: {
           id,

@@ -21,14 +21,34 @@ const DEMO_TOPICS = [
 
 const DEMO_COMMENTS = [
   {
+    commentId: 1,
     text: 'Мы заранее проверяли связь, всё работало стабильно. После сбоя испробовали несколько вариантов — увы, найти решение, кроме обычной конференции в Zoom, быстро не получилось. В Zoom есть ограничение по количеству мест.',
     userId: DEMO_USER_ID,
     topicId: 1,
+    level: 0,
   },
   {
+    commentId: 2,
     text: 'P.S. Если вам нужна личная поддержка любые вопросы, сомнения, переживания можно обсудить со своим куратором в личных сообщениях. Мы постараемся сделать всё, что в наших силах. :heart_hands:',
     userId: DEMO_USER_ID,
     topicId: 1,
+    level: 0,
+  },
+  {
+    commentId: 3,
+    text: 'blabla',
+    userId: DEMO_USER_ID,
+    topicId: 1,
+    parentId: 1,
+    level: 1,
+  },
+  {
+    commentId: 4,
+    text: 'blablabla',
+    userId: DEMO_USER_ID,
+    topicId: 1,
+    parentId: 2,
+    level: 1,
   },
 ];
 

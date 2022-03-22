@@ -1,3 +1,5 @@
+import { CommentListItem } from '../../pages/ForumThreadPage.ts/ThreadListItem/types';
+
 export type SetForumTopicRequest = {
   title: string;
   description: string;
@@ -30,6 +32,9 @@ export type ForumComment = {
   text: string;
   topicId: number;
   userId: number;
+  parentId: number | null;
+  level: number;
+  comments?: CommentListItem[];
 };
 
 export type GetForumCommentsRequest = {
@@ -39,8 +44,10 @@ export type GetForumCommentsRequest = {
 };
 
 export type AddForumCommentRequest = {
-  title: string;
-  description: string;
+  text: string;
+  parentId: number | null;
+  topicId: number;
+  level: number;
 };
 
 export type GetForumCommentsResponse = ForumComment[];

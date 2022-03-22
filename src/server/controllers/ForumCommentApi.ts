@@ -3,14 +3,16 @@ import { forumCommentService } from 'server/services/ForumCommentService';
 
 export class ForumCommentAPI {
   public static create = async (request: Request, response: Response) => {
-    const { title, description } = request.params;
+    const { text, parentId, topicId, level } = request.body;
     const userId = response.locals.user.id;
 
     try {
       await forumCommentService.create({
+        text,
         userId: Number(userId),
-        title,
-        description,
+        parentId,
+        topicId,
+        level,
       });
       return response.sendStatus(201);
     } catch {
@@ -19,13 +21,12 @@ export class ForumCommentAPI {
   };
 
   public static update = async (request: Request, response: Response) => {
-    const { id, description, title } = request.params;
+    const { id, text } = request.params;
 
     try {
       await forumCommentService.update({
         id: Number(id),
-        description,
-        title,
+        text,
       });
       return response.sendStatus(201);
     } catch {
@@ -34,10 +35,10 @@ export class ForumCommentAPI {
   };
 
   public static find = async (request: Request, response: Response) => {
-    const { topicId } = request.params;
+    const { id } = request.params;
 
     try {
-      const data = await forumCommentService.find(Number(topicId));
+      const data = await forumCommentService.find(Number(id));
       return response.json(data);
     } catch (e) {
       console.log(e);
