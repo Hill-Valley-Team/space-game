@@ -10,4 +10,4 @@ logs
 .DS_Store
 postgresdata
 error.log
-combined.log.pr
+combined.log

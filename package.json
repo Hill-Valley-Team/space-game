@@ -129,7 +129,6 @@
     "image-minimizer-webpack-plugin": "2.2.0",
     "install": "^0.13.0",
     "mini-css-extract-plugin": "^2.5.3",
-    "npm": "^8.5.4",
     "pg": "^8.7.3",
     "postcss-nested": "5.0.6",
     "qs": "^6.10.2",
