@@ -54,7 +54,11 @@ export const routes: RouteObject[] = [
       },
       {
         path: 'forum',
-        element: <ForumPage />,
+        element: (
+          <RequireAuth to={nonAuthorizedPath} requireAuth>
+            <ForumPage />
+          </RequireAuth>
+        ),
       },
       {
         path: 'forum/:topicId',

@@ -2,7 +2,7 @@ import { SiteTheme } from 'server/db/models/SiteTheme';
 import { BaseService } from './BaseService';
 
 interface CreateRequest {
-  theme: string;
+  title: string;
   description: string;
 }
 
@@ -39,7 +39,7 @@ class ThemeService implements BaseService {
 
   public update = ({ id, description, title }: UpdateRequest) => {
     return SiteTheme.update(
-      { description, theme: title },
+      { description, title },
       {
         where: {
           id,

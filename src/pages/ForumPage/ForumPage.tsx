@@ -71,12 +71,12 @@ export const ForumPage = () => {
         </div>
         <table className={b('thread-list')}>
           <thead>
-            <tr className={b('thead')}>
-              <td>Тема</td>
-              <td>Автор</td>
-              <td>Дата</td>
-              <td>Сообщений</td>
-            </tr>
+          <tr className={b('thead')}>
+            <td>Тема</td>
+            <td>Автор</td>
+            <td>Дата</td>
+            <td>Сообщений</td>
+          </tr>
           </thead>
           <tbody>{threadList}</tbody>
         </table>

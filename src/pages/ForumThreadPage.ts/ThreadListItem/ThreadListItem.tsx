@@ -19,8 +19,8 @@ export const ThreadListItem = (props: ThreadListItemProps) => {
   const getCommentsList = (comments: CommentListItem[] | undefined) => {
     const commentsList = comments
       ? comments.map((comment) => (
-          <ThreadListItem data={comment} key={comment.id} addComment={addComment} />
-        ))
+        <ThreadListItem data={comment} key={comment.id} addComment={addComment} />
+      ))
       : '';
     if (commentsList && commentsList.length) {
       return <div className={b('comments-list')}>{commentsList}</div>;

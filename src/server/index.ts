@@ -4,6 +4,7 @@ import render from './middlewares/render';
 import { middlewares } from './middlewares';
 import { dbConnect, sequelize } from './db/sequelize';
 import router from './router';
+import { ForumAnswer } from './db/models/ForumAnswers';
 import logger from './middlewares/logger';
 import { auth } from './middlewares/auth';
 import { initSiteThemeModel, SiteTheme } from './db/models/SiteTheme/SiteTheme';
@@ -29,6 +30,23 @@ ForumTopic.hasMany(ForumComment, {
   as: 'forum_comment',
 });
 ForumComment.belongsTo(ForumTopic);
+
+dbConnect();
+
+SiteTheme.hasMany(UserTheme, {
+  onDelete: 'SET NULL',
+  foreignKey: 'theme_id',
+});
+
+ForumTopic.hasMany(ForumComment, {
+  onDelete: 'CASCADE',
+  foreignKey: 'topic_id',
+});
+
+ForumComment.hasMany(ForumAnswer, {
+  onDelete: 'CASCADE',
+  foreignKey: 'comment_id',
+});
 
 dbConnect();
 
