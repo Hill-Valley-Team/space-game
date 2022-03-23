@@ -10,10 +10,8 @@ export async function dbConnect() {
     await sequelize.sync({ force: true });
     console.log('Connection has been established successfully.');
     await initThemes();
-    if (process.env.NODE_ENV === 'development') {
-      await initForumTopics();
-      await initForumComments();
-    }
+    await initForumTopics();
+    await initForumComments();
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
