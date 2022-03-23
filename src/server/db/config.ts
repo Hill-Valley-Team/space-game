@@ -1,7 +1,7 @@
 import { config } from 'dotenv';
 import { Options } from 'sequelize';
 
-const configPath = process.env.NODE_ENV === 'production' ? '.prod.env' : '.dev.env';
+const configPath = process.env.NODE_ENV === 'production' ? '/env/.prod.env' : '/env/.dev.env';
 
 config({ path: configPath });
 
