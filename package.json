@@ -125,6 +125,7 @@
     "emoji-mart": "^3.0.1",
     "express": "^4.17.2",
     "express-winston": "^4.2.0",
+    "helmet": "^5.0.2",
     "i": "^0.3.7",
     "image-minimizer-webpack-plugin": "2.2.0",
     "install": "^0.13.0",

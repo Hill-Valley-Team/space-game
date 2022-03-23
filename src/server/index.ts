@@ -3,6 +3,7 @@ import express from 'express';
 import render from './middlewares/render';
 import { middlewares } from './middlewares';
 import { dbConnect, sequelize } from './db/sequelize';
+import helmet from 'helmet';
 import router from './router';
 import logger from './middlewares/logger';
 import { auth } from './middlewares/auth';
@@ -56,6 +57,7 @@ app
   .use(express.json())
   .use(logger)
   .use(auth)
+  .use(helmet.xssFilter())
   .use('/api/v1', router);
 
 app.get('/*', [...middlewares], render);
