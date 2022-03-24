@@ -121,7 +121,7 @@ export const ForumThreadPage = () => {
           }
         }
       });
-      maxLevel--;
+
       if (!maxLevel) {
         tc.forEach((item) => {
           if (item.level === maxLevel) {
@@ -129,6 +129,7 @@ export const ForumThreadPage = () => {
           }
         });
       }
+      maxLevel--;
     }
     return leveledComments;
   };
