@@ -11,8 +11,8 @@ import { initUserThemeModel, UserTheme } from './db/models/UserTheme/UserTheme';
 import { ForumTopic, initForumTopicModel } from './db/models/ForumTopic';
 import { ForumComment, initForumCommentModel } from './db/models/ForumComment';
 
-initUserThemeModel(sequelize);
 initSiteThemeModel(sequelize);
+initUserThemeModel(sequelize);
 initForumTopicModel(sequelize);
 initForumCommentModel(sequelize);
 
@@ -21,14 +21,14 @@ SiteTheme.hasMany(UserTheme, {
   foreignKey: 'themeId',
   as: 'user_theme',
 });
-// UserTheme.belongsTo(SiteTheme);
+UserTheme.belongsTo(SiteTheme);
 
 ForumTopic.hasMany(ForumComment, {
   onDelete: 'CASCADE',
   foreignKey: 'topicId',
   as: 'forum_comment',
 });
-// ForumComment.belongsTo(ForumTopic);
+ForumComment.belongsTo(ForumTopic);
 
 dbConnect();
 
