@@ -1,15 +1,15 @@
 import { Sequelize } from 'sequelize';
 import { sequelizeOptions } from './config';
-import { initForumComments, initForumTopics, initThemes } from './init';
+// import { initForumComments, initForumTopics, initThemes } from './init';
 
 export const sequelize = new Sequelize(sequelizeOptions);
 
 export async function dbConnect() {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ force: true });
+    await sequelize.sync();
     console.log('Connection has been established successfully.');
-    await initThemes();
+    // await initThemes();
     // await initForumTopics();
     // await initForumComments();
   } catch (error) {

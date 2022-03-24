@@ -5,45 +5,12 @@ services:
     container_name: web
     build:
       context: .
-    depends_on:
-      - postgres
     ports:
-      - '3000:443'
+      - '3001:443'
     restart: always
     env_file:
       - .prod.env
-    entrypoint: ./utils/wait-for.sh
-    command: postgres:5432 -- npm run start
-    networks:
-      - appNetwork
-
-  postgres:
-    container_name: pg
-    image: postgres:12
-    ports:
-      - '5432:5432'
-    volumes:
-      - ./postgresdata:/var/lib/postgresql/data
-    restart: always
-    env_file:
-      - .prod.env
-    networks:
-      - appNetwork
-
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4:4.18
-    restart: always
-    env_file:
-      - .prod.env
-    ports:
-      - '8080:8080'
-    volumes:
-      - pgadmin-data:/var/lib/pgadmin
-    depends_on:
-      - postgres
-    networks:
-      - appNetwork
+    command: npm run start
 
 volumes:
   pgadmin-data:

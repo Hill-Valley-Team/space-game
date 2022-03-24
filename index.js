@@ -22,6 +22,6 @@ Loadable.preloadAll().then(() => {
   }
 
   app.listen(port, () => {
-    console.log('Application is started on', `http://local.ya-praktikum.tech:${port}/`);
+    console.log('Application is started on', `https://space-game.nomoredomains.work/:${port}/`);
   });
 });
