@@ -11,7 +11,7 @@ services:
       - '3000:443'
     restart: always
     env_file:
-      - .prod.env
+      - .env
     entrypoint: ./utils/wait-for.sh
     command: postgres:5432 -- npm run start
     networks:
@@ -26,7 +26,7 @@ services:
       - ./postgresdata:/var/lib/postgresql/data
     restart: always
     env_file:
-      - .prod.env
+      - .env
     networks:
       - appNetwork
 
@@ -35,7 +35,7 @@ services:
     image: dpage/pgadmin4:4.18
     restart: always
     env_file:
-      - .prod.env
+      - .env
     ports:
       - '8080:8080'
     volumes:
