@@ -31,8 +31,6 @@ ForumTopic.hasMany(ForumComment, {
 });
 ForumComment.belongsTo(ForumTopic);
 
-dbConnect();
-
 SiteTheme.hasMany(UserTheme, {
   onDelete: 'SET NULL',
   foreignKey: 'theme_id',
