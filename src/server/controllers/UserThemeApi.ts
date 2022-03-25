@@ -15,6 +15,8 @@ export class UserThemeAPI {
       } catch {
         response.sendStatus(400);
       }
+    } else {
+      response.sendStatus(400);
     }
   };
 
@@ -32,6 +34,8 @@ export class UserThemeAPI {
       } catch {
         response.sendStatus(400);
       }
+    } else {
+      response.sendStatus(400);
     }
   };
 
@@ -46,6 +50,8 @@ export class UserThemeAPI {
         console.log(e);
         response.sendStatus(400);
       }
+    } else {
+      response.sendStatus(400);
     }
   };
 }
