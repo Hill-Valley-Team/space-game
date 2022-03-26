@@ -4,7 +4,6 @@ import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
 import ImageMinimizerPlugin from 'image-minimizer-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { Configuration, DllReferencePlugin, Entry, HotModuleReplacementPlugin } from 'webpack';
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 import fileLoader from './loaders/file';
@@ -49,13 +48,12 @@ const clientConfig: Configuration = {
     new DllReferencePlugin({
       manifest: join(DIST_DIR, 'vendors', 'vendors-manifest.json'),
     }),
-    new MiniCssExtractPlugin({ filename: '[name].css' }),
     new ImageMinimizerPlugin({
       minimizerOptions: {
         plugins: [
           ['gifsicle', { interlaced: true }],
           ['jpegtran', { progressive: true }],
-          ['optipng', { optimizationLevel: 5 }],
+          // ['optipng', { optimizationLevel: 5 }], //TODO расскомментировать перед деплоем
           [
             'svgo',
             {
@@ -70,11 +68,12 @@ const clientConfig: Configuration = {
         ],
       },
     }),
-    !IS_DEV && new WorkboxPlugin.InjectManifest({
-      swSrc: join(SRC_DIR, 'index.tsx'),
-      swDest: "./service-worker.js",
-      mode: 'production'
-    }),
+    !IS_DEV &&
+      new WorkboxPlugin.InjectManifest({
+        swSrc: join(SRC_DIR, 'index.tsx'),
+        swDest: './service-worker.js',
+        mode: 'production',
+      }),
     new HotModuleReplacementPlugin(),
     !IS_DEV && new CompressionPlugin(),
   ].filter(Boolean) as [],

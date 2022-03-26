@@ -1,5 +1,5 @@
 .page-layout {
-  background: center / cover no-repeat url('../../assets/images/bg.jpg') $secondary-color;
+  background: center / cover no-repeat url('../../assets/images/bg.jpg') var(--secondary-color);
   width: 100%;
   min-height: 100vh;
   padding: 15px 40px 40px;

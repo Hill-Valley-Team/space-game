@@ -7,7 +7,7 @@
   flex-direction: column;
 
   & p {
-    color: $pure-white;
+    color: var(--pure-white);
     margin-top: 40px;
   }
 }

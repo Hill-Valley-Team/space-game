@@ -1,5 +1,6 @@
 import { Draft, Slice } from '@reduxjs/toolkit';
 import { UserData } from 'api/Auth';
+import { UserThemeData } from 'api/Theme/types';
 import { FetchStatus } from 'store/consts';
 
 export type UserState = {
@@ -16,3 +17,9 @@ export type UserSlice = Slice<
   },
   string
 >;
+
+export type ThemeState = {
+  status: FetchStatus;
+  data: UserThemeData | undefined;
+  error: string | undefined;
+};

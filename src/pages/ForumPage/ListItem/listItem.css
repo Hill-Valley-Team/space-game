@@ -1,19 +1,19 @@
 .list-item {
   td {
     padding: 20px;
-    border-top: 1px solid $primary-color;
-    border-bottom: 1px solid $primary-color;
+    border-top: 1px solid var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
   }
 
   td:first-child {
-    border-left: 1px solid $primary-color;
+    border-left: 1px solid var(--primary-color);
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     padding-left: 30px;
   }
 
   td:last-child {
-    border-right: 1px solid $primary-color;
+    border-right: 1px solid var(--primary-color);
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     padding-right: 30px;
@@ -27,12 +27,12 @@
     font-size: 16px;
 
     a {
-      color: black;
+      color: var(--text-color);
     }
   }
 
   p {
     margin-top: 10px;
-    color: $text-color-light;
+    color: var(--text-color-light);
   }
 }

@@ -1,4 +1,5 @@
 import block from 'bem-cn';
+import { Spinner } from 'components/Spinner';
 import React, { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 import { ThreadListItem } from '../types';
@@ -19,11 +20,11 @@ export const ListItem = (props: ListItemProps) => {
         <h3>
           <Link to={`${id}`}>{title}</Link>
         </h3>
-        <p>{text}</p>
+        <p dangerouslySetInnerHTML={{ __html: text }} />
       </td>
+      <td className={b('userName')}>{userName ?? <Spinner />}</td>
       <td className={b('datetime')}>{datatime}</td>
-      <td className={b('userName')}>{userName}</td>
-      <td className={b('messages')}>{comments}</td>
+      <td className={b('messages')}>{comments ?? <Spinner />}</td>
     </tr>
   );
 };

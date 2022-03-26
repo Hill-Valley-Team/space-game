@@ -12,6 +12,7 @@ import { ForumPage } from '../../pages/ForumPage/ForumPage';
 import { LeaderBoardPage } from '../../pages/LeaderBoardPage';
 import { RequireAuth } from '../RequireAuth';
 import { authorizedPath, nonAuthorizedPath } from './consts';
+import { ForumThreadPage } from 'pages/ForumThreadPage.ts';
 
 export const routes: RouteObject[] = [
   { path: '/', index: true, element: <HomePage /> },
@@ -53,7 +54,15 @@ export const routes: RouteObject[] = [
       },
       {
         path: 'forum',
-        element: <ForumPage />,
+        element: (
+          <RequireAuth to={nonAuthorizedPath} requireAuth>
+            <ForumPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: 'forum/:topicId',
+        element: <ForumThreadPage />,
       },
       {
         path: 'leaderboard',

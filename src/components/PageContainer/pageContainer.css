@@ -1,24 +1,25 @@
 .page-container {
-  background: $primary-bg-color;
+  background: var(--primary-bg-color);
   box-shadow: 0 0 6px rgb(0 0 0 / 14%);
   border-radius: 50px;
   margin-top: 10px;
 
   &_small {
     max-width: 350px;
-    width: 350px;
+    width: 100%;
     padding: 30px;
   }
 
   &_medium {
     max-width: 731px;
-    width: 731px;
+    width: 100%;
     padding: 40px 110px;
   }
 
   &_large {
     max-width: 1100px;
     width: 1100px;
+    height: 100%;
     padding: 40px 110px;
   }
 }

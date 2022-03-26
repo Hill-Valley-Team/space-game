@@ -9,7 +9,7 @@
     display: block;
     font-size: 13px;
     line-height: 13px;
-    color: $text-color-light;
+    color: var(--text-color-light);
   }
 
   &__input {
@@ -17,14 +17,14 @@
     width: 100%;
     border: none;
     outline: none;
-    border-bottom: 1px solid $primary-color;
+    border-bottom: 1px solid var(--primary-color);
     background-color: transparent;
     height: 35px;
     text-align: center;
   }
 
   &__error-text {
-    color: $error-text-color;
+    color: var(--error-text-color);
     margin-top: 7px;
     font-size: 8px;
     line-height: 8px;

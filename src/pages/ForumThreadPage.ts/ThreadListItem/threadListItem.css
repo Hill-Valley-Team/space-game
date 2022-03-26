@@ -1,0 +1,34 @@
+.thread-list-item {
+  &__wrapper {
+    border: 1px solid var(--primary-color);
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 25px;
+  }
+
+  &__info {
+    display: flex;
+  }
+
+  &__username {
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  &__datetime {
+    color: var(--text-color-light);
+    margin-left: 10px;
+  }
+
+  &__comment {
+    margin-top: 5px;
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  &__comments-list {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+}

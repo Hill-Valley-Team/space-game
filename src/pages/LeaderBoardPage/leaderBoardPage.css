@@ -39,7 +39,7 @@
 
   .table-header__btn {
     border: none;
-    background: $light-blue;
+    background: var(--light-blue);
     padding: 20px;
     font-size: 18px;
     line-height: 11px;
@@ -54,7 +54,7 @@
       position: absolute;
       top: 10px;
       left: 0;
-      background: $pure-white;
+      background: var(--pure-white);
     }
 
     &:first-child::before {
