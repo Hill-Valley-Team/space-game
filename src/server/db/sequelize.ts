@@ -7,7 +7,7 @@ export const sequelize = new Sequelize(sequelizeOptions);
 export async function dbConnect() {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ alter: true });
     console.log('Connection has been established successfully.');
     if (process.env.NODE_ENV === 'development') {
       await initThemes();
