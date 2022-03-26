@@ -3,7 +3,7 @@ import { forumCommentService } from 'server/services/ForumCommentService';
 
 export class ForumCommentAPI {
   public static create = async (request: Request, response: Response) => {
-    const { text, parentId, topicId } = request.body;
+    const { text, parentId, topicId, level } = request.body;
     const userId = response.locals.user.id;
 
     try {
@@ -12,6 +12,7 @@ export class ForumCommentAPI {
         userId: Number(userId),
         parentId,
         topicId,
+        level,
       });
       return response.sendStatus(201);
     } catch {

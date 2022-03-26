@@ -42,3 +42,17 @@ export const getComments = async (
     await forumCommentApi.getForumComments({ topicId, limit, offset });
   return response.data.map((item) => item);
 };
+
+export const addNewComment = async (
+  text: string,
+  parentId: number | null,
+  topicId: number,
+  level: number,
+) => {
+  await forumCommentApi.addForumComment({
+    text: text,
+    parentId: parentId,
+    topicId: topicId,
+    level: level,
+  });
+};

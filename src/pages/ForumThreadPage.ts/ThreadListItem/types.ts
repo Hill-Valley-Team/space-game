@@ -1,10 +1,10 @@
 export type CommentListItem = {
   id: number;
   text: string;
-  datatime: string;
+  datatime: string | Date;
   userName: string | undefined;
-  parentId?: number; // для древовидности
-  level?: number;
+  parentId: number | null; // для древовидности
   comments?: CommentListItem[];
+  level?: number;
 };
 export type CommentListData = CommentListItem[];

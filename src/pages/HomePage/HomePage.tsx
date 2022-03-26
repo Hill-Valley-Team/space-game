@@ -9,7 +9,6 @@ import { Button } from '../../components/Button';
 import { Switcher } from '../../components/Switcher/Switcher';
 import { useUserTheme } from '../../hooks/useUserTheme';
 import { Logo } from '../../components/Logo';
-import { removeFullscreenListener } from '../../utils/fullscreen';
 import { loginWithOAuth } from '../../controllers/OAuthController';
 
 const b = block('home-page');

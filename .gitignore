@@ -2,9 +2,12 @@ node_modules
 dist
 dev
 logs
-.prod.env
+.env
 .dev.env
+.prod.env
 .idea
 .vscode
 .DS_Store
 postgresdata
+error.log
+combined.log
