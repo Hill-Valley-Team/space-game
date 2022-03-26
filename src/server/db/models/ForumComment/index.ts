@@ -1,1 +1,1 @@
-export { ForumComment } from './ForumComment';
+export { ForumComment, initForumCommentModel } from './ForumComment';

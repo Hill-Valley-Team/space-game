@@ -1,1 +1,1 @@
-export { SiteTheme } from './SiteTheme';
+export { SiteTheme, initSiteThemeModel } from './SiteTheme';

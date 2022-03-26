@@ -14,12 +14,15 @@ Loadable.preloadAll().then(() => {
     };
 
     https.createServer(options, app).listen(port, () => {
-      console.log('Application is started on', `https://local.ya-praktikum.tech:${port}/`);
+      console.log('Application is started on', `https://local.ya-praktikum.tech/:${port}/`);
     });
     return;
   }
 
   app.listen(port, () => {
-    console.log('Application is started on', `http://local.ya-praktikum.tech:${port}/`);
+    console.log(
+      'Application is started on',
+      `https://hill-valley-space-game-10.ya-praktikum.tech/:${port}/`,
+    );
   });
 });

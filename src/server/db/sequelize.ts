@@ -1,4 +1,4 @@
-import { Sequelize } from 'sequelize-typescript';
+import { Sequelize } from 'sequelize';
 import { sequelizeOptions } from './config';
 import { initForumComments, initForumTopics, initThemes } from './init';
 

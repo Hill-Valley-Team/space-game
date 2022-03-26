@@ -2,7 +2,8 @@ node_modules
 dist
 dev
 logs
-.env
+.prod.env
+.dev.env
 .idea
 .vscode
 .DS_Store
