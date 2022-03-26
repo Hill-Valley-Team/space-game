@@ -4,5 +4,5 @@ WORKDIR /usr/webapp
 COPY . .
 RUN npm install \
   && npm run build
-EXPOSE 443
+EXPOSE 3000
 CMD ["npm", "run", "start"]

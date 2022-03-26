@@ -4,8 +4,6 @@ const Loadable = require('react-loadable');
 const { app } = require('./dist/server.js');
 const { readFileSync } = require('fs');
 
-console.log(process.env.PORT);
-
 const port = process.env.PORT || 443;
 
 Loadable.preloadAll().then(() => {
@@ -16,12 +14,15 @@ Loadable.preloadAll().then(() => {
     };
 
     https.createServer(options, app).listen(port, () => {
-      console.log('Application is started on', `https://local.ya-praktikum.tech:${port}/`);
+      console.log('Application is started on', `https://local.ya-praktikum.tech/:${port}/`);
     });
     return;
   }
 
   app.listen(port, () => {
-    console.log('Application is started on', `https://space-game.nomoredomains.work/:${port}/`);
+    console.log(
+      'Application is started on',
+      `https://hill-valley-space-game-10.ya-praktikum.tech/:${port}/`,
+    );
   });
 });

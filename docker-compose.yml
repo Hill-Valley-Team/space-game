@@ -1,16 +1,33 @@
 version: '3.9'
 
 services:
-  web:
-    container_name: web
-    build:
-      context: .
+  postgres:
+    container_name: pg
+    image: postgres:12
     ports:
-      - '3001:443'
+      - '5432:5432'
+    volumes:
+      - ./postgresdata:/var/lib/postgresql/data
+    restart: always
+    env_file:
+      - .dev.env
+    networks:
+      - appNetwork
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:4.18
     restart: always
     env_file:
       - .prod.env
-    command: npm run start
+    ports:
+      - '8080:80'
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - appNetwork
 
 volumes:
   pgadmin-data:
