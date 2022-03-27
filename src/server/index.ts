@@ -2,7 +2,6 @@ import path from 'path';
 import express from 'express';
 import render from './middlewares/render';
 import { middlewares } from './middlewares';
-import { dbConnect, sequelize } from './db/sequelize';
 import helmet from 'helmet';
 import router from './router';
 import logger from './middlewares/logger';
@@ -11,6 +10,7 @@ import { initSiteThemeModel, SiteTheme } from './db/models/SiteTheme/SiteTheme';
 import { initUserThemeModel, UserTheme } from './db/models/UserTheme/UserTheme';
 import { ForumTopic, initForumTopicModel } from './db/models/ForumTopic';
 import { ForumComment, initForumCommentModel } from './db/models/ForumComment';
+import { dbConnect, sequelize } from './db/sequelize';
 
 initUserThemeModel(sequelize);
 initSiteThemeModel(sequelize);
@@ -31,19 +31,9 @@ ForumTopic.hasMany(ForumComment, {
 });
 ForumComment.belongsTo(ForumTopic);
 
-SiteTheme.hasMany(UserTheme, {
-  onDelete: 'SET NULL',
-  foreignKey: 'theme_id',
-});
-
-ForumTopic.hasMany(ForumComment, {
-  onDelete: 'CASCADE',
-  foreignKey: 'topic_id',
-});
-
 ForumComment.hasMany(ForumComment, {
   onDelete: 'CASCADE',
-  foreignKey: 'comment_id',
+  foreignKey: 'commentId',
 });
 
 dbConnect();
@@ -54,8 +44,8 @@ app
   .use(express.static(path.resolve(__dirname, '../dist')))
   .use(express.json())
   .use(logger)
-  .use(auth)
   .use(helmet.xssFilter())
+  .use(auth)
   .use('/api/v1', router);
 
 app.get('/*', [...middlewares], render);

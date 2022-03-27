@@ -16,7 +16,7 @@ export class UserThemeAPI {
         response.sendStatus(400);
       }
     } else {
-      response.sendStatus(400);
+      response.sendStatus(401);
     }
   };
 
@@ -35,7 +35,7 @@ export class UserThemeAPI {
         response.sendStatus(400);
       }
     } else {
-      response.sendStatus(400);
+      response.sendStatus(401);
     }
   };
 
@@ -51,7 +51,7 @@ export class UserThemeAPI {
         response.sendStatus(400);
       }
     } else {
-      response.sendStatus(400);
+      response.sendStatus(401);
     }
   };
 }

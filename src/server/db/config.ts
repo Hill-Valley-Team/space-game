@@ -1,6 +1,8 @@
 import { config } from 'dotenv';
 import { Options } from 'sequelize';
 
+// config({ path: process.env.NODE_ENV === 'development' ? '.dev.env' : '.prod.env' }); // TODO
+
 if (process.env.NODE_ENV === 'development') {
   config({ path: '.dev.env' });
 }
