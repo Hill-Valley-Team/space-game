@@ -11,6 +11,7 @@ import { initUserThemeModel, UserTheme } from './db/models/UserTheme/UserTheme';
 import { ForumTopic, initForumTopicModel } from './db/models/ForumTopic';
 import { ForumComment, initForumCommentModel } from './db/models/ForumComment';
 import { dbConnect, sequelize } from './db/sequelize';
+import {cspHeader} from "./middlewares/csp";
 
 initUserThemeModel(sequelize);
 initSiteThemeModel(sequelize);
@@ -46,7 +47,8 @@ app
   .use(logger)
   .use(helmet.xssFilter())
   .use(auth)
-  .use('/api/v1', router);
+  .use('/api/v1', router)
+  .use(cspHeader);
 
 app.get('/*', [...middlewares], render);
 

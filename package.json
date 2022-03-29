@@ -124,6 +124,7 @@
     "dotenv": "^15.0.1",
     "emoji-mart": "^3.0.1",
     "express": "^4.17.2",
+    "express-csp-header": "^5.1.0",
     "express-winston": "^4.2.0",
     "helmet": "^5.0.2",
     "image-minimizer-webpack-plugin": "2.2.0",
