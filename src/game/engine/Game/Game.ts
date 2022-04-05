@@ -41,6 +41,8 @@ export class Game {
 
   public score: number;
 
+  public isVisible: boolean;
+
   constructor(config: GameConfig, cb: (score: number) => void) {
     const { width, height, parent, backgroundColor } = config;
 
@@ -49,6 +51,7 @@ export class Game {
     this.bgColor = backgroundColor ?? defaultGameConfig.backgroundColor;
     this.parent = this.getParent(parent ?? defaultGameConfig.parent);
     this.isRunning = false;
+    this.isVisible = true;
     this.loop = new TimeStep(this);
     this.canvas = null;
     this.contextValue = null;
@@ -63,6 +66,12 @@ export class Game {
   public start() {
     this.isRunning = true;
     this.loop.start();
+    document.addEventListener('visibilitychange', this.onVisibilityChange);
+  }
+
+  public onVisibilityChange() {
+    this.isVisible = document.visibilityState === 'visible';
+    console.log(this.isVisible);
   }
 
   private create() {
@@ -90,17 +99,21 @@ export class Game {
     }
   }
 
-  public exit() {}
+  public exit() {
+    document.removeEventListener('visibilitychange', this.onVisibilityChange);
+  }
 
   public update(delay: number) {
-    if (this.isRunning && this.scene.current) {
+    if (this.isRunning && this.scene.current && this.isVisible) {
       this.scene.current.update(delay);
     }
   }
 
   public render() {
-    this.context.clearRect(0, 0, this.width, this.height);
-    this.scene.current?.render();
+    if (this.isVisible) {
+      this.context.clearRect(0, 0, this.width, this.height);
+      this.scene.current?.render();
+    }
   }
 
   /** get game area bounds with object padding  */
